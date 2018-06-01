@@ -59,8 +59,10 @@ public class UsuarioController {
 	    }
 	
 																	///////////alta de usuarios
-	@RequestMapping(value = { "/registro/{userName}" }, method = RequestMethod.POST, consumes = "Application/Json")
-	public void crearUsuario(HttpServletRequest request, HttpServletResponse response, @RequestBody String json, @PathVariable String userName)
+	@RequestMapping(value = { "/registro" }, method = RequestMethod.POST, consumes = "Application/Json")
+	//@RequestMapping(value = { "/registro/{userName}" }, method = RequestMethod.POST, consumes = "Application/Json")
+	//public void crearUsuario(HttpServletRequest request, HttpServletResponse response, @RequestBody String json, @PathVariable String userName)
+	public void crearUsuario(HttpServletRequest request, HttpServletResponse response, @RequestBody String json)
 			throws IOException {
 	//	if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 48, sessionDao,userName)){
 			AsignadorDeCharset.asignar(request, response);
