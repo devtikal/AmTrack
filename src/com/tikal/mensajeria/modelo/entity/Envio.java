@@ -3,6 +3,8 @@ package com.tikal.mensajeria.modelo.entity;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.tikal.mensajeria.modelo.login.Sucursal;
+import com.tikal.mensajeria.modelo.login.Usuario;
 
 @Entity
 public class Envio {
@@ -10,6 +12,7 @@ public class Envio {
 
 	@Id Long id;
 	
+	private Usuario usuario;
 	private Persona cliente;
 	private Persona destinatario;
 	@Index  Empresa empresa;
@@ -24,6 +27,15 @@ public class Envio {
 	private Double precio;
 	private Double total;
 	private String totalLetra;
+	
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public Long getId() {
 		return id;
 	}

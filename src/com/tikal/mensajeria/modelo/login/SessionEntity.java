@@ -11,7 +11,7 @@ public class SessionEntity {
 	@Index private String idSession;
 	@Index private String nameUser;
 	@Index private String estatus;
-	
+	@Index private Long idSucursal;
 	
 	
 	public String getId() {
@@ -37,6 +37,12 @@ public class SessionEntity {
 	}
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
+	}
+	public Long getIdSucursal() {
+		return idSucursal;
+	}
+	public void setIdSucursal(Long idSucursal) {
+		this.idSucursal = idSucursal;
 	}
 	
 	

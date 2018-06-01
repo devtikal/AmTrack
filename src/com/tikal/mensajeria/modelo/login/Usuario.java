@@ -22,7 +22,7 @@ public class Usuario implements UserDetails{
 	private String password;
 	private List<Rol> authorities;
 	@Index private String perfil;    //nombre del perfil
-	@Index private Long idSucursal;
+	@Index private Sucursal sucursal;;
 
 	private String nombre;
 	private String aPaterno;
@@ -33,12 +33,14 @@ public class Usuario implements UserDetails{
 	
 	
 
-	public Long getIdSucursal() {
-		return idSucursal;
+	
+
+	public Sucursal getSucursal() {
+		return sucursal;
 	}
 
-	public void setIdSucursal(Long idSucursal) {
-		this.idSucursal = idSucursal;
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
 	}
 
 	@Override

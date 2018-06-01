@@ -113,7 +113,7 @@ public class UsuarioController {
 			@PathVariable Long id, @PathVariable String userName )
 			throws IOException {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 50, sessionDao,userName)){
-			System.out.println("YYYYYYYYYYYYYy");
+  			System.out.println("YYYYYYYYYYYYYy");
 			AsignadorDeCharset.asignar(request, response);
 			
 			Usuario usuario = usuarioDao.consult(id);
@@ -212,14 +212,15 @@ public class UsuarioController {
 				//usuario.setEmail("root@root.com");
 				usuario.setPassword(otroMetodo("root"));  
 				usuario.setPerfil("SuperAdministrador");//root;admin1
-				usuario.setIdSucursal(Long.valueOf(9999));
+				//usuario.setSucursal(sucursal);
+				//usuario.setIdSucursal(Long.valueOf(9999));
 				usuario.setUsername("root");
 				usuario.setNombre("Administrador");
 				usuario.setaPaterno("Administrador");
 				usuario.setaMaterno("Administrador");
 				//usuario.setIdPuesto(Long.parseLong("1111111111"));
 				System.out.println("si entra a superadministrador");
-				usuarioDao.crearUsuario(usuario);
+				
 				System.out.println("ssssssssssssssssssssr");
 				//PuestoEntity puesto = new PuestoEntity();
 				
@@ -233,8 +234,9 @@ public class UsuarioController {
 				sucursal.setUbicacion("-------");
 				sucursalDao.save(sucursal);
 				//hacer el controller
+				usuario.setSucursal(sucursal);
 				
-				
+				usuarioDao.crearUsuario(usuario);
 				
 				Perfil perfil = new Perfil();
 				perfil.setTipo("SuperAdministrador");

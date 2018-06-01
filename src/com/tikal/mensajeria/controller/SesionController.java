@@ -44,7 +44,7 @@ public class SesionController {
 	@Autowired
 	PerfilDAO perfilDAO;
 	
-	////////////////////// checar si el usuario es válido
+	////////////////////// checar si el usuario es válido se asigna a sesion el usuario y la sucursal
 
 	@RequestMapping(value = { "/user" }, method = RequestMethod.POST, consumes="application/json", produces = "application/json")
 	public void user(HttpServletResponse res, HttpServletRequest req, @RequestBody String json) throws IOException {
@@ -99,12 +99,14 @@ public class SesionController {
 							System.out.println(" -+++++id:"+session.getId());
 							req.setAttribute("usuario", usuarioFront.getUsername());
 							s.setNameUser(usuarioFront.getUsername());
+							s.setIdSucursal(usuarioFront.getSucursal().getId());
+							
 							System.out.println("req++++++++"+req.getAttribute("usuario"));
 							//System.out.println("session:::::"+s.getAttribute("usuario"));
 							 Cookie miCookie = new Cookie("userName",s.getNameUser());
                              System.out.println("cookie:::"+miCookie.getValue());
 							
-							res.getWriter().println(s.getNameUser());						
+							res.getWriter().println(s.getNameUser()+" "+s.getIdSucursal());						
 							//res.getWriter().println(JsonConvertidor.toJson(s.getNameUser()));
 						}
 				}
