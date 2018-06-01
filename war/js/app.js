@@ -1,17 +1,41 @@
 var app=angular.module("app",['ngRoute', 'ngCookies',]);
-app.config([ '$routeProvider', function($routeProvider) {
-	
-	$routeProvider.when('/login', {
-		templateUrl : "pages/login.html",
-		controller : "navigation"
-	});
+app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
+	$httpProvider.defaults.headers.common = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Method': 'GET'};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.common["Accept"] = "application/json";
+    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+//	$routeProvider.when('/login', {
+//		templateUrl : "pages/login.html",
+//		controller : "navigation"
+//	});
 	$routeProvider.when('/welcome', {
 		templateUrl : "pages/welcome.html",
+		controller : "navigation"
+	});
+	$routeProvider.when('/dhl', {
+		templateUrl : "pages/dhl.html",
+		controller : "DHLController"
+	});
+	$routeProvider.when('/fedex', {
+		templateUrl : "pages/fedex.html",
 		controller : "navigation"
 	});
 	$routeProvider.when('/Sucursal', {
 		templateUrl : "pages/sucursal/navbar.html",
 		controller : "navigation"
+	});
+	$routeProvider.when('/AltaUsuario', {
+		templateUrl : "pages/altaUsuario.html",
+		controller : "userController"
+	});
+	$routeProvider.when('/AltaSucursal', {
+		templateUrl : "pages/altaSucursal.html",
+		controller : "userController"
 	});
 //	$routeProvider.otherwise({
 //		redirectTo : '/NoFound',
@@ -61,7 +85,7 @@ app.service('sessionService', [
 					$http.get("/notificacion/numAlertas/"+ data.id).then(function(response){
 						$rootScope.numNotificaciones=response.data;
 					})
-					$location.path("/listaOTs");
+					$location.path("/welcome");
 				} else {
 					$rootScope.authenticated = false;
 				}
@@ -80,12 +104,12 @@ app.service('sessionService', [
 		}
 		this.isAuthenticated = function() {
 			var d = $q.defer();
-			$http.get("currentSession").success(function(data) {
-				$rootScope.authenticated = true;
-				d.resolve(data);
-			}).error(function(data) {
-				$location.path("/welcome");
-			});
+//			$http.get("currentSession").success(function(data) {
+//				$rootScope.authenticated = true;
+//				d.resolve(data);
+//			}).error(function(data) {
+//				$location.path("/welcome");
+//			});
 			return d.promise;
 		}
 } ]);
@@ -104,7 +128,7 @@ app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope
 //				}
 //			});
 //		};
-	
+		$('html, body').animate({scrollTop:0}, 'slow');
 		$scope.restablecer=function(email){
 			sessionService.reset(email).then(function(data){
 			

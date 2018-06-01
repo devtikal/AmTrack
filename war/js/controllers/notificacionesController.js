@@ -106,7 +106,7 @@ app.service('notificacionesService',['$http','$q','$location','$rootScope','$win
 	
 }]);
 
-app.controller('notificacionesController',['$rootScope', 'notificacionesService','$scope','$cookieStore','$location','userFactory',function($rootScope,notificacionesService,$scope,$cookieStore,$location,userFactory){
+app.controller("dhlController",['$rootScope', '$scope','$cookieStore', '$window', '$location', 'CBService',function($rootScope, $scope, $cookieStore, $window, $location, CBService){
 	
 	$rootScope.perfilUsuario = userFactory.getUsuarioPerfil();  //obtener perfl de usuario para pintar el menú al qe tiene acceso
 	var us= userFactory.getUsuarioFirmado();

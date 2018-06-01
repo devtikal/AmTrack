@@ -1,7 +1,7 @@
-app.service("usuarioservice",['$http', '$q', function($http, $q){
+app.service("usuarioservice",['$http', '$q','$window', function($http, $q,$window){
 	this.crearUsuario = function(usuario) {
 		var d = $q.defer();
-		$http.post("/usuario/registro", usuario).then(
+		$http.post("usuario/add", usuario).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -12,7 +12,7 @@ app.service("usuarioservice",['$http', '$q', function($http, $q){
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
 						//alert("No tiene permiso de realizar esta acción");
-						$location.path("/login");
+//						$location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -27,7 +27,7 @@ app.service("usuarioservice",['$http', '$q', function($http, $q){
 		}, function(response) {
 			if(response.status==403){
 				//alert("No tiene permiso de realizar esta acción");
-				$location.path("/login");
+//				$location.path("/login");
 			}
 		});
 		return d.promise;
@@ -39,7 +39,7 @@ app.service("usuarioservice",['$http', '$q', function($http, $q){
 		}, function(response) {
 			if(response.status==403){
 				//alert("No tiene permiso de realizar esta acción");
-				$location.path("/login");
+//				$location.path("/login");
 			}
 		});
 		return d.promise;

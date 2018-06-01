@@ -16,13 +16,13 @@ app.controller('headerController',['$scope','$rootScope','$location','$http','$c
 		});
 	};
 	
-	$http.get("/usuario/check").then(function(response){
-		$rootScope.variable = true;
-	},function(response){
-		if(response.status==403){
-			$rootScope.variable = false;
-			$scope.empresas={};
-		}
-		$location.path("/login");
-	});
+//	$http.get("/usuario/check").then(function(response){
+//		$rootScope.variable = true;
+//	},function(response){
+//		if(response.status==403){
+//			$rootScope.variable = false;
+//			$scope.empresas={};
+//		}
+//		$location.path("/login");
+//	});
 }]);
