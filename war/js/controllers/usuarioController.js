@@ -107,15 +107,11 @@ $scope.EnviarFormulario = function() {
 			.crearUsuario($scope.usuario)
 			.then(
 					function(data) {
-//						var x = document.getElementById("snackbar")
-//					    x.className = "show";
-//						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-						document.getElementById('AltaOK').style.backgroundColor="#70db70";
-						alert("Usuario creado correctamente");
+						var x = document.getElementById("snackbar")
+					    x.className = "show";
+						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 					    setTimeout(function(){ if($scope.usuario){window.location="#/AltaUsuario"; $window.location.reload(); } }, 3000);
-//						alert("Usuario creado correctamente");
-//						$location.path("/AltaUsuario");
-//						$window.location.reload();
+//						
 					})}else{
 						alert("Contraseña no valida, intente de nuevo");
 					}
