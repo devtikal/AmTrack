@@ -81,7 +81,7 @@ app.controller("userController",['$scope','$window', '$location', '$cookieStore'
 }
 
 $scope.validatePass = function() {
-	if($scope.usuario.pass != $scope.usuario.passconfirm){
+	if($scope.usuario.password != $scope.usuario.passconfirm){
 		$scope.IsMatchP=true;
 		return false;
 	}
@@ -98,7 +98,7 @@ $scope.acceptSubmit = function() {
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
 	$scope.validate();
-	if(($scope.usuario.email != $scope.usuario.emailconfirm) || ($scope.usuario.pass != $scope.usuario.passconfirm)){
+	if($scope.usuario.password != $scope.usuario.passconfirm){
 		alert("Email o contraseña no coinciden")
 		//$window.location.reload();
 	}else{
