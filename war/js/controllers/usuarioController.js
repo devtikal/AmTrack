@@ -1,7 +1,7 @@
 app.service("usuarioservice",['$http', '$q','$window', function($http, $q,$window){
 	this.crearUsuario = function(usuario) {
 		var d = $q.defer();
-		$http.post("usuario/add", usuario).then(
+		$http.post("usuario/registro", usuario).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
