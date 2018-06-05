@@ -73,9 +73,13 @@ public class SucursalController {
 //				}
 			}
 			
-			@RequestMapping(value = { "/add/{userName}" }, method = RequestMethod.GET)
-			public void crearPerfil(HttpServletRequest request, HttpServletResponse response, 
-						@RequestBody String json, @PathVariable String userName)throws IOException {
+//			@RequestMapping(value = { "/add/{userName}" }, method = RequestMethod.GET)
+//			public void crearPerfil(HttpServletRequest request, HttpServletResponse response, 
+//						@RequestBody String json, @PathVariable String userName)throws IOException {
+				
+				@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
+				public void crearPerfil(HttpServletRequest request, HttpServletResponse response, 
+							@RequestBody String json)throws IOException {
 			
 //					if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 				AsignadorDeCharset.asignar(request, response);
