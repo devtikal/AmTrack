@@ -99,7 +99,8 @@ public class SesionController {
 							System.out.println(" -+++++id:"+session.getId());
 							req.setAttribute("usuario", usuarioFront.getUsername());
 							s.setNameUser(usuarioFront.getUsername());
-							s.setIdSucursal(usuarioFront.getSucursal().getId());
+							//s.setIdSucursal(usuarioFront.getSucursal().getId());
+							s.setIdSucursal(usuarioFront.getIdSucursal());
 							
 							System.out.println("req++++++++"+req.getAttribute("usuario"));
 							//System.out.println("session:::::"+s.getAttribute("usuario"));

@@ -69,6 +69,9 @@ public class UsuarioController {
 			System.out.println("usuario edgar "+json);
 			Usuario usuario = (Usuario) JsonConvertidor.fromJson(json, Usuario.class);
 			System.out.println("usuari password: "+usuario.getPassword());
+			System.out.println("usuari usuario: "+usuario.getUsername());
+			System.out.println("usuari perfil: "+usuario.getPerfil());
+			System.out.println("usuari nombre: "+usuario.getNombre());
 			usuario.setPassword(UsuarioController.otroMetodo(usuario.getPassword()));
 			//System.out.println("usuario, idpuesto: "+usuario.getIdPuesto());
 			//usuario.setNombrePuesto(puestoDao.consult(usuario.getIdPuesto()).getDescripcion());
@@ -236,8 +239,8 @@ public class UsuarioController {
 				sucursal.setUbicacion("-------");
 				sucursalDao.save(sucursal);
 				//hacer el controller
-				usuario.setSucursal(sucursal);
-				
+				//usuario.setSucursal(sucursal);
+				usuario.setIdSucursal(sucursal.getId());
 				usuarioDao.crearUsuario(usuario);
 				
 				Perfil perfil = new Perfil();

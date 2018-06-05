@@ -13,7 +13,8 @@ public class Envio {
 	@Id Long id;
 	
 	private Usuario usuario;
-	private Persona cliente;
+	//private Persona cliente;
+	private String cliente;
 	private Persona destinatario;
 	@Index  Empresa empresa;
 	private Paquete paquete;
@@ -30,6 +31,13 @@ public class Envio {
 	
 	
 	
+	
+	public String getCliente() {
+		return cliente;
+	}
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -42,12 +50,12 @@ public class Envio {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Persona getCliente() {
-		return cliente;
-	}
-	public void setCliente(Persona cliente) {
-		this.cliente = cliente;
-	}
+//	public Persona getCliente() {
+//		return cliente;
+//	}
+//	public void setCliente(Persona cliente) {
+//		this.cliente = cliente;
+//	}
 	public Persona getDestinatario() {
 		return destinatario;
 	}
