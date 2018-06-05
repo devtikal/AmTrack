@@ -37,7 +37,7 @@ public class Envio {
 	}
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
-	}
+	} 
 	public Usuario getUsuario() {
 		return usuario;
 	}
