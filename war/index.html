@@ -3,6 +3,7 @@
 
 <html ng-app="app">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <META http-equiv=Content-Type content="text/html; charset=ISO-8859-1">
 
 <title>Mensajeria</title>
@@ -62,7 +63,8 @@
 <script type="text/javascript" src="js/controllers/DHLController.js"></script>
 <script type="text/javascript" src="js/controllers/usuarioController.js"></script>
 <script type="text/javascript" src="js/controllers/notificacionesController.js"></script>
-
+<script type="text/javascript" src="js/controllers/sucursalController.js"></script>
+<script type="text/javascript" src="js/controllers/paqueteriaController.js"></script>
 
 <!-- <script>
 	if (location.protocol != 'https:')
@@ -124,6 +126,9 @@
             <span class="nav-link-text">Alta</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseAlta">
+          <li>
+              <a href="#/altaPaquete">Paquete</a>
+            </li>
             <li>
               <a href="#/AltaUsuario">Usuario</a>
             </li>

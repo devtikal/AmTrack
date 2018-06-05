@@ -1,0 +1,189 @@
+
+<div class="content-wrapper">
+	<div class="container-fluid">
+		<div class="Dlabel" align="center">
+
+			<label>Registro de Paquete</label>
+
+
+		</div>
+		<div class="topBanner">
+
+			<h5>CLiente: Nombre del CLinete</h5>
+			<br>
+		</div>
+		<button class="tablink" onclick="openPage('paq', this,'green')"
+			id="defaultOpen">Paquete</button>
+		<button class="tablink" onclick="openPage('dest', this,'green')">Destinatario</button>
+		<button class="tablink">
+			<br>
+		</button>
+		<button class="tablink">
+			<br>
+		</button>
+
+		<div id="paq" class="tabcontent">
+			<form name="form" ng-submit="EnviarFormulario()">
+				<article class="post clearfix">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-4">
+							<br> <label>Cantidad: </label><input type="number" class="form-control"
+								ng-model="paqueteria.nombre" required> <br>
+							<label>Descripcion:</label> <input type="text" class="form-control"
+								ng-model="paqueteria.ubicacion" required> <br> <label>Tipo
+							de Paquete: </label><select class="form-control" ng-model="usuario.sucursal"
+										required>
+										<option></option>
+										<option>PAQUETE</option>
+										<option>SOBRE</option>
+										
+										</select>
+						</div>
+
+						<div class="col-md-4">
+						<br><label>Telefono:</label> <input type="text" class="form-control"
+								ng-model="paqueteria.telefono" required> 
+							<br><label>Tipo de Envio:</label> <select class="form-control" ng-model="usuario.sucursal"
+										required>
+										<option></option>
+										<option>EXPRESS</option>
+										<option>DIA SIG.</option>
+										<option>OTRO</option>
+										
+										</select>
+						</div>
+					</div>
+					<br> <br>
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label">Medidas (cm):</label>
+
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Largo </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paqueteria.m1" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Ancho </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paqueteria.m2" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Alto </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paqueteria.m3" required>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 				###########	 -->
+
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label">Peso:</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										ng-model="paqueteria.m1" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label"> Empresa </label>
+								<div class="col-10">
+									<select class="form-control" ng-model="usuario.sucursal"
+										required>
+										<option></option>
+										<option>HDL</option>
+										<option>UPS</option>
+										<option>FeDex</option>
+										
+										</select>
+								</div>
+							</div>
+						</div>
+
+						<br> <br>
+					</div>
+					<div class="row">
+					<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label">Total</label>
+								<div class="col-10">
+									<input type="text" class="form-control"
+										ng-model="paqueteria.m1" required>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div align="right">
+						<button type="submit" value="Guardar" class="btn">
+							Guardar</button>
+						<button type="submit" value="Limpiar" class="btn">Limpiar</button>
+					</div>
+
+					<nav>
+						<div class="center-blog"></div>
+					</nav>
+
+
+
+				</article>
+			</form>
+		</div>
+
+
+<div id="dest" class="tabcontent">
+	<h3>News</h3>
+	<p>Some news this fine day!</p>
+</div>
+
+	</div>
+</div>
+
+<script>
+	function openPage(pageName, elmnt, color) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablink");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].style.backgroundColor = "";
+		}
+		document.getElementById(pageName).style.display = "block";
+		elmnt.style.backgroundColor = color;
+
+	}
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+</script>
+

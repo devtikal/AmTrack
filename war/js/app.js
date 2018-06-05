@@ -35,7 +35,15 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 	});
 	$routeProvider.when('/AltaSucursal', {
 		templateUrl : "pages/altaSucursal.html",
-		controller : "userController"
+		controller : "sucursalController"
+	});
+	$routeProvider.when('/altaPaquete', {
+		templateUrl : "pages/AltaPaquete.html",
+		controller : "paqueteriaController"
+	});
+	$routeProvider.when('/', {
+		templateUrl : "pages/welcome.html",
+		controller : "navigation"
 	});
 //	$routeProvider.otherwise({
 //		redirectTo : '/NoFound',
