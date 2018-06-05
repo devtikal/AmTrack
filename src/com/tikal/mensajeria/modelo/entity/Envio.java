@@ -15,7 +15,8 @@ public class Envio {
 	private Usuario usuario;
 	//private Persona cliente;
 	private String cliente;
-	private Persona destinatario;
+	//private Persona destinatario;
+	private Destinatario destinatario;
 	@Index  Empresa empresa;
 	private Paquete paquete;
 	
@@ -27,11 +28,18 @@ public class Envio {
 	@Index private String folio;
 	private Double precio;
 	private Double total;
-	private String totalLetra;
+	//private String totalLetra;
 	
 	
 	
 	
+	
+	public Destinatario getDestinatario() {
+		return destinatario;
+	}
+	public void setDestinatario(Destinatario destinatario) {
+		this.destinatario = destinatario;
+	}
 	public String getCliente() {
 		return cliente;
 	}
@@ -56,12 +64,12 @@ public class Envio {
 //	public void setCliente(Persona cliente) {
 //		this.cliente = cliente;
 //	}
-	public Persona getDestinatario() {
-		return destinatario;
-	}
-	public void setDestinatario(Persona destinatario) {
-		this.destinatario = destinatario;
-	}
+//	public Persona getDestinatario() {
+//		return destinatario;
+//	}
+//	public void setDestinatario(Persona destinatario) {
+//		this.destinatario = destinatario;
+//	}
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -122,12 +130,12 @@ public class Envio {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-	public String getTotalLetra() {
-		return totalLetra;
-	}
-	public void setTotalLetra(String totalLetra) {
-		this.totalLetra = totalLetra;
-	}
+//	public String getTotalLetra() {
+//		return totalLetra;
+//	}
+//	public void setTotalLetra(String totalLetra) {
+//		this.totalLetra = totalLetra;
+//	}
 	
 	
 	

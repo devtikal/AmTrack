@@ -7,24 +7,34 @@ import com.googlecode.objectify.annotation.Id;
 public class Paquete {
 	
 	@Id Long id;
-	private String nombre;
+	private Integer cantidad;
+	private String descripcion;
 	private String tipoPaquete;
 	private String tipoEnvio;
 	private Double largo;
 	private Double alto;
 	private Double ancho;
 	private Double peso;
+	
+	
+	public Integer getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public String getTipoPaquete() {
 		return tipoPaquete;

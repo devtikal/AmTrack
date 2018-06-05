@@ -77,7 +77,7 @@ public class SucursalController {
 //			public void crearPerfil(HttpServletRequest request, HttpServletResponse response, 
 //						@RequestBody String json, @PathVariable String userName)throws IOException {
 				
-				@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
+				@RequestMapping(value = { "/add" }, method = RequestMethod.POST, consumes = "Application/Json")
 				public void crearPerfil(HttpServletRequest request, HttpServletResponse response, 
 							@RequestBody String json)throws IOException {
 			

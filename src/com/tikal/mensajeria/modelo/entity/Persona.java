@@ -10,6 +10,7 @@ public class Persona {
 	private Nombre nombre;
 	private Direccion direccion;
 	private String telefono;
+	
 	public Long getId() {
 		return id;
 	}
