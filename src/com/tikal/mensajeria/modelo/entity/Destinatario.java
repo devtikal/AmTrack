@@ -19,6 +19,14 @@ public class Destinatario {
 	private String municipio;
 	private String estado;
 	private Integer codigoPostal;
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getCalle() {
 		return calle;
 	}

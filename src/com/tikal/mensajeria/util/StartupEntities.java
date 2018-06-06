@@ -3,6 +3,7 @@ package com.tikal.mensajeria.util;
 import org.springframework.stereotype.Component;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.tikal.mensajeria.modelo.entity.Destinatario;
 import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Paquete;
@@ -29,6 +30,7 @@ public class StartupEntities  {
 		ObjectifyService.register(Paquete.class);
 		ObjectifyService.register(Envio.class);
 		ObjectifyService.register(Empresa.class);
+		ObjectifyService.register(Destinatario.class);
 		
 	}
 	  
