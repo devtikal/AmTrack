@@ -1,7 +1,7 @@
 app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$window){
-	this.crearPaquete = function(sucursal) {
+	this.crearPaquete = function(paqueteria) {
 		var d = $q.defer();
-		$http.post("sucursal/add", sucursal).then(
+		$http.post("envio/add", paqueteria).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -28,12 +28,12 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 app.controller("paqueteriaController",['$scope','$window', '$location', '$cookieStore','paqueteriaService',function($scope, $window, $location, $cookieStore, paqueteriaService){
 
-
+	$scope.CurrentDate = new Date();
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
 //	$scope.validate();
 	
-	paqueteriaService.crearSucursal($scope.sucursal).then(function(data) {
+	paqueteriaService.crearPaquete($scope.paqueteria).then(function(data) {
 						var x = document.getElementById("snackbar")
 					    x.className = "show";
 						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
