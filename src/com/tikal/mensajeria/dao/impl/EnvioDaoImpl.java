@@ -1,0 +1,79 @@
+package com.tikal.mensajeria.dao.impl;
+
+
+
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.tikal.mensajeria.dao.EnvioDao;
+import com.tikal.mensajeria.modelo.entity.Envio;
+
+
+@Service("envioDao")
+public class EnvioDaoImpl implements EnvioDao{
+	
+	public  void save(Envio e) {    	
+        ofy().save().entity(e).now();
+    }
+
+    
+    public void delete(Envio e) {
+    	 System.out.println("si esta en daoimpl eliminando"+e);
+        ofy().delete().entity(e).now();
+        System.out.println("eliminando...envio");
+    }
+
+
+	public void update(Envio e) {
+	   System.out.print("Envio:"+e.getId());
+	   Envio old = this.consult(e.getId());
+	System.out.print("old:"+old);
+		if (old != null) {
+			old.setCantidad(e.getCantidad());
+			old.setCliente(e.getCliente());
+			old.setDestinatario(e.getDestinatario());
+			old.setEmpresa(e.getEmpresa());
+			old.setFecha(e.getFecha());
+			old.setFolio(e.getFolio());
+			old.setGuia(e.getGuia());
+			old.setPaquete(e.getPaquete());
+			old.setPrecio(e.getPrecio());
+			old.setRastreo(e.getRastreo());
+			old.setTipoEnvio(e.getTipoEnvio());
+			old.setTotal(e.getTotal());
+			old.setUsuario(e.getUsuario());
+				
+		}
+
+			ofy().save().entity(old);
+   }
+
+    
+
+	public Envio consult(Long id) {
+	   System.out.println("si esta en daoimpl consultando la Envio.."+id);
+      return ofy().load().type(Envio.class).id(id).now();
+		
+	}
+
+
+   
+	public List<Envio> findAll() {
+		return ofy().load().type(Envio.class).list();
+	}
+
+
+	@Override
+	public void findAll(Envio e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+
+}
