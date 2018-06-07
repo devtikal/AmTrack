@@ -22,6 +22,7 @@ import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.login.Usuario;
+import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.util.AsignadorDeCharset;
 import com.tikal.util.JsonConvertidor;
 
@@ -100,7 +101,7 @@ public class EnvioController {
 			e.setDescripcion("FEDEX_");
 			empresaDao.save(e);
 			
-			envio.setEmpresa(e);
+		//	envio.setEmpresa("otra");
 			envio.setFecha("05/06/2018 18:03:45");
 			envio.setFolio("0001");
 			envio.setGuia(123456789);
@@ -126,9 +127,55 @@ public class EnvioController {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 			AsignadorDeCharset.asignar(request, response);
 			System.out.println(" Yisus manda:"+json);
-			Envio envio = (Envio) JsonConvertidor.fromJson(json, Envio.class);
+			EnvioVo evo = (EnvioVo) JsonConvertidor.fromJson(json, EnvioVo.class);
 			//System.out.println("lista de permisos:"+perfil.getPermisos());
+			Paquete p = new Paquete();
+			Envio envio = new Envio();
+			Destinatario des= new Destinatario();
+			Empresa e=new Empresa();
+		//	e=empresaDao.getByNombre(evo.getEmpresa());
+			
+			p.setAlto(evo.getAlto());
+			p.setAncho(evo.getAncho());
+			p.setDescripcion(evo.getDescripcion());
+			p.setLargo(evo.getLargo());
+			p.setPeso(evo.getPeso());
+			p.setTipoPaquete(evo.getTipoPaquete());
+			 paqueteDao.save(p);
+			
+			des.setaMaterno(evo.getaMaterno());
+			des.setaPaterno(evo.getaPaterno());
+			des.setCalle(evo.getCalle());
+			des.setCodigoPostal(evo.getCodigoPostal());
+			des.setColonia(evo.getColonia());
+			des.setEstado(evo.getEstado());
+			des.setLocalidad(evo.getLocalidad());
+			des.setMunicipio(evo.getMunicipio());
+			des.setNoExterior(evo.getNoExterior());
+			des.setNoInterior(evo.getNoInterior());
+			des.setNombre(evo.getNombre());
+			des.setTelefono(evo.getTelefono());
+			destinatarioDao.save(des);
+			
+			//envio.setEmpresa(e);
+			
+			envio.setCantidad(evo.getCantidad());
+			envio.setCliente(evo.getCliente());
+			envio.setDestinatario(des);
+			
+			envio.setFecha(evo.getFecha());
+			envio.setFolio(evo.getFolio());
+			envio.setGuia(evo.getGuia());
+			envio.setPaquete(p);
+			envio.setPrecio(evo.getPrecio());
+			envio.setRastreo(evo.getRastreo());
+			envio.setTipoEnvio(evo.getTipoEnvio());
+			envio.setTotal(evo.getTotal());
+			//envio.setUsuario(usuario); falta
+			
 			envioDao.save(envio);
+			
+			
 			
 	}
 }

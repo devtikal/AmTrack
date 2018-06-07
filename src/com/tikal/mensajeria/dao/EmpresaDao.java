@@ -17,5 +17,7 @@ public interface EmpresaDao {
 	
     
 	public void findAll(Empresa e);	
+	
+	public Empresa getByNombre(String nombre);
 
 }

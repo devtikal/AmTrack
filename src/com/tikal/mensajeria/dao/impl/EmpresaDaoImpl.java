@@ -60,6 +60,14 @@ public class EmpresaDaoImpl implements EmpresaDao{
 	}
 
 
+	//@Override
+	public Empresa getByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		
+		return ofy().load().type(Empresa.class).filter("descripcion",nombre).list().get(0);
+	}
+
+
 	
 
 

@@ -2,13 +2,14 @@ package com.tikal.mensajeria.modelo.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Empresa {
 	
 	@Id Long id;
 	private String clave;
-	private String descripcion;
+	@Index private String descripcion;
 	public Long getId() {
 		return id;
 	}
