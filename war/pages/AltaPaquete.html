@@ -261,6 +261,7 @@
 					</div>
 </article>
 			</form>
+				<div id="snackbar">Sucursal Guardada Correctamente</div>
 	</div>
 </div>
 
@@ -281,5 +282,9 @@
 	}
 	// Get the element with id="defaultOpen" and click on it
 	document.getElementById("defaultOpen").click();
+	
+	window.addEventListener("contextmenu", function(event){
+	    event.preventDefault();
+	}, false);
 </script>
 
