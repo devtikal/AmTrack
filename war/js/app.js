@@ -9,10 +9,10 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-//	$routeProvider.when('/login', {
-//		templateUrl : "pages/login.html",
-//		controller : "navigation"
-//	});
+	$routeProvider.when('/login', {
+		templateUrl : "pages/login.html",
+		controller : "navigation"
+	});
 	$routeProvider.when('/welcome', {
 		templateUrl : "pages/welcome.html",
 		controller : "navigation"
@@ -93,13 +93,13 @@ app.service('sessionService', [
 					$http.get("/notificacion/numAlertas/"+ data.id).then(function(response){
 						$rootScope.numNotificaciones=response.data;
 					})
-					$location.path("/welcome");
+					$location.path("/");
 				} else {
 					$rootScope.authenticated = false;
 				}
 			}).error(function(data) {
 				alert("Usuario o Contraseña incorrectos");
-				$location.path("/welcome");
+				$location.path("/login");
 			});
 		}
 		this.reset=function(data){
@@ -112,12 +112,12 @@ app.service('sessionService', [
 		}
 		this.isAuthenticated = function() {
 			var d = $q.defer();
-//			$http.get("currentSession").success(function(data) {
-//				$rootScope.authenticated = true;
-//				d.resolve(data);
-//			}).error(function(data) {
-//				$location.path("/welcome");
-//			});
+			$http.get("currentSession").success(function(data) {
+				$rootScope.authenticated = true;
+				d.resolve(data);
+			}).error(function(data) {
+				$location.path("/login");
+			});
 			return d.promise;
 		}
 } ]);
@@ -125,17 +125,17 @@ app.service('sessionService', [
 app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope','$http', '$location','userFactory',
 	function(sessionService, $rootScope, $scope, $http, $location,userFactory) {
 		$scope.credentials = {};
-//		$scope.login = function() {
-//			sessionService.authenticate($scope.credentials, function() {
-//				if ($rootScope.authenticated) {
-//					$scope.error = false;
-//					$location.path("/");
-//				} else {
-//					$location.path("/welcome");
-//					$scope.error = true;
-//				}
-//			});
-//		};
+		$scope.login = function() {
+			sessionService.authenticate($scope.credentials, function() {
+				if ($rootScope.authenticated) {
+					$scope.error = false;
+					$location.path("/");
+				} else {
+					$location.path("/login");
+					$scope.error = true;
+				}
+			});
+		};
 		$('html, body').animate({scrollTop:0}, 'slow');
 		$scope.restablecer=function(email){
 			sessionService.reset(email).then(function(data){

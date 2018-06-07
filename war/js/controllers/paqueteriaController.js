@@ -27,7 +27,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 
 app.controller("paqueteriaController",['$scope','$window', '$location', '$cookieStore','paqueteriaService',function($scope, $window, $location, $cookieStore, paqueteriaService){
-
+	$scope.usuariologin="femers";
+	$scope.sucursalname="Toluca Centro";
 	$scope.CurrentDate = new Date();
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);

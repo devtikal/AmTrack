@@ -7,6 +7,7 @@ app.service("dhlService",['$http', '$q', function($http, $q){
 
 app.controller("DHLController",['$rootScope', '$scope','$cookieStore', '$window', '$location', 'dhlService',
 	function($rootScope, $scope, $cookieStore, $window, $location, dhlService){
+	location.reload();
 	$scope.page=null;
 	$('html, body').animate({scrollTop:0}, 'slow');
 	$scope.getPage = function(){
@@ -29,6 +30,8 @@ app.controller("DHLController",['$rootScope', '$scope','$cookieStore', '$window'
 			console.log("Datos de la Pagina: ", $scope.objeto);
 		}, 5000); 
 		
+		
+		    
 		
 //
 //		 $('#contendDHL').load(frame );
