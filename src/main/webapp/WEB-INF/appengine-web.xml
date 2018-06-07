@@ -13,6 +13,7 @@
   </system-properties>
   
   <runtime>java8</runtime>
+  <sessions-enabled>true</sessions-enabled> 
   
  
 
