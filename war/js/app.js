@@ -83,16 +83,16 @@ app.service('sessionService', [
 						+ btoa(credentials.username + ":"
 								+ credentials.password)
 			} : {};
-			$http.get('user', {
+			$http.get('/user', {
 				headers : headers
 			}).success(function(data) {
 				userFactory.setUsuarioFirmado(data);
 				if (data.usuario) {
 					$rootScope.authenticated = true;
 					$rootScope.variable = true;
-					$http.get("/notificacion/numAlertas/"+ data.id).then(function(response){
-						$rootScope.numNotificaciones=response.data;
-					})
+//					$http.get("/notificacion/numAlertas/"+ data.id).then(function(response){
+//						$rootScope.numNotificaciones=response.data;
+//					})
 					$location.path("/");
 				} else {
 					$rootScope.authenticated = false;
@@ -126,6 +126,7 @@ app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope
 	function(sessionService, $rootScope, $scope, $http, $location,userFactory) {
 		$scope.credentials = {};
 		$scope.login = function() {
+			$scope.credentials.idSucursal=9999;
 			sessionService.authenticate($scope.credentials, function() {
 				if ($rootScope.authenticated) {
 					$scope.error = false;
