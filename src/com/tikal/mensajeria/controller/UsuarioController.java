@@ -218,7 +218,7 @@ public class UsuarioController {
 				usuario.setPassword(otroMetodo("root"));  
 				usuario.setPerfil("SuperAdministrador");//root;admin1
 				//usuario.setSucursal(sucursal);
-				//usuario.setIdSucursal(Long.valueOf(9999));
+				usuario.setIdSucursal(Long.valueOf(9999));
 				usuario.setUsername("root");
 				usuario.setNombre("Administrador");
 				usuario.setaPaterno("Administrador");
@@ -240,7 +240,7 @@ public class UsuarioController {
 				sucursalDao.save(sucursal);
 				//hacer el controller
 				//usuario.setSucursal(sucursal);
-				usuario.setIdSucursal(sucursal.getId());
+				//usuario.setIdSucursal(9999);
 				usuarioDao.crearUsuario(usuario);
 				
 				Perfil perfil = new Perfil();
