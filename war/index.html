@@ -238,11 +238,74 @@
 <!--         </li> -->
         <li><div class="col-md-2"></div></li>
         <li><div class="col-md-2"></div></li>
-        <li><div class="col-md-6"></div><a class="nav-link" ng-controller="paqueteriaController">
-            <i class="fa fa-fw fa-user "></i>{{UserData.usuario}}</a></li>
+        <li class="nav-item dropdown"><div class="col-md-6"></div>
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-controller="paqueteriaController">
+            <i class="fa fa-fw fa-user col-md-2 fa-lg"></i>
+            &nbsp;{{UserData.usuario}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">Datos Usuario:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <span >
+                <strong>
+                  <i class="fa fa-address-card-o fa-fw"></i>Perfil</strong>
+              </span>
+              <div class="dropdown-message small">{{UserData.perfil}}</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <span >
+                <strong>
+                  <i class="fa fa-file-text fa-fw"></i>Nombre</strong>
+              </span>
+              
+              <div class="dropdown-message small">{{UserData.nombre}}&nbsp;{{UserData.aMaterno}}&nbsp;{{UserData.aPaterno}}</div>
+            </a>
+            
+            <div class="dropdown-divider"></div>
+            <span class="text-danger">
+            <a class="dropdown-item small" ng-click="CerrarSesion()">Cerrar Session</a>
+            </span>
+          </div>
+        </li>
         <li><div class="col-md-6"></div></li>
-        <li><div class="col-md-6"></div><a class="nav-link">
-            <i class="fa fa-fw fa-building"></i>{{SucursalName}}</a></li>
+          <li class="nav-item dropdown"><div class="col-md-6"></div>
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-building col-md-2 fa-lg"></i>
+            &nbsp;{{SucursalName}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">Datos Sucursal:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <span >
+                <strong>
+                  <i class="fa fa-user-circle fa-fw"></i>Titular</strong>
+              </span>
+              <div class="dropdown-message small">{{sucursalData.titular}}</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <span >
+                <strong>
+                  <i class="fa fa-map-marker fa-fw"></i>Domicilio</strong>
+              </span>
+              
+              <div class="dropdown-message small">{{sucursalData.domiciio}}&nbsp;</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">
+              <span >
+                <strong>
+                  <i class="fa fa-phone fa-fw"></i>Telefono</strong>
+              </span>
+              
+              <div class="dropdown-message small">{{sucursalData.telefono}}&nbsp;</div>
+            </a>
+           
+          </div>
+        </li>
         <li><div class="col-md-6"></div></li>
         <li class="nav-item">
           <a class="nav-link" ng-click="CerrarSesion()">
