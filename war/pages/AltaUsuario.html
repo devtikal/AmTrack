@@ -52,14 +52,14 @@
 					</select><br>
 					
 					<br>
-<!-- 					Sucursal: <select class="form-control" ng-model="usuario.sucursal" -->
-<!-- 						ng-required="!multiple" required> -->
-<!-- 						<option></option> -->
-<!-- 						<option>Sucursal 1</option> -->
-<!-- 						<option>Sucursal 2</option> -->
-<!-- 						<option>Sucursal 3</option> -->
+					Sucursal: <select class="form-control" ng-model="usuario.idSucursal"
+						ng-required="!multiple" required>
+						<option></option>
+						<option ng-repeat="s in listSuc" value="{{s.id}}">{{s.nombre}}</option>
+						
 
-<!-- 					</select><br> -->
+					</select>
+					<br>
 				</div>
 				<div class="col-md-1"></div>
 				<div class="col-md-4">

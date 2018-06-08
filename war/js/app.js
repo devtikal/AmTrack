@@ -15,7 +15,7 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 	});
 	$routeProvider.when('/welcome', {
 		templateUrl : "pages/welcome.html",
-		controller : "navigation"
+		controller : "DHLController"
 	});
 	$routeProvider.when('/dhl', {
 		templateUrl : "pages/dhl.html",
@@ -23,7 +23,7 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 	});
 	$routeProvider.when('/fedex', {
 		templateUrl : "pages/fedex.html",
-		controller : "navigation"
+		controller : "DHLController"
 	});
 	$routeProvider.when('/Sucursal', {
 		templateUrl : "pages/sucursal/navbar.html",
@@ -43,7 +43,7 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 	});
 	$routeProvider.when('/', {
 		templateUrl : "pages/welcome.html",
-		controller : "navigation"
+		controller : "DHLController"
 	});
 //	$routeProvider.otherwise({
 //		redirectTo : '/NoFound',
@@ -61,10 +61,11 @@ app.factory("userFactory", function(){
 	        },
 	        setUsuarioFirmado: function(user){
 	        	usuarioFirmado = user;
+	        	console.log("EL Usuario",usuarioFirmado)
 	        },
 	        getUsuarioPerfil: function(){
 	            return usuarioFirmado.perfil;
-	        }
+	        },
 	    }
 	return respuesta;
 });
@@ -75,7 +76,9 @@ app.service('sessionService', [
 	'$location',
 	'$q',
 	'userFactory',
-	function($rootScope, $http, $location, $q,userFactory) {
+	'$cookieStore',
+	'sucursalService',
+	function($rootScope,$http, $location, $q,userFactory,$cookieStore,sucursalService) {
 		this.authenticate = function(credentials, callback) {
 
 			var headers = credentials ? {
@@ -113,20 +116,30 @@ app.service('sessionService', [
 		this.isAuthenticated = function() {
 			var d = $q.defer();
 			$http.get("currentSession").success(function(data) {
+				$rootScope.UserData=data;
+				$cookieStore.put("idSucursal", data.idSucursal);
 				$rootScope.authenticated = true;
+				
+				sucursalService.getSucursal(data.idSucursal).then(function(data) {
+					$rootScope.sucursalData=data;
+					$rootScope.SucursalName=data.nombre;
+				
+					console.log("La Sucursal",$rootScope.sucursalData);
+				})
 				d.resolve(data);
 			}).error(function(data) {
 				$location.path("/login");
 			});
+			
 			return d.promise;
 		}
+
 } ]);
 
 app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope','$http', '$location','userFactory',
 	function(sessionService, $rootScope, $scope, $http, $location,userFactory) {
 		$scope.credentials = {};
 		$scope.login = function() {
-			$scope.credentials.idSucursal=9999;
 			sessionService.authenticate($scope.credentials, function() {
 				if ($rootScope.authenticated) {
 					$scope.error = false;
@@ -153,10 +166,11 @@ app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope
 app.run(['$rootScope','$http','sessionService','userFactory',function ($rootScope,$http,sessionService,userFactory) {
 	sessionService.isAuthenticated().then(function(data){
 		var us= data;
+		$rootScope.UserData=data;
 		userFactory.setUsuarioFirmado(us);
 		$rootScope.perfilUsuario=userFactory.getUsuarioPerfil();
-		$http.get("/notificacion/numAlertas/"+ us.id).then(function(response){
-			$rootScope.numNotificaciones=response.data;
-		})
+//		$http.get("/notificacion/numAlertas/"+ us.id).then(function(response){
+//			$rootScope.numNotificaciones=response.data;
+//		})
 	});
 }]);

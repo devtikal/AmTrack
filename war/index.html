@@ -239,14 +239,14 @@
         <li><div class="col-md-2"></div></li>
         <li><div class="col-md-2"></div></li>
         <li><div class="col-md-6"></div><a class="nav-link" ng-controller="paqueteriaController">
-            <i class="fa fa-fw fa-user "></i>{{usuariologin}}</a></li>
+            <i class="fa fa-fw fa-user "></i>{{UserData.usuario}}</a></li>
         <li><div class="col-md-6"></div></li>
-        <li><div class="col-md-6"></div><a class="nav-link" ng-controller="paqueteriaController">
-            <i class="fa fa-fw fa-building"></i>{{sucursalname}}</a></li>
+        <li><div class="col-md-6"></div><a class="nav-link">
+            <i class="fa fa-fw fa-building"></i>{{SucursalName}}</a></li>
         <li><div class="col-md-6"></div></li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Login / LogOut</a>
+          <a class="nav-link" ng-click="CerrarSesion()">
+            <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesion</a>
         </li>
       </ul>
     </div>

@@ -19,15 +19,39 @@ app.service("sucursalService",['$http', '$q','$window', function($http, $q,$wind
 				});
 		return d.promise;
 	}
+	this.getSucursal = function(id) {
+		var d = $q.defer();
+		$http.get("/sucursal/find/"+id).then(
+			function(response) {
+				d.resolve(response.data);
+			});
+		return d.promise;
+	}
 	
-
+	this.getAllSucursal = function() {
+		var d = $q.defer();
+		$http.get("/sucursal/findAll/").then(
+			function(response) {
+				d.resolve(response.data);
+			});
+		return d.promise;
+	}
 
 	
 }]);
 
-
-app.controller("sucursalController",['$scope','$window', '$location', '$cookieStore','sucursalService',function($scope, $window, $location, $cookieStore, sucursalService){
-
+app.controller("getSucursalController",['$scope','$rootScope','$window', '$location', '$cookieStore','sucursalService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore, sucursalService,sessionService){
+	sessionService.isAuthenticated();
+	 $scope.idSuc = $cookieStore.get('idSucursal');
+	sucursalService.getSucursal( $scope.idSuc).then(function(data) {
+		$scope.sucursalData=data;
+		$scope.SucursalName=data.nombre;
+	
+		console.log("La Sucursal",$scope.sucursalData);
+	})
+} ]);	
+app.controller("sucursalController",['$scope','$rootScope','$window', '$location', '$cookieStore','sucursalService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore, sucursalService,sessionService){
+	sessionService.isAuthenticated();
 
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
@@ -40,6 +64,8 @@ $scope.EnviarFormulario = function() {
 					    setTimeout(function(){ if($scope.sucursal){window.location="#/AltaSucursal"; $window.location.reload(); } }, 3000);
 //						
 					})}
+
+	
 
 } ]);
 

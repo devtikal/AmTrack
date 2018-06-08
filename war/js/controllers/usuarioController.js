@@ -70,7 +70,12 @@ app.service("usuarioservice",['$http', '$q','$window', function($http, $q,$windo
 app.service("perfilservice",['$http', '$q', function($http, $q){
 	
 }]);
-app.controller("userController",['$scope','$window', '$location', '$cookieStore','usuarioservice',function($scope, $window, $location, $cookieStore, usuarioservice){
+app.controller("userController",['$scope','$window', '$location', '$cookieStore','usuarioservice','sessionService','sucursalService',function($scope, $window, $location, $cookieStore, usuarioservice,sessionService,sucursalService){
+	sessionService.isAuthenticated();
+	
+	sucursalService.getAllSucursal().then(function(data) {
+		$scope.listSuc = data;
+	})
 
 	$scope.validate = function() {
 		  if ($scope.usuario.email != $scope.usuario.emailconfirm) {
@@ -89,7 +94,7 @@ $scope.validatePass = function() {
 }		
 
 $scope.acceptSubmit = function() {
-	if($scope.form.email.$valid && $scope.form.emailconfirm.$valid && !$scope.IsMatch && $scope.form.pass.$valid && $scope.form.passconfirm.$valid && !$scope.IsMatchP){
+	if(!$scope.IsMatch && $scope.form.pass.$valid && $scope.form.passconfirm.$valid && !$scope.IsMatchP){
 		return true;
 	}
 	return false;

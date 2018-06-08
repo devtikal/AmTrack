@@ -26,7 +26,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 }]);
 
 
-app.controller("paqueteriaController",['$scope','$window', '$location', '$cookieStore','paqueteriaService',function($scope, $window, $location, $cookieStore, paqueteriaService){
+app.controller("paqueteriaController",['$scope','$window', '$location', '$cookieStore','paqueteriaService','sessionService',function($scope, $window, $location, $cookieStore, paqueteriaService,sessionService){
+	sessionService.isAuthenticated();
 	$scope.usuariologin="femers";
 	$scope.sucursalname="Toluca Centro";
 	$scope.CurrentDate = new Date();

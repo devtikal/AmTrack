@@ -6,13 +6,16 @@ app.directive('submenu',function(){
 	};
 });
 
-app.controller('headerController',['$scope','$rootScope','$location','$http','$cookieStore',function($scope,$rootScope,$location,$http,$cookieStore){
+app.controller('headerController',['$scope','$rootScope','$location','$http','$cookieStore','userFactory','sessionService',function($scope,$rootScope,$location,$http,$cookieStore,userFactory,sessionService){
+	sessionService.isAuthenticated();
 	$scope.CerrarSesion = function(){
 		$http.get("/usuario/cerrarSesion").then(function(response) {
 			$rootScope.variable = false;
 			$location.path("/login");
+			location.reload(true);
 		}, function(response) {
 			$location.path("/login");
+			location.reload(true);;
 		});
 	};
 	
