@@ -58,11 +58,7 @@ public class SucursalDaoImpl implements SucursalDao {
 		}
 
 
-		@Override
-		public void findAll(Sucursal s) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 
 
 

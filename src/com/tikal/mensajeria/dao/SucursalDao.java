@@ -1,5 +1,7 @@
 package com.tikal.mensajeria.dao;
 
+import java.util.List;
+
 import com.tikal.mensajeria.modelo.login.Sucursal;
 
 public interface SucursalDao {
@@ -15,6 +17,8 @@ public interface SucursalDao {
 	//public static AeronaveEntity consult(String numeroSerie);
 	
     
-	public void findAll(Sucursal s);	
+	public List<Sucursal> findAll();
+	
+	
 
 }

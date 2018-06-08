@@ -1,6 +1,8 @@
 package com.tikal.mensajeria.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,7 +104,19 @@ public class SucursalController {
 					System.out.println("aaaaaaaaaa");
 					//System.out.println("find/id"+dd);
 					Sucursal s=sucursalDao.consult(id);
+					
 					response.getWriter().println(JsonConvertidor.toJson(s));
 				
+				}
+			 
+			 @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
+				public void findAllSuc(HttpServletResponse response, HttpServletRequest request) throws IOException {
+					AsignadorDeCharset.asignar(request, response);
+					List<Sucursal> lista = sucursalDao.findAll();
+					if (lista == null) {
+						lista = new ArrayList<Sucursal>();
+					}
+					response.getWriter().println(JsonConvertidor.toJson(lista));
+
 				}
 }
