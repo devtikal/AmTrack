@@ -20,6 +20,7 @@ public class Envio {
 	@Index  Empresa empresa;
 	private Paquete paquete;
 	
+	
 	@Index private String fecha;
 	private Integer cantidad;
 	@Index private Integer guia;
