@@ -1,10 +1,9 @@
 <!doctype html>
 
 
-<html ng-app="app">
+<html ng-app="app" lang="es-mx">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<META http-equiv=Content-Type content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Language" content="es">
 
 <title>Mensajeria</title>
 <!-- <link href="favicon.ico" type="image/x-icon" rel="shortcut icon" /> -->
@@ -61,6 +60,7 @@
 <script type="text/javascript" src="js/controllers/headerController.js"></script>
 <script type="text/javascript" src="js/controllers/perfil.js"></script>
 <script type="text/javascript" src="js/controllers/DHLController.js"></script>
+<script type="text/javascript" src="js/controllers/guiaController.js"></script>
 <script type="text/javascript" src="js/controllers/usuarioController.js"></script>
 <script type="text/javascript" src="js/controllers/notificacionesController.js"></script>
 <script type="text/javascript" src="js/controllers/sucursalController.js"></script>
@@ -108,7 +108,7 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" data-target="#collapseComponents">
             <i class="fa fa-fw fa-truck fa-2x"></i>
-            <span class="nav-link-text">Paqueteria</span>
+            <span class="nav-link-text">Paquetería</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
@@ -134,6 +134,9 @@
             </li>
             <li>
               <a href="#/AltaSucursal">Sucursal</a>
+            </li>
+            <li>
+              <a href="#/altaGuia">Guia</a>
             </li>
           </ul>
         </li>

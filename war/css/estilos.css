@@ -426,3 +426,7 @@ infPago infComisiones infCliente{
     padding: 100px 20px;
     height: 100%;
 }
+
+.bg-gray {
+  background-color: #F5F5F5 !important;
+}
