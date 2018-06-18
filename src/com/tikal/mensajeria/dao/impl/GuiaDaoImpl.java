@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tikal.mensajeria.dao.GuiaDao;
 
 import com.tikal.mensajeria.modelo.entity.Guia;
+import com.tikal.mensajeria.modelo.login.Usuario;
 
 @Service("guiaDao")
 public class GuiaDaoImpl implements GuiaDao {
@@ -87,7 +88,13 @@ public class GuiaDaoImpl implements GuiaDao {
 	public Guia getByEstSuc(String estatus, Long idSucursal) {
 		// TODO Auto-generated method stub
 		System.out.println("esta en daoimpl envio  get by status:"+estatus+" Suc:"+idSucursal);
-		return ofy().load().type(Guia.class).filter("estatus",estatus).filter("idSucursal", idSucursal).order("numero").list().get(0);
+		List<Guia> g= ofy().load().type(Guia.class).filter("estatus",estatus).filter("idSucursal", idSucursal).order("numero").list();
+		 
+		if (g.size() == 0) {
+			return null;
+		}
+		Guia nuevo = g.get(0);
+		return nuevo;
 	}
 
 

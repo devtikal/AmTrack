@@ -221,6 +221,7 @@ public class EnvioController {
 			public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
 		   System.out.println("dame guia");
 		   Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
+		   
 		   System.out.println("dame guia:"+g.getNumero());
 		   response.getWriter().println(g.getNumero());
 //		   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
