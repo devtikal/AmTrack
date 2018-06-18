@@ -1,6 +1,9 @@
 package com.tikal.mensajeria.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +19,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.tikal.mensajeria.dao.DestinatarioDao;
 import com.tikal.mensajeria.dao.EmpresaDao;
 import com.tikal.mensajeria.dao.EnvioDao;
+import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.PaqueteDao;
+import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
+import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
+import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.Destinatario;
 import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Envio;
+import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
+import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
 import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.util.AsignadorDeCharset;
@@ -30,9 +40,13 @@ import com.tikal.util.JsonConvertidor;
 @RequestMapping("/envio")
 public class EnvioController {
 	
-	//@Autowired
-	@Qualifier("usuariDao")
+	@Autowired
+	@Qualifier("usuarioDao")
 	UsuarioDao usuarioDao;
+	
+	@Autowired
+	@Qualifier("sucursalDao")
+	SucursalDao sucursalDao;
 	
 	@Autowired
 	@Qualifier("empresaDao")
@@ -43,12 +57,17 @@ public class EnvioController {
 	PaqueteDao paqueteDao;
 	
 	@Autowired
+	
 	@Qualifier("destinatarioDao")
 	DestinatarioDao destinatarioDao;
 	
 	@Autowired
 	@Qualifier("envioDao")
 	EnvioDao envioDao;
+	
+	@Autowired
+	@Qualifier("guiaDao")
+	GuiaDao guiaDao;
 	
 	
 	@RequestMapping(value={"/prueba"},method = RequestMethod.GET)
@@ -58,8 +77,8 @@ public class EnvioController {
 
 	    }
 	
-	@RequestMapping(value = { "/add_" }, method = RequestMethod.GET)
-	public void crearPerfil(HttpServletRequest request, HttpServletResponse response)throws IOException {
+	@RequestMapping(value = { "/add_/{usuario}" }, method = RequestMethod.GET)
+	public void addEnvio(HttpServletRequest request, HttpServletResponse response, @PathVariable String usuario)throws IOException {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		//	AsignadorDeCharset.asignar(request, response);
 		//	System.out.println(" edgar manda:"+json);
@@ -103,8 +122,14 @@ public class EnvioController {
 			
 		//	envio.setEmpresa("otra");
 			envio.setFecha("05/06/2018 18:03:45");
-			envio.setFolio("0001");
-			envio.setGuia(123456789);
+			Contador c= new Contador();
+			envio.setFolio(c.getFolio().toString());
+			//Integer guia = buscaGuia(username);
+			//guiaDao.
+			//Usuario user= usuarioDao.consultarUsuario(usuario);
+			//System.out.println("esta en daoimpl envio  get by status Suc:"+usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			envio.setGuia(g.getNumero());
 			envio.setPrecio(312.50);
 			envio.setRastreo(8888888);
 			envio.setTipoEnvio("Express");
@@ -115,7 +140,9 @@ public class EnvioController {
 			
 			//envio.setUsuario(usuario);
 			envioDao.save(envio);
-			
+			g.setEstatus("ASIGNADA");
+			guiaDao.update(g);
+			c.incremeta();
 	//}
 //			response.sendError(403);
 //		}
@@ -163,9 +190,15 @@ public class EnvioController {
 			envio.setCliente(evo.getCliente());
 			envio.setDestinatario(des);
 			
-			envio.setFecha(evo.getFecha());
-			envio.setFolio(evo.getFolio());
-			envio.setGuia(evo.getGuia());
+			 Calendar c = Calendar.getInstance();		  
+			//  String fecha =  Integer.toString(c.get(Calendar.DATE));
+			envio.setFecha(c.toString());
+			//envio.setFolio(evo.getFolio()); asignar folio consecutivo
+			Contador folio= new Contador();
+			envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
+			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario("dapp").getIdSucursal());
+			envio.setGuia(g.getNumero());
+			//envio.setGuia(evo.getGuia());
 			envio.setPaquete(p);
 			envio.setPrecio(evo.getPrecio());
 			envio.setRastreo(evo.getRastreo());
@@ -174,8 +207,61 @@ public class EnvioController {
 			//envio.setUsuario(usuario); falta
 			
 			envioDao.save(envio);
+			g.setEstatus("ASIGNADA");
+			guiaDao.update(g);
+			folio.incremeta();
 			
 			
 			
 	}
+	
+	
+	
+	   @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+			public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
+		   System.out.println("dame guia");
+		   Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
+		   System.out.println("dame guia:"+g.getNumero());
+		   response.getWriter().println(g.getNumero());
+//		   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+			  
+	   }
+	
+	   @RequestMapping(value = { "/generaTicket/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+		public void generaVale(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable String userName) throws IOException {
+	   System.out.println("genera ticket");
+//	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+		   response.setContentType("Application/Pdf");
+		  Envio e = envioDao.consult(idEnvio) ;  
+	        File newPdfFile = new File(idEnvio+".pdf");		 
+	        if (!newPdfFile.exists()){
+	            try {
+	            	newPdfFile.createNewFile();
+	            } catch (IOException ioe) {
+	                System.out.println("(Error al crear el fichero nuevo ......)" + ioe);
+	            }
+	        }
+       
+	        Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
+	        Paquete p = e.getPaquete();
+	     //   String des = e.paquete.paqueteDao.consult(e.getPaquete().getDescripcion());
+	        System.out.println("Empiezo a generar pdf...." );
+	    	GeneraTicket gt = new GeneraTicket(e, s, p,  response.getOutputStream());
+	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
+	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
+	    	  response.getOutputStream().flush();
+		        response.getOutputStream().close();
+	    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
+	    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+//	   }else{
+//			response.sendError(403);
+//		}
+	}
+	   
+	    
+		 
+	
+	
 }
+
+

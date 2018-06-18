@@ -102,7 +102,7 @@ public class SucursalController {
 					AsignadorDeCharset.asignar(request, response);
 					//DetalleDiscrepanciaVo dd = getDetalleDiscrepancia(id);
 					System.out.println("aaaaaaaaaa");
-					//System.out.println("find/id"+dd);
+					System.out.println("sucursal"+id);
 					Sucursal s=sucursalDao.consult(id);
 					
 					response.getWriter().println(JsonConvertidor.toJson(s));

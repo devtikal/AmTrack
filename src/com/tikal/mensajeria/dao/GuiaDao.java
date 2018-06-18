@@ -23,4 +23,8 @@ public interface GuiaDao {
 	public List<Guia> getByEstatus(String estatus);
 	
 	public List<Guia> getBySucursal(Long idSucursal);
+	
+	public Guia getByEstSuc(String estatus,Long idSucursal);
+	
+	public Guia getByNumero (Integer numero);
 }

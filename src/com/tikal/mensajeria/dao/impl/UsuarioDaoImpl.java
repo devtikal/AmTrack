@@ -75,6 +75,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		}
 		Usuario nuevo = usu.get(0);
 		return nuevo;
+		
 	}
 	
 	@Override

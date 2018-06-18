@@ -76,6 +76,21 @@ public class GuiaDaoImpl implements GuiaDao {
 	}
 
 
+	@Override
+	public Guia getByNumero(Integer numero) {
+		// TODO Auto-generated method stub
+		return ofy().load().type(Guia.class).filter("numero",numero).list().get(0);
+	}
+
+
+	@Override
+	public Guia getByEstSuc(String estatus, Long idSucursal) {
+		// TODO Auto-generated method stub
+		System.out.println("esta en daoimpl envio  get by status:"+estatus+" Suc:"+idSucursal);
+		return ofy().load().type(Guia.class).filter("estatus",estatus).filter("idSucursal", idSucursal).order("numero").list().get(0);
+	}
+
+
 	
 
 

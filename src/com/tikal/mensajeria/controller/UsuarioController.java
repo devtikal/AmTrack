@@ -72,6 +72,7 @@ public class UsuarioController {
 			System.out.println("usuari usuario: "+usuario.getUsername());
 			System.out.println("usuari perfil: "+usuario.getPerfil());
 			System.out.println("usuari nombre: "+usuario.getNombre());
+			System.out.println("usuari sucursal: "+usuario.getIdSucursal());
 			usuario.setPassword(UsuarioController.otroMetodo(usuario.getPassword()));
 			//System.out.println("usuario, idpuesto: "+usuario.getIdPuesto());
 			//usuario.setNombrePuesto(puestoDao.consult(usuario.getIdPuesto()).getDescripcion());
@@ -218,7 +219,7 @@ public class UsuarioController {
 				usuario.setPassword(otroMetodo("root"));  
 				usuario.setPerfil("SuperAdministrador");//root;admin1
 				//usuario.setSucursal(sucursal);
-				usuario.setIdSucursal(Long.valueOf(9999));
+				//usuario.setIdSucursal(Long.valueOf(9999));
 				usuario.setUsername("root");
 				usuario.setNombre("Administrador");
 				usuario.setaPaterno("Administrador");
@@ -230,6 +231,7 @@ public class UsuarioController {
 				//PuestoEntity puesto = new PuestoEntity();
 				
 				Sucursal sucursal = new Sucursal();
+				//sucursal.setId(Long.valueOf("9999"));
 				sucursal.setNombre("MASTER");
 				sucursal.setRfc("MASTER");
 				sucursal.setCurp("MASTER9999");
@@ -238,6 +240,7 @@ public class UsuarioController {
 				sucursal.setTitular("SUPER ADMINISTRADOR");
 				sucursal.setUbicacion("-------");
 				sucursalDao.save(sucursal);
+				usuario.setIdSucursal(sucursal.getId());
 				//hacer el controller
 				//usuario.setSucursal(sucursal);
 				//usuario.setIdSucursal(9999);

@@ -26,7 +26,7 @@ public class Envio {
 	@Index private Integer guia;
 	@Index private Integer rastreo;
 	private String tipoEnvio;
-	@Index private String folio;
+	@Index private String folio; //numero de envio
 	private Double precio;
 	private Double total;
 	//private String totalLetra;
