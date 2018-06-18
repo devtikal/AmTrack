@@ -1,7 +1,7 @@
 app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$window){
-	this.crearPaquete = function(paqueteria) {
+	this.crearPaquete = function(user,paqueteria) {
 		var d = $q.defer();
-		$http.post("envio/add", paqueteria).then(
+		$http.post("envio/add/"+user, paqueteria).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -26,16 +26,14 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 }]);
 
 
-app.controller("paqueteriaController",['$scope','$window', '$location', '$cookieStore','paqueteriaService','sessionService',function($scope, $window, $location, $cookieStore, paqueteriaService,sessionService){
+app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
-	$scope.usuariologin="femers";
-	$scope.sucursalname="Toluca Centro";
+	
 	$scope.CurrentDate = new Date();
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
 //	$scope.validate();
-	
-	paqueteriaService.crearPaquete($scope.paqueteria).then(function(data) {
+	paqueteriaService.crearPaquete($cookieStore.get('usuario'),$scope.paqueteria).then(function(data) {
 						var x = document.getElementById("snackbar")
 					    x.className = "show";
 						setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);

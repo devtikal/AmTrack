@@ -61,7 +61,7 @@ app.factory("userFactory", function(){
 	        },
 	        setUsuarioFirmado: function(user){
 	        	usuarioFirmado = user;
-	        	console.log("EL Usuario",usuarioFirmado)
+//	        	console.log("EL Usuario",usuarioFirmado)
 	        },
 	        getUsuarioPerfil: function(){
 	            return usuarioFirmado.perfil;
@@ -117,6 +117,8 @@ app.service('sessionService', [
 			var d = $q.defer();
 			$http.get("currentSession").success(function(data) {
 				$rootScope.UserData=data;
+				$cookieStore.put("usuario", data.usuario);
+//				console.log("Solo el Usuario a cookie",data.usuario);
 				$cookieStore.put("idSucursal", data.idSucursal);
 				$rootScope.authenticated = true;
 				
@@ -124,7 +126,7 @@ app.service('sessionService', [
 					$rootScope.sucursalData=data;
 					$rootScope.SucursalName=data.nombre;
 				
-					console.log("La Sucursal",$rootScope.sucursalData);
+//					console.log("La Sucursal",$rootScope.sucursalData);
 				})
 				d.resolve(data);
 			}).error(function(data) {

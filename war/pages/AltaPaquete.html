@@ -10,17 +10,8 @@
 		</div>
 		<div class="topBanner">
 <div class="row">
-			<br>
-			<div class="col-md-2">
-							<div class="form-group ">
-								<label for="example-text-input" class="col-2 col-form-label">
-									Cliente </label>
-								<div class="col-23">
-								<input type="text" class="form-control" id ="Named" ng-model="paqueteria.cliente" required>
-									
-								</div>
-							</div>
-						</div>
+			<div class="col-md-1"></div>
+			
 			<div class="col-md-2">
 							<div class="form-group ">
 								<label for="example-text-input" class="col-2 col-form-label">
@@ -75,7 +66,13 @@
 			
 					<div class="row">
 						<div class="col-md-1"></div>
+						
+						
 						<div class="col-md-4">
+						
+									<br><label> Cliente: </label>
+								<input type="text" class="form-control" id ="Named" ng-model="paqueteria.cliente" required>
+							
 							<br> <label>Cantidad: </label><input type="number" class="form-control"
 								ng-model="paqueteria.cantidad" required> <br>
 							<label>Descripcion:</label> <input type="text" class="form-control"
@@ -83,20 +80,24 @@
 								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paqueteria.tipoPaquete"
 										required>
 										<option></option>
-										<option>PAQUETE</option>
+										<option>BOLSA</option>
+										<option>CAJA</option>
+										<option>IRREGULAR</option>
 										<option>SOBRE</option>
 										
 										</select>
 						</div>
-
 						<div class="col-md-4">
-						
+						<br><label> Domicilio: </label>
+								<input type="text" class="form-control" id ="Named" ng-model="paqueteria.domicilio">
 							<br><label>Tipo de Envio:</label> <select class="form-control" ng-model="paqueteria.tipoEnvio"
 										required>
 										<option></option>
-										<option>EXPRESS</option>
-										<option>DIA SIG.</option>
-										<option>OTRO</option>
+										<option>3 a 5 Dias Habibles</option>
+										<option>Dia Siguiente</option>
+										<option>Serv. 11:30</option>
+										<option>Dos Dias</option>
+										<option>Serv. Terrestre</option>
 										
 										</select>
 						</div>
@@ -184,7 +185,7 @@
 									class="col-2 col-form-label">Total</label>
 								<div class="col-10">
 									<input type="number" class="form-control"
-										ng-model="paqueteria.total" step="0.01" required>
+										ng-model="paqueteria.precio" step="0.01" required>
 										{{paqueteria.total | currency}}
 								</div>
 							</div>
@@ -264,7 +265,7 @@
 					</div>
 </article>
 			</form>
-				<div id="snackbar">Sucursal Guardada Correctamente</div>
+				<div id="snackbar">Envio gurdado correctamente</div>
 	</div>
 </div>
 
