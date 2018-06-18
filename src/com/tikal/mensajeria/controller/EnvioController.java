@@ -134,7 +134,7 @@ public class EnvioController {
 			envio.setRastreo(8888888);
 			envio.setTipoEnvio("Express");
 			envio.setTotal(312.50);
-			
+			   
 
 			//u= usuarioDao.consult("")
 			
