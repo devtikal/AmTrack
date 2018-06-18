@@ -15,6 +15,7 @@ public class Envio {
 	private Usuario usuario;
 	//private Persona cliente;
 	private String cliente;
+	private String domicilioCliente;
 	//private Persona destinatario;
 	private Destinatario destinatario;
 	@Index  Empresa empresa;
@@ -47,6 +48,13 @@ public class Envio {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	} 
+	
+	public String getDomicilioCliente() {
+		return domicilioCliente;
+	}
+	public void setDomicilioCliente(String domicilioCliente) {
+		this.domicilioCliente = domicilioCliente;
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}

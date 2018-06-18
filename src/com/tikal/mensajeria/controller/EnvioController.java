@@ -149,8 +149,8 @@ public class EnvioController {
 	}
 	
 
-	@RequestMapping(value = { "/add" },  method = RequestMethod.POST, consumes = "Application/Json")
-	public void crearEnvio(HttpServletRequest request, HttpServletResponse response,@RequestBody String json)throws IOException {
+	@RequestMapping(value = { "/add/{usuario}" },  method = RequestMethod.POST, consumes = "Application/Json")
+	public void crearEnvio(HttpServletRequest request, HttpServletResponse response,@RequestBody String json, @PathVariable String usuario)throws IOException {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 			AsignadorDeCharset.asignar(request, response);
 			System.out.println(" Yisus manda:"+json);
@@ -196,7 +196,7 @@ public class EnvioController {
 			//envio.setFolio(evo.getFolio()); asignar folio consecutivo
 			Contador folio= new Contador();
 			envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
-			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario("dapp").getIdSucursal());
+			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
 			envio.setGuia(g.getNumero());
 			//envio.setGuia(evo.getGuia());
 			envio.setPaquete(p);
@@ -204,7 +204,7 @@ public class EnvioController {
 			envio.setRastreo(evo.getRastreo());
 			envio.setTipoEnvio(evo.getTipoEnvio());
 			envio.setTotal(evo.getTotal());
-			//envio.setUsuario(usuario); falta
+			envio.setUsuario(usuarioDao.consultarUsuario(usuario));// falta
 			
 			envioDao.save(envio);
 			g.setEstatus("ASIGNADA");
