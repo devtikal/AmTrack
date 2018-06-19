@@ -1,6 +1,8 @@
 package com.tikal.mensajeria.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Guia;
+import com.tikal.mensajeria.util.JsonConvertidor;
 import com.tikal.util.AsignadorDeCharset;
 
 @Controller
@@ -121,5 +124,29 @@ public class GuiaController {
 		
 	}
 	
+	@RequestMapping(value = { "/cancelar/{idGuia}" },  method = RequestMethod.GET)
+	public void asignaM(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable Long idGuia )throws IOException {
 	
+	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
+		AsignadorDeCharset.asignar(request, response);
+		
+			Guia guia = guiaDao.consult(idGuia);
+			guia.setEstatus("CANCELADA");
+			guiaDao.update(guia);
+			//System.out.println(" yisus manda:"+json);
+		
+		
+	}
+	
+	 @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Guia> lista = guiaDao.findAll();
+			if (lista == null) {
+				lista = new ArrayList<Guia>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
 }

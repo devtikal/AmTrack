@@ -131,7 +131,7 @@ public class GeneraTicket {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph("C.U.R.P.:"+s.getCurp(),f2);
+            Paragraph p6 = new Paragraph("C.U.R.P.: aqui va un curp",f2);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_LEFT);
             c6.setColspan(2);

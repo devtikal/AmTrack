@@ -55,11 +55,7 @@ public class GuiaDaoImpl implements GuiaDao {
 	}
 
 
-	@Override
-	public void findAll(Guia g) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 	//@Override

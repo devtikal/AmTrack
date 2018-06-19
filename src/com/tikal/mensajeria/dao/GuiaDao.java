@@ -18,7 +18,7 @@ public interface GuiaDao {
 	//public static AeronaveEntity consult(String numeroSerie);
 	
     
-	public void findAll(Guia g);	
+	public List<Guia> findAll();	
 	
 	public List<Guia> getByEstatus(String estatus);
 	

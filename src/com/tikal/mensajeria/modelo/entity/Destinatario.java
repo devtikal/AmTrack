@@ -19,7 +19,7 @@ public class Destinatario {
 	private String municipio;
 	private String estado;
 	private Integer codigoPostal;
-	
+	private String referencias;
 	
 	public Long getId() {
 		return id;
@@ -109,4 +109,12 @@ public class Destinatario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	public String getReferencias() {
+		return referencias;
+	}
+	public void setReferencias(String referencias) {
+		this.referencias = referencias;
+	}
+	
+	
 }

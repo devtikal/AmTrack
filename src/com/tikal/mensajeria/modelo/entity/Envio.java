@@ -1,5 +1,7 @@
 package com.tikal.mensajeria.modelo.entity;
 
+import java.util.List;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -32,7 +34,7 @@ public class Envio {
 	private Double total;
 	//private String totalLetra;
 	
-	
+	private List<Material> materiales;
 	
 	
 	
@@ -145,6 +147,12 @@ public class Envio {
 //	public void setTotalLetra(String totalLetra) {
 //		this.totalLetra = totalLetra;
 //	}
+	public List<Material> getMateriales() {
+		return materiales;
+	}
+	public void setMateriales(List<Material> materiales) {
+		this.materiales = materiales;
+	}
 	
 	
 	

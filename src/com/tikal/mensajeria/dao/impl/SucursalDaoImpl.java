@@ -30,7 +30,7 @@ public class SucursalDaoImpl implements SucursalDao {
 		System.out.print("old:"+old);
 			if (old != null) {
 				old.setNombre(s.getNombre());
-				old.setCurp(s.getCurp());
+				//old.setCurp(s.getCurp());
 				old.setDomiciio(s.getDomiciio());
 				old.setRfc(s.getRfc());
 				old.setTelefono(s.getTelefono());

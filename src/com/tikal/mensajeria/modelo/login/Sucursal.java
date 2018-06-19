@@ -13,7 +13,7 @@ public class Sucursal {
 	private String ubicacion;
 	private String domiciio;
 	private String telefono;
-	private String curp;
+	//private String curp;
 	private String rfc;
 	private String titular;
 	
@@ -48,12 +48,7 @@ public class Sucursal {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getCurp() {
-		return curp;
-	}
-	public void setCurp(String curp) {
-		this.curp = curp;
-	}
+	
 	public String getRfc() {
 		return rfc;
 	}

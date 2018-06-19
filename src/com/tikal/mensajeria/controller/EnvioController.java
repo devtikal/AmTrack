@@ -23,6 +23,7 @@ import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.PaqueteDao;
 import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
+import com.tikal.mensajeria.formatos.pdf.GeneraGuiaMervel;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.Destinatario;
@@ -259,7 +260,36 @@ public class EnvioController {
 //		}
 	}
 	   
-	    
+	   @RequestMapping(value = { "/generaGuiaMervel/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+	 		public void generaGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable String userName) throws IOException {
+	 	   System.out.println("genera ticket");
+//	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+	 		   response.setContentType("Application/Pdf");
+	 		  Envio e = envioDao.consult(idEnvio) ;  
+	 	        File newPdfFile = new File(idEnvio+".pdf");		 
+	 	        if (!newPdfFile.exists()){
+	 	            try {
+	 	            	newPdfFile.createNewFile();
+	 	            } catch (IOException ioe) {
+	 	                System.out.println("(Error al crear el fichero nuevo ......)" + ioe);
+	 	            }
+	 	        }
+	        
+	 	        Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
+	 	        Paquete p = e.getPaquete();
+	 	     //   String des = e.paquete.paqueteDao.consult(e.getPaquete().getDescripcion());
+	 	        System.out.println("Empiezo a generar pdf...." );
+	 	    	GeneraGuiaMervel ggm = new GeneraGuiaMervel(e, s, p,  response.getOutputStream());
+	 	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
+	 	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
+	 	    	  response.getOutputStream().flush();
+	 		        response.getOutputStream().close();
+	 	    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
+	 	    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+//	 	   }else{
+//	 			response.sendError(403);
+//	 		}
+	 	}
 		 
 	
 	

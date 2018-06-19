@@ -44,6 +44,7 @@ public class DestinatarioDaoImpl implements DestinatarioDao {
 			old.setEstado(d.getEstado());
 			old.setTelefono(d.getTelefono());
 			old.setNombreCompleto(d.getNombreCompleto());
+			old.setReferencias(d.getReferencias());
 				
 		}
 
