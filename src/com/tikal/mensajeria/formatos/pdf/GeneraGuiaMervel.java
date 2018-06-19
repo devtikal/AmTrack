@@ -52,12 +52,17 @@ public class GeneraGuiaMervel {
     	    
     	    Font f3 = new Font();
     	    f3.setStyle(1);
-    	    f3.setSize(8);
+    	    f3.setSize(10);
     	    f3.setColor(BaseColor.BLACK);
+    	    
+    	    Font f4 = new Font();
+    	    f4.setStyle(1);
+    	    f4.setSize(20);
+    	    f4.setColor(BaseColor.BLACK);
     	   
             PdfPTable table = new PdfPTable(3);              
             
-            Image imagen = Image.getInstance("img/LogoMervel.png");
+            Image imagen = Image.getInstance("img/Mervel.png");
             imagen.scaleAbsolute(200, 50);
            
       
@@ -68,26 +73,35 @@ public class GeneraGuiaMervel {
             c1.setRowspan(5);
             c1.setBorder(Rectangle.NO_BORDER);
             table.addCell(c1);
+            
+            Paragraph p36 = new Paragraph("    ",f2);
+            PdfPCell c36 = new PdfPCell(p36);
+            c36.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c36.setColspan(3);c36.setRowspan(5);
+            c36.setBorder(Rectangle.NO_BORDER);
+            table.addCell(c36);
            
-            Paragraph p2 = new Paragraph("______________________________________",f2);
+            Paragraph p2 = new Paragraph("_______________________",f1);
             PdfPCell c2 = new PdfPCell(p2);
             c2.setHorizontalAlignment(Element.ALIGN_CENTER);
             c2.setColspan(3);c2.setRowspan(1);
             c2.setBorder(Rectangle.NO_BORDER);
             table.addCell(c2);
             
+            
+            
            
-            Paragraph p3 = new Paragraph("Firma de recibido",f2);
+            Paragraph p3 = new Paragraph("Firma de recibido",f1);
             PdfPCell c3 = new PdfPCell(p3);
             c3.setHorizontalAlignment(Element.ALIGN_CENTER);
-            c3.setColspan(3);c3.setRowspan(1);
+            c3.setColspan(3);
             c3.setBorder(Rectangle.NO_BORDER);
             table.addCell(c3);
            
-            Paragraph p33 = new Paragraph("",f2);
+            Paragraph p33 = new Paragraph("       ",f2);
             PdfPCell c33 = new PdfPCell(p33);
             c33.setHorizontalAlignment(Element.ALIGN_CENTER);
-            c33.setColspan(3);c33.setRowspan(3);
+            c33.setColspan(3);c33.setRowspan(2);
             c33.setBorder(Rectangle.NO_BORDER);
             table.addCell(c33);
             
@@ -106,7 +120,7 @@ public class GeneraGuiaMervel {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph("Fecha:12/06/2018",f3);
+            Paragraph p6 = new Paragraph("12/06/2018",f3);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_LEFT);
             c6.setColspan(1);
@@ -119,6 +133,13 @@ public class GeneraGuiaMervel {
             c7.setColspan(4);c7.setBorder(Rectangle.NO_BORDER);
             table.addCell(c7);
             
+            Paragraph p37 = new Paragraph("                ",f2);
+            PdfPCell c37 = new PdfPCell(p37);
+            c37.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c37.setColspan(3);c37.setRowspan(1);
+            c37.setBorder(Rectangle.NO_BORDER);
+            table.addCell(c37);
+            
             Paragraph p8 = new Paragraph("Calle:"+e.getDomicilioCliente(),f1);
             PdfPCell c8 = new PdfPCell(p8);
             c8.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -127,7 +148,7 @@ public class GeneraGuiaMervel {
             table.addCell(c8);
            // table.addCell(c6);
             
-            Paragraph px = new Paragraph("50450",f3);
+            Paragraph px = new Paragraph("50450",f4);
             PdfPCell cx = new PdfPCell(px);
             cx.setHorizontalAlignment(Element.ALIGN_LEFT);
             cx.setColspan(3);
@@ -199,12 +220,12 @@ public class GeneraGuiaMervel {
             c13.setColspan(3);
             table2.addCell(c13);
 //            
-            Paragraph p14 = new Paragraph("CP:"+e.getDestinatario().getCodigoPostal(),f2);
+            Paragraph p14 = new Paragraph(e.getDestinatario().getCodigoPostal().toString(),f4);
             PdfPCell c14 = new PdfPCell(p14);
             c14.setHorizontalAlignment(Element.ALIGN_LEFT);
            //.setBackgroundColor(BaseColor.BLACK);
             c14.setBorder(Rectangle.NO_BORDER);
-            c14.setColspan(2);
+            c14.setColspan(3);
             table2.addCell(c14);
             
             document.add(table2);

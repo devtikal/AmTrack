@@ -51,7 +51,7 @@ public class GuiaDaoImpl implements GuiaDao {
 
    
 	public List<Guia> findAll() {
-		return ofy().load().type(Guia.class).list();
+		return ofy().load().type(Guia.class).order("numero").list();
 	}
 
 
