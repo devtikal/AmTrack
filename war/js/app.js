@@ -45,6 +45,7 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/AltaGuia.html",
 		controller : "guiaController"
 	});
+	
 	$routeProvider.when('/', {
 		templateUrl : "pages/welcome.html",
 		controller : "DHLController"
