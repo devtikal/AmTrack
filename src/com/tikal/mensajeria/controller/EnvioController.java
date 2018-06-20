@@ -2,8 +2,9 @@ package com.tikal.mensajeria.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -191,9 +192,9 @@ public class EnvioController {
 			envio.setCliente(evo.getCliente());
 			envio.setDestinatario(des);
 			
-			 Calendar c = Calendar.getInstance();		  
+			// Calendar c = Calendar.getInstance();		  
 			//  String fecha =  Integer.toString(c.get(Calendar.DATE));
-			envio.setFecha(c.toString());
+			envio.setFecha(evo.getFecha());
 			//envio.setFolio(evo.getFolio()); asignar folio consecutivo
 			Contador folio= new Contador();
 			envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
@@ -217,7 +218,7 @@ public class EnvioController {
 	}
 	
 	
-	   @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+	   @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/json")
 			public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
 		   //System.out.println("dame guia");
 		   Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
@@ -293,7 +294,17 @@ public class EnvioController {
 //	 		}
 	 	}
 		 
-	
+//	   @RequestMapping(value = { "/reporte/{inicio}/{fin}" }, method = RequestMethod.GET, produces = "application/json")
+//		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable Integer inicio , @PathVariable Integer fin) throws IOException {
+//			AsignadorDeCharset.asignar(request, response);
+//			for (int i=inicio; i<= fin; i++) {
+//				Guia guia = guiaDao.getByNumero(i);
+//				guia.setIdSucursal(idSucursal);
+//				guiaDao.update(guia);
+//				//System.out.println(" yisus manda:"+json);
+//			}
+//
+//		}
 	
 }
 
