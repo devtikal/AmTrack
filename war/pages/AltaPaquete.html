@@ -36,7 +36,7 @@
 								<label for="example-text-input" class="col-2 col-form-label">
 									Guia</label>
 								<div class="col-15">
-									<input type="number" class="form-control" ng-model="paqueteria.guia" required>
+									<input type="number" class="form-control" ng-model="paqueteria.guia" required readonly>
 								</div>
 							</div>
 						</div>
@@ -103,8 +103,31 @@
 						</div>
 					</div>
 					<br> <br>
+					
 					<div class="row">
+					<div class="col-md-1"></div>
+							<div class="col-md-2">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label"> Empresa </label>
+								<div class="col-10">
+									<select class="form-control" ng-model="paqueteria.empresa" ng-change="isEstafeta()"
+										required>
+										<option></option>
+										<option>DHL</option>
+										<option>UPS</option>
+										<option>FEDEX</option>
+										<option>ESTAFETA</option>
+										
+										</select>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div ng-hide="hide">
+					<div class="row" >
 						<div class="col-md-1"></div>
+						
 						<div class="col-md-1">
 							<div class="form-group ">
 								<br> <label for="example-text-input"
@@ -118,7 +141,7 @@
 									Largo </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paqueteria.largo" required>
+										ng-model="paqueteria.largo" ng-required="requerido">
 								</div>
 							</div>
 						</div>
@@ -128,7 +151,7 @@
 									Ancho </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paqueteria.ancho" required>
+										ng-model="paqueteria.ancho" ng-required="requerido">
 								</div>
 							</div>
 						</div>
@@ -138,7 +161,7 @@
 									Alto </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paqueteria.alto" required>
+										ng-model="paqueteria.alto" ng-required="requerido">
 								</div>
 							</div>
 						</div>
@@ -154,29 +177,14 @@
 									class="col-6 col-form-label">Peso (kg):</label>
 								<div class="col-10">
 									<input type="text" class="form-control"
-										ng-model="paqueteria.peso" required>
+										ng-model="paqueteria.peso" ng-required="requerido">
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="form-group ">
-								<br> <label for="example-text-input"
-									class="col-2 col-form-label"> Empresa </label>
-								<div class="col-10">
-									<select class="form-control" ng-model="paqueteria.empresa"
-										required>
-										<option></option>
-										<option>DHL</option>
-										<option>UPS</option>
-										<option>FEDEX</option>
-										<option>ESTAFETA</option>
-										
-										</select>
-								</div>
-							</div>
-						</div>
+				
 
 						<br> <br>
+					</div>
 					</div>
 					<div class="row">
 					<div class="col-md-1"></div>
@@ -207,37 +215,37 @@
 <!-- #######DESTINATARIO###### -->
 
 <div id="dest" class="tabcontent">
-	
+	<div ng-hide="hide">
 					<div class="row">
 						<div class="col-md-1"></div>
 						<div class="col-md-4">
 							<br> <label>Nombre: </label><input type="text" class="form-control"
-								ng-model="paqueteria.Nombre" required> <br>
+								ng-model="paqueteria.Nombre" ng-required="requerido"> <br>
 							<label>Apellido Paterno:</label> <input type="text" class="form-control"
-								ng-model="paqueteria.aPaterno" required> 
+								ng-model="paqueteria.aPaterno" ng-required="requerido"> 
 							<br> <label>Apellido Materno: </label><input type="text" class="form-control"
-								ng-model="paqueteria.aMaterno" required> 
+								ng-model="paqueteria.aMaterno" ng-required="requerido"> 
 							<br> <label>Telefono: </label><input type="text" class="form-control"
-								ng-model="paqueteria.telefono" required>
+								ng-model="paqueteria.telefono" ng-required="requerido">
 								<br> <label>Localidad: </label><input type="text" class="form-control"
-								ng-model="paqueteria.localidad" required>
+								ng-model="paqueteria.localidad" ng-required="requerido">
 								<br> <label>Municipio: </label><input type="text" class="form-control"
-								ng-model="paqueteria.municipio" required>
+								ng-model="paqueteria.municipio" ng-required="requerido">
 						</div>
 
 						<div class="col-md-4">
 						<br> <label>Estado: </label><input type="text" class="form-control"
-								ng-model="paqueteria.estado" required>
+								ng-model="paqueteria.estado" ng-required="requerido">
 						<br> <label>CP: </label><input type="number" class="form-control"
-								ng-model="paqueteria.codigoPostal" required>
+								ng-model="paqueteria.codigoPostal" ng-required="requerido">
 						<br><label>Calle:</label> <input type="text" class="form-control"
-								ng-model="paqueteria.calle" required> 
+								ng-model="paqueteria.calle" ng-required="requerido"> 
 						<br><label>No. Ext:</label> <input type="text" class="form-control"
-								ng-model="paqueteria.noExterior" required> 
+								ng-model="paqueteria.noExterior" ng-required="requerido"> 
 						<br><label>No. Int:</label> <input type="text" class="form-control"
 								ng-model="paqueteria.noInterior"> 	
 						<br><label>Colonia:</label> <input type="text" class="form-control"
-								ng-model="paqueteria.colonia" required> 
+								ng-model="paqueteria.colonia" ng-required="requerido"> 
 						</div>
 					</div>
 					<br> <br>
@@ -253,7 +261,7 @@
 <!-- 					</nav> -->
 
 
-
+		</div>
 				
 </div>
 <div class="row">

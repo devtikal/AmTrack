@@ -171,16 +171,16 @@ tr:nth-child(even) {
     #mdlconfirmacion{
       width: 10% !important;
     }
-    .modal-header {
-	background-color: #4c60ce;
-	color: white;
-	width: 98% !important;
-	margin: 1% auto;
-	text-align: center;
-	font-size: 18px;
-	box-shadow: 0px 6px 13px -4px rgba(167,190,235,1);
-	border-radius:10px 10px 10px 10px;
-}
+/*     .modal-header { */
+/* /* 	background-color: #4c60ce; */ */
+/* /* 	color: white; */ */
+/* 	width: 98% !important; */
+/* 	margin: 1% auto; */
+/* 	text-align: center; */
+/* 	font-size: 18px; */
+/* 	box-shadow: 0px 6px 13px -4px rgba(167,190,235,1); */
+/* 	border-radius:10px 10px 10px 10px; */
+/* } */
 .pmdl {
 	text-align: center;
 	position: fixed;
@@ -430,3 +430,9 @@ infPago infComisiones infCliente{
 .bg-gray {
   background-color: #F5F5F5 !important;
 }
+
+.modal-dialog {
+  padding-top:20%;
+}
+
+

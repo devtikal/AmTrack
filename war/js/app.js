@@ -45,16 +45,19 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/AltaGuia.html",
 		controller : "guiaController"
 	});
-	
+	$routeProvider.when('/guia', {
+		templateUrl : "pages/Guia.html",
+		controller : "guiaController"
+	});
 	$routeProvider.when('/', {
 		templateUrl : "pages/welcome.html",
 		controller : "DHLController"
 	});
-//	$routeProvider.otherwise({
-//		redirectTo : '/NoFound',
-//		templateUrl : "pages/noPage.html",
-//		controller : "OTsListController"
-//	});
+	$routeProvider.otherwise({
+		redirectTo : '/NoFound',
+		templateUrl : "pages/noPage.html",
+		controller : "OTsListController"
+	});
 }]);
 
 app.factory("userFactory", function(){

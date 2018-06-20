@@ -10,15 +10,15 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">De</label>
-            <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Ingresar Inicio Guia">
+            <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Ingresar Inicio Guia" ng-model="de">
           </div>
        
         <div class="form-group">
             <label for="exampleInputEmail1">Hasta</label>
-            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="Ingresar Fin Guia">
+            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta">
           </div>
           
-          <a class="btn btn-primary btn-block" href="index.html">Guardar</a>
+          <a class="btn btn-primary btn-block" ng-click="addguias(de,hasta)">Guardar</a>
         </form>
 
       </div>

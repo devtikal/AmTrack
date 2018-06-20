@@ -1,0 +1,109 @@
+
+<div class="content-wrapper" lang="es-mx">
+	<div class="container-fluid">
+
+<div class="topBanner rounded-bottom">
+<br>
+	<div class="row">
+	<div class="col-md-1"></div>
+		<div class="col-md-3">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Numero de Guia"
+					ng-model="buscar.guia">
+				<div class="input-group-btn">
+					<button class="btn btn-info" type="submit">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+				</div>
+				
+			</div>
+		</div>
+<div class="col-md-3"></div>
+		<div class="col-md-3">
+		 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Agregar Guias</button>
+<!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
+						
+		</div>
+
+
+	</div>
+	<br>
+		</div>
+		
+<!-- FIN TOP -->
+    
+<!--     <div class="container"> -->
+    
+    <br>
+		<table class="table .table-striped">
+			<thead>
+				<tr>
+					<th>Numero</th>
+					<th>Estatus</th>
+					<th>Sucursal</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="g in guias">
+					<td>{{g.numero}}</td>
+					<td>{{g.estatus}}</td>
+					<td>{{g.idSucursal}}</td>
+					<td><button class="btn btn-small" ng-click="ver(g.id)">
+							<i class="glyphicon glyphicon-eye-open"></i>
+						</button>
+<!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
+<!-- 							title="Imprimir OT" -->
+<!-- 							href=" ots/descargaOt/{{ot.id}}" download="ordenDeTrabajo.pdf"> -->
+<!-- 							<i class="glyphicon glyphicon-print"></i> -->
+<!-- 						</a>	 -->
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+    
+<!--     </div> -->
+    
+   
+     <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Rango de Guia</h4>
+        </div>
+        <div class="modal-body">
+             
+      
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">De</label>
+            <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Ingresar Inicio Guia" ng-model="de">
+          </div>
+       
+        <div class="form-group">
+            <label for="exampleInputEmail1">Hasta</label>
+            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta">
+          </div>
+          
+          <a class="btn btn-success btn-block" ng-click="addguias(de,hasta)">Agregar</a>
+        </form>
+
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  </div>
+
+	
+	</div>
+
+
+
+
