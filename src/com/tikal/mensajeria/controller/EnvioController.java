@@ -223,8 +223,8 @@ public class EnvioController {
 		   Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
 		   
 		   System.out.println("dame guia:"+g);
-		  //// response.getWriter().println(g.getNumero());
-		  // response.getWriter().println(JsonConvertidor.toJson(g));
+		  //response.getWriter().println(g.getNumero());
+		  response.getWriter().println(JsonConvertidor.toJson(g));
 		
 
 //		   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
