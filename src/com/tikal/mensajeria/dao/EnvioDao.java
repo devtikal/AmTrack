@@ -1,5 +1,7 @@
 package com.tikal.mensajeria.dao;
 
+import java.util.List;
+
 import com.tikal.mensajeria.modelo.entity.Envio;
 
 public interface EnvioDao {
@@ -15,6 +17,6 @@ public interface EnvioDao {
 	//public static AeronaveEntity consult(String numeroSerie);
 	
     
-	public void findAll(Envio e);	
+	public List<Envio> findAll();	
 
 }

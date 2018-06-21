@@ -161,7 +161,7 @@ public class EnvioController {
 			Paquete p = new Paquete();
 			Envio envio = new Envio();
 			Destinatario des= new Destinatario();
-			Empresa e=new Empresa();
+			//Empresa e=new Empresa();
 		//	e=empresaDao.getByNombre(evo.getEmpresa());
 			
 			p.setAlto(evo.getAlto());
@@ -199,6 +199,9 @@ public class EnvioController {
 			Contador folio= new Contador();
 			envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
 			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			if (g==null){
+			  System.out.println("no hay guias asignadas a esta sucursal");
+			}
 			envio.setGuia(g.getNumero());
 			//envio.setGuia(evo.getGuia());
 			envio.setPaquete(p);
@@ -294,6 +297,17 @@ public class EnvioController {
 //	 			response.sendError(403);
 //	 		}
 	 	}
+	   
+	   @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Envio> lista = envioDao.findAll();
+			if (lista == null) {
+				lista = new ArrayList<Envio>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
 		 
 //	   @RequestMapping(value = { "/reporte/{inicio}/{fin}" }, method = RequestMethod.GET, produces = "application/json")
 //		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable Integer inicio , @PathVariable Integer fin) throws IOException {

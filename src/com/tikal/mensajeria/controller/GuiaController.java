@@ -62,7 +62,8 @@ public class GuiaController {
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		//System.out.println(" yisus manda:"+json);
-		
+//		int ini=Integer.parseInt(inicio);
+//		int f=Integer.parseInt(fin);
 		for (int i=inicio; i<= fin; i++) {
 			Guia guia = new Guia();
 			guia.setEstatus("NO ASIGNADA");
@@ -85,9 +86,14 @@ public class GuiaController {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-	//	System.out.println(" yisus manda:"+json);
+//		System.out.println(" Str inicio:"+inicio);
+//		System.out.println(" Str fin:"+fin);
+//		int ini=Integer.parseInt(inicio);
+//		int f=Integer.parseInt(fin);
+//		System.out.println(" inicio:"+ini);
+//		System.out.println(" fin:"+f);
 		Long suc=usuarioDao.consultarUsuario("root").getIdSucursal();
-		for (int i=inicio; i<= fin; i++) {
+		for (int i=inicio; i<=fin;  i++) {
 			Guia guia = new Guia();
 			guia.setEstatus("NO ASIGNADA");
 			guia.setNumero(i);

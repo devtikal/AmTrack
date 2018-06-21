@@ -86,7 +86,7 @@ public class GuiaDaoImpl implements GuiaDao {
 		// TODO Auto-generated method stub
 		System.out.println("esta en daoimpl envio  get by status:"+estatus+" Suc:"+idSucursal);
 		List<Guia> g= ofy().load().type(Guia.class).filter("estatus",estatus).filter("idSucursal", idSucursal).order("numero").list();
-		 
+		System.out.println(" cuantas guias :"+g.size());
 		if (g.size() == 0) {
 			return null;
 		}

@@ -341,7 +341,7 @@ public class GeneraTicket {
             c30.setColspan(2);
             table2.addCell(c30);
             
-            Paragraph p31 = new Paragraph(e.getTotal().toString(),f3);
+            Paragraph p31 = new Paragraph((e.getPrecio()).toString(),f3);
             PdfPCell c31 = new PdfPCell(p31);
             c31.setHorizontalAlignment(Element.ALIGN_LEFT);
            // c15.setBackgroundColor(BaseColor.BLACK);

@@ -5,7 +5,7 @@ import java.util.List;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.tikal.mensajeria.modelo.login.Sucursal;
+//import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
 
 @Entity
