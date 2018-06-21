@@ -71,7 +71,7 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
         console.log( $scope.products);
     }
 	
-	$scope.CurrentDate = new Date();
+	$scope.paqueteria.fecha = new Date();
 	$scope.hide=true;
 	$scope.requerido=true;
 	$scope.isEstafeta = function() {

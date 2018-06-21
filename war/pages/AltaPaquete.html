@@ -17,7 +17,7 @@
 								<label for="example-text-input" class="col-2 col-form-label">
 									Fecha </label>
 								<div class="col-23">
-									<label id ="fecha" ng-model="paqueteria.fecha">{{CurrentDate | date: "longDate"}}</label>
+									<label id ="fecha" ng-model="paqueteria.fecha">{{paqueteria.fecha | date: "longDate"}}</label>
 								</div>
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 								<label for="example-text-input" class="col-2 col-form-label">
 									Guia</label>
 								<div class="col-15">
-									<input type="number" class="form-control" ng-model="paqueteria.guia" required readonly>
+									<input type="number" class="form-control" style="font-size:20px" ng-model="paqueteria.guia" required readonly>
 								</div>
 							</div>
 						</div>
@@ -87,7 +87,7 @@
 						</div>
 						<div class="col-md-4">
 						<br><label> Domicilio: </label>
-								<input type="text" class="form-control" id ="Named" ng-model="paqueteria.domicilio">
+								<input type="text" class="form-control" id ="Named" ng-model="paqueteria.domicilioCliente">
 							<br><label>Tipo de Envio:</label> <select class="form-control" ng-model="paqueteria.tipoEnvio"
 										required>
 										<option></option>

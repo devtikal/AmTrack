@@ -38,19 +38,29 @@
 		<table class="table .table-striped">
 			<thead>
 				<tr>
-					<th>Numero</th>
-					<th>Estatus</th>
-					<th>Sucursal</th>
-					<th>Acciones</th>
+					<th width="10%"></th>
+					<th width="20%">Numero</th>
+					<th width="10%">Estatus</th>
+					<th width="40%">Sucursal</th>
+					<th width="20%">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="g in guias">
+					<td></td>
 					<td>{{g.numero}}</td>
 					<td>{{g.estatus}}</td>
 					<td>{{g.idSucursal}}</td>
-					<td><button class="btn btn-small" ng-click="ver(g.id)">
-							<i class="glyphicon glyphicon-eye-open"></i>
+					<td><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar">
+							<i class="fa fa-building-o"></i>
+						</button>
+						
+						<button class="btn btn-danger" title="Imprimir">
+							<i class="fa fa-file-pdf-o"></i>
+						</button>
+						
+						<button class="btn btn-warning" title="Cancelar">
+							<i class="fa fa-trash"></i>
 						</button>
 <!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
 <!-- 							title="Imprimir OT" -->
@@ -64,7 +74,7 @@
     
 <!--     </div> -->
     
-   
+<!--    MODAL AGREGAR GUIA -->
      <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -98,7 +108,59 @@
       </div>
     </div>
   </div>
-    
+<!--     MODAL ASIGNAR GUIA -->
+
+    <div class="modal fade" id="modalAsignar" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Asignar Guia</h4>
+        </div>
+        <div class="modal-body">
+             
+      
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Numero de Guia</label>
+            <input class="form-control" id="exampleInputEmail1" type="text"  ng-model="guia.numero" readonly>
+          </div>
+       
+        <div class="form-group">
+            <label for="exampleInputEmail1">Estado</label>
+            <input class="form-control" id="exampleInputEmail1" type="text"   ng-model="guia.estatus" readonly>
+          </div>
+          
+           <div class="form-group">
+            <label for="exampleInputEmail1">Sucursal Actual</label>
+            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="No hay Sucursal Asignada" ng-model="guia.idSucursal" readonly>
+          </div>
+          <br><br>
+           <div class="form-group">
+            <label for="exampleInputEmail1">Nueva Sucursal</label>
+            <select class="form-control" ng-model="addsuc.idSucursal"
+										required>
+										<option>Repetir las sucursales</option>
+										
+										</select>
+          </div>
+          <div align="center">
+          <div class="w-50 p-3" >
+          <a class="btn btn-primary btn-block" style="color:white;" >Asignar</a>
+          </div>
+          </div>
+        </form>
+
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 
 	
