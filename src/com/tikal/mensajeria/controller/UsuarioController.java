@@ -235,7 +235,7 @@ public class UsuarioController {
 				sucursal.setNombre("MASTER");
 				sucursal.setRfc("MASTER");
 				//sucursal.setCurp("MASTER9999");
-				sucursal.setDomiciio("CONOCIDO");
+				sucursal.setDomicilio("CONOCIDO");
 				sucursal.setTelefono("--------");
 				sucursal.setTitular("SUPER ADMINISTRADOR");
 				sucursal.setUbicacion("-------");
