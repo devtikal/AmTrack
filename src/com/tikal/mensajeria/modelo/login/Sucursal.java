@@ -11,7 +11,7 @@ public class Sucursal {
 	@Id private Long id;
 	private String nombre;
 	private String ubicacion;
-	private String domiciio;
+	private String domicilio;
 	private String telefono;
 	//private String curp;
 	private String rfc;
@@ -37,10 +37,10 @@ public class Sucursal {
 		this.ubicacion = ubicacion;
 	}
 	public String getDomiciio() {
-		return domiciio;
+		return domicilio;
 	}
-	public void setDomiciio(String domiciio) {
-		this.domiciio = domiciio;
+	public void setDomiciio(String domicilio) {
+		this.domicilio = domicilio;
 	}
 	public String getTelefono() {
 		return telefono;
