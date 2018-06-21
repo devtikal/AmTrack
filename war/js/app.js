@@ -30,11 +30,11 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		controller : "navigation"
 	});
 	$routeProvider.when('/AltaUsuario', {
-		templateUrl : "pages/altaUsuario.html",
+		templateUrl : "pages/AltaUsuario.html",
 		controller : "userController"
 	});
 	$routeProvider.when('/AltaSucursal', {
-		templateUrl : "pages/altaSucursal.html",
+		templateUrl : "pages/AltaSucursal.html",
 		controller : "sucursalController"
 	});
 	$routeProvider.when('/altaPaquete', {
