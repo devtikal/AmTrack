@@ -1,5 +1,5 @@
 
-<div class="content-wrapper" lang="es-mx">
+<div class="content-wrapper" lang="es-mx" ng-cloak>
 	<div class="container-fluid">
 
 <div class="topBanner rounded-bottom">
@@ -50,16 +50,16 @@
 					<td></td>
 					<td>{{g.numero}}</td>
 					<td>{{g.estatus}}</td>
-					<td>{{g.idSucursal}}</td>
-					<td><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar">
+					<td>{{g.sucursal}}</td>
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus!='ASIGNADA' && g.estatus!='CANCELADA'" >
 							<i class="fa fa-building-o"></i>
 						</button>
 						
-						<button class="btn btn-danger" title="Imprimir">
+						<button class="btn btn-danger" title="Imprimir" ng-if="g.estatus!='CANCELADA'">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
-						<button class="btn btn-warning" title="Cancelar">
+						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
 							<i class="fa fa-trash"></i>
 						</button>
 <!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
@@ -134,20 +134,20 @@
           
            <div class="form-group">
             <label for="exampleInputEmail1">Sucursal Actual</label>
-            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="No hay Sucursal Asignada" ng-model="guia.idSucursal" readonly>
+            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="No hay Sucursal Asignada" ng-model="guia.sucursal" readonly>
           </div>
           <br><br>
            <div class="form-group">
             <label for="exampleInputEmail1">Nueva Sucursal</label>
             <select class="form-control" ng-model="addsuc.idSucursal"
 										required>
-										<option>Repetir las sucursales</option>
+										<option ng-repeat="s in sucursal" value="{{s.id}}" ng-if="s.nombre!='MASTER'">{{s.nombre}}</option>
 										
 										</select>
           </div>
           <div align="center">
           <div class="w-50 p-3" >
-          <a class="btn btn-primary btn-block" style="color:white;" >Asignar</a>
+          <a class="btn btn-primary btn-block" style="color:white;" ng-click="asignar(addsuc.idSucursal,guia.id)" >Asignar</a>
           </div>
           </div>
         </form>
