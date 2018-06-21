@@ -20,7 +20,7 @@ public class Envio {
 	private String domicilioCliente;
 	//private Persona destinatario;
 	private Destinatario destinatario;
-	@Index  Empresa empresa;
+	@Index  String empresa;
 	private Paquete paquete;
 	
 	
@@ -81,10 +81,10 @@ public class Envio {
 //	public void setDestinatario(Persona destinatario) {
 //		this.destinatario = destinatario;
 //	}
-	public Empresa getEmpresa() {
+	public String getEmpresa() {
 		return empresa;
 	}
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 	public Paquete getPaquete() {

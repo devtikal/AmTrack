@@ -142,7 +142,7 @@ public class EnvioController {
 			
 			//envio.setUsuario(usuario);
 			envioDao.save(envio);
-			g.setEstatus("ASIGNADA");
+			g.setEstatus("EN ENVIO");
 			guiaDao.update(g);
 			c.incremeta();
 	//}
@@ -186,7 +186,7 @@ public class EnvioController {
 			des.setTelefono(evo.getTelefono());
 			destinatarioDao.save(des);
 			
-			//envio.setEmpresa(e);
+			envio.setEmpresa(evo.getEmpresa());
 			
 			envio.setCantidad(evo.getCantidad());
 			envio.setCliente(evo.getCliente());
@@ -207,9 +207,10 @@ public class EnvioController {
 			envio.setTipoEnvio(evo.getTipoEnvio());
 			envio.setTotal(evo.getTotal());
 			envio.setUsuario(usuarioDao.consultarUsuario(usuario));// falta
+			envio.setMateriales(evo.getMateriales());
 			
 			envioDao.save(envio);
-			g.setEstatus("ASIGNADA");
+			g.setEstatus("EN ENVIO");
 			guiaDao.update(g);
 			Contador.incremeta();
 			

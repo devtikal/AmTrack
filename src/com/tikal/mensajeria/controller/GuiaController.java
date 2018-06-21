@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.dao.GuiaDao;
+import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Guia;
@@ -37,6 +38,9 @@ public class GuiaController {
 	@Qualifier("guiaDao")
 	GuiaDao guiaDao;
 	
+	@Autowired
+	@Qualifier("sucursalDao")
+	SucursalDao sucursalDao;
 
 	@Autowired
 	@Qualifier("envioDao")
@@ -51,7 +55,7 @@ public class GuiaController {
 
 	    }
 	
-	@RequestMapping(value = { "/addM/{inicio}/{fin}" },  method = RequestMethod.GET)
+	@RequestMapping(value = { "/addM_/{inicio}/{fin}" },  method = RequestMethod.GET)
 	public void altas(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable Integer inicio , @PathVariable Integer fin)throws IOException {
 	
@@ -65,6 +69,7 @@ public class GuiaController {
 			guia.setNumero(i);
 			//guia.setIdSucursal(Long.valueOf("9999"));
 			guia.setIdSucursal(usuarioDao.consultarUsuario("root").getIdSucursal());
+			//guia.setSucursal(sucursalDao.consult(suc).getNombre());
 			guiaDao.save(guia); 
 		}
 	
@@ -74,19 +79,20 @@ public class GuiaController {
 		}
 	
 	
-	@RequestMapping(value = { "/addMassive/{inicio}/{fin}" },  method = RequestMethod.POST, consumes = "Application/Json")
+	@RequestMapping(value = { "/addM/{inicio}/{fin}" },  method = RequestMethod.GET)
 	public void altaGuias(HttpServletRequest request, HttpServletResponse response, 
-			@RequestBody String json,@PathVariable Integer inicio , @PathVariable Integer fin)throws IOException {
+			@PathVariable Integer inicio , @PathVariable Integer fin)throws IOException {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-		System.out.println(" yisus manda:"+json);
+	//	System.out.println(" yisus manda:"+json);
 		Long suc=usuarioDao.consultarUsuario("root").getIdSucursal();
 		for (int i=inicio; i<= fin; i++) {
 			Guia guia = new Guia();
 			guia.setEstatus("NO ASIGNADA");
 			guia.setNumero(i);
 			guia.setIdSucursal(suc);
+			guia.setSucursal(sucursalDao.consult(suc).getNombre());
 			//guia.setIdSucursal(Long.valueOf("9999"));
 			guiaDao.save(guia);
 		}
@@ -104,6 +110,8 @@ public class GuiaController {
 		AsignadorDeCharset.asignar(request, response);
 		Guia guia = guiaDao.consult(idGuia);
 		guia.setIdSucursal(idSucursal);
+		guia.setSucursal(sucursalDao.consult(idSucursal).getNombre());
+		guia.setEstatus("ASIGNADA");
 		guiaDao.update(guia);
 		//System.out.println(" yisus manda:"+json);
 		
@@ -118,6 +126,7 @@ public class GuiaController {
 		for (int i=inicio; i<= fin; i++) {
 			Guia guia = guiaDao.getByNumero(i);
 			guia.setIdSucursal(idSucursal);
+			guia.setEstatus("ASIGNADA");
 			guiaDao.update(guia);
 			//System.out.println(" yisus manda:"+json);
 		}

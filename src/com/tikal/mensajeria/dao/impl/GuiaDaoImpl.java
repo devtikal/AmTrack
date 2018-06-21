@@ -34,6 +34,7 @@ public class GuiaDaoImpl implements GuiaDao {
 			old.setNumero(g.getNumero());
 			old.setEstatus(g.getEstatus());
 			old.setIdSucursal(g.getIdSucursal());
+			old.setSucursal(g.getSucursal());
 				
 		}
 

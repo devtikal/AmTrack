@@ -12,6 +12,7 @@ public class Guia {
 	@Index private Integer numero;
 	@Index private String estatus;
 	@Index private Long idSucursal;
+	private String  sucursal;
 	
 	public Long getId() {
 		return id;
@@ -36,6 +37,12 @@ public class Guia {
 	}
 	public void setIdSucursal(Long idSucursal) {
 		this.idSucursal = idSucursal;
+	}
+	public String getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
 	}
 	
 
