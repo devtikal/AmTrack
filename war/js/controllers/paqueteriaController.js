@@ -47,12 +47,29 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
-	
+	$scope.paqueteria={guia:null};
 	paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
-		console.log("El numero de Guia a usar es", data);
-		$scope.paqueteria.guia=data;
+		$scope.paqueteria.guia=data.numero;
 	});
-	
+	$scope.products =[];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+//            $scope.products.push($scope.addMe,$scope.addMe2);
+            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
+            console.log($scope.products);
+        } else {
+            $scope.errortext = "Ya se encuentra en la lista.";
+        }
+        $scope.addMe="";
+        $scope.addMe2="";
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";    
+        $scope.products.splice(x, 1);
+        console.log( $scope.products);
+    }
 	
 	$scope.CurrentDate = new Date();
 	$scope.hide=true;
@@ -73,6 +90,7 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
 //	$scope.validate();
+	$scope.paqueteria.materiales=$scope.products;
 	paqueteriaService.crearPaquete($cookieStore.get('usuario'),$scope.paqueteria).then(function(data) {
 						var x = document.getElementById("snackbar")
 					    x.className = "show";

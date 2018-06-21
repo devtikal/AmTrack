@@ -1,14 +1,14 @@
 
 <div class="content-wrapper">
 	<div class="container-fluid">
-	<body>
+
 		<div class="Dlabel" align="center">
 
 			<label>Registro de Envio</label>
 
 
 		</div>
-		<div class="topBanner">
+		<div class="topBanner" id="banner">
 <div class="row">
 			<div class="col-md-1"></div>
 			
@@ -54,9 +54,7 @@
 		<button class="tablink" onclick="openPage('paq', this,'green')"
 			id="defaultOpen">Paquete</button>
 		<button class="tablink" onclick="openPage('dest', this,'green')">Destinatario</button>
-		<button class="tablink">
-			<br>
-		</button>
+		<button class="tablink" onclick="openPage('mat', this,'green')">Material Extra</button>
 		<button class="tablink">
 			<br>
 		</button>
@@ -201,13 +199,6 @@
 						</div>
 
 					</div>
-					
-
-<!-- 					<nav> -->
-<!-- 						<div class="center-blog"></div> -->
-<!-- 					</nav> -->
-
-
 
 			
 		</div>
@@ -264,6 +255,66 @@
 		</div>
 				
 </div>
+<div id="mat" class="tabcontent">
+<div ng-cloak class="container">
+ <div class="row">
+			
+						<div class="col-md-6">
+							<div class="form-group ">
+								
+								<div class="col-200">
+									<input type="text" placeholder="Descripcion" ng-model="addMe" class="form-control">
+								</div>
+							</div>
+							</div>
+							<div class="col-md-3">
+							
+							<div class="form-group ">
+								
+								<div class="col-23">
+									<input type="number" placeholder="Cantidad" ng-model="addMe2" class="form-control">
+								</div>
+							</div>
+							</div>
+							<div class="col-md-2">
+							<div class="form-group ">
+								
+									<button type=button ng-click="addItem()" class="btn btn-info">Agregar</button>
+								
+							</div>
+							
+							
+						</div>
+						</div>
+
+  
+  <div class="w3-container w3-light-grey w3-padding-16">
+   
+    <p class="w3-text-red">{{errortext}}</p>
+  </div>
+  
+  		<table class="table .table-striped">
+			<thead>
+				<tr>
+					<th>Descripcion</th>
+					<th>Cantidad</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in products">
+					<td>{{p.descripcion}}</td>
+					<td>{{p.cantidad}}</td>
+					<td><button class="btn btn-small" ng-click="removeItem($index)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+  
+</div>
+</div>
 <div class="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4">
@@ -295,6 +346,8 @@
 	}
 	// Get the element with id="defaultOpen" and click on it
 	document.getElementById("defaultOpen").click();
+	
+		
 	
 </script>
 
