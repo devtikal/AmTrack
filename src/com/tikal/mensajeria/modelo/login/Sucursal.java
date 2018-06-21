@@ -36,10 +36,10 @@ public class Sucursal {
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-	public String getDomiciio() {
+	public String getDomicilio() {
 		return domicilio;
 	}
-	public void setDomiciio(String domicilio) {
+	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
 	public String getTelefono() {

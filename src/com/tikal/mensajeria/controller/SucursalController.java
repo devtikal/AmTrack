@@ -65,7 +65,7 @@ public class SucursalController {
 					sucursal.setNombre("prueba");
 					sucursal.setRfc("prueba");
 				//	sucursal.setCurp("prueba11111");
-					sucursal.setDomiciio("pruebapruebapruebaprueba");
+					sucursal.setDomicilio("pruebapruebapruebaprueba");
 					sucursal.setTelefono("--------");
 					sucursal.setTitular("prueba prueba");
 					sucursal.setUbicacion("-------");

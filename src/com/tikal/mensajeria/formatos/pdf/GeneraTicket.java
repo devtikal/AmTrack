@@ -102,7 +102,7 @@ public class GeneraTicket {
             c1.setBorder(Rectangle.NO_BORDER);
             table.addCell(c1);
            
-            Paragraph p2 = new Paragraph(s.getDomiciio(),f2);
+            Paragraph p2 = new Paragraph(s.getDomicilio(),f2);
             PdfPCell c2 = new PdfPCell(p2);
             c2.setHorizontalAlignment(Element.ALIGN_LEFT);
             c2.setColspan(2);c2.setRowspan(2);
