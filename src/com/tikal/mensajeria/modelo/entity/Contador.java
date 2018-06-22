@@ -19,7 +19,7 @@ public class Contador {
 	}
 	public static Long getFolio() {
 		if (folio == null || folio==0)
-			folio=Long.parseLong("1");
+			folio=Long.parseLong("1000");
 		return folio;
 	}
 	public static void setFolio(Long folio) {

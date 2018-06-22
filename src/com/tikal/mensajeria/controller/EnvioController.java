@@ -225,6 +225,7 @@ public class EnvioController {
 	   @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/json")
 			public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
 		   //System.out.println("dame guia");
+		   
 		   Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
 		   
 		   System.out.println("dame guia:"+g);
@@ -235,6 +236,19 @@ public class EnvioController {
 //		   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 			  
 	   }
+	   
+	   @RequestMapping(value = { "/getFolio" },  method = RequestMethod.GET, produces = "application/json")
+		public void getFolio(HttpServletResponse response, HttpServletRequest request) throws IOException {
+	   //System.out.println("dame guia");
+		   Contador folio= new Contador();
+		   //folio.getFolio();
+	  //response.getWriter().println(g.getNumero());
+	  response.getWriter().println(JsonConvertidor.toJson(folio.getFolio()));
+	
+
+//	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+		  
+  }
 	
 	   @RequestMapping(value = { "/generaTicket/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
 		public void generaVale(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable String userName) throws IOException {
