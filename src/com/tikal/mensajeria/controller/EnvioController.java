@@ -198,7 +198,7 @@ public class EnvioController {
 			//envio.setFolio(evo.getFolio()); asignar folio consecutivo
 			Contador folio= new Contador();
 			envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
-			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
 			if (g==null){
 			  System.out.println("no hay guias asignadas a esta sucursal");
 			}

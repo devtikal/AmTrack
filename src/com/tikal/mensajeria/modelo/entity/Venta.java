@@ -12,11 +12,25 @@ public class Venta {
 	@Id private Long id;
 	@Index private Long folio;
 	@Index private String fecha;
+	private Integer cantidad;
+	private String estatus;
 	List<Envio> envios;
 	
 	
 	
 	
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	public Integer getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
 	public Long getId() {
 		return id;
 	}
