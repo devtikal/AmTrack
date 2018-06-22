@@ -42,9 +42,38 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 	
+	this.getEnvio = function(){
+		var d = $q.defer();
+		$http.get("envio/findAll").then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	
 }]);
 
-
+app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
+	sessionService.isAuthenticated();
+	paqueteriaService.getEnvio().then(function(data) {
+		$scope.envios=data;
+		console.log("Datos de Envio", $scope.envios);
+	});
+	
+	
+} ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
 	$scope.paqueteria={guia:null};

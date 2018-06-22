@@ -104,7 +104,26 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 		return d.promise;
 	}
 	
-	
+	this.makePDF = function(idEnvio,usuario) {
+		var d = $q.defer();
+		$http.get("envio/generaGuiaMervel/"+idEnvio+"/"+usuario).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 	
 }]);
 
@@ -131,16 +150,6 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		
 	});
 	
-$scope.getSucursal=function(){
-		
-		for (var i = 0; i < $scope.guias.length; i+=1) {
-			  if($scope.cliente[0].idBrocker==$scope.bk[i].id){
-				  $scope.namebk=$scope.bk[i].nickname;
-				  $scope.idbk=$scope.bk[i].id
-				  console.log("Match",  $scope.namebk);
-			  }
-			}
-	}
 
 	$scope.addguias = function(dato1,dato2) {
 		
@@ -171,6 +180,13 @@ $scope.getSucursal=function(){
 			alert("Guias Asignada correctamente");
 			$window.location.reload();
 		});
+	}
+	
+	$scope.generaPDF = function (idEnvio){
+		guiaService.makePDF(idEnvio,idGuia).then(function(data) {
+			
+		});
+		
 	}
 } ]);
 

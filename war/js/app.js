@@ -41,6 +41,10 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/AltaPaquete.html",
 		controller : "paqueteriaController"
 	});
+	$routeProvider.when('/envio', {
+		templateUrl : "pages/Envio.html",
+		controller : "EnvioController"
+	});
 	$routeProvider.when('/altaGuia', {
 		templateUrl : "pages/AltaGuia.html",
 		controller : "guiaController"
@@ -53,11 +57,11 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/welcome.html",
 		controller : "DHLController"
 	});
-	$routeProvider.otherwise({
-		redirectTo : '/NoFound',
-		templateUrl : "pages/noPage.html",
-		controller : "OTsListController"
-	});
+//	$routeProvider.otherwise({
+//		redirectTo : '/NoFound',
+//		templateUrl : "pages/noPage.html",
+//		controller : "OTsListController"
+//	});
 }]);
 
 app.factory("userFactory", function(){

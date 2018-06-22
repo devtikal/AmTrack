@@ -8,7 +8,7 @@
 	<div class="col-md-1"></div>
 		<div class="col-md-3">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Numero de Guia"
+				<input type="text" class="form-control" placeholder="Numero de Envio"
 					ng-model="buscar.guia">
 				<div class="input-group-btn">
 					<button class="btn btn-info" type="submit">
@@ -19,12 +19,6 @@
 			</div>
 		</div>
 <div class="col-md-3"></div>
-		<div class="col-md-3">
-		 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Agregar Guias</button>
-<!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
-						
-		</div>
-
 
 	</div>
 	<br>
@@ -38,23 +32,36 @@
 		<table class="table .table-striped">
 			<thead>
 				<tr>
-					<th width="10%"></th>
-					<th width="20%">Numero</th>
-					<th width="10%">Estatus</th>
-					<th width="40%">Sucursal</th>
-					<th width="20%">Acciones</th>
+					<th width="5%"></th>
+					<th width="10%">Folio</th>
+					
+					<th width="25%">Guia</th>
+					<th width="10%">Rastreo</th>
+					<th width="10%">Precio</th>
+					<th width="10%">Empresa</th>
+					<th width="10%">Tipo de Envio</th>
+					<th width="10%">Tipo Paquete</th>
+					<th width="10%">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="g in guias">
+				<tr ng-repeat="e in envios">
 					<td></td>
-					<td>{{g.numero}}</td>
-					<td>{{g.estatus}}</td>
-					<td>{{g.sucursal}}</td>
+					<td>{{e.folio}}</td>
+					
+					<td>{{e.guia}}</td>
+					<td>{{e.rastreo}}</td>
+					<td>{{e.precio | currency}}</td>
+					<td>{{e.empresa}}</td>
+					<td>{{e.tipoEnvio}}</td>
+					<td>{{e.paquete.tipoPaquete}}</td>
 					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" >
 							<i class="fa fa-building-o"></i>
 						</button>
 						
+						<button class="btn btn-danger" title="Imprimir">
+							<i class="fa fa-file-pdf-o"></i>
+						</button>
 						
 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
 							<i class="fa fa-trash"></i>
