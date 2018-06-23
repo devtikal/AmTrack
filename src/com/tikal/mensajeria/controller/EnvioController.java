@@ -215,7 +215,7 @@ public class EnvioController {
 			envioDao.save(envio);
 			g.setEstatus("EN ENVIO");
 			guiaDao.update(g);
-			Contador.incremeta();
+			folio.incremeta();
 			
 			
 			

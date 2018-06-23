@@ -62,7 +62,28 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+
 	
+	this.makePDF = function(idEnvio,usuario){
+		var d = $q.defer();
+		$http.get("envio/generaTicket/"+idEnvio+"/"+usuario).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
@@ -71,7 +92,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$scope.envios=data;
 		console.log("Datos de Envio", $scope.envios);
 	});
-	
+	$scope.generaPDF = function (idEnvio){
+		paqueteriaService.makePDF(idEnvio,$cookieStore.get('usuario')).then(function(data) {
+			
+		});
+		
+	}
 	
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){

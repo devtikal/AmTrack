@@ -182,11 +182,6 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		});
 	}
 	
-	$scope.generaPDF = function (idEnvio){
-		guiaService.makePDF(idEnvio,idGuia).then(function(data) {
-			
-		});
-		
-	}
+
 } ]);
 
