@@ -12,7 +12,7 @@ public class Guia {
 	@Index private Integer numero;
 	@Index private String estatus;
 	@Index private Long idSucursal;
-	private String  sucursal;
+	@Index private String sucursal;
 	
 	public Long getId() {
 		return id;

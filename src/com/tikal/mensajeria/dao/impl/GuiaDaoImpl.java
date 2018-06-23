@@ -59,7 +59,7 @@ public class GuiaDaoImpl implements GuiaDao {
 	
 
 
-	//@Override
+	@Override
 	public List<Guia> getByEstatus(String estatus) {
 		// TODO Auto-generated method stub
 		
