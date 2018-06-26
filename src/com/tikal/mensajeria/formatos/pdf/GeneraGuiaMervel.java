@@ -112,7 +112,7 @@ public class GeneraGuiaMervel {
             c5.setBorder(Rectangle.NO_BORDER);
             table.addCell(c5);
             
-            Paragraph p4 = new Paragraph("folio: "+e.getFolio(),f3);
+            Paragraph p4 = new Paragraph("folio: ",f3);
             PdfPCell c4 = new PdfPCell(p4);
             c4.setHorizontalAlignment(Element.ALIGN_LEFT);
             c4.setColspan(1);c4.setRowspan(1);
@@ -140,7 +140,7 @@ public class GeneraGuiaMervel {
             c37.setBorder(Rectangle.NO_BORDER);
             table.addCell(c37);
             
-            Paragraph p8 = new Paragraph("Calle:"+e.getDomicilioCliente(),f1);
+            Paragraph p8 = new Paragraph("Calle:",f1);
             PdfPCell c8 = new PdfPCell(p8);
             c8.setHorizontalAlignment(Element.ALIGN_LEFT);
             c8.setColspan(4);c8.setRowspan(5);

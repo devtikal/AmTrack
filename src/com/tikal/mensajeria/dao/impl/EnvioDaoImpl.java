@@ -32,19 +32,16 @@ public class EnvioDaoImpl implements EnvioDao{
 	   Envio old = this.consult(e.getId());
 	System.out.print("old:"+old);
 		if (old != null) {
-			old.setCantidad(e.getCantidad());
+			
 			old.setCliente(e.getCliente());
 			old.setDestinatario(e.getDestinatario());
 			old.setEmpresa(e.getEmpresa());
-			old.setFecha(e.getFecha());
-			old.setFolio(e.getFolio());
 			old.setGuia(e.getGuia());
 			old.setPaquete(e.getPaquete());
 			old.setPrecio(e.getPrecio());
 			old.setRastreo(e.getRastreo());
 			old.setTipoEnvio(e.getTipoEnvio());
-			old.setTotal(e.getTotal());
-			old.setUsuario(e.getUsuario());
+			old.setTipoServicio(e.getTipoServicio());
 			old.setMateriales(e.getMateriales());
 				
 		}

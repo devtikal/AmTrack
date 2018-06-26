@@ -32,6 +32,8 @@ public class EnvioVo {
 	private String municipio;
 	private String estado;
 	private Integer codigoPostal;
+	private Integer referencias;
+	
 	
 	
 	
@@ -275,6 +277,12 @@ public class EnvioVo {
 	}
 	public void setMateriales(List<Material> materiales) {
 		this.materiales = materiales;
+	}
+	public Integer getReferencias() {
+		return referencias;
+	}
+	public void setReferencias(Integer referencias) {
+		this.referencias = referencias;
 	}
 	
 	

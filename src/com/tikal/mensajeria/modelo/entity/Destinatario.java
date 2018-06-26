@@ -7,9 +7,6 @@ import com.googlecode.objectify.annotation.Id;
 public class Destinatario {
 	@Id Long id;
 	private String nombre;
-	private String aPaterno;
-	private String aMaterno;
-	private String nombreCompleto;	
 	private String telefono;	
 	private String calle;
 	private String noExterior;
@@ -84,24 +81,7 @@ public class Destinatario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getaPaterno() {
-		return aPaterno;
-	}
-	public void setaPaterno(String aPaterno) {
-		this.aPaterno = aPaterno;
-	}
-	public String getaMaterno() {
-		return aMaterno;
-	}
-	public void setaMaterno(String aMaterno) {
-		this.aMaterno = aMaterno;
-	}
-	public String getNombreCompleto() {
-		return nombreCompleto;
-	}
-	public void setNombreCompleto(String nombreCompleto) {
-		this.nombreCompleto = nombreCompleto;
-	}
+	
 	
 	public String getTelefono() {
 		return telefono;

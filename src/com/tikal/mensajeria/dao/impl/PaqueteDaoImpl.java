@@ -14,6 +14,7 @@ import com.tikal.mensajeria.modelo.entity.Paquete;
 public class PaqueteDaoImpl implements PaqueteDao{
 	
 	public  void save(Paquete p) {    	
+		p.setPesoVol((p.getAlto()*p.getAncho()*p.getLargo())/5000);
         ofy().save().entity(p).now();
     }
 
@@ -33,11 +34,12 @@ public class PaqueteDaoImpl implements PaqueteDao{
 			
 			old.setDescripcion(p.getDescripcion());
 			old.setTipoPaquete(p.getTipoPaquete());
-	
+			old.setCostoSeguro(p.getCostoSeguro());
 			old.setLargo(p.getLargo());
 			old.setAncho(p.getAncho());
 			old.setAlto(p.getAlto());	
 			old.setPeso(p.getPeso());
+			old.setPesoVol((old.getAlto()*old.getAncho()*old.getLargo())/5000);
 		
 			
 		}

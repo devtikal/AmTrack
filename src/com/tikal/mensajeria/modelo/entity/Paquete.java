@@ -10,11 +10,12 @@ public class Paquete {
 	
 	private String descripcion;
 	private String tipoPaquete;
-//	private String tipoEnvio;
+	private String costoSeguro;
 	private Double largo;
 	private Double alto;
 	private Double ancho;
 	private Double peso;
+	private Double pesoVol;
 	
 	
 
@@ -38,6 +39,12 @@ public class Paquete {
 		this.tipoPaquete = tipoPaquete;
 	}
 	
+	public String getCostoSeguro() {
+		return costoSeguro;
+	}
+	public void setCostoSeguro(String costoSeguro) {
+		this.costoSeguro = costoSeguro;
+	}
 	public Double getLargo() {
 		return largo;
 	}
@@ -61,6 +68,12 @@ public class Paquete {
 	}
 	public void setPeso(Double peso) {
 		this.peso = peso;
+	}
+	public Double getPesoVol() {
+		return pesoVol;
+	}
+	public void setPesoVol(Double pesoVol) {
+		this.pesoVol = pesoVol;
 	}
 
 	

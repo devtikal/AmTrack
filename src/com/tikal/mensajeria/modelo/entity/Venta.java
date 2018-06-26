@@ -5,20 +5,28 @@ import java.util.List;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.tikal.mensajeria.modelo.login.Usuario;
 
 @Entity
 public class Venta {
 
 	@Id private Long id;
+	@Index private Usuario usuario;
 	@Index private Long folio;
 	@Index private String fecha;
 	private Integer cantidad;
 	private String estatus;
-	List<Envio> envios;
+	List<Long> envios;
 	
 	
 	
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public String getEstatus() {
 		return estatus;
 	}
@@ -49,10 +57,10 @@ public class Venta {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public List<Envio> getEnvios() {
+	public List<Long> getEnvios() {
 		return envios;
 	}
-	public void setEnvios(List<Envio> envios) {
+	public void setEnvios(List<Long> envios) {
 		this.envios = envios;
 	}
 	
