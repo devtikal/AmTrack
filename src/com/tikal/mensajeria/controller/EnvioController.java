@@ -33,7 +33,7 @@ import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.entity.Persona;
 import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
-import com.tikal.mensajeria.modelo.vo.EnvioVo;
+//import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.util.AsignadorDeCharset;
 import com.tikal.util.JsonConvertidor;
 

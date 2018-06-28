@@ -17,6 +17,7 @@ public class Venta {
 	private Integer cantidad;
 	private String estatus;
 	List<Long> envios;
+	private Double total;
 	
 	
 	
@@ -62,6 +63,12 @@ public class Venta {
 	}
 	public void setEnvios(List<Long> envios) {
 		this.envios = envios;
+	}
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 	
 	

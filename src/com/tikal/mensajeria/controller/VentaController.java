@@ -88,7 +88,7 @@ public class VentaController {
 		Venta v= new Venta();
 		Usuario u= usuarioDao.consultarUsuario(username);
 		List<Long> envios= new ArrayList<Long>();
-		Envio e1 = new Envio();
+		Envio e1 = new Envio();Envio e2 = new Envio();
 		Persona c=new Persona();
 		Persona d =new Persona();
 		Paquete pq = new Paquete();
@@ -108,6 +108,7 @@ public class VentaController {
 		e1.setCliente(c);
 		
 		
+		
 		d.setNombre("Ma. del Carmen PAntoja");
 		d.setCalle("melero y piña");
 		d.setNoExterior("870");
@@ -122,6 +123,7 @@ public class VentaController {
 		personaDao.save(d);
 		e1.setDestinatario(d);
 		
+		
 		pq.setAlto(10.00);pq.setAncho(10.00); pq.setLargo(10.00);
 		pq.setDescripcion("paquete de joyeria");
 		pq.setPeso(3.0);
@@ -129,9 +131,11 @@ public class VentaController {
 		paqueteDao.save(pq);
 		e1.setPaquete(pq);
 		
+		
 		e1.setEmpresa("ESTAFETA");
+
 		Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(username).getIdSucursal());
-		System.out.println("guia:"+g.getNumero());
+	//	System.out.println("guia:"+g.getNumero());
 		e1.setGuia(g.getNumero());
 		e1.setRastreo(111111);
 		e1.setTipoEnvio("PAQUETE");
@@ -140,10 +144,28 @@ public class VentaController {
 		e1.setId(Long.parseLong("1111111"));
 		
 		envioDao.save(e1);
-		envios.add(e1.getId());
+		
+		
+		/////////// SEGUNDO ENVIO
+		e2.setCliente(d);
+		e2.setDestinatario(c);
+		e2.setPaquete(pq);
+		e2.setEmpresa("MERVEL");
+		Guia g2=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(username).getIdSucursal());
+		System.out.println("guia:"+g2.getNumero());
+		e2.setGuia(g2.getNumero());
+		e2.setRastreo(22222);
+		e2.setTipoEnvio("PAQUETE");
+		e2.setTipoServicio("NACIONAL");
+		e2.setPrecio(70.00);
+		e2.setId(Long.parseLong("222222"));
+		envioDao.save(e2);
+		////////
+		envios.add(e1.getId());		
+		envios.add(e2.getId());
 		
 		v.setEnvios(envios);
-		v.setCantidad(1);
+		v.setCantidad(2);
 		//Envio e2 = new Envio();
 		Contador folio= new Contador();
 		v.setFolio(folio.getFolio());
@@ -152,6 +174,7 @@ public class VentaController {
 		v.setEstatus("ABIERTA");
 		
 		v.setUsuario(u);
+		v.setTotal(Double.valueOf("382.50"));
 		
 		
 		
@@ -162,8 +185,10 @@ public class VentaController {
 		
 			ventaDao.save(v); 
 			g.setEstatus("EN ENVIO");
+			g2.setEstatus("EN ENVIO");
 			guiaDao.update(g);
-	
+			guiaDao.update(g2);
+			folio.incremeta();
 	
 //			} else {
 //				response.sendError(403);
@@ -180,6 +205,7 @@ public class VentaController {
 		Contador folio= new Contador();
 		v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
+		v.setTotal(Double.parseDouble("0.00"));
 		//System.out.println(" yisus manda:"+json);
 //		int ini=Integer.parseInt(inicio);
 //		int f=Integer.parseInt(fin);
@@ -194,7 +220,22 @@ public class VentaController {
 		}
 	
 	
-	
+	 @RequestMapping(value = {"/update/{idVenta}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json, @PathVariable Long idVenta)
+				throws IOException {
+	//	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 2, sessionDao,userName)){
+
+				AsignadorDeCharset.asignar(request, response);
+				Venta v = (Venta) JsonConvertidor.fromJson(json, Venta.class);
+				
+				
+				//Empleado e= evo.getEmpleado();
+				ventaDao.update(v);
+				response.getWriter().println(JsonConvertidor.toJson(v));
+//		   }else{
+//				response.sendError(403);
+//		   }
+		}
 	
 	
 	@RequestMapping(value = { "/cancelar/{idVenta}" },  method = RequestMethod.GET)
@@ -241,7 +282,7 @@ public class VentaController {
 	   System.out.println("genera ticket");
 //	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 		   response.setContentType("Application/Pdf");
-		 //  Venta v = ventaDao.consult(idVenta);
+		   Venta v = ventaDao.consult(idVenta);
 		 // Envio e = envioDao.consult(idEnvio) ; 
 		   List<Envio> objE= new ArrayList<Envio>();
 		    List<Long> envios = ventaDao.consult(idVenta).getEnvios();
@@ -265,8 +306,10 @@ public class VentaController {
 	        
 	       // Paquete p = v.getPaquete();  
 	     //   String des = e.paquete.paqueteDao.consult(e.getPaquete().getDescripcion());
-	        System.out.println("Empiezo a generar pdf...." );
-	    	GeneraTicket gt = new GeneraTicket(objE, s,  response.getOutputStream());
+	        System.out.println("Empiezo a generar pdf..envios.."+objE );
+	        System.out.println("Empiezo a generar pdf...suc."+s );
+	        System.out.println("Empiezo a generar pdf...venta."+v );
+	    	GeneraTicket gt = new GeneraTicket(objE, s, v ,  response.getOutputStream());
 	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
 	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
 	    	  response.getOutputStream().flush();

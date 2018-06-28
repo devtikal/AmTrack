@@ -2,12 +2,13 @@ package com.tikal.mensajeria.dao.impl;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.tikal.mensajeria.dao.VentaDao;
-
+import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Venta;
 
 @Service("ventaDao")
@@ -29,13 +30,25 @@ public class VentaDaoImpl implements VentaDao{
 	public void update(Venta v) {
 	   System.out.print("Venta:"+v.getId());
 	   Venta old = this.consult(v.getId());
-	System.out.print("old:"+old);
+	   System.out.print("old:"+old);
 		if (old != null) {
 			
 			old.setFecha(v.getFecha());
 			old.setFolio(v.getFolio());
 			old.setEnvios(v.getEnvios());
 			old.setCantidad(v.getCantidad());
+			
+			List<Envio> es= new ArrayList<Envio>();
+			if (es.size()<=0){
+				old.setTotal(Double.valueOf("0.00"));
+			}else{
+				for (Envio e:es){
+					v.setTotal(v.getTotal()+e.getPrecio());
+				
+				}
+			}
+			
+			old.setTotal(v.getTotal());
 		}
 
 			ofy().save().entity(old);
