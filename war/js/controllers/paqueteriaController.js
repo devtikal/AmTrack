@@ -19,11 +19,30 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
-	
+	this.addVenta = function(user,venta) {
+		var d = $q.defer();
+		$http.get("venta/add/"+user, venta).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 
 	this.getGuiaByName = function(user){
 		var d = $q.defer();
-		$http.get("envio/getGuia/"+user).then(
+		$http.get("guia/getGuia/"+user).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -88,12 +107,22 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
+	
+	$scope.venta={fecha: new Date()};
+	
+	console.log($scope.venta.fecha);
 	paqueteriaService.getEnvio().then(function(data) {
 		$scope.envios=data;
 		console.log("Datos de Envio", $scope.envios);
 	});
 	$scope.generaPDF = function (idEnvio){
 		paqueteriaService.makePDF(idEnvio,$cookieStore.get('usuario')).then(function(data) {
+			
+		});
+		
+	}
+	$scope.newVenta= function (){
+		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
 			
 		});
 		
@@ -130,11 +159,11 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
 	$scope.hide=true;
 	$scope.requerido=true;
 	$scope.isEstafeta = function() {
-		if ($scope.paqueteria.empresa=="ESTAFETA"){
-			$scope.hide=true;
+		if ($scope.paqueteria.empresa=="ESTAFETA" || $scope.paqueteria.empresa=="MERVEL"){
+			$scope.hide=false;
 			$scope.requerido=false;
 		}else{
-			$scope.hide=false;
+			$scope.hide=true;
 			$scope.requerido=true;
 			
 		}
@@ -153,6 +182,10 @@ $scope.EnviarFormulario = function() {
 					    setTimeout(function(){ if($scope.paqueteria){window.location="#/altaPaquete"; $window.location.reload(); } }, 3000);
 //						
 					})}
+
+
+
+
 
 } ]);
 

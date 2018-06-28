@@ -82,6 +82,27 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 				});
 		return d.promise;
 	}
+	
+	this.asignarMGuia = function(inicio,fin,idSuc) {
+		var d = $q.defer();
+		$http.get("guia/asignar/"+inicio+"/" + fin +"/"+idSuc).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 
 	this.getSucursal = function() {
 		var d = $q.defer();
@@ -155,6 +176,16 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		
 		guiaService.addGuia(dato1,dato2).then(function(data) {
 			alert("Guias Agregadas correctamente");
+			$window.location.reload();
+		});
+	}
+
+	$scope.addMasives = function() {
+		
+		guiaService.asignarMGuia($scope.addM.inicio,$scope.addM.fin,$scope.addM.idSucursal).then(function(data) {
+			var inicio = $scope.addM.inicio;
+			var fin = $scope.addM.fin;
+			alert("Guias Asignadas \n "+  inicio+" a "+ fin+ " \n Correctamente");
 			$window.location.reload();
 		});
 	}

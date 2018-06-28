@@ -41,8 +41,8 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/AltaPaquete.html",
 		controller : "paqueteriaController"
 	});
-	$routeProvider.when('/envio', {
-		templateUrl : "pages/Envio.html",
+	$routeProvider.when('/Ventas', {
+		templateUrl : "pages/Ventas.html",
 		controller : "EnvioController"
 	});
 	$routeProvider.when('/altaGuia', {
