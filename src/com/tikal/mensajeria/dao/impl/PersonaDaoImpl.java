@@ -33,6 +33,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	System.out.print("old:"+old);
 		if (old != null) {
 			old.setNombre(p.getNombre());
+			old.setEnAtencion(p.getEnAtencion()); 
 			old.setNoExterior(p.getNoExterior());
 			old.setNoInterior(p.getNoInterior());
 			old.setColonia(p.getColonia());

@@ -17,20 +17,25 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Paquete;
+import com.tikal.mensajeria.modelo.entity.Venta;
 import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.util.NumberToLetterConverter;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.util.List;
 //import java.util.Date;
 //import java.util.List; 
 public class GeneraGuiaMervel {
 	
-      public GeneraGuiaMervel(Envio e, Sucursal s, Paquete p,OutputStream ops) throws MalformedURLException, IOException {
+      public GeneraGuiaMervel(Venta v, Envio e, OutputStream ops) throws MalformedURLException, IOException {
 
     	
     	try {
-    		Document document = new Document(PageSize.A6,15,15,15,15);   	  
+    		Rectangle envelope = new Rectangle(230, 690);
+        	//	Document pdfDoc = new Document(envelope, 230f, 10f, 100f, 0f);
+        		Document document = new Document(envelope,0,0,0,0); 
+    		//Document document = new Document(PageSize.A6,15,15,15,15);   	  
     	        PdfWriter.getInstance(document,ops);
     	    document.open();
     	    
@@ -105,14 +110,14 @@ public class GeneraGuiaMervel {
             c33.setBorder(Rectangle.NO_BORDER);
             table.addCell(c33);
             
-            Paragraph p5 = new Paragraph("Guia"+e.getGuia(),f3);
+            Paragraph p5 = new Paragraph(e.getGuia().toString(),f3);
             PdfPCell c5 = new PdfPCell(p5);
             c5.setHorizontalAlignment(Element.ALIGN_LEFT);
             c5.setColspan(1);c5.setRowspan(1);
             c5.setBorder(Rectangle.NO_BORDER);
             table.addCell(c5);
             
-            Paragraph p4 = new Paragraph("folio: ",f3);
+            Paragraph p4 = new Paragraph(v.getFolio().toString(),f3);
             PdfPCell c4 = new PdfPCell(p4);
             c4.setHorizontalAlignment(Element.ALIGN_LEFT);
             c4.setColspan(1);c4.setRowspan(1);
@@ -120,27 +125,28 @@ public class GeneraGuiaMervel {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph("12/06/2018",f3);
+            Paragraph p6 = new Paragraph(v.getFecha(),f3);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_LEFT);
             c6.setColspan(1);
             c6.setBorder(Rectangle.NO_BORDER);
             table.addCell(c6);
             
-            Paragraph p7 = new Paragraph("rastreo:"+e.getRastreo(),f3);
+            Paragraph p7 = new Paragraph(e.getRastreo().toString(),f3);
             PdfPCell c7 = new PdfPCell(p7);
             c7.setHorizontalAlignment(Element.ALIGN_LEFT);
             c7.setColspan(4);c7.setBorder(Rectangle.NO_BORDER);
             table.addCell(c7);
+            table.addCell(c33);
             
-            Paragraph p37 = new Paragraph("                ",f2);
+            Paragraph p37 = new Paragraph(e.getCliente().getNombre(),f3);
             PdfPCell c37 = new PdfPCell(p37);
-            c37.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c37.setHorizontalAlignment(Element.ALIGN_LEFT);
             c37.setColspan(3);c37.setRowspan(1);
             c37.setBorder(Rectangle.NO_BORDER);
             table.addCell(c37);
             
-            Paragraph p8 = new Paragraph("Calle:",f1);
+            Paragraph p8 = new Paragraph(e.getCliente().getCalle(),f1);
             PdfPCell c8 = new PdfPCell(p8);
             c8.setHorizontalAlignment(Element.ALIGN_LEFT);
             c8.setColspan(4);c8.setRowspan(5);
@@ -148,7 +154,42 @@ public class GeneraGuiaMervel {
             table.addCell(c8);
            // table.addCell(c6);
             
-            Paragraph px = new Paragraph("50450",f4);
+            Paragraph pxx = new Paragraph(e.getCliente().getColonia(),f1);
+            PdfPCell cxx = new PdfPCell(pxx);
+            cxx.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cxx.setColspan(3);
+            cxx.setBorder(Rectangle.NO_BORDER);
+            table.addCell(cxx);
+            
+            Paragraph px1 = new Paragraph(e.getCliente().getLocalidad(),f1);
+            PdfPCell cx1 = new PdfPCell(px1);
+            cx1.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx1.setColspan(3);
+            cx1.setBorder(Rectangle.NO_BORDER);
+            table.addCell(cx1);
+       
+            Paragraph px2 = new Paragraph(e.getCliente().getMunicipio(),f1);
+            PdfPCell cx2 = new PdfPCell(px2);
+            cx2.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx2.setColspan(3);
+            cx2.setBorder(Rectangle.NO_BORDER);
+            table.addCell(cx2);
+            
+            Paragraph px3 = new Paragraph(e.getCliente().getEstado(),f1);
+            PdfPCell cx3 = new PdfPCell(px3);
+            cx3.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx3.setColspan(3);
+            cx3.setBorder(Rectangle.NO_BORDER);
+            table.addCell(cx3);
+            
+            Paragraph px4 = new Paragraph(e.getCliente().getTelefono(),f1);
+            PdfPCell cx4 = new PdfPCell(px4);
+            cx4.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx4.setColspan(3);
+            cx4.setBorder(Rectangle.NO_BORDER);
+            table.addCell(cx4);
+            
+            Paragraph px = new Paragraph(e.getCliente().getCodigoPostal().toString(),f4);
             PdfPCell cx = new PdfPCell(px);
             cx.setHorizontalAlignment(Element.ALIGN_LEFT);
             cx.setColspan(3);
@@ -156,12 +197,7 @@ public class GeneraGuiaMervel {
            // cx.setBorder(Rectangle.NO_BORDER);
             table.addCell(cx);
             
-            Paragraph pxx = new Paragraph("cliente:"+e.getCliente(),f1);
-            PdfPCell cxx = new PdfPCell(pxx);
-            cxx.setHorizontalAlignment(Element.ALIGN_LEFT);
-            cxx.setColspan(3);
-            cxx.setBorder(Rectangle.NO_BORDER);
-            table.addCell(cxx);
+           
            
 //    // segunda parte... tabla 2
 //
@@ -170,6 +206,12 @@ public class GeneraGuiaMervel {
             
             PdfPTable table2 = new PdfPTable(3);        
             
+            Paragraph px6 = new Paragraph(e.getDestinatario().getNombre(),f3);
+            PdfPCell cx6 = new PdfPCell(px6);
+            cx6.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx6.setColspan(3);
+            cx6.setBorder(Rectangle.NO_BORDER);
+            table2.addCell(cx6);
             
             
             Paragraph p1 = new Paragraph("calle:"+e.getDestinatario().getCalle(),f1);

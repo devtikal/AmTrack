@@ -24,6 +24,7 @@ import com.tikal.mensajeria.dao.PaqueteDao;
 import com.tikal.mensajeria.dao.PersonaDao;
 import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
+import com.tikal.mensajeria.dao.VentaDao;
 import com.tikal.mensajeria.formatos.pdf.GeneraGuiaMervel;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
@@ -31,6 +32,7 @@ import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.entity.Persona;
+import com.tikal.mensajeria.modelo.entity.Venta;
 import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
 //import com.tikal.mensajeria.modelo.vo.EnvioVo;
@@ -65,6 +67,10 @@ public class EnvioController {
 	@Autowired
 	@Qualifier("guiaDao")
 	GuiaDao guiaDao;
+	
+	@Autowired
+	@Qualifier("ventaDao")
+	VentaDao ventaDao;
 	
 	
 	@RequestMapping(value={"/prueba"},method = RequestMethod.GET)
@@ -231,12 +237,14 @@ public class EnvioController {
 	}
 	   
 	 
-	
-	    
-	   @RequestMapping(value = { "/generaGuiaMervel/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
-	 		public void generaGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable String userName) throws IOException {
+	  	   @RequestMapping(value = { "/generaGuiaMervel/{idVenta}/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+	 		public void generaGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio
+	 				, @PathVariable Long idVenta, @PathVariable String userName) throws IOException {
 	 	   System.out.println("genera ticket");
 //	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+	 	   Venta v = ventaDao.consult(idVenta);
+			  Envio envio = envioDao.consult(idEnvio) ; 
+			  
 	 		   response.setContentType("Application/Pdf");
 	 		  Envio e = envioDao.consult(idEnvio) ;  
 	 	        File newPdfFile = new File(idEnvio+".pdf");		 
@@ -248,11 +256,11 @@ public class EnvioController {
 	 	            }
 	 	        }
 	        
-	 	        Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
-	 	        Paquete p = e.getPaquete();
+	 	     //   Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
+	 	     //   Paquete p = e.getPaquete();
 	 	     //   String des = e.paquete.paqueteDao.consult(e.getPaquete().getDescripcion());
 	 	        System.out.println("Empiezo a generar pdf...." );
-	 	    	GeneraGuiaMervel ggm = new GeneraGuiaMervel(e, s, p,  response.getOutputStream());
+	 	    	GeneraGuiaMervel ggm = new GeneraGuiaMervel(v,envio, response.getOutputStream());
 	 	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
 	 	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
 	 	    	  response.getOutputStream().flush();

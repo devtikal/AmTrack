@@ -9,6 +9,7 @@ public class Persona {
 
 	@Id Long id;
 	@Index private String nombre;
+	private String enAtencion;
 	private String calle;
 	private String noExterior;
 	private String noInterior;
@@ -28,6 +29,12 @@ public class Persona {
 	}
 	
 	
+	public String getEnAtencion() {
+		return enAtencion;
+	}
+	public void setEnAtencion(String enAtencion) {
+		this.enAtencion = enAtencion;
+	}
 	public String getCalle() {
 		return calle;
 	}
