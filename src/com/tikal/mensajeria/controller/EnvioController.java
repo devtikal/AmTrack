@@ -90,9 +90,13 @@ public class EnvioController {
 			Usuario u = new Usuario();
 //			envio.("Juan Perez Acuña");
 //			
-//			d.setNombre("Angelica");
-//			d.setaMaterno("Pacheco");
-//			d.setaMaterno("Pantoja");
+			Persona d= new Persona();Persona c= new Persona();
+			d=personaDao.consult(Long.valueOf("4877433580814336"));
+			c=personaDao.consult(Long.valueOf("4595958604103680"));
+//			d.setNombre("Oscar vazquez");
+//			d.setId(4877433580814336);
+//			//d.setaMaterno("Vazqu");
+//		//	d.setaMaterno("Pantoja");
 //			d.setCalle("Ejercito del trabajo");
 //			d.setNoExterior("130");
 //			d.setNoInterior("0");
@@ -102,16 +106,18 @@ public class EnvioController {
 //			d.setEstado("Mexico");
 //			d.setCodigoPostal(50110);
 //			d.setTelefono("7222222222");
-//			
+			
 //			destinatarioDao.save(d);
 //			
 			
-		//	envio.setDestinatario(d);
+			envio.setDestinatario(d);
+			envio.setCliente(c);
 			
-			p.setAlto(10.00);p.setAncho(10.00); p.setLargo(10.00);
-			p.setDescripcion("paquete de joyeria");
+			p.setAlto(30.00);p.setAncho(30.00); p.setLargo(30.00);
+			p.setDescripcion("Libros");
 			p.setPeso(312.00);
 			p.setTipoPaquete("paquete");
+			
 			paqueteDao.save(p);
 			
 			envio.setPaquete(p);
@@ -119,20 +125,20 @@ public class EnvioController {
 //			e.setClave("fed");
 //			e.setDescripcion("FEDEX_");
 //			empresaDao.save(e);
-			
-		//	envio.setEmpresa("otra");
+			envio.setTipoServicio("NACIONAL");
+			envio.setEmpresa("MERVEL");
 		//	envio.setFecha("05/06/2018 18:03:45");
-			Contador c= new Contador();
+			Contador ct= new Contador();
 		//	envio.setFolio(c.getFolio().toString());
 			//Integer guia = buscaGuia(username);
 			//guiaDao.
 			//Usuario user= usuarioDao.consultarUsuario(usuario);
 			//System.out.println("esta en daoimpl envio  get by status Suc:"+usuarioDao.consultarUsuario(usuario).getIdSucursal());
-			Guia g=guiaDao.getByEstSuc("NO ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
 			envio.setGuia(g.getNumero());
-			envio.setPrecio(312.50);
-			envio.setRastreo(8888888);
-			envio.setTipoEnvio("Express");
+			envio.setPrecio(65.50);
+			envio.setRastreo(878987657);
+			envio.setTipoEnvio("Dia siguiente");
 		//	envio.setTotal(312.50);
 			   
 
@@ -142,7 +148,7 @@ public class EnvioController {
 			envioDao.save(envio);
 			g.setEstatus("EN ENVIO");
 			guiaDao.update(g);
-			c.incremeta();
+			ct.incremeta();
 	//}
 //			response.sendError(403);
 //		}

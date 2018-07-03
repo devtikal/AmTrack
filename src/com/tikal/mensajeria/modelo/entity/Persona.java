@@ -14,6 +14,7 @@ public class Persona {
 	private String noExterior;
 	private String noInterior;
 	private String colonia;
+	private String colOpcional;
 	private String localidad;
 	private String municipio;
 	private String estado;
@@ -29,6 +30,12 @@ public class Persona {
 	}
 	
 	
+	public String getColOpcional() {
+		return colOpcional;
+	}
+	public void setColOpcional(String colOpcional) {
+		this.colOpcional = colOpcional;
+	}
 	public String getEnAtencion() {
 		return enAtencion;
 	}

@@ -16,11 +16,12 @@ public class Envio {
 	private Persona destinatario;
 	@Index  String empresa;
 	private Paquete paquete;	
-	@Index private Integer guia;
+	@Index private String guia;
 	@Index private Integer rastreo;
 	private String tipoEnvio;
 	private String tipoServicio;
 	private Double precio;	
+	private Double costoSeguro;
 	private List<Material> materiales;
 	
 	
@@ -59,10 +60,16 @@ public class Envio {
 		this.paquete = paquete;
 	}
 	
-	public Integer getGuia() {
+	public Double getCostoSeguro() {
+		return costoSeguro;
+	}
+	public void setCostoSeguro(Double costoSeguro) {
+		this.costoSeguro = costoSeguro;
+	}
+	public String getGuia() {
 		return guia;
 	}
-	public void setGuia(Integer guia) {
+	public void setGuia(String guia) {
 		this.guia = guia;
 	}
 	public Integer getRastreo() {

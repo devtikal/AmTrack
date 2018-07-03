@@ -3,6 +3,7 @@ package com.tikal.mensajeria.dao.impl;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.tikal.mensajeria.dao.VentaDao;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Venta;
+import com.tikal.mensajeria.modelo.vo.ReporteVo;
 
 @Service("ventaDao")
 public class VentaDaoImpl implements VentaDao{
@@ -67,6 +69,17 @@ public class VentaDaoImpl implements VentaDao{
 	public List<Venta> findAll() {
 		return ofy().load().type(Venta.class).list();
 	}
+
+
+	@Override
+
+		public List<Venta> getVentas(Date inicio, Date fin) {
+			
+			//return ofy().load().type(Venta.class).filter("fecha >=",inicio).filter("fecha <=", fin).list();
+			return ofy().load().type(Venta.class).list();
+		}
+
+	
 	
 	
 }

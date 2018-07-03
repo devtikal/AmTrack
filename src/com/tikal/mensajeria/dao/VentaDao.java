@@ -1,5 +1,6 @@
 package com.tikal.mensajeria.dao;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,8 +17,10 @@ public interface VentaDao {
 	public Venta consult(Long id);
 	
 	//public static AeronaveEntity consult(String numeroSerie);
+	public List<Venta> findAll();
 	
-    
-	public List<Venta> findAll();	
+	public List<Venta> getVentas(Date inicio, Date fin);
+	
+	
 
 }

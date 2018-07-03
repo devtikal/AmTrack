@@ -57,17 +57,27 @@ public class GuiaController {
 	
 	@RequestMapping(value = { "/addM_/{inicio}/{fin}" },  method = RequestMethod.GET)
 	public void altas(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable Integer inicio , @PathVariable Integer fin)throws IOException {
+			@PathVariable String inicio , @PathVariable String fin)throws IOException {
 	
-	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
+	//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-		//System.out.println(" yisus manda:"+json);
+		String gui = inicio.substring(0,15);
+		
+		Integer ini= Integer.parseInt(inicio.substring(15));
+		Integer fini= Integer.parseInt(fin.substring(15));
+		System.out.println("-------------- cuerpo guia:"+gui);
+		System.out.println("-------------- ini:"+ini);
+		System.out.println("-------------- fin:"+fini);
 //		int ini=Integer.parseInt(inicio);
+	//	int 1==9;
 //		int f=Integer.parseInt(fin);
-		for (int i=inicio; i<= fin; i++) {
+		for (int i=ini; i<=fini; i++) {
 			Guia guia = new Guia();
 			guia.setEstatus("NO ASIGNADA");
-			guia.setNumero(i);
+			guia.setNumero(gui+i);
+			System.out.println("*******ini:"+i);
+			System.out.println("------------guia:"+gui+i);
+		//	guia.setNumero(i);
 			//guia.setIdSucursal(Long.valueOf("9999"));
 			guia.setIdSucursal(usuarioDao.consultarUsuario("root").getIdSucursal());
 			//guia.setSucursal(sucursalDao.consult(suc).getNombre());
@@ -82,30 +92,36 @@ public class GuiaController {
 	
 	@RequestMapping(value = { "/addM/{inicio}/{fin}" },  method = RequestMethod.GET)
 	public void altaGuias(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable Integer inicio , @PathVariable Integer fin)throws IOException {
+			@PathVariable String inicio , @PathVariable String fin)throws IOException {
 	
-	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
-		AsignadorDeCharset.asignar(request, response);
-//		System.out.println(" Str inicio:"+inicio);
-//		System.out.println(" Str fin:"+fin);
-//		int ini=Integer.parseInt(inicio);
-//		int f=Integer.parseInt(fin);
-//		System.out.println(" inicio:"+ini);
-//		System.out.println(" fin:"+f);
-		Long suc=usuarioDao.consultarUsuario("root").getIdSucursal();
-		for (int i=inicio; i<=fin;  i++) {
-			Guia guia = new Guia();
-			guia.setEstatus("NO ASIGNADA");
-			guia.setNumero(i);
-			guia.setIdSucursal(suc);
-			guia.setSucursal(sucursalDao.consult(suc).getNombre());
-			//guia.setIdSucursal(Long.valueOf("9999"));
-			guiaDao.save(guia);
-		}
-	
-//			} else {
-//				response.sendError(403);
-//			}
+		//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
+				AsignadorDeCharset.asignar(request, response);
+				String gui = inicio.substring(0,15);
+				
+				Integer ini= Integer.parseInt(inicio.substring(15));
+				Integer fini= Integer.parseInt(fin.substring(15));
+				System.out.println("-------------- cuerpo guia:"+gui);
+				System.out.println("-------------- ini:"+ini);
+				System.out.println("-------------- fin:"+fini);
+//				int ini=Integer.parseInt(inicio);
+			//	int 1==9;
+//				int f=Integer.parseInt(fin);
+				for (int i=ini; i<=fini; i++) {
+					Guia guia = new Guia();
+					guia.setEstatus("NO ASIGNADA");
+					guia.setNumero(gui+i);
+					System.out.println("*******ini:"+i);
+					System.out.println("------------guia:"+gui+i);
+				//	guia.setNumero(i);
+					//guia.setIdSucursal(Long.valueOf("9999"));
+					guia.setIdSucursal(usuarioDao.consultarUsuario("root").getIdSucursal());
+					//guia.setSucursal(sucursalDao.consult(suc).getNombre());
+					guiaDao.save(guia); 
+				}
+			
+//					} else {
+//						response.sendError(403);
+//					}
 		}
 
 	@RequestMapping(value = { "/asignar/{idSucursal}/{idGuia}" },  method = RequestMethod.GET)

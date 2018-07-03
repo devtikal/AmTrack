@@ -34,7 +34,6 @@ public class PaqueteDaoImpl implements PaqueteDao{
 			
 			old.setDescripcion(p.getDescripcion());
 			old.setTipoPaquete(p.getTipoPaquete());
-			old.setCostoSeguro(p.getCostoSeguro());
 			old.setLargo(p.getLargo());
 			old.setAncho(p.getAncho());
 			old.setAlto(p.getAlto());	

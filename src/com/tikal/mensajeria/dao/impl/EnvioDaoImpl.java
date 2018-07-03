@@ -39,6 +39,7 @@ public class EnvioDaoImpl implements EnvioDao{
 			old.setGuia(e.getGuia());
 			old.setPaquete(e.getPaquete());
 			old.setPrecio(e.getPrecio());
+			old.setCostoSeguro(e.getCostoSeguro());
 			old.setRastreo(e.getRastreo());
 			old.setTipoEnvio(e.getTipoEnvio());
 			old.setTipoServicio(e.getTipoServicio());

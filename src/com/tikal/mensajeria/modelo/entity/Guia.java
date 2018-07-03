@@ -9,7 +9,7 @@ import com.googlecode.objectify.annotation.Index;
 public class Guia {
 	
 	@Id private Long id;
-	@Index private Integer numero;
+	@Index private String numero;
 	@Index private String estatus;
 	@Index private Long idSucursal;
 	@Index private String sucursal;
@@ -20,10 +20,10 @@ public class Guia {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public String getEstatus() {

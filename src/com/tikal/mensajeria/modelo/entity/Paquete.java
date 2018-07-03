@@ -10,7 +10,7 @@ public class Paquete {
 	
 	private String descripcion;
 	private String tipoPaquete;
-	private String costoSeguro;
+	
 	private Double largo;
 	private Double alto;
 	private Double ancho;
@@ -39,12 +39,7 @@ public class Paquete {
 		this.tipoPaquete = tipoPaquete;
 	}
 	
-	public String getCostoSeguro() {
-		return costoSeguro;
-	}
-	public void setCostoSeguro(String costoSeguro) {
-		this.costoSeguro = costoSeguro;
-	}
+
 	public Double getLargo() {
 		return largo;
 	}
