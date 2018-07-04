@@ -81,6 +81,27 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	
+	this.getFolio = function(){
+		var d = $q.defer();
+		$http.get("venta/getFolio").then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 
 	
 	this.makePDF = function(idEnvio,usuario){
@@ -126,6 +147,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			
 		});
 		
+	}
+	$scope.generarFolio = function(){
+		paqueteriaService.getFolio().then(function(data) {
+			$scope.venta.folio = data;
+		});
 	}
 	
 } ]);
