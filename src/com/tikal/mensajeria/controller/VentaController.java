@@ -205,13 +205,13 @@ public class VentaController {
 //			}
 		}
 	
-	@RequestMapping(value = { "/add/{username}" },  method = RequestMethod.GET )
+	@RequestMapping(value = { "/add/{username}" },  method = RequestMethod.GET ,consumes = "Application/Json")
 	public void altas(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable String username,@RequestBody String json)throws IOException {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-		Venta v = new Venta();
+		Venta v = (Venta) JsonConvertidor.fromJson(json, Venta.class);
 		Contador folio= new Contador();
 		v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
