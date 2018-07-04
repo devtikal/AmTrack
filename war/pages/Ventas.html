@@ -54,10 +54,10 @@
 					<td>{{v.fecha | date}}</td>
 					<td>{{v.cantidad}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
 							<i class="fa fa-plus"></i>
 						</button>
-						<button class="btn btn-info" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalEnvio"  >
+						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" data-toggle="modal" data-target="#modalVerEnvio"  >
 							<i class="fa fa-eye"></i>
 						</button>
 						<button class="btn btn-danger" title="Imprimir" ng-click="generaPDF(v.id)">
@@ -212,7 +212,7 @@
   </div>
   </div>
   <div class="tab">
-  <h3 align="center">Paquete</h3>
+  <h3 align="center">Envio</h3>
   
   <div class="row">
 			<div class="col-md-6">
@@ -342,7 +342,7 @@
 					</div>
   
   </div>
-  <div class="tab">
+  <div id="delTap" class="tab" ng-hide="hide">
   <h3 align="center">Destinatario</h3>
    <div class="row">
   <div class="col-md-6">

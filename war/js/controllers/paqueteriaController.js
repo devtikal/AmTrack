@@ -166,6 +166,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 		
 	}
+	$scope.prePaquete = function(data){
+		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
+			$scope.paquete.guia=data.numero;
+	});
+	}
 	$scope.newVenta= function (){
 		$scope.venta.cantidad=0;
 		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
@@ -210,10 +215,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		if ($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){
 			$scope.hide=false;
 			$scope.requerido=false;
+			document.getElementById("delTap").classList.add("tab");
 		}else{
 			$scope.hide=true;
 			$scope.requerido=true;
-			
+			document.getElementById("delTap").classList.remove("tab");
 		}
 		
 		
