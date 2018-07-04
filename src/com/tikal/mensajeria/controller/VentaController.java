@@ -205,7 +205,7 @@ public class VentaController {
 //			}
 		}
 	
-	@RequestMapping(value = { "/add/{username}" },  method = RequestMethod.GET ,consumes = "Application/Json")
+	@RequestMapping(value = { "/add/{username}" },  method = RequestMethod.POST,consumes = "Application/Json")
 	public void altas(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable String username,@RequestBody String json)throws IOException {
 	
