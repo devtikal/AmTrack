@@ -42,7 +42,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 	this.getGuiaByName = function(user){
 		var d = $q.defer();
-		$http.get("guia/getGuia/"+user).then(
+		$http.post("guia/getGuia/"+user).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -149,6 +149,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 	}
 	$scope.generarFolio = function(){
+		$scope.venta.cantidad=1;
 		paqueteriaService.getFolio().then(function(data) {
 			$scope.venta.folio = data;
 		});
