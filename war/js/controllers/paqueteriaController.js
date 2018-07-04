@@ -184,6 +184,40 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		alert("La wea CMS");
 	}
 	
+	$scope.products =[];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+//            $scope.products.push($scope.addMe,$scope.addMe2);
+            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
+            console.log($scope.products);
+        } else {
+            $scope.errortext = "Ya se encuentra en la lista.";
+        }
+        $scope.addMe="";
+        $scope.addMe2="";
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";    
+        $scope.products.splice(x, 1);
+        console.log( $scope.products);
+    }
+	
+	$scope.hide=true;
+	$scope.requerido=true;
+	$scope.isEstafeta = function() {
+		if ($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){
+			$scope.hide=false;
+			$scope.requerido=false;
+		}else{
+			$scope.hide=true;
+			$scope.requerido=true;
+			
+		}
+		
+		
+	}
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
