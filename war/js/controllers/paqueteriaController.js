@@ -21,7 +21,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 	}
 	this.addVenta = function(user,venta) {
 		var d = $q.defer();
-		$http.get("venta/add/"+user, venta).then(
+		$http.post("venta/add/"+user, venta).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -42,7 +42,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 	this.getGuiaByName = function(user){
 		var d = $q.defer();
-		$http.post("guia/getGuia/"+user).then(
+		$http.get("guia/getGuia/"+user).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
