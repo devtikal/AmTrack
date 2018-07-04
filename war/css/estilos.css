@@ -164,7 +164,13 @@ tr:nth-child(even) {
 .form-inline#forma, .form-control#forma {margin-bottom:10px;}
 
 /* MODAL CSS */
-
+.full-screen {
+    width: 100%;
+    height: 100%;
+    margin: 30;
+    top: 23%;
+    left: 25%;
+}
 #mdialTamanio{
       width: 60% !important;
     }
@@ -483,3 +489,4 @@ input.invalid {
 .step.finish {
   background-color: #4CAF50;
 }
+

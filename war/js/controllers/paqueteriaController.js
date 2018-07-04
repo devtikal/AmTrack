@@ -39,6 +39,27 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	
+	this.getVenta = function() {
+		var d = $q.defer();
+		$http.get("venta/findAll").then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 
 	this.getGuiaByName = function(user){
 		var d = $q.defer();
@@ -130,12 +151,15 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	sessionService.isAuthenticated();
 	
 	$scope.venta={fecha: new Date()};
-	
-	console.log($scope.venta.fecha);
-	paqueteriaService.getEnvio().then(function(data) {
-		$scope.envios=data;
-		console.log("Datos de Envio", $scope.envios);
+	paqueteriaService.getVenta().then(function(data) {
+		$scope.ventas=data;
+		console.log("List Ventas", $scope.ventas);
 	});
+	console.log($scope.venta.fecha);
+//	paqueteriaService.getEnvio().then(function(data) {
+//		$scope.envios=data;
+//		console.log("Datos de Envio", $scope.envios);
+//	});
 	$scope.generaPDF = function (idEnvio){
 		paqueteriaService.makePDF(idEnvio,$cookieStore.get('usuario')).then(function(data) {
 			
@@ -143,16 +167,21 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 	}
 	$scope.newVenta= function (){
+		$scope.venta.cantidad=0;
 		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
-			
+			$window.location.reload();
 		});
 		
 	}
 	$scope.generarFolio = function(){
-		$scope.venta.cantidad=1;
+		
 		paqueteriaService.getFolio().then(function(data) {
 			$scope.venta.folio = data;
 		});
+	}
+	$scope.savePaquete = function(data){
+		console.log("Datos de Paquete", data);
+		alert("La wea CMS");
 	}
 	
 } ]);

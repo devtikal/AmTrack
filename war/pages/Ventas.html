@@ -51,14 +51,16 @@
 					<td></td>
 					<td>{{v.folio}}</td>
 					
-					<td>{{v.fecha}}</td>
+					<td>{{v.fecha | date}}</td>
 					<td>{{v.cantidad}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" >
-							<i class="fa fa-building-o"></i>
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
+							<i class="fa fa-plus"></i>
 						</button>
-						
-						<button class="btn btn-danger" title="Imprimir" ng-click="generaPDF(e.id)">
+						<button class="btn btn-info" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalEnvio"  >
+							<i class="fa fa-eye"></i>
+						</button>
+						<button class="btn btn-danger" title="Imprimir" ng-click="generaPDF(v.id)">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
@@ -163,56 +165,301 @@
       </div>
     </div>
   </div>
+  
 <!--   MODAL ALTA Envio -->
-<!--    <div class="modal fade" id="modalEnvio" role="dialog"> -->
-<!--     <div class="modal-dialog modal-lg"> -->
-<!--       <div class="modal-content"> -->
-<!--         <div class="modal-header"> -->
+   <div class="modal fade" id="modalEnvio" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg " role="document">
+      <div class="modal-content ">
+        <div class="modal-header">
           
-<!--           <h4 class="modal-title">Registrar Envios</h4> -->
-<!--           <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-<!--         </div> -->
-<!--         <div class="modal-body"> -->
-<!--           <form id="regForm" action="/action_page.php"> -->
-<!--   <h1>Register:</h1> -->
-<!--   <!-- One "tab" for each step in the form: --> 
-<!--   <div class="tab">Name: -->
-<!--     <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p> -->
-<!--     <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p> -->
-<!--   </div> -->
-<!--   <div class="tab">Contact Info: -->
-<!--     <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p> -->
-<!--     <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p> -->
-<!--   </div> -->
-<!--   <div class="tab">Birthday: -->
-<!--     <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p> -->
-<!--     <p><input placeholder="mm" oninput="this.className = ''" name="nn"></p> -->
-<!--     <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p> -->
-<!--   </div> -->
-<!--   <div class="tab">Login Info: -->
-<!--     <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p> -->
-<!--     <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p> -->
-<!--   </div> -->
-<!--   <div style="overflow:auto;"> -->
-<!--     <div style="float:right;"> -->
-<!--       <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button> -->
-<!--       <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button> -->
-<!--     </div> -->
-<!--   </div> -->
-<!--   <!-- Circles which indicates the steps of the form: -->
-<!--   <div style="text-align:center;margin-top:40px;"> -->
-<!--     <span class="step"></span> -->
-<!--     <span class="step"></span> -->
-<!--     <span class="step"></span> -->
-<!--     <span class="step"></span> -->
-<!--   </div> -->
-<!-- </form> -->
-<!--         </div> -->
-<!--         <div class="modal-footer"> -->
-<!--           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div></div> -->
+          <h4 class="modal-title">Registrar Envios</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="altaPaquete" name="myForm">
+<!--   <h3>Destinatario:</h3> -->
+  <!-- One "tab" for each step in the form:--> 
+  <div class="tab">
+  <h3 align="center">Remitente</h3>
+  <div class="row">
+  <div class="col-md-6">
+ 	 Nombre
+    <p><input placeholder="Nombre..." ng-model="paquete.remitente.nombre" required></p>
+    Telefono
+    <p><input placeholder="Telefono..." ng-model="paquete.remitente.telefono" required></p>
+    CP:
+    <p><input placeholder="-----" ng-model="paquete.remitente.cp"></p>
+     Colonia
+    <p><input placeholder="Colonia..." ng-model="paquete.remitente.colonia" required></p>
+     
+     Localidad
+    <p><input placeholder="Localidad..."  ng-model="paquete.remitente.localidad" required></p>
+     </div>
+     <div class="col-md-6">
+     
+     Municipio
+    <p><input placeholder="Municipio..." ng-model="paquete.remitente.municipio" required></p>
+     Estado
+    <p><input placeholder="Estado..." ng-model="paquete.remitente.estado" required></p>
+     Calle
+    <p><input placeholder="Calle..."  ng-model="paquete.remitente.calle" required></p>
+     
+     Numero Ext
+    <p><input placeholder="Ext..."  ng-model="paquete.remitente.ext" required></p>
+    Numero Int
+    <p><input placeholder="Int..." ng-model="paquete.remitente.int"></p>
+    </div>
+  </div>
+  </div>
+  <div class="tab">
+  <h3 align="center">Paquete</h3>
+  
+  <div class="row">
+			<div class="col-md-6">
+							<label>Guia</label>
+								<input type="number" class="form-control" style="font-size:20px" ng-model="paquete.guia" required >
+						</div>
+						<div class="col-md-6">
+							
+								<label>Rastreo</label><input type="number" class="form-control" ng-model="paquete.rastreo" required>
+							</div>
+			 </div>
+					<div class="row">
+						<div class="col-md-6">
+						
+									<br><label> Cliente: </label>
+								<input type="text" class="form-control" id ="Named" ng-model="paquete.cliente" required>
+							
+<!-- 							<br> <label>Cantidad: </label><input type="number" class="form-control" -->
+<!-- 								ng-model="paquete.cantidad" required> -->
+								 <br>
+							<label>Descripcion:</label> <input type="text" class="form-control"
+								ng-model="paquete.descripcion" required> <br> 
+								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.tipoPaquete"
+										required>
+										<option></option>
+										<option>BOLSA</option>
+										<option>CAJA</option>
+										<option>IRREGULAR</option>
+										<option>SOBRE</option>
+										
+										</select>
+						</div>
+						<div class="col-md-6">
+						<br><label> Domicilio: </label>
+								<input type="text" class="form-control" id ="Named" ng-model="paquete.domicilioCliente">
+							<br><label>Tipo de Envio:</label> <select class="form-control" ng-model="paquete.tipoEnvio"
+										required>
+										<option></option>
+										<option>3 a 5 Dias Habibles</option>
+										<option>Dia Siguiente</option>
+										<option>Serv. 11:30</option>
+										<option>Dos Dias</option>
+										<option>Serv. Terrestre</option>
+										
+										</select>
+								<br><label>Tipo de Servicio:</label> <select class="form-control" ng-model="paquete.tipoServicio"
+										required>
+										<option></option>
+										<option>NACIONAL</option>
+										<option>INTERNACIONAL</option>
+										
+										</select>
+						</div>
+					</div>
+					<br> <br>
+					
+					<div class="row">
+							<div class="col-md-3">
+							
+								 <label> Empresa </label>
+							
+									<select class="form-control" ng-model="paquete.empresa" ng-change="isEstafeta()"
+										required>
+										<option>MERVEL</option>
+										<option>DHL</option>
+										<option>UPS</option>
+										<option>FEDEX</option>
+										<option>ESTAFETA</option>
+										
+										</select>
+										
+								</div>
+								
+								
+							
+						
+						<div class="col-md-3">
+						<div><label><br> </label>
+								<button class="btn btn-danger form-control" type="button" title="Imprimir" ng-click="generaPDF(e.id)" ng-hide="hide">
+							<i class="fa fa-file-pdf-o"></i> <label>Imprimir Guia</label>
+						</button></div>
+						
+						</div>
+						
+						</div><br>
+						<div ng-hide="hide">
+					<div class="row" >
+						
+						<div class="col-md-2">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-2 col-form-label">Medidas (cm):</label>
+
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Largo </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paquete.largo" ng-required="requerido">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Ancho </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paquete.ancho" ng-required="requerido">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Alto </label>
+								<div class="col-13">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="paquete.alto" ng-required="requerido">
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+  
+  </div>
+  <div class="tab">
+  <h3 align="center">Destinatario</h3>
+   <div class="row">
+  <div class="col-md-6">
+ 	 Nombre
+    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.nombre"></p>
+    Telefono
+    <p><input placeholder="Telefono..." ng-model="paquete.destinatario.telefono"></p>
+    CP:
+    <p><input placeholder="-----" ng-model="paquete.destinatario.cp"></p>
+     Colonia
+    <p><input placeholder="Colonia..." ng-model="paquete.destinatario.colonia"></p>
+     
+     Localidad
+    <p><input placeholder="Localidad..."  ng-model="paquete.destinatario.localidad"></p>
+     </div>
+     <div class="col-md-6">
+     
+     Municipio
+    <p><input placeholder="Municipio..." ng-model="paquete.destinatario.municipio"></p>
+     Estado
+    <p><input placeholder="Estado..." ng-model="paquete.destinatario.estado"></p>
+     Calle
+    <p><input placeholder="Calle..."  ng-model="paquete.destinatario.calle"></p>
+     
+     Numero Ext*
+    <p><input placeholder="Ext..."  ng-model="paquete.destinatario.ext"></p>
+    Numero Int
+    <p><input placeholder="Int..." ng-model="paquete.destinatario.int"></p>
+    </div>
+  </div>
+  </div>
+  <div class="tab">
+  <h3 align="center">Material Extra</h3>
+   <div class="row">
+			
+						<div class="col-md-6">
+							<div class="form-group ">
+								
+								<div class="col-200">
+									<input type="text" placeholder="Descripcion" ng-model="addMe" class="form-control">
+								</div>
+							</div>
+							</div>
+							<div class="col-md-3">
+							
+							<div class="form-group ">
+								
+								<div class="col-23">
+									<input type="number" placeholder="Cantidad" ng-model="addMe2" class="form-control">
+								</div>
+							</div>
+							</div>
+							<div class="col-md-2">
+							<div class="form-group ">
+								
+									<button type=button ng-click="addItem()" class="btn btn-info">Agregar</button>
+								
+							</div>
+							
+							
+						</div>
+						</div>
+
+  
+  <div class="w3-container w3-light-grey w3-padding-16">
+   
+    <p class="w3-text-red">{{errortext}}</p>
+  </div>
+  
+  		<table class="table .table-striped">
+			<thead>
+				<tr>
+					<th>Descripcion</th>
+					<th>Cantidad</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in products">
+					<td>{{p.descripcion}}</td>
+					<td>{{p.cantidad}}</td>
+					<td><button class="btn btn-small" ng-click="removeItem($index)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+  
+</div>
+  
+  <div class="tab">
+  <h3 align="center">Resume</h3>
+  
+  </div>
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" class="btn btn-info" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+      <button type="button" class="btn btn-info" id="nextBtn" onclick="nextPrev(1)">Continuar</button>
+      <button type="button" class="btn btn-success" id="btnSave" style="display: none" ng-click="myForm.$valid && savePaquete(paquete)">Guardar</button>
+    </div>
+  </div>
+  <!-- Circles which indicates the steps of the form:-->
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div></div>
 <!--   MODAL ALTA VENTA -->
    <div class="modal fade" id="modalVenta" role="dialog">
 <div class="modal-dialog modal-sm">
@@ -228,22 +475,22 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">Folio</label>
-            <input class="form-control" type="text"  ng-model="venta.folio" >
+            <input class="form-control" type="text"  ng-model="venta.folio" readonly>
           </div>
        
         <div class="form-group">
             <label for="exampleInputEmail1">Fecha</label>
-            <input class="form-control" type="date" style="text-align:center;" ng-model="venta.fecha" readonly>
+            <input class="form-control" type="date" style="text-align:center;" ng-model="venta.fecha" >
           </div>
           
-           <div class="form-group">
-            <label for="exampleInputEmail1">Cantidad</label>
-            <input class="form-control" type="number" min="1"  ng-model="venta.cantidad" >
-          </div>
+<!--            <div class="form-group"> -->
+<!--             <label for="exampleInputEmail1">Cantidad</label> -->
+<!--             <input class="form-control" type="number" min="1"  ng-model="venta.cantidad" > -->
+<!--           </div> -->
          
           <div align="center">
           <div class="w-50 p-3" >
-          <a class="btn btn-primary btn-block" style="color:white;" ng-click="newVenta()" >Guardar</a>
+          <a class="btn btn-primary btn-block" style="color:white;" ng-click="newVenta()" >Generar</a>
           </div>
           </div>
         </form>
@@ -274,11 +521,17 @@
 	  //... and fix the Previous/Next buttons:
 	  if (n == 0) {
 	    document.getElementById("prevBtn").style.display = "none";
+	    document.getElementById("btnSave").style.display = "none";
+	    document.getElementById("nextBtn").style.display = "inline";
 	  } else {
 	    document.getElementById("prevBtn").style.display = "inline";
+	    document.getElementById("btnSave").style.display = "none";
+	    document.getElementById("nextBtn").style.display = "inline";
 	  }
 	  if (n == (x.length - 1)) {
-	    document.getElementById("nextBtn").innerHTML = "Guardar";
+// 	    document.getElementById("nextBtn").innerHTML = "Guardar";
+	    document.getElementById("nextBtn").style.display = "none";
+	    document.getElementById("btnSave").style.display = "inline";
 	  } else {
 	    document.getElementById("nextBtn").innerHTML = "Continuar";
 	  }
@@ -290,7 +543,8 @@
 	  // This function will figure out which tab to display
 	  var x = document.getElementsByClassName("tab");
 	  // Exit the function if any field in the current tab is invalid:
-	  if (n == 1 && !validateForm()) return false;
+ 	  if (n == 1 && !validateForm()) return false;
+
 	  // Hide the current tab:
 	  x[currentTab].style.display = "none";
 	  // Increase or decrease the current tab by 1:
@@ -298,7 +552,8 @@
 	  // if you have reached the end of the form...
 	  if (currentTab >= x.length) {
 	    // ... the form gets submitted:
-	    document.getElementById("regForm").submit();
+// 	    document.getElementById("altaPaquete").submit();
+	  
 	    return false;
 	  }
 	  // Otherwise, display the correct tab:
@@ -317,7 +572,7 @@
 	      // add an "invalid" class to the field:
 	      y[i].className += " invalid";
 	      // and set the current valid status to false
-	      valid = false;
+// 	      valid = false;
 	    }
 	  }
 	  // If the valid status is true, mark the step as finished and valid:
