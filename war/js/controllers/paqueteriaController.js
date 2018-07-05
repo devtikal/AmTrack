@@ -214,7 +214,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	$scope.savePaquete = function(data){
 		console.log("Datos de Paquete", data);
-		alert("La wea CMS");
+		
 		$scope.guardarEnvio();
 	}
 	
