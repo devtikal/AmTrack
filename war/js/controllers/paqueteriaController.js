@@ -146,7 +146,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 	}
 	this.makePDF = function(idEnvio,usuario){
 		var d = $q.defer();
-		$http.get("envio/generaTicket/"+idEnvio+"/"+usuario).then(
+		$http.get("venta/generaTicket/"+idEnvio+"/"+usuario).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
