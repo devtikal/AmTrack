@@ -124,7 +124,26 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 
-	
+	this.AddEnvio = function(idVenta,usuario){
+		var d = $q.defer();
+		$http.post("envio/add/"+idVenta+"/"+usuario).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 	this.makePDF = function(idEnvio,usuario){
 		var d = $q.defer();
 		$http.get("envio/generaTicket/"+idEnvio+"/"+usuario).then(
@@ -151,6 +170,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	sessionService.isAuthenticated();
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
+	$scope.idVenta=null;
 	paqueteriaService.getVenta().then(function(data) {
 		$scope.ventas=data;
 		console.log("List Ventas", $scope.ventas);
@@ -166,9 +186,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 		
 	}
-	$scope.prePaquete = function(data){
+	$scope.guardarEnvio=function(){
+		paqueteriaService.AddEnvio($scope.idVenta,$cookieStore.get('usuario')).then(function(data) {
+			alert("Se ha guardado el Envio");
+			$window.location.reload();
+	});
+	}
+	$scope.prePaquete = function(inf){
+		$scope.idVenta=inf.id;
 		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
-			console.log("La Guia",data);
+			console.log("La Guia",inf);
 			$scope.paquete.guia=data.numero;
 	});
 	}
@@ -188,6 +215,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.savePaquete = function(data){
 		console.log("Datos de Paquete", data);
 		alert("La wea CMS");
+		$scope.guardarEnvio();
 	}
 	
 	$scope.products =[];
