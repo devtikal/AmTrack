@@ -173,7 +173,8 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.idVenta=null;
 	paqueteriaService.getVenta().then(function(data) {
 		$scope.ventas=data;
-		console.log("List Ventas", $scope.ventas);
+		$scope.usuario=$cookieStore.get('usuario');
+		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
 	});
 	console.log($scope.venta.fecha);
 //	paqueteriaService.getEnvio().then(function(data) {
