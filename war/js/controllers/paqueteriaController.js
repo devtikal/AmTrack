@@ -149,7 +149,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
-	
+	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	paqueteriaService.getVenta().then(function(data) {
 		$scope.ventas=data;
@@ -168,6 +168,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	$scope.prePaquete = function(data){
 		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
+			console.log("La Guia",data);
 			$scope.paquete.guia=data.numero;
 	});
 	}
