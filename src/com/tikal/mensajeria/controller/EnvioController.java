@@ -287,6 +287,20 @@ public class EnvioController {
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 
 		}
+	   
+	   @RequestMapping(value = { "/getEnviosxVenta/{idVenta}" }, method = RequestMethod.GET, produces = "application/json")
+		public void enviosporventa(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idVenta) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
+			List<Envio> envios= new ArrayList<Envio>();
+			for (Long id:ids){
+				Envio e=envioDao.consult(id);
+				envios.add(e);
+			}
+			
+			response.getWriter().println(JsonConvertidor.toJson(envios));
+
+		}
 		 
 //	   @RequestMapping(value = { "/reporte/{inicio}/{fin}" }, method = RequestMethod.GET, produces = "application/json")
 //		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable Integer inicio , @PathVariable Integer fin) throws IOException {
