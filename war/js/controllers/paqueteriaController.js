@@ -165,6 +165,26 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 	
+	this.getEnvioxVenta = function(idventa){
+		var d = $q.defer();
+		$http.get("envio/getEnviosxVenta/"+idventa).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
@@ -187,6 +207,14 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			
 		});
 		
+	}
+	$scope.ver = function(id){
+		paqueteriaService.getEnvioxVenta(id.id).then(function(data) {
+			$scope.envios = data;
+			console.log("Envios ",$scope.envios);
+			
+			$("#modalEnvios").modal();
+	});
 	}
 	$scope.guardarEnvio=function(){
 		paqueteriaService.AddEnvio($scope.idVenta,$cookieStore.get('usuario'),$scope.paquete).then(function(data) {

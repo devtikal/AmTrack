@@ -57,7 +57,7 @@
 					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
 							<i class="fa fa-plus"></i>
 						</button>
-						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" data-toggle="modal" data-target="#modalEnvios"  >
+						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles">
 							<i class="fa fa-eye"></i>
 						</button>
 						<button class="btn btn-danger" title="Imprimir" ng-click="showPDF(v.id)">
@@ -184,34 +184,34 @@
   <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input placeholder="Nombre..." ng-model="paquete.cliente.nombre" required></p>
+    <p><input  ng-model="paquete.cliente.nombre" required></p>
      En Antencion a
-    <p><input placeholder="Nombre..." ng-model="paquete.cliente.enAtencion" required></p>
+    <p><input  ng-model="paquete.cliente.enAtencion" required></p>
     Telefono
-    <p><input placeholder="Telefono..." ng-model="paquete.cliente.telefono" required></p>
+    <p><input  ng-model="paquete.cliente.telefono" required></p>
     CP:
-    <p><input type="number" placeholder="-----" ng-model="paquete.cliente.cp"></p>
+    <p><input type="number" ng-model="paquete.cliente.cp"></p>
      Colonia
-    <p><input placeholder="Colonia..." ng-model="paquete.cliente.colonia" required></p>
+    <p><input  ng-model="paquete.cliente.colonia" required></p>
      
      Localidad
-    <p><input placeholder="Localidad..."  ng-model="paquete.cliente.localidad" required></p>
+    <p><input   ng-model="paquete.cliente.localidad" required></p>
      </div>
      <div class="col-md-6">
      
      Municipio
-    <p><input placeholder="Municipio..." ng-model="paquete.cliente.municipio" required></p>
+    <p><input ng-model="paquete.cliente.municipio" required></p>
      Estado
-    <p><input placeholder="Estado..." ng-model="paquete.cliente.estado" required></p>
+    <p><input ng-model="paquete.cliente.estado" required></p>
      Calle
-    <p><input placeholder="Calle..."  ng-model="paquete.cliente.calle" required></p>
+    <p><input   ng-model="paquete.cliente.calle" required></p>
      
      Numero Ext
-    <p><input placeholder="Ext..."  ng-model="paquete.cliente.noExterior" required></p>
+    <p><input  ng-model="paquete.cliente.noExterior" required></p>
     Numero Int
-    <p><input placeholder="Int..." ng-model="paquete.cliente.noInterior"></p>
+    <p><input ng-model="paquete.cliente.noInterior"></p>
      Referencia
-    <p><input placeholder="Int..." ng-model="paquete.cliente.referencias"></p>
+    <p><input  ng-model="paquete.cliente.referencias"></p>
     </div>
   </div>
   </div>
@@ -396,34 +396,34 @@
    <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.nombre" required></p>
+    <p><input ng-model="paquete.destinatario.nombre" required></p>
      En Antencion a
-    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.enAtencion" required></p>
+    <p><input ng-model="paquete.destinatario.enAtencion" required></p>
     Telefono
-    <p><input placeholder="Telefono..." ng-model="paquete.destinatario.telefono"></p>
+    <p><input ng-model="paquete.destinatario.telefono"></p>
     CP:
-    <p><input placeholder="-----" ng-model="paquete.destinatario.cp"></p>
+    <p><input  ng-model="paquete.destinatario.cp"></p>
      Colonia
-    <p><input placeholder="Colonia..." ng-model="paquete.destinatario.colonia"></p>
+    <p><input  ng-model="paquete.destinatario.colonia"></p>
      
      Localidad
-    <p><input placeholder="Localidad..."  ng-model="paquete.destinatario.localidad"></p>
+    <p><input  ng-model="paquete.destinatario.localidad"></p>
      </div>
      <div class="col-md-6">
      
      Municipio
-    <p><input placeholder="Municipio..." ng-model="paquete.destinatario.municipio"></p>
+    <p><input  ng-model="paquete.destinatario.municipio"></p>
      Estado
-    <p><input placeholder="Estado..." ng-model="paquete.destinatario.estado"></p>
+    <p><input ng-model="paquete.destinatario.estado"></p>
      Calle
-    <p><input placeholder="Calle..."  ng-model="paquete.destinatario.calle"></p>
+    <p><input   ng-model="paquete.destinatario.calle"></p>
      
     Numero Ext
-    <p><input placeholder="Ext..."  ng-model="paquete.destinatario.noExterior" required></p>
+    <p><input   ng-model="paquete.destinatario.noExterior" required></p>
     Numero Int
-    <p><input placeholder="Int..." ng-model="paquete.destinatario.noInterior"></p>
+    <p><input  ng-model="paquete.destinatario.noInterior"></p>
      Referencia
-    <p><input placeholder="Int..." ng-model="paquete.destinatario.referencias"></p>
+    <p><input  ng-model="paquete.destinatario.referencias"></p>
     </div>
   </div>
   </div>
@@ -560,7 +560,7 @@
  
 <!--   MODAL VER ENVIOS -->
    <div class="modal modal-wide fade" id="modalEnvios" role="dialog">
-<div class="modal-dialog modal-lg ">
+<div class="modal-dialog modal-lg " height="1100" width="850">
       <div class="modal-content">
         <div class="modal-header">
           
@@ -577,7 +577,7 @@
 					<th>Destinatatio</th>
 					<th>Empresa</th>
 					<th>Guia</th>
-					<th>Rastrep</th>
+					<th>Rastreo</th>
 					<th>Tipo de Envio</th>
 					<th>Precio</th>
 					<th>Acciones</th>
@@ -585,14 +585,14 @@
 			</thead>
 			<tbody>
 			
-				<tr ng-repeat="p in products">
-					<td>{{p.descripcion}}</td>
-					<td>{{p.cantidad}}</td>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-					<td> </td>
+				<tr ng-repeat="e in envios">
+					<td>{{e.cliente.nombre}}</td>
+					<td>{{e.destinatario.nombre}}</td>
+					<td>{{e.empresa}} </td>
+					<td>{{e.guia}}</td>
+					<td>{{e.rastreo}}</td>
+					<td>{{e.tipoEnvio}}</td>
+					<td>{{e.precio | currency}}</td>
 					<td><button class="btn btn-small btn-danger" ng-click="removeItem($index)">
 							<i class="fa fa-times"></i>
 						</button>
