@@ -124,9 +124,9 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 
-	this.AddEnvio = function(idVenta,usuario){
+	this.AddEnvio = function(idVenta,usuario,datos){
 		var d = $q.defer();
-		$http.post("envio/add/"+idVenta+"/"+usuario).then(
+		$http.post("envio/add/"+idVenta+"/"+usuario,datos).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -187,7 +187,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 	}
 	$scope.guardarEnvio=function(){
-		paqueteriaService.AddEnvio($scope.idVenta,$cookieStore.get('usuario')).then(function(data) {
+		paqueteriaService.AddEnvio($scope.idVenta,$cookieStore.get('usuario'),$scope.paquete).then(function(data) {
 			alert("Se ha guardado el Envio");
 			$window.location.reload();
 	});
