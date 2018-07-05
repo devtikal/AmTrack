@@ -57,7 +57,7 @@
 					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
 							<i class="fa fa-plus"></i>
 						</button>
-						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" data-toggle="modal" data-target="#modalVerEnvio"  >
+						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" data-toggle="modal" data-target="#modalEnvios"  >
 							<i class="fa fa-eye"></i>
 						</button>
 						<button class="btn btn-danger" title="Imprimir" ng-click="generaPDF(v.id)">
@@ -188,7 +188,7 @@
     Telefono
     <p><input placeholder="Telefono..." ng-model="paquete.cliente.telefono" required></p>
     CP:
-    <p><input placeholder="-----" ng-model="paquete.cliente.cp"></p>
+    <p><input type="number" placeholder="-----" ng-model="paquete.cliente.cp"></p>
      Colonia
     <p><input placeholder="Colonia..." ng-model="paquete.cliente.colonia" required></p>
      
@@ -286,7 +286,7 @@
 										
 								</div>
 								
-								
+							
 							
 						
 						<div class="col-md-3">
@@ -297,7 +297,21 @@
 						
 						</div>
 						
-						</div><br>
+						</div>
+						<div class="row">
+								<div class="col-md-3">
+							<div class="form-group ">
+								<br> <label for="example-text-input"
+									class="col-16 col-form-label">Consto de Seguro</label>
+								<div class="col-10">
+									<input type="number" class="form-control"
+										ng-model="paquete.costoSeguro" step="0.01" required>
+										{{paquete.costoSeguro | currency}}
+								</div>
+							</div>
+						</div>
+						
+						</div>
 						<div ng-hide="hide">
 					<div class="row" >
 						
@@ -358,6 +372,7 @@
 					</div>
 					
 					<div class="row">
+					
 						<div class="col-md-3">
 							<div class="form-group ">
 								<br> <label for="example-text-input"
@@ -464,10 +479,10 @@
   
 </div>
   
-  <div class="tab">
-  <h3 align="center">Resume</h3>
-  
-  </div>
+<!--   <div class="tab"> -->
+<!--   <h3 align="center">Resume</h3> -->
+<!--   {{paquete | json}} -->
+<!--   </div> -->
   <div style="overflow:auto;">
     <div style="float:right;">
       <button type="button" class="btn btn-info" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
@@ -481,7 +496,7 @@
     <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
-    <span class="step"></span>
+<!--     <span class="step"></span> -->
   </div>
 </form>
         </div>
@@ -535,6 +550,58 @@
  </div>
 <!-- FIN -->
  
+<!--   MODAL VER ENVIOS -->
+   <div class="modal modal-wide fade" id="modalEnvios" role="dialog">
+<div class="modal-dialog modal-lg ">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">ENVIOS</h4>
+        </div>
+        <div class="modal-body">
+             
+      
+      <div class="card-body">
+       <table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Cliente</th>
+					<th>Destinatatio</th>
+					<th>Empresa</th>
+					<th>Guia</th>
+					<th>Rastrep</th>
+					<th>Tipo de Envio</th>
+					<th>Precio</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr ng-repeat="p in products">
+					<td>{{p.descripcion}}</td>
+					<td>{{p.cantidad}}</td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td><button class="btn btn-small btn-danger" ng-click="removeItem($index)">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+    </div>
+ </div>
+<!-- FIN -->
 
 </div>	
 	</div>
