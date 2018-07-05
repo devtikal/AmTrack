@@ -69,7 +69,7 @@
 						</button>
 						<a class="btn btn-info" data-toggle="tooltip"
 							title="Imprimir OT {{usuario}}"
-							href="venta/generaTicket/{{v.id}}/{{usuario}}" download="venta{{v.folio}}.pdf">
+							href="venta/generaTicket/{{v.id}}/{{usuario}}" target="_blank">
 							<i class="glyphicon glyphicon-print"></i>
 						</a>	
 					</td>
@@ -183,8 +183,10 @@
   <h3 align="center">Remitente</h3>
   <div class="row">
   <div class="col-md-6">
- 	 Nombre
+ 	 Nombre / Empresa
     <p><input placeholder="Nombre..." ng-model="paquete.cliente.nombre" required></p>
+     En Antencion a
+    <p><input placeholder="Nombre..." ng-model="paquete.cliente.enAtencion" required></p>
     Telefono
     <p><input placeholder="Telefono..." ng-model="paquete.cliente.telefono" required></p>
     CP:
@@ -205,9 +207,11 @@
     <p><input placeholder="Calle..."  ng-model="paquete.cliente.calle" required></p>
      
      Numero Ext
-    <p><input placeholder="Ext..."  ng-model="paquete.cliente.ext" required></p>
+    <p><input placeholder="Ext..."  ng-model="paquete.cliente.noExterior" required></p>
     Numero Int
-    <p><input placeholder="Int..." ng-model="paquete.cliente.int"></p>
+    <p><input placeholder="Int..." ng-model="paquete.cliente.noInterior"></p>
+     Referencia
+    <p><input placeholder="Int..." ng-model="paquete.cliente.referencias"></p>
     </div>
   </div>
   </div>
@@ -391,8 +395,10 @@
   <h3 align="center">Destinatario</h3>
    <div class="row">
   <div class="col-md-6">
- 	 Nombre
-    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.nombre"></p>
+ 	 Nombre / Empresa
+    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.nombre" required></p>
+     En Antencion a
+    <p><input placeholder="Nombre..." ng-model="paquete.destinatario.enAtencion" required></p>
     Telefono
     <p><input placeholder="Telefono..." ng-model="paquete.destinatario.telefono"></p>
     CP:
@@ -412,10 +418,12 @@
      Calle
     <p><input placeholder="Calle..."  ng-model="paquete.destinatario.calle"></p>
      
-     Numero Ext*
-    <p><input placeholder="Ext..."  ng-model="paquete.destinatario.ext"></p>
+    Numero Ext
+    <p><input placeholder="Ext..."  ng-model="paquete.destinatario.noExterior" required></p>
     Numero Int
-    <p><input placeholder="Int..." ng-model="paquete.destinatario.int"></p>
+    <p><input placeholder="Int..." ng-model="paquete.destinatario.noInterior"></p>
+     Referencia
+    <p><input placeholder="Int..." ng-model="paquete.destinatario.referencias"></p>
     </div>
   </div>
   </div>
