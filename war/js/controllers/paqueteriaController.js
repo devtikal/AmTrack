@@ -226,6 +226,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 //            $scope.products.push($scope.addMe,$scope.addMe2);
             $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
             console.log($scope.products);
+            $scope.paquete.materiales=$scope.products;
         } else {
             $scope.errortext = "Ya se encuentra en la lista.";
         }
