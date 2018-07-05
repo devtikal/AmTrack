@@ -216,6 +216,7 @@ public class VentaController {
 		v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
 		v.setTotal(Double.parseDouble("0.00"));
+		v.setUsuario(usuarioDao.consultarUsuario(username));
 		//System.out.println(" yisus manda:"+json);
 //		int ini=Integer.parseInt(inicio);
 //		int f=Integer.parseInt(fin);
@@ -292,6 +293,7 @@ public class VentaController {
 	   System.out.println("genera ticket");
 //	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 		   response.setContentType("Application/Pdf");
+		   
 		   Venta v = ventaDao.consult(idVenta);
 		 // Envio e = envioDao.consult(idEnvio) ; 
 		   List<Envio> objE= new ArrayList<Envio>();
@@ -311,21 +313,15 @@ public class VentaController {
 	        }
      
 	        Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
-	      //  List<Envio> es= new ArrayList<Envio>();
-	        
-	        
-	       // Paquete p = v.getPaquete();  
-	     //   String des = e.paquete.paqueteDao.consult(e.getPaquete().getDescripcion());
+	  
 	        System.out.println("Empiezo a generar pdf..envios.."+objE );
 	        System.out.println("Empiezo a generar pdf...suc."+s );
 	        System.out.println("Empiezo a generar pdf...venta."+v );
 	    	GeneraTicket gt = new GeneraTicket(objE, s, v ,  response.getOutputStream());
-	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
-	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
+	 
 	    	  response.getOutputStream().flush();
 		        response.getOutputStream().close();
-	    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
-	    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+	    	
 //	   }else{
 //			response.sendError(403);
 //		}

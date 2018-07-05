@@ -75,7 +75,7 @@ public class GuiaDaoImpl implements GuiaDao {
 
 
 	@Override
-	public Guia getByNumero(Integer numero) {
+	public Guia getByNumero(String numero) {
 		// TODO Auto-generated method stub
 		return ofy().load().type(Guia.class).filter("numero",numero).list().get(0);
 	}

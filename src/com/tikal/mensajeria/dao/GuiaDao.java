@@ -26,5 +26,5 @@ public interface GuiaDao {
 	
 	public Guia getByEstSuc(String estatus,Long idSucursal);
 	
-	public Guia getByNumero (Integer numero);
+	public Guia getByNumero (String numero);
 }

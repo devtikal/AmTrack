@@ -155,7 +155,7 @@ public class EnvioController {
 	}
 	
 
-	@RequestMapping(value = { "/add/{idVenta}/{usuario}" },  method = RequestMethod.POST, consumes = "Application/Json")
+	@RequestMapping(value = { "/add/{idVenta}/{usuario}" }, method = RequestMethod.POST,consumes = "Application/Json")
 	public void crearEnvio(HttpServletRequest request, HttpServletResponse response,@RequestBody String json, 
 			@PathVariable String usuario, @PathVariable Long idVenta)throws IOException {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
@@ -178,6 +178,10 @@ public class EnvioController {
 			personaDao.save(d);
 			
 			p=ef.getPaquete();
+			if (p.getAlto()==null){ p.setAlto(Double.valueOf("0.00"));}
+			if (p.getAncho()==null){ p.setAncho(Double.valueOf("0.00"));}
+			if (p.getLargo()==null){ p.setLargo(Double.valueOf("0.00"));}
+			if (p.getPeso()==null){ p.setPeso(Double.valueOf("0.00"));}
 			paqueteDao.save(p);
 						
 			envio.setCliente(c);
@@ -216,9 +220,24 @@ public class EnvioController {
 			//folio.incremeta();
 			
 			Venta v=ventaDao.consult(idVenta);
-			List<Long> ids=v.getEnvios();
-			ids.add(envio.getId());
-			ventaDao.update(v);   
+			if (v.getEnvios()==null){
+			//List<Long> ids=v.getEnvios();
+			System.out.println("lista de eids de envios"+v.getEnvios());
+			//if (ids.size()==0){
+				List<Long> ids= new ArrayList<Long>();
+				ids.add(envio.getId());
+				v.setEnvios(ids);
+				v.setCantidad(ids.size());
+				System.out.println("lista de eids de envios"+ids);
+			}else{
+				List<Long> ids=v.getEnvios();
+				ids.add(envio.getId());
+				v.setEnvios(ids);
+				v.setCantidad(ids.size());
+				System.out.println("lista ids de envios"+ids);
+			}
+			
+			ventaDao.update(v);      
 			
 	}
 	   

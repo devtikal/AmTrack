@@ -49,7 +49,8 @@ public class VentaDaoImpl implements VentaDao{
 				
 				}
 			}
-			
+			old.setEnvios(v.getEnvios());
+			old.setEstatus(v.getEstatus());
 			old.setTotal(v.getTotal());
 		}
 
