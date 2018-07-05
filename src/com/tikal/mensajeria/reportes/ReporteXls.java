@@ -13,9 +13,11 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.tikal.mensajeria.modelo.vo.ReporteVo; 
 
@@ -48,30 +50,46 @@ public class ReporteXls {
 	    		  	System.out.println("nombre de hoja:"+ 	sheet.getSheetName());
 	    			////////// fuentes
     		             
-	    		  	headerFont  = createFont(HSSFColor.BLACK.index, (short)12, true);
-	    			contentFont = createFont(HSSFColor.BLACK.index, (short)10, false);
-	    	 
-	    		  	
-    		        //HSSFFont font = workbook.createFont();
-	    		      // font.setBoldweight(Font.BOLDITALIC);
-    		        
-	    		  	//////////estilos de celda
-	    		 	 CellStyle headerStyle = workbook.createCellStyle();
-	    		       
-	    		        headerStyle.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
-	    		        headerStyle.setFont(headerFont);
-
-	    		    CellStyle style = workbook.createCellStyle();
-	    		        
-	    		        style.setFillForegroundColor(IndexedColors.CORAL.getIndex());
-	    		       // style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-	    		  
-	    		 	//file.close();
+	    		  	 HSSFFont font = workbook.createFont();
+	    		  	HSSFFont font2 = workbook.createFont();   
+	    		  	HSSFFont font3 = workbook.createFont();    
+	    	            
+	    	            
+	    		  	 CellStyle style = workbook.createCellStyle();
+	    	          //  style.setBorderBottom(CellStyle.BORDER_THIN);
+	    	            style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+	    	            style.setAlignment(HorizontalAlignment.CENTER);
+	    	            font.setBold(true);
+	    	            font.setFontHeightInPoints((short)11);
+	    	            font.setColor(HSSFColor.BLACK.index);
+	    	            style.setFont(font);
+	    	            
+	    	            CellStyle style2 = workbook.createCellStyle();
+	    	            style2.setBorderBottom(CellStyle.BORDER_THIN);
+	    	            style2.setAlignment(HorizontalAlignment.CENTER);
+	    	            style2.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+	    	            font2.setBold(false);
+	    	            font2.setFontHeightInPoints((short)10);
+	    	            font2.setColor(HSSFColor.BLACK.index);
+	    	            style2.setFont(font2);
+	    	            
+	    	            CellStyle style3 = workbook.createCellStyle();
+	    	            style3.setBorderBottom(CellStyle.BORDER_THIN);
+	    	            style3.setAlignment(HorizontalAlignment.RIGHT);
+	    	            style3.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+	    	            font3.setBold(false);
+	    	            font3.setFontHeightInPoints((short)10);
+	    	            font3.setColor(HSSFColor.BLACK.index);
+	    	            style3.setFont(font3);
+	    	            
+	    	            
+	    	            
+	    		 
 	    		        String[] titulos = {"Fecha", "Folio", 
-	                            "Remitente", "Guia", "Rastreo", "TipoPaquete", "Tipo Envío", "Empresa","Precio", "Costo Seguro", "Total Cobrado", "Acumulado" };
+	                            "Remitente", "Guia", "Rastreo", "TipoPaquete", "Tipo Envío", "Empresa","Precio", "Costo Seguro", "Total Cobrado" };
 	    		        
 	    		        
-	    		       Integer[] wd = {256*20, 256*20, 256*40, 256*40, 256*20,256*15,256*15,256*15,256*10,256*10,256*10,256*10,};        
+	    		       Integer[] wd = {256*20, 256*20, 256*40, 256*40, 256*20,256*15,256*15,256*15,256*10,256*15,256*15,256*15,};        
 	    		        // Creamos una fila en la hoja en la posicion 0
 	    		        Row fila = sheet.createRow(0);
 	    		        
@@ -81,12 +99,14 @@ public class ReporteXls {
 	    		            // indicada por el contador del ciclo
 	    		        	System.out.println("IIIIIIIII numero de registros:"+regs.size());
 	    		            Cell celda = fila.createCell(i);
+	    		           
 	    		            	          
 	    		            celda.setCellValue(titulos[i]);
 	    		         //   sheet.autoSizeColumn(i);
 	    		            sheet.setColumnWidth(i,wd[i]);
-	    		       
-	    		            celda.setCellStyle(headerStyle);
+	    		            celda.setCellStyle(style);
+	    		           
+	    		            //celda.setCellStyle(headerStyle);
 	    		        }
 	    		     
 	    		     //   fila = sheet.createRow(1);
@@ -95,39 +115,41 @@ public class ReporteXls {
 	    		        for (int ren=1; ren<regs.size()+1; ren++){
 	    		        	fila = sheet.createRow(ren);
 		    		        for(ReporteVo r:regs) {
-		    		        	System.out.println("1111111");
-		    		        	System.out.println("1-+"+r.getFecha());
-		    		        	System.out.println("2-+"+r.getFolio().toString());
-		    		        	System.out.println("3-+"+r.getRemitente());
-		    		        	System.out.println("4-+"+r.getGuia());
-		    		        	System.out.println("5-+"+r.getRastreo());
-		    		        	System.out.println("6-+"+r.getTipoPaquete());
-		    		        	System.out.println("7-+"+r.getTipoEnvio());
-		    		        	System.out.println("8-+"+r.getEmpresa());
-		    		        	System.out.println("9-+"+r.getCostoSeguro());
-		    		        	System.out.println("10-+"+r.getTotal());
-		    		        	System.out.println("prec-+"+r.getPrecio());
+//		    		        	System.out.println("1111111");
+//		    		        	System.out.println("1-+"+r.getFecha());
+//		    		        	System.out.println("2-+"+r.getFolio().toString());
+//		    		        	System.out.println("3-+"+r.getRemitente());
+//		    		        	System.out.println("4-+"+r.getGuia());
+//		    		        	System.out.println("5-+"+r.getRastreo());
+//		    		        	System.out.println("6-+"+r.getTipoPaquete());
+//		    		        	System.out.println("7-+"+r.getTipoEnvio());
+//		    		        	System.out.println("8-+"+r.getEmpresa());
+//		    		        	System.out.println("9-+"+r.getCostoSeguro());
+//		    		        	System.out.println("10-+"+r.getTotal());
+//		    		        	System.out.println("prec-+"+r.getPrecio());
 		    		        	
 		    		        	 String[] datos = { r.getFecha(),r.getFolio().toString(),r.getRemitente(), r.getGuia(), r.getRastreo().toString(), r.getTipoPaquete()
-		    		        			 ,r.getTipoEnvio(), r.getEmpresa(), r.getPrecio().toString(),"0.00", r.getTotal().toString()};
+		    		        			 ,r.getTipoEnvio(), r.getEmpresa(), "$ "+r.getPrecio().toString(),"$ "+r.getCostoSeguro(), "$ "+r.getTotal().toString()};
 		    		        	 
 		    		        	for (int x=0; x < 11; x++){   		    		
 		    		        	    		        
 			    		            // Creamos una celda en esa fila, en la
 			    		            // posicion indicada por el contador del ciclo
-			    		            Cell celda = fila.createCell(x);
-			    		            celda.setCellStyle(style);
+			    		            Cell cel = fila.createCell(x);
+			    		            
+			    		            if (x>7){
+			    		            	cel.setCellStyle(style3);
+			    		            }else{
+			    		            	cel.setCellStyle(style2);
+			    		            }
 			    		            System.out.println("datpsssssssss:"+datos[x]);
-			    		            celda.setCellValue(datos[x]);   
+			    		            cel.setCellValue(datos[x]);   
 			    		            //sheet.autoSizeColumn(0,true);
 		    		        	}
-		    		        	 HSSFRow dataRow = sheet.createRow(datos.length+1);
-				    		        HSSFCell total = dataRow.createCell(datos.length+1);
-				    		        total.setCellType(Cell.CELL_TYPE_FORMULA);
-				    		        total.setCellStyle(style);
-				    		        total.setCellFormula(String.format("SUM(K2:K5)"));
+		    		        	
 		    		        }
 		    		     
+		    		        
 		    		       
 	    		        }
 	    		       
@@ -136,6 +158,7 @@ public class ReporteXls {
 	    	            fileOut.close(); //Cierro el archivo
 	    		
 	}
+	
 	
 	private HSSFFont createFont(short fontColor, short fontHeight, boolean fontBold) {
 		 

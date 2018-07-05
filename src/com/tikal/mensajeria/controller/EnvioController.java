@@ -155,8 +155,9 @@ public class EnvioController {
 	}
 	
 
-	@RequestMapping(value = { "/add/{usuario}" },  method = RequestMethod.POST, consumes = "Application/Json")
-	public void crearEnvio(HttpServletRequest request, HttpServletResponse response,@RequestBody String json, @PathVariable String usuario)throws IOException {
+	@RequestMapping(value = { "/add/{idVenta}/{usuario}" },  method = RequestMethod.POST, consumes = "Application/Json")
+	public void crearEnvio(HttpServletRequest request, HttpServletResponse response,@RequestBody String json, 
+			@PathVariable String usuario, @PathVariable Long idVenta)throws IOException {
 //		if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 			AsignadorDeCharset.asignar(request, response);
 			System.out.println(" Yisus manda:"+json);
@@ -178,41 +179,17 @@ public class EnvioController {
 			
 			p=ef.getPaquete();
 			paqueteDao.save(p);
-			
-			
-			
-			
-			
+						
 			envio.setCliente(c);
 			envio.setDestinatario(d);
 			envio.setPaquete(p);
 			
-			
-			
-//			p.setAlto(evo.getAlto());
-//			p.setAncho(evo.getAncho());
-//			p.setDescripcion(evo.getDescripcion());
-//			p.setLargo(evo.getLargo());
-//			p.setPeso(evo.getPeso());
-//			p.setTipoPaquete(evo.getTipoPaquete());
-//			 paqueteDao.save(p);
-			
-//			des.setNombre(evo.getNombre()); 
-//			des.setCalle(evo.getCalle());
-//			des.setCodigoPostal(evo.getCodigoPostal());
-//			des.setColonia(evo.getColonia());
-//			des.setEstado(evo.getEstado());
-//			des.setLocalidad(evo.getLocalidad());
-//			des.setMunicipio(evo.getMunicipio());
-//			des.setNoExterior(evo.getNoExterior());
-//			des.setNoInterior(evo.getNoInterior());			
-//			des.setTelefono(evo.getTelefono());
-//			des.setReferencias(evo.getReferencias);
-//			destinatarioDao.save(des);
-			
 			envio.setEmpresa(ef.getEmpresa());
-			
-			
+			if (ef.getCostoSeguro()==null){
+				envio.setCostoSeguro(Double.valueOf("0.00"));
+			}else{
+				envio.setCostoSeguro(ef.getCostoSeguro());
+			}
 			
 			// Calendar c = Calendar.getInstance();		  
 			//  String fecha =  Integer.toString(c.get(Calendar.DATE));
@@ -238,7 +215,10 @@ public class EnvioController {
 			guiaDao.update(g);
 			//folio.incremeta();
 			
-			
+			Venta v=ventaDao.consult(idVenta);
+			List<Long> ids=v.getEnvios();
+			ids.add(envio.getId());
+			ventaDao.update(v);   
 			
 	}
 	   
@@ -300,6 +280,10 @@ public class EnvioController {
 //			}
 //
 //		}
+	   public void agregaEnvio(Venta v, Envio e){
+		  
+		   
+	   }
 	
 }
 
