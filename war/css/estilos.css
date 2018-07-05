@@ -171,9 +171,10 @@ tr:nth-child(even) {
     top: 23%;
     left: 25%;
 }
+
 #mdialTamanio{
-      width: 60% !important;
-    }
+  width: 80% !important;
+}
     #mdlconfirmacion{
       width: 10% !important;
     }
@@ -490,3 +491,6 @@ input.invalid {
   background-color: #4CAF50;
 }
 
+.modal-dialog{
+  width: 60%;
+}

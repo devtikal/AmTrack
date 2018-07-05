@@ -164,6 +164,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
@@ -255,6 +256,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 		
 	}
+	$scope.showPDF = function(id){
+		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
+		$("#modalPDF").modal();
+	}
+	
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();

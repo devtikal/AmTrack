@@ -60,18 +60,18 @@
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" data-toggle="modal" data-target="#modalEnvios"  >
 							<i class="fa fa-eye"></i>
 						</button>
-						<button class="btn btn-danger" title="Imprimir" ng-click="generaPDF(v.id)">
+						<button class="btn btn-danger" title="Imprimir" ng-click="showPDF(v.id)">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
 							<i class="fa fa-trash"></i>
 						</button>
-						<a class="btn btn-info" data-toggle="tooltip"
-							title="Imprimir OT {{usuario}}"
-							href="venta/generaTicket/{{v.id}}/{{usuario}}" target="_blank">
-							<i class="glyphicon glyphicon-print"></i>
-						</a>	
+<!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
+<!-- 							title="Imprimir OT {{usuario}}" -->
+<!-- 							href="venta/generaTicket/{{v.id}}/{{usuario}}" target="_blank"> -->
+<!-- 							<i class="glyphicon glyphicon-print"></i> -->
+<!-- 						</a>	 -->
 					</td>
 				</tr>
 			</tbody>	
@@ -607,6 +607,16 @@
           <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
         </div>
       </div>
+    </div>
+ </div>
+<!-- FIN -->
+<!--   MODAL FPf -->
+   <div class="modal modal-wide fade" id="modalPDF" role="dialog">
+<div class="modal-dialog modal-lg ">
+   
+      <object data="{{url}}" type="application/pdf" height="1100" width="850" >
+    </object>
+
     </div>
  </div>
 <!-- FIN -->
