@@ -257,6 +257,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
+	$scope.usuario=$cookieStore.get('usuario');
 	$scope.paqueteria={guia:null};
 	paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
 		$scope.paqueteria.guia=data.numero;

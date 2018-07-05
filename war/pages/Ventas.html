@@ -67,11 +67,11 @@
 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
 							<i class="fa fa-trash"></i>
 						</button>
-<!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
-<!-- 							title="Imprimir OT" -->
-<!-- 							href=" ots/descargaOt/{{ot.id}}" download="ordenDeTrabajo.pdf"> -->
-<!-- 							<i class="glyphicon glyphicon-print"></i> -->
-<!-- 						</a>	 -->
+						<a class="btn btn-info" data-toggle="tooltip"
+							title="Imprimir OT"
+							href=" venta/generaTicket/{{v.id}}/{{usuario}}" download="venta{{v.folio}}.pdf">
+							<i class="glyphicon glyphicon-print"></i>
+						</a>	
 					</td>
 				</tr>
 			</tbody>	
@@ -227,8 +227,8 @@
 					<div class="row">
 						<div class="col-md-6">
 						
-									<br><label> Cliente: </label>
-								<input type="text" class="form-control" id ="Named" ng-model="paquete.cliente" required>
+<!-- 									<br><label> Cliente: </label> -->
+<!-- 								<input type="text" class="form-control" id ="Named" ng-model="paquete.cliente" required> -->
 							
 <!-- 							<br> <label>Cantidad: </label><input type="number" class="form-control" -->
 <!-- 								ng-model="paquete.cantidad" required> -->
@@ -246,8 +246,8 @@
 										</select>
 						</div>
 						<div class="col-md-6">
-						<br><label> Domicilio: </label>
-								<input type="text" class="form-control" id ="Named" ng-model="paquete.domicilioCliente">
+<!-- 						<br><label> Domicilio: </label> -->
+<!-- 								<input type="text" class="form-control" id ="Named" ng-model="paquete.domicilioCliente"> -->
 							<br><label>Tipo de Envio:</label> <select class="form-control" ng-model="paquete.tipoEnvio"
 										required>
 										<option></option>
