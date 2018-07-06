@@ -137,6 +137,7 @@ app.service('sessionService', [
 				sucursalService.getSucursal(data.idSucursal).then(function(data) {
 					$rootScope.sucursalData=data;
 					$rootScope.SucursalName=data.nombre;
+					$cookieStore.put("sucursal", data.nombre);
 				
 //					console.log("La Sucursal",$rootScope.sucursalData);
 				})

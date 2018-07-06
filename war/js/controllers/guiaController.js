@@ -170,7 +170,32 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		}
 		
 	});
-	
+	$scope.btnGuardar=true;
+	$scope.validate = function(ref){
+		if(ref=="de"){
+			if($scope.de.length<= 15){
+				document.getElementById("idDe").classList.add("error");
+				$scope.btnGuardar=true;
+				console.log("Error");
+			}else{
+				document.getElementById("idDe").classList.remove("error");
+				
+				console.log("No,Error");
+			}
+		}else{
+			if($scope.hasta.length<= 15){
+				document.getElementById("idHasta").classList.add("error");
+				$scope.btnGuardar=true;
+			}else{
+				document.getElementById("idHasta").classList.remove("error");
+				
+			}
+		}
+		
+	 if($scope.de.length> 15 && $scope.hasta.length > 15){
+		 $scope.btnGuardar=false;
+	 }
+	}
 
 	$scope.addguias = function(dato1,dato2) {
 		
@@ -212,7 +237,10 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 			$window.location.reload();
 		});
 	}
-	
+		$scope.clearGuia = function(){
+			$scope.de=null;
+			$scope.hasta=null;
+		}
 
 } ]);
 

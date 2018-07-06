@@ -49,12 +49,12 @@
 			<tbody>
 				<tr ng-repeat="v in ventas">
 					<td></td>
-					<td>{{v.folio}}</td>
+					<td><b>{{v.folio}}</b></td>
 					
 					<td>{{v.fecha | date}}</td>
 					<td>{{v.cantidad}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio" data-toggle="modal" data-target="#modalEnvio"  >
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio">
 							<i class="fa fa-plus"></i>
 						</button>
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles">
@@ -91,18 +91,19 @@
              
       
       <div class="card-body">
-        <form>
+        <form name="MultiAdd">
           <div class="form-group">
             <label for="exampleInputEmail1">De</label>
-            <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Ingresar Inicio Guia" ng-model="de">
+            <input class="form-control" id="exampleInputEmail1" name="de" type="text" placeholder="Ingresar Inicio Guia" ng-model="de" minlength=15 required>
+            <span ng-show="">required</span>
           </div>
        
         <div class="form-group">
             <label for="exampleInputEmail1">Hasta</label>
-            <input class="form-control" id="exampleInputEmail1" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta">
+            <input class="form-control" id="exampleInputEmail1" name="hasta" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta" minlength=15 required>
           </div>
           
-          <a class="btn btn-success btn-block" ng-click="addguias(de,hasta)">Agregar</a>
+          <a class="btn btn-success btn-block" ng-click="MultiAdd.$valid && addguias(de,hasta)">Agregar</a>
         </form>
 
       </div>
@@ -560,17 +561,38 @@
  
 <!--   MODAL VER ENVIOS -->
    <div class="modal modal-wide fade" id="modalEnvios" role="dialog">
-<div class="modal-dialog modal-lg " height="1100" width="850">
+<div class="modal-dialog modal-lg " >
       <div class="modal-content">
         <div class="modal-header">
           
-          <h4 class="modal-title">ENVIOS</h4>
+          <h4 class="modal-title">Envios</h4>
         </div>
         <div class="modal-body">
-             
-      
-      <div class="card-body">
-       <table class="table table-striped">
+        <div align="center">
+      	 <table class="table">
+			<thead align="center">
+				<tr>
+					<th width="15px"></th>
+					<th width="75px">Folio</th>
+					<th width="75px">Fecha</th>
+					<th width="75px">Estatus</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr class="info" align="center">
+					<td></td>
+					<td>{{ventaInf.folio}}</td>
+					<td>{{ventaInf.fecha | date}}</td>
+					<td>{{ventaInf.estatus}} </td>
+					
+				</tr>
+			</tbody>	
+		</table>
+		</div>
+      <br><br>
+       <table class="table table-striped table-responsive">
 			<thead>
 				<tr>
 					<th>Cliente</th>
@@ -601,7 +623,7 @@
 			</tbody>	
 		</table>
 
-      </div>
+     
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>

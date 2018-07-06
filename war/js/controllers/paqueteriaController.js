@@ -209,6 +209,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 	}
 	$scope.ver = function(id){
+		$scope.ventaInf = id;
 		paqueteriaService.getEnvioxVenta(id.id).then(function(data) {
 			$scope.envios = data;
 			console.log("Envios ",$scope.envios);
@@ -227,7 +228,21 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
 			console.log("La Guia",inf);
 			$scope.paquete.guia=data.numero;
+			
+			if(!$scope.paquete.guia){
+				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
+				    if (r == true) {
+				    	
+				    	$location.path("/guia");
+				    }   	
+				    
+				}else{
+					$("#modalEnvio").modal();
+				}
 	});
+		
+	
+	
 	}
 	$scope.newVenta= function (){
 		$scope.venta.cantidad=0;
