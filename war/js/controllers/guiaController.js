@@ -159,6 +159,23 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 	guiaService.getGuia().then(function(data) {
 		$scope.guias=data;
 		for (var o = 0; o < $scope.guias.length; o+=1) {
+						
+			switch ($scope.guias[o].estatus) {
+		    case "EN ENVIO":
+		    	$scope.guias[o].clase="success";
+		        break;
+		    case "CANCELADA":
+		    	$scope.guias[o].clase="danger";
+		        break;
+		    case "ASIGNADA":
+		    	$scope.guias[o].clase="info";
+		    	break;
+		    	
+		    	case "ASIGNADA":
+		    		$scope.guias[o].clase="active";
+		    		break;
+		    default:
+		}
 			
 			for (var i = 0; i < $scope.sucursal.length; i+=1) {
 				  if($scope.guias[o].idSucursal==$scope.sucursal[i].id){
@@ -241,6 +258,8 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 			$scope.de=null;
 			$scope.hasta=null;
 		}
+		
+
 
 } ]);
 

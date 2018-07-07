@@ -40,7 +40,7 @@
 <!--     <div class="container"> -->
     
     <br>
-		<table class="table .table-striped">
+		<table class="table">
 			<thead>
 				<tr>
 					<th width="10%"></th>
@@ -51,7 +51,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="g in guias">
+				<tr ng-repeat="g in guias" class="{{g.clase}}">
 					<td></td>
 					<td>{{g.numero}}</td>
 					<td>{{g.estatus}}</td>
