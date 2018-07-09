@@ -33,7 +33,27 @@
     
 <!--     <div class="container"> -->
     
-    <br>
+    <br><div align="center">
+      	<div class="row">
+        <div class="col-md-2"></div>	
+		<div class="col-md-6">
+			<div class="col-md-10">
+				<div class="input-group input-daterange">
+					<input type="text" class="form-control" ng-model="fechaInicio">
+					<div class="input-group-addon"> - </div>
+					<input type="text" class="form-control" ng-model="fechaFin">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<a class="btn btn-small btn-success" href="{{'/ventas/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="Reporte.xls">
+				<i class="fa fa-file-excel-o fa-lg"></i>
+					Descargar Reporte
+				</a>
+			</div>
+		</div>
+
+	</div>
+	</div><br><br>
 		<table class="table .table-striped">
 			<thead>
 				<tr>
@@ -569,6 +589,7 @@
         </div>
         <div class="modal-body">
         <div align="center">
+      
       	 <table class="table">
 			<thead align="center">
 				<tr>

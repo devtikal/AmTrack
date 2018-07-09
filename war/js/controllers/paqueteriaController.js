@@ -197,6 +197,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$scope.usuario=$cookieStore.get('usuario');
 		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
 	});
+	$('.datepicker').datepicker({format: 'mm-dd-yyyy '});
+	
+	$('.input-daterange').datepicker({
+	    format: "mm-dd-yyyy"
+	});
+	
+	$('.input-daterange input').each(function() {
+	    $(this).datepicker("format","mm-dd-yyyy");
+	});
+	
 	console.log($scope.venta.fecha);
 //	paqueteriaService.getEnvio().then(function(data) {
 //		$scope.envios=data;
@@ -223,24 +233,25 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$window.location.reload();
 	});
 	}
+	
 	$scope.prePaquete = function(inf){
 		$scope.idVenta=inf.id;
 		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
 			console.log("La Guia",inf);
 			$scope.paquete.guia=data.numero;
 			
-			if(!$scope.paquete.guia){
-				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
-				    if (r == true) {
-				    	
-				    	$location.path("/guia");
-				    }   	
-				    
-				}else{
-					$("#modalEnvio").modal();
-				}
+//			if(!$scope.paquete.guia){
+//				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
+//				    if (r == true) {
+//				    	
+//				    	$location.path("/guia");
+//				    }   	
+//				    
+//				}else{
+//					$("#modalEnvio").modal();
+//				}
 	});
-		
+		$("#modalEnvio").modal();	
 	
 	
 	}
