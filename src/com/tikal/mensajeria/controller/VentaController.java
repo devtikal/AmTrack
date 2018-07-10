@@ -286,12 +286,11 @@ public class VentaController {
 	 @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
-			List<Venta> lista = ventaDao.findAll();
+			List<Venta> lista = ventaDao.findAllAbierta();
 			if (lista == null) {
 				lista = new ArrayList<Venta>();
 			}
 			response.getWriter().println(JsonConvertidor.toJson(lista));
-
 		}
 	 
 	  @RequestMapping(value = { "/getFolio" },  method = RequestMethod.GET, produces = "application/json")

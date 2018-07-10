@@ -39,16 +39,7 @@ public class VentaDaoImpl implements VentaDao{
 			old.setFolio(v.getFolio());
 			old.setEnvios(v.getEnvios());
 			old.setCantidad(v.getCantidad());
-			
-			List<Envio> es= new ArrayList<Envio>();
-			if (es.size()<=0){
-				old.setTotal(Double.valueOf("0.00"));
-			}else{
-				for (Envio e:es){
-					v.setTotal(v.getTotal()+e.getPrecio());
-				
-				}
-			}
+			old.setTotal(v.getTotal());
 			old.setEnvios(v.getEnvios());
 			old.setEstatus(v.getEstatus());
 			old.setTotal(v.getTotal());
@@ -79,6 +70,13 @@ public class VentaDaoImpl implements VentaDao{
 			//return ofy().load().type(Venta.class).filter("fecha >=",inicio).filter("fecha <=", fin).list();
 			return ofy().load().type(Venta.class).list();
 		}
+
+
+	@Override
+	public List<Venta> findAllAbierta() {
+		// TODO Auto-generated method stub
+		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
+	}
 
 	
 	

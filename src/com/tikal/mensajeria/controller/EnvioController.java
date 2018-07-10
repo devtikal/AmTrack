@@ -228,16 +228,22 @@ public class EnvioController {
 				ids.add(envio.getId());
 				v.setEnvios(ids);
 				v.setCantidad(ids.size());
+				System.out.println("precio envio"+envio.getPrecio());
+				v.setTotal(envio.getPrecio());
+				ventaDao.update(v); 
+				System.out.println("total venta"+v.getTotal());
 				System.out.println("lista de eids de envios"+ids);
 			}else{
 				List<Long> ids=v.getEnvios();
 				ids.add(envio.getId());
 				v.setEnvios(ids);
 				v.setCantidad(ids.size());
+				v.setTotal(v.getTotal()+envio.getPrecio());
+				ventaDao.update(v); 
 				System.out.println("lista ids de envios"+ids);
 			}
 			
-			ventaDao.update(v);      
+			     
 			
 	}
 	   
@@ -314,20 +320,27 @@ public class EnvioController {
 //
 //		}
 	   
-//	   @RequestMapping(value = { "/delete/{idVenta}" }, method = RequestMethod.GET)
-//		public void deleteVenta(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idVenta) throws IOException {
-//			AsignadorDeCharset.asignar(request, response);
-//			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
-//			
-////			List<Envio> envios= new ArrayList<Envio>();
-////			for (Long id:ids){
-////				Envio e=envioDao.consult(id);
-////				envios.add(e);
-////			}
-//			
-//			response.getWriter().println(JsonConvertidor.toJson(envios));
-//
-//		}
+	   @RequestMapping(value = { "/delete/{idEnvio}/{idVenta}" }, method = RequestMethod.GET)
+		public void deleteVenta(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable Long idVenta) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			envioDao.delete(envioDao.consult(idEnvio));
+			
+			Venta v = ventaDao.consult(idVenta);
+			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
+			ids.remove(idEnvio);
+			System.out.println("lista de envios nueva:"+ids);
+			v.setEnvios(ids);
+			ventaDao.update(v);
+		
+//			List<Envio> envios= new ArrayList<Envio>();
+//			for (Long id:ids){
+//				Envio e=envioDao.consult(id);
+//				envios.add(e);
+//			}
+			
+			//response.getWriter().println(JsonConvertidor.toJson(envios));
+
+		}
 	
 }
 

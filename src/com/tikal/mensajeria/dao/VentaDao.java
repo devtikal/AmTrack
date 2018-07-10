@@ -19,6 +19,8 @@ public interface VentaDao {
 	//public static AeronaveEntity consult(String numeroSerie);
 	public List<Venta> findAll();
 	
+	public List<Venta> findAllAbierta();
+	
 	public List<Venta> getVentas(Date inicio, Date fin);
 	
 	

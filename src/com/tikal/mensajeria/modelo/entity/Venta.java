@@ -15,7 +15,7 @@ public class Venta {
 	@Index private Long folio;
 	@Index private String fecha;
 	private Integer cantidad;
-	private String estatus;
+	@Index private String estatus;
 	List<Long> envios;
 	private Double total;
 	

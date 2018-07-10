@@ -7,6 +7,12 @@
   <property name="numero" direction="asc"/>
    </datastore-index>
   
+  <datastore-index kind="Venta" ancestor="false" source="manual"> 
+  <property name="estatus" direction="asc"/> 
+  <property name="usuario" direction="asc"/> 
+  <property name="folio" direction="asc"/>
+  <property name="fecha" direction="asc"/>
+   </datastore-index>
   
 </datastore-indexes>
 

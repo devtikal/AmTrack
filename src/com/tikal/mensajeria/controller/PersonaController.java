@@ -60,7 +60,7 @@ public class PersonaController {
 	
 		 @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
 			public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
-				AsignadorDeCharset.asignar(request, response);
+//				AsignadorDeCharset.asignar(request, response);
 				List<Persona> lista = personaDao.findAll();
 				if (lista == null) {
 					lista = new ArrayList<Persona>();
