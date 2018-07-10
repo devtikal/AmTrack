@@ -372,7 +372,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		    
 		}
 	$scope.eliminarEnvio = function(datos){
-		 var r = confirm("Click en Aceptar para Eliminar el envio. \n Guia" + datos.guia + "\n Rastro" + datos.rastreo);
+		 var r = confirm("Click en Aceptar para Eliminar el envio. \n Guia: " + datos.guia + "\n Rastro: " + datos.rastreo);
 		    if (r == true) {
 		    	paqueteriaService.cancelarEnvio(datos.id,$scope.idVenta).then(function(data) {
 					$window.location.reload();
