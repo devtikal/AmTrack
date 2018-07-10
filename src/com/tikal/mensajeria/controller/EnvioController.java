@@ -326,10 +326,17 @@ public class EnvioController {
 			envioDao.delete(envioDao.consult(idEnvio));
 			
 			Venta v = ventaDao.consult(idVenta);
+			Envio e = envioDao.consult(idEnvio);
 			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
 			ids.remove(idEnvio);
+			if (ids.size()==0){
+				ids = new ArrayList<Long>();
+			}
+			
 			System.out.println("lista de envios nueva:"+ids);
 			v.setEnvios(ids);
+			v.setTotal(v.getTotal() - e.getPrecio());
+			v.setCantidad(v.getCantidad()-1);
 			ventaDao.update(v);
 		
 //			List<Envio> envios= new ArrayList<Envio>();
