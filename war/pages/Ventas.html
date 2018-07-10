@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<a class="btn btn-small btn-success" href="{{'/ventas/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="Reporte.xls">
+				<a class="btn btn-small btn-success" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls">
 				<i class="fa fa-file-excel-o fa-lg"></i>
 					Descargar Reporte
 				</a>
@@ -77,14 +77,14 @@
 					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio">
 							<i class="fa fa-plus"></i>
 						</button>
-						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles">
+						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" ng-disabled="v.cantidad==0">
 							<i class="fa fa-eye"></i>
 						</button>
 						<button class="btn btn-danger" title="Imprimir" ng-click="showPDF(v.id)">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
-						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
+						<button class="btn btn-warning" ng-click="eliminarVenta(v)" title="Eliminar Venta">
 							<i class="fa fa-trash"></i>
 						</button>
 <!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
@@ -530,7 +530,7 @@
 </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-link" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div></div>
@@ -580,12 +580,12 @@
 <!-- FIN -->
  
 <!--   MODAL VER ENVIOS -->
-   <div class="modal modal-wide fade" id="modalEnvios" role="dialog">
-<div class="modal-dialog modal-lg " >
-      <div class="modal-content">
+   <div class="modal fade" id="modalEnvios" role="dialog">
+<div class="modal-dialog modal-lg">
+      <div class="modal-content"  style="width:1024PX; margin-left:0; ">
         <div class="modal-header">
           
-          <h4 class="modal-title">Envios</h4>
+          <h4 class="modal-title">Detalle de Venta</h4>
         </div>
         <div class="modal-body">
         <div align="center">
@@ -616,14 +616,14 @@
        <table class="table table-striped table-responsive">
 			<thead>
 				<tr>
-					<th>Cliente</th>
-					<th>Destinatatio</th>
-					<th>Empresa</th>
-					<th>Guia</th>
-					<th>Rastreo</th>
-					<th>Tipo de Envio</th>
-					<th>Precio</th>
-					<th>Acciones</th>
+					<th width="15%">Cliente</th>
+					<th width="15%">Destinatatio</th>
+					<th width="10%">Empresa</th>
+					<th width="13%">Guia</th>
+					<th width="10%">Rastreo</th>
+					<th width="10%">Tipo de Envio</th>
+					<th width="8%">Precio</th>
+					<th width="10%">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -636,9 +636,14 @@
 					<td>{{e.rastreo}}</td>
 					<td>{{e.tipoEnvio}}</td>
 					<td>{{e.precio | currency}}</td>
-					<td><button class="btn btn-small btn-danger" ng-click="removeItem($index)">
+					<td>
+					<button ng-if="e.empresa=='MERVEL'" class="btn btn-danger" title="Imprimir" ng-click="showPDFM(e.id)">
+							<i class="fa fa-file-pdf-o"></i>
+						</button>
+					<button class="btn btn-small btn-warning" ng-click="eliminarEnvio(e)">
 							<i class="fa fa-times"></i>
 						</button>
+						
 					</td>
 				</tr>
 			</tbody>	

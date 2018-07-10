@@ -185,6 +185,48 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	
+	this.eliminarVenta = function(idventa){
+		var d = $q.defer();
+		$http.get("venta/cancelar/"+idventa).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	
+	this.cancelarEnvio = function(idEnvio,idVenta){
+		var d = $q.defer();
+		$http.get("envio/delete/"+idEnvio+"/"+idVenta).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
@@ -218,11 +260,14 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 		
 	}
+	$scope.idVenta=null;
 	$scope.ver = function(id){
 		$scope.ventaInf = id;
+		$scope.idVenta = id.id;
 		paqueteriaService.getEnvioxVenta(id.id).then(function(data) {
 			$scope.envios = data;
-			console.log("Envios ",$scope.envios);
+			
+			console.log("Envios ",$scope.envios, );
 			
 			$("#modalEnvios").modal();
 	});
@@ -313,6 +358,28 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
 		$("#modalPDF").modal();
 	}
+	$scope.showPDFM = function(id){
+		$scope.url = "envio/generaGuiaMervel/"+id+"/"+$scope.idVenta+"/"+$scope.usuario;
+		$("#modalPDF").modal();
+	}
+	$scope.eliminarVenta = function(datos){
+		 var r = confirm("Click en Aceptar para Eliminar la Venta. \n" + datos.folio);
+		    if (r == true) {
+		    	paqueteriaService.eliminarVenta(datos.id).then(function(data) {
+					$window.location.reload();
+				});
+		    }   	
+		    
+		}
+	$scope.eliminarEnvio = function(datos){
+		 var r = confirm("Click en Aceptar para Eliminar el envio. \n Guia" + datos.guia + "\n Rastro" + datos.rastreo);
+		    if (r == true) {
+		    	paqueteriaService.cancelarEnvio(datos.id,$scope.idVenta).then(function(data) {
+					$window.location.reload();
+				});
+		    }   	
+		    
+		}	
 	
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
