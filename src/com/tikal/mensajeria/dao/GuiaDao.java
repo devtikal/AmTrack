@@ -26,6 +26,8 @@ public interface GuiaDao {
 	
 	public Guia getByEstSuc(String estatus,Long idSucursal);
 	
+	public Guia getByEstSucK(String estatus,Long idSucursal, String kilataje);
+	
 	public Guia getByNumero (String numero);
 	
 	public void deleteAll();
