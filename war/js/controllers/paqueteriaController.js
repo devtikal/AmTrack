@@ -281,21 +281,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	
 	$scope.prePaquete = function(inf){
 		$scope.idVenta=inf.id;
-		paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
-			console.log("La Guia",inf);
-			$scope.paquete.guia=data.numero;
-			
-			if(!$scope.paquete.guia){
-				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
-				    if (r == true) {
-				    	
-				    	$location.path("/guia");
-				    }   	
-				    
-				}else{
-					$("#modalEnvio").modal();
-				}
-	});
+		$("#modalEnvio").modal();
 	
 	
 	}
@@ -346,14 +332,32 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.hide=false;
 			$scope.requerido=false;
 			document.getElementById("delTap").classList.add("tab");
+			
+			paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
+				
+				$scope.paquete.guia=data.numero;
+				$scope.disGuia=true;
+				if(!$scope.paquete.guia){
+					 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
+					    if (r == true) {
+					    	
+					    	$location.path("/guia");
+					    }   	
+					    
+					}
+		});
+			
 		}else{
 			$scope.hide=true;
 			$scope.requerido=true;
 			document.getElementById("delTap").classList.remove("tab");
+			$scope.paquete.guia=null;
+			$scope.disGuia=false;
 		}
 		
 		
 	}
+	$scope.disGuia=true;
 	$scope.showPDF = function(id){
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
 		$("#modalPDF").modal();

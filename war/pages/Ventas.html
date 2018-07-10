@@ -200,49 +200,56 @@
           <form id="altaPaquete" name="myForm">
 <!--   <h3>Destinatario:</h3> -->
   <!-- One "tab" for each step in the form:--> 
-  <div class="tab">
-  <h3 align="center">Remitente</h3>
-  <div class="row">
-  <div class="col-md-6">
- 	 Nombre / Empresa
-    <p><input  ng-model="paquete.cliente.nombre" required></p>
-     En Antencion a
-    <p><input  ng-model="paquete.cliente.enAtencion" required></p>
-    Telefono
-    <p><input  ng-model="paquete.cliente.telefono" required></p>
-    CP:
-    <p><input type="number" ng-model="paquete.cliente.cp"></p>
-     Colonia
-    <p><input  ng-model="paquete.cliente.colonia" required></p>
-     
-     Localidad
-    <p><input   ng-model="paquete.cliente.localidad" required></p>
-     </div>
-     <div class="col-md-6">
-     
-     Municipio
-    <p><input ng-model="paquete.cliente.municipio" required></p>
-     Estado
-    <p><input ng-model="paquete.cliente.estado" required></p>
-     Calle
-    <p><input   ng-model="paquete.cliente.calle" required></p>
-     
-     Numero Ext
-    <p><input  ng-model="paquete.cliente.noExterior" required></p>
-    Numero Int
-    <p><input ng-model="paquete.cliente.noInterior"></p>
-     Referencia
-    <p><input  ng-model="paquete.cliente.referencias"></p>
-    </div>
-  </div>
-  </div>
+
   <div class="tab">
   <h3 align="center">Envio</h3>
-  
+  	<div class="row">
+							<div class="col-md-3">
+							
+								 <label> Empresa </label>
+							
+									<select class="form-control" ng-model="paquete.empresa" ng-change="isEstafeta()"
+										required>
+										<option>MERVEL</option>
+										<option>DHL</option>
+										<option>UPS</option>
+										<option>FEDEX</option>
+										<option>ESTAFETA</option>
+										
+										</select>
+										
+								</div>
+								
+							
+							
+						
+						<div class="col-md-3">
+						 <label> Kilataje </label>
+							
+									<select class="form-control" ng-model="paquete.kilataje" 
+										required>
+										<option>1K</option>
+										<option>3K</option>
+										<option>5K</option>
+										<option>10K</option>
+										<option>15K</option>
+										<option>20K</option>
+										<option>25K</option>
+										<option>30K</option>
+										<option>35K</option>
+										<option>40K</option>
+										<option>45K</option>
+										<option>11:30</option>
+										
+										</select>
+						
+						</div>
+						
+						</div><br>
   <div class="row">
 			<div class="col-md-6">
 							<label>Guia</label>
-								<input class="form-control" style="font-size:20px" ng-model="paquete.guia" required readonly>
+								<input class="form-control" style="font-size:20px" ng-model="paquete.guia" required ng-disabled="disGuia">
 						</div>
 						<div class="col-md-6">
 							
@@ -294,35 +301,7 @@
 					</div>
 					<br> <br>
 					
-					<div class="row">
-							<div class="col-md-3">
-							
-								 <label> Empresa </label>
-							
-									<select class="form-control" ng-model="paquete.empresa" ng-change="isEstafeta()"
-										required>
-										<option>MERVEL</option>
-										<option>DHL</option>
-										<option>UPS</option>
-										<option>FEDEX</option>
-										<option>ESTAFETA</option>
-										
-										</select>
-										
-								</div>
-								
-							
-							
-						
-<!-- 						<div class="col-md-3"> -->
-<!-- 						<div><label><br> </label> -->
-<!-- 								<button class="btn btn-danger form-control" type="button" title="Imprimir" ng-click="generaPDF(e.id)" ng-hide="hide"> -->
-<!-- 							<i class="fa fa-file-pdf-o"></i> <label>Imprimir Guia</label> -->
-<!-- 						</button></div> -->
-						
-<!-- 						</div> -->
-						
-						</div>
+				
 						<div class="row">
 								<div class="col-md-3">
 							<div class="form-group ">
@@ -411,6 +390,43 @@
 						</div>
 
 					</div>
+  </div>
+    <div class="tab">
+  <h3 align="center">Remitente</h3>
+  <div class="row">
+  <div class="col-md-6">
+ 	 Nombre / Empresa
+    <p><input  ng-model="paquete.cliente.nombre" required></p>
+     En Atencion a
+    <p><input  ng-model="paquete.cliente.enAtencion" required></p>
+    
+    CP:
+    <p><input type="number" ng-model="paquete.cliente.cp"></p>
+    Calle
+    <p><input   ng-model="paquete.cliente.calle" required></p>
+       Numero Ext
+    <p><input  ng-model="paquete.cliente.noExterior" required></p>
+    Numero Int
+    <p><input ng-model="paquete.cliente.noInterior"></p>
+   
+     </div>
+     <div class="col-md-6">
+       Colonia
+    <p><input  ng-model="paquete.cliente.colonia" required></p>
+     
+     Localidad
+    <p><input   ng-model="paquete.cliente.localidad" required></p>
+     Municipio
+    <p><input ng-model="paquete.cliente.municipio" required></p>
+     Estado
+    <p><input ng-model="paquete.cliente.estado" required></p>
+     
+    Telefono
+    <p><input  ng-model="paquete.cliente.telefono" required></p>
+     Referencia
+    <p><input  ng-model="paquete.cliente.referencias"></p>
+    </div>
+  </div>
   </div>
   <div id="delTap" class="tab" ng-hide="hide">
   <h3 align="center">Destinatario</h3>
