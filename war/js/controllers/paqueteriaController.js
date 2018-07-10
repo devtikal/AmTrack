@@ -240,18 +240,17 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			console.log("La Guia",inf);
 			$scope.paquete.guia=data.numero;
 			
-//			if(!$scope.paquete.guia){
-//				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
-//				    if (r == true) {
-//				    	
-//				    	$location.path("/guia");
-//				    }   	
-//				    
-//				}else{
-//					$("#modalEnvio").modal();
-//				}
+			if(!$scope.paquete.guia){
+				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
+				    if (r == true) {
+				    	
+				    	$location.path("/guia");
+				    }   	
+				    
+				}else{
+					$("#modalEnvio").modal();
+				}
 	});
-		$("#modalEnvio").modal();	
 	
 	
 	}
