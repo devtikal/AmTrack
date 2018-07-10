@@ -15,9 +15,10 @@ public class Envio {
 	private Persona cliente;
 	private Persona destinatario;
 	@Index  String empresa;
+	private String kilataje;
 	private Paquete paquete;	
 	@Index private String guia;
-	@Index private Integer rastreo;
+	@Index private String rastreo;
 	private String tipoEnvio;
 	private String tipoServicio;
 	private Double precio;	
@@ -34,6 +35,14 @@ public class Envio {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+	public String getKilataje() {
+		return kilataje;
+	}
+	public void setKilataje(String kilataje) {
+		this.kilataje = kilataje;
 	}
 	public Persona getCliente() {
 		return cliente;
@@ -72,10 +81,10 @@ public class Envio {
 	public void setGuia(String guia) {
 		this.guia = guia;
 	}
-	public Integer getRastreo() {
+	public String getRastreo() {
 		return rastreo;
 	}
-	public void setRastreo(Integer rastreo) {
+	public void setRastreo(String rastreo) {
 		this.rastreo = rastreo;
 	}
 	public String getTipoEnvio() {

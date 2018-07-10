@@ -478,7 +478,8 @@ public class VentaController {
 				///	}
 				//	for (Envio e : envios){
 						//Envio e = envioDao.consult(e.getCliente())
-						System.out.println("+++++++++++++++++++++++");
+						System.out.println("++++++++++++++++++++++::::+"+e.getCliente().getNombre());
+						
 						r.setRemitente(e.getCliente().getNombre());
 						r.setGuia(e.getGuia());
 						r.setRastreo(e.getRastreo());

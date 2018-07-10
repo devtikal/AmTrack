@@ -6,7 +6,7 @@ public class ReporteVo {
 	private Long folio;
 	private String remitente;
 	private String guia;
-	private Integer rastreo;
+	private String rastreo;
 	private String tipoPaquete;
 	private String tipoEnvio;
 	private String empresa;
@@ -41,10 +41,10 @@ public class ReporteVo {
 	public void setGuia(String guia) {
 		this.guia = guia;
 	}
-	public Integer getRastreo() {
+	public String getRastreo() {
 		return rastreo;
 	}
-	public void setRastreo(Integer rastreo) {
+	public void setRastreo(String rastreo) {
 		this.rastreo = rastreo;
 	}
 	public String getTipoPaquete() {

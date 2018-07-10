@@ -137,7 +137,7 @@ public class EnvioController {
 			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
 			envio.setGuia(g.getNumero());
 			envio.setPrecio(65.50);
-			envio.setRastreo(878987657);
+			envio.setRastreo("878987657");
 			envio.setTipoEnvio("Dia siguiente");
 		//	envio.setTotal(312.50);
 			   
@@ -323,6 +323,7 @@ public class EnvioController {
 	   @RequestMapping(value = { "/delete/{idEnvio}/{idVenta}" }, method = RequestMethod.GET)
 		public void deleteVenta(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable Long idVenta) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
+			double precio= envioDao.consult(idEnvio).getPrecio();
 			envioDao.delete(envioDao.consult(idEnvio));
 			
 			Venta v = ventaDao.consult(idVenta);
@@ -335,17 +336,21 @@ public class EnvioController {
 			
 			System.out.println("lista de envios nueva:"+ids);
 			v.setEnvios(ids);
-			v.setTotal(v.getTotal() - e.getPrecio());
-			v.setCantidad(v.getCantidad()-1);
-			ventaDao.update(v);
+			System.out.println("total venta:"+v.getTotal());
+			System.out.println("precio envio:"+precio);
+		//	System.out.println("cantidad de venta:"+e.getPrecio());
+			v.setTotal(v.getTotal() - precio);
 		
+			v.setCantidad(ids.size());
+			ventaDao.update(v);
+			System.out.println("nuevo total de venta:"+v.getTotal());
 //			List<Envio> envios= new ArrayList<Envio>();
 //			for (Long id:ids){
 //				Envio e=envioDao.consult(id);
 //				envios.add(e);
 //			}
 			
-			//response.getWriter().println(JsonConvertidor.toJson(envios));
+			response.getWriter().println(JsonConvertidor.toJson(ids));
 
 		}
 	
