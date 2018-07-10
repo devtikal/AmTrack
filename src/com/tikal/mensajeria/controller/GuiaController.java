@@ -213,4 +213,14 @@ public class GuiaController {
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 
 		}
+	 
+	 @RequestMapping(value = { "/deleteAll" }, method = RequestMethod.GET)
+		public void deleteAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			//List<Guia> lista = guiaDao.findAll();
+			guiaDao.deleteAll();
+			//response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
+	 
 }

@@ -27,4 +27,6 @@ public interface GuiaDao {
 	public Guia getByEstSuc(String estatus,Long idSucursal);
 	
 	public Guia getByNumero (String numero);
+	
+	public void deleteAll();
 }

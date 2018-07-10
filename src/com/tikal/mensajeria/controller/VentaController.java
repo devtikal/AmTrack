@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.googlecode.objectify.ObjectifyService;
 import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.PaqueteDao;
@@ -212,8 +213,25 @@ public class VentaController {
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		Venta v = (Venta) JsonConvertidor.fromJson(json, Venta.class);
-		Contador folio= new Contador();
-		v.setFolio(folio.getFolio());
+		
+		if (ObjectifyService.ofy().load().type(Contador.class).list().isEmpty()){
+			Contador f= new Contador();
+			f.getFolio();
+			v.setFolio(f.getFolio());
+			f.incremeta();
+			ObjectifyService.ofy().save().entity(f).now(); 
+		}else{
+			Contador f=ObjectifyService.ofy().load().type(Contador.class).list().get(0);
+			//int numero = (int) (Math.random() * 9999) + 1;
+			v.setFolio(f.getFolio());
+			//dato.setIdServicio(numero);
+			f.incremeta();
+			ObjectifyService.ofy().save().entity(f).now(); 
+		}
+		
+		
+		//Contador folio= new Contador();
+	//	v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
 		v.setTotal(Double.parseDouble("0.00"));
 		v.setUsuario(usuarioDao.consultarUsuario(username));
@@ -223,7 +241,8 @@ public class VentaController {
 			
 		
 			ventaDao.save(v); 
-			folio.incremeta();
+			//folio.incremeta();
+		//	ObjectifyService.ofy().save().entity(folio).now();
 	
 //			} else {
 //				response.sendError(403);

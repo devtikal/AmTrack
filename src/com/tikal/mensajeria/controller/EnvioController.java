@@ -313,10 +313,21 @@ public class EnvioController {
 //			}
 //
 //		}
-	   public void agregaEnvio(Venta v, Envio e){
-		  
-		   
-	   }
+	   
+//	   @RequestMapping(value = { "/delete/{idVenta}" }, method = RequestMethod.GET)
+//		public void deleteVenta(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idVenta) throws IOException {
+//			AsignadorDeCharset.asignar(request, response);
+//			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
+//			
+////			List<Envio> envios= new ArrayList<Envio>();
+////			for (Long id:ids){
+////				Envio e=envioDao.consult(id);
+////				envios.add(e);
+////			}
+//			
+//			response.getWriter().println(JsonConvertidor.toJson(envios));
+//
+//		}
 	
 }
 

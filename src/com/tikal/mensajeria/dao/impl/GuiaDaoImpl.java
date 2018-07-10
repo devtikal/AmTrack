@@ -95,6 +95,20 @@ public class GuiaDaoImpl implements GuiaDao {
 	}
 
 
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		 System.out.println("si esta en daoimpl eliminando todAS LAS GUIAS");
+		 List<Guia> lista =findAll();
+		 for (Guia g:lista){
+			 ofy().delete().entity(g).now();
+		 }
+	     //   ofy().delete().type(Guia.class).;
+	        System.out.println("eliminando...guiaSSSS");
+		
+	}
+
+
 	
 
 
