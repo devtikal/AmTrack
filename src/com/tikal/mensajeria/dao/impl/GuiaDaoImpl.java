@@ -109,6 +109,13 @@ public class GuiaDaoImpl implements GuiaDao {
 	}
 
 
+	@Override
+	public Guia getByEstSucK(String estatus, Long idSucursal, String kilataje) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 

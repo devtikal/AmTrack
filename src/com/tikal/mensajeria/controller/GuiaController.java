@@ -191,6 +191,7 @@ public class GuiaController {
 	 @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/json")
 		public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
 	   System.out.println("dame guia");
+	////   Guia g=guiaDao.getByEstSucK("ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal(), kilataje);
 	   
 	   Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
 	   

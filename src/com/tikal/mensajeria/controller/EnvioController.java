@@ -134,8 +134,8 @@ public class EnvioController {
 			//guiaDao.
 			//Usuario user= usuarioDao.consultarUsuario(usuario);
 			//System.out.println("esta en daoimpl envio  get by status Suc:"+usuarioDao.consultarUsuario(usuario).getIdSucursal());
-			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
-			envio.setGuia(g.getNumero());
+			//Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
+			//envio.setGuia(g.getNumero());
 			envio.setPrecio(65.50);
 			envio.setRastreo("878987657");
 			envio.setTipoEnvio("Dia siguiente");
@@ -146,8 +146,8 @@ public class EnvioController {
 			
 			//envio.setUsuario(usuario);
 			envioDao.save(envio);
-			g.setEstatus("EN ENVIO");
-			guiaDao.update(g);
+		////	g.setEstatus("EN ENVIO");
+		//	guiaDao.update(g);
 			ct.incremeta();
 	//}
 //			response.sendError(403);
@@ -195,17 +195,13 @@ public class EnvioController {
 				envio.setCostoSeguro(ef.getCostoSeguro());
 			}
 			
-			// Calendar c = Calendar.getInstance();		  
-			//  String fecha =  Integer.toString(c.get(Calendar.DATE));
-			//envio.setFecha(evo.getFecha());
-			//envio.setFolio(evo.getFolio()); asignar folio consecutivo
-		//	Contador folio= new Contador();
-			//envio.setFolio(folio.getFolio().toString());// asignar folio consecutivo
-			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal());
-			if (g==null){
-			  System.out.println("no hay guias asignadas a esta sucursal");
-			}
-			envio.setGuia(g.getNumero());
+		
+			
+//			Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(usuario).getIdSucursal(), kilataje);
+//			if (g==null){
+//			  System.out.println("no hay guias asignadas a esta sucursal");
+//			}
+			envio.setGuia(ef.getGuia());
 			//envio.setGuia(evo.getGuia());
 			
 			envio.setPrecio(ef.getPrecio());
@@ -215,6 +211,7 @@ public class EnvioController {
 			envio.setMateriales(ef.getMateriales());
 			
 			envioDao.save(envio);
+			Guia g=guiaDao.getByNumero(ef.getGuia());
 			g.setEstatus("EN ENVIO");
 			guiaDao.update(g);
 			//folio.incremeta();
