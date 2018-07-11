@@ -11,8 +11,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -31,8 +31,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -52,8 +52,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -73,8 +73,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -94,8 +94,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -115,8 +115,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -136,8 +136,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -156,8 +156,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -177,8 +177,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -198,8 +198,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -219,8 +219,8 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
 					}if(response.status==403){
-						//alert("No tiene permiso de realizar esta acción");
-//						$location.path("/login");
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
 					}
 					d.reject(response);
 					$window.location.reload;
@@ -250,17 +250,113 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	});
 	
 	console.log($scope.venta.fecha);
-//	paqueteriaService.getEnvio().then(function(data) {
-//		$scope.envios=data;
-//		console.log("Datos de Envio", $scope.envios);
-//	});
+// paqueteriaService.getEnvio().then(function(data) {
+// $scope.envios=data;
+// console.log("Datos de Envio", $scope.envios);
+// });
 	$scope.generaPDF = function (idEnvio){
 		paqueteriaService.makePDF(idEnvio,$cookieStore.get('usuario')).then(function(data) {
 			
 		});
 		
 	}
+	$scope.validaPeso = function(){
+		
+	if($scope.paquete.paquete.largo && $scope.paquete.paquete.ancho && $scope.paquete.paquete.alto){
+		var PesoVol = (($scope.paquete.paquete.largo*$scope.paquete.paquete.ancho*$scope.paquete.paquete.alto)/5000);
+var valor = 0;
+switch ($scope.paquete.kilataje) {
+case "1Kg Sobre Sig. Dia":
+	valor = 1;
+	if(PesoVol > valor){
+		alert("El Peso Volumetrio sobre pasa al Kilataje");
+	}
 	
+    break;
+ case "1Kg Paquete Sig. Dia":
+	 valor = 1;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}  	
+	 break;
+ case "11:30 Sig. Dia":
+	 valor = 30;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "11:30 Sobre Sig. Dia":
+	 valor = 30;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "3Kg Sig. Dia":
+	 valor = 3;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "5Kg Terrestre":
+	 valor = 5;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "10Kg Terrestre":
+	 valor = 10;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "15Kg Terrestre":
+	 valor = 15;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "20Kg Terrestre":
+	 valor = 20;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "25Kg Terrestre":
+	 valor = 25;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "30Kg Terrestre":
+	 valor = 30;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "35Kg Terrestre":
+	 valor = 35;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "40Kg Terrestre":
+	 valor = 40;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+ case "45Kg Terrestre":
+	 valor = 45;
+    	if(PesoVol > valor){
+    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+    	}
+     break;
+
+}
+	}1
+		
+		
+	}
 	$scope.paquete={
 			tipoEnvio:null , 
 			paquete:{tipoPaquete:null}
@@ -326,7 +422,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
         $scope.errortext = "";
         if (!$scope.addMe) {return;}
         if ($scope.products.indexOf($scope.addMe) == -1) {
-//            $scope.products.push($scope.addMe,$scope.addMe2);
+// $scope.products.push($scope.addMe,$scope.addMe2);
             $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
             console.log($scope.products);
             $scope.paquete.materiales=$scope.products;
@@ -415,7 +511,7 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
         $scope.errortext = "";
         if (!$scope.addMe) {return;}
         if ($scope.products.indexOf($scope.addMe) == -1) {
-//            $scope.products.push($scope.addMe,$scope.addMe2);
+// $scope.products.push($scope.addMe,$scope.addMe2);
             $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
             console.log($scope.products);
         } else {
@@ -447,8 +543,8 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
 	}
 	
 $scope.EnviarFormulario = function() {
-	//console.log($scope.form.pass.$valid);
-//	$scope.validate();
+	// console.log($scope.form.pass.$valid);
+// $scope.validate();
 	$scope.paqueteria.materiales=$scope.products;
 	paqueteriaService.crearPaquete($cookieStore.get('usuario'),$scope.paqueteria).then(function(data) {
 						var x = document.getElementById("snackbar")
