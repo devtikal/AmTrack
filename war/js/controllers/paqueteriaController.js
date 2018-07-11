@@ -260,6 +260,23 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 		
 	}
+	
+	$scope.paquete={
+			tipoEnvio:null , 
+			paquete:{tipoPaquete:null}
+	}
+	$scope.isSobre= function (data) {
+		if (data=='1Kg Sobre Sig. Dia' || data=='11:30 Sobre Sig. Dia'){
+			$scope.paquete.paquete.tipoPaquete="SOBRE";
+			$scope.paquete.tipoEnvio="Dia Siguiente";
+		}else{
+			$scope.paquete.paquete.tipoPaquete="";
+			$scope.paquete.tipoEnvio="";
+		}
+	}
+	$scope.cleanMdl = function() {
+		$window.location.reload(true);
+	}
 	$scope.idVenta=null;
 	$scope.ver = function(id){
 		$scope.ventaInf = id;

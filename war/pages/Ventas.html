@@ -194,7 +194,7 @@
         <div class="modal-header">
           
           <h4 class="modal-title">Registrar Envios</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+<!--           <button type="button" class="close" data-dismiss="modal">&times;</button> -->
         </div>
         <div class="modal-body">
           <form id="altaPaquete" name="myForm">
@@ -226,20 +226,22 @@
 						<div class="col-md-3">
 						 <label> Kilataje </label>
 							
-									<select class="form-control" ng-model="paquete.kilataje" 
+									<select class="form-control" ng-model="paquete.kilataje" ng-change="isSobre(paquete.kilataje)"
 										required>
-										<option>1K</option>
-										<option>3K</option>
-										<option>5K</option>
-										<option>10K</option>
-										<option>15K</option>
-										<option>20K</option>
-										<option>25K</option>
-										<option>30K</option>
-										<option>35K</option>
-										<option>40K</option>
-										<option>45K</option>
-										<option>11:30</option>
+										<option>1Kg Sobre Sig. Dia</option>
+										<option>1Kg Paquete Sig. Dia</option>
+										<option>11:30 Sig. Dia</option>
+										<option>11:30 Sobre Sig. Dia</option>
+										<option>3Kg Sig. Dia</option>
+										<option>5Kg Terrestre</option>
+										<option>10Kg Terrestre</option>
+										<option>15Kg Terrestre</option>
+										<option>20Kg Terrestre</option>
+										<option>25Kg Terrestre</option>
+										<option>30Kg Terrestre</option>
+										<option>35Kg Terrestre</option>
+										<option>40Kg Terrestre</option>
+										<option>45Kg Terrestre</option>
 										
 										</select>
 						
@@ -338,6 +340,15 @@
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
 										ng-model="paquete.paquete.alto" ng-required="requerido">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label for="example-text-input" class="col-2 col-form-label">
+									Peso Volumetrico </label>
+								<div class="col-13">
+									{{(paquete.paquete.largo*paquete.paquete.ancho*paquete.paquete.alto)/5000}}
 								</div>
 							</div>
 						</div>
@@ -543,7 +554,7 @@
 </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-link" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-link" data-dismiss="modal" ng-click="cleanMdl(); ">Cerrar</button>
         </div>
       </div>
     </div></div>
@@ -650,7 +661,7 @@
 					<td>{{e.tipoEnvio}}</td>
 					<td>{{e.precio | currency}}</td>
 					<td>
-					<button ng-if="e.empresa=='MERVEL'" class="btn btn-danger" title="Imprimir" ng-click="showPDFM(e.id)">
+					<button ng-if="e.empresa=='MERVEL' || e.empresa=='ESTAFETA'" class="btn btn-danger" title="Imprimir" ng-click="showPDFM(e.id)">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 					<button class="btn btn-small btn-warning" ng-click="eliminarEnvio(e)">

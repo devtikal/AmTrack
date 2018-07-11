@@ -1,7 +1,7 @@
 app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
-	this.addGuia = function(number1,number2) {
+	this.addGuia = function(number1,number2,tipoGuia) {
 		var d = $q.defer();
-		$http.get("guia/addM/"+number1+"/"+number2).then(
+		$http.get("guia/addM/"+number1+"/"+number2+"/"+tipoGuia).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -216,7 +216,7 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 
 	$scope.addguias = function(dato1,dato2) {
 		
-		guiaService.addGuia(dato1,dato2).then(function(data) {
+		guiaService.addGuia(dato1,dato2,$scope.tipoGuia).then(function(data) {
 			alert("Guias Agregadas correctamente");
 			$window.location.reload();
 		});

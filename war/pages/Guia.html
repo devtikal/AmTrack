@@ -99,6 +99,30 @@
             <input class="form-control" id="hasta" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta"  required ng-change="validate('hasta')">
           </div>
           
+          <div class="form-group">
+            <label> Tipo de Guia </label>
+							
+									<select class="form-control" ng-model="tipoGuia"
+										required>
+										<option>1Kg Sobre Sig. Dia</option>
+										<option>1Kg Paquete Sig. Dia</option>
+										<option>11:30 Sig. Dia</option>
+										<option>11:30 Sobre Sig. Dia</option>
+										<option>3Kg Sig. Dia</option>
+										<option>5Kg Terrestre</option>
+										<option>10Kg Terrestre</option>
+										<option>15Kg Terrestre</option>
+										<option>20Kg Terrestre</option>
+										<option>25Kg Terrestre</option>
+										<option>30Kg Terrestre</option>
+										<option>35Kg Terrestre</option>
+										<option>40Kg Terrestre</option>
+										<option>45Kg Terrestre</option>
+										
+										
+										</select>
+          </div>
+          
           <a class="btn btn-success btn-block" ng-disabled="btnGuardar" ng-click="formMasive.$valid && addguias(de,hasta)">Agregar</a>
         </form>
 
