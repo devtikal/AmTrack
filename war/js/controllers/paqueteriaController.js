@@ -423,6 +423,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 				    if (r == true) {
 				    	
 				    	$location.path("/guia");
+				    	 window.location.reload();
 				    }   	
 				    
 				}
@@ -452,23 +453,27 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	
 	$scope.prePaquete = function(inf){
-		$scope.idVenta=inf.id;
+		$scope.idVenta=inf;
 		$("#modalEnvio").modal();
 	
 	
 	}
-	$scope.newVenta= function (){
-		$scope.venta.cantidad=0;
-		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
-			$window.location.reload();
-		});
-		
-	}
+
 	$scope.generarFolio = function(){
+		
+		var r = confirm("Click en Aceptar para Confirmar Nueva Venta");
+	    if (r == true) {
 		
 		paqueteriaService.getFolio().then(function(data) {
 			$scope.venta.folio = data;
 		});
+		
+		$scope.venta.cantidad=0;
+		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
+			$scope.idVenta = data;
+			$scope.prePaquete(data);
+		});
+	    }
 	}
 	$scope.savePaquete = function(data){
 		console.log("Datos de Paquete", data);

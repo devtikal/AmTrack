@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-3"></div>
 		<div class="col-md-3">
-		 <button type="button" class="btn btn-info " data-toggle="modal" ng-click="generarFolio()" data-target="#modalVenta">Agregar Venta</button>
+		 <button type="button" class="btn btn-info " ng-click="generarFolio()" >Agregar Venta</button>
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
 		</div>
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<a class="btn btn-small btn-success" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls">
+				<a class="btn btn-small btn-success" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xlsx">
 				<i class="fa fa-file-excel-o fa-lg"></i>
 					Descargar Reporte
 				</a>
@@ -74,7 +74,7 @@
 					<td>{{v.fecha | date}}</td>
 					<td>{{v.cantidad}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v)" title="Agregar Envio">
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio">
 							<i class="fa fa-plus"></i>
 						</button>
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" ng-disabled="v.cantidad==0">
@@ -193,8 +193,8 @@
       <div class="modal-content ">
         <div class="modal-header">
           
-          <h4 class="modal-title">Registrar Envios</h4>
-<!--           <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title" align="center">Registrar Envios</h4>
+          <button type="button" class="close" data-dismiss="modal" ng-click="cleanMdl(); ">&times;</button>
         </div>
         <div class="modal-body">
           <form id="altaPaquete" name="myForm">
@@ -690,7 +690,7 @@
    <div class="modal modal-wide fade" id="modalPDF" role="dialog">
 <div class="modal-dialog modal-lg ">
    
-      <object data="{{url}}" type="application/pdf" height="1100" width="850" >
+      <object data="{{url}}" type="application/pdf" height="870" width="850" >
     </object>
 
     </div>
