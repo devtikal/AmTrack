@@ -226,7 +226,7 @@
 						<div class="col-md-3">
 						 <label> Kilataje </label>
 							
-									<select class="form-control" ng-model="paquete.tipoGuia" ng-change="isSobre(paquete.kilataje)"
+									<select class="form-control" ng-model="paquete.tipoGuia" ng-change="isSobre(paquete.tipoGuia)" ng-disabled="disKilataje"
 										required>
 										<option>1Kg Sobre Sig. Dia</option>
 										<option>1Kg Paquete Sig. Dia</option>
@@ -319,7 +319,7 @@
 									Largo </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paquete.paquete.largo" ng-required="requerido">
+										ng-model="paquete.paquete.largo" ng-required="requerido" ng-change="validaPeso()">
 								</div>
 							</div>
 						</div>
@@ -329,7 +329,7 @@
 									Ancho </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paquete.paquete.ancho" ng-required="requerido">
+										ng-model="paquete.paquete.ancho" ng-required="requerido" ng-change="validaPeso()">
 								</div>
 							</div>
 						</div>
@@ -339,18 +339,20 @@
 									Alto </label>
 								<div class="col-13">
 									<input type="number" step="0.01" class="form-control"
-										ng-model="paquete.paquete.alto" ng-required="requerido">
+										ng-model="paquete.paquete.alto" ng-required="requerido" ng-change="validaPeso()">
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-4">
 							<div class="form-group ">
-								<label for="example-text-input" class="col-2 col-form-label">
-									Peso Volumetrico </label>
-								<div class="col-13">
-									{{(paquete.paquete.largo*paquete.paquete.ancho*paquete.paquete.alto)/5000}}
+								<label for="example-text-input" class="col-10 col-form-label">
+									Peso Volumetrico</label>
+								<div class="col-9">
+									<input type="number" step="0.01" class="form-control"
+										ng-model="pesoVol" readonly>
 								</div>
 							</div>
+						
 						</div>
 					</div>
 					</div>
@@ -539,7 +541,7 @@
   <div style="overflow:auto;">
     <div style="float:right;">
       <button type="button" class="btn btn-info" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-      <button type="button" class="btn btn-info" id="nextBtn" onclick="nextPrev(1)">Continuar</button>
+      <button type="button" class="btn btn-info" id="nextBtn" onclick="nextPrev(1)" ng-disabled="disContinuar">Continuar</button>
       <button type="button" class="btn btn-success" id="btnSave" style="display: none" ng-click="savePaquete(paquete)">Guardar</button>
     </div>
   </div>

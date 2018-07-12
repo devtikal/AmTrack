@@ -170,6 +170,12 @@ function formatoFecha(fecha){
 		return result;
 	}
 }
+function redondea(valor){
+	 var aux= valor;
+		aux= aux.toFixed(4);
+		return aux;
+ }
+
 function blurFunction(mont) {
 
 	var Num = numeral(mont).format('0,0.00');

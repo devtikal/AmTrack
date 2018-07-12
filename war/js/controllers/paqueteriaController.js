@@ -61,9 +61,9 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 
-	this.getGuiaByName = function(user){
+	this.getGuiaByName = function(tipo,user){
 		var d = $q.defer();
-		$http.get("guia/getGuia/"+user).then(
+		$http.get("guia/getGuia/"+tipo+"/"+user).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -260,100 +260,133 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 		
 	}
+	$scope.disContinuar=false;
 	$scope.validaPeso = function(){
 		
-	if($scope.paquete.paquete.largo && $scope.paquete.paquete.ancho && $scope.paquete.paquete.alto){
 		var PesoVol = (($scope.paquete.paquete.largo*$scope.paquete.paquete.ancho*$scope.paquete.paquete.alto)/5000);
-var valor = 0;
-switch ($scope.paquete.kilataje) {
-case "1Kg Sobre Sig. Dia":
-	valor = 1;
-	if(PesoVol > valor){
-		alert("El Peso Volumetrio sobre pasa al Kilataje");
-	}
-	
-    break;
- case "1Kg Paquete Sig. Dia":
-	 valor = 1;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}  	
-	 break;
- case "11:30 Sig. Dia":
-	 valor = 30;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "11:30 Sobre Sig. Dia":
-	 valor = 30;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "3Kg Sig. Dia":
-	 valor = 3;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "5Kg Terrestre":
-	 valor = 5;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "10Kg Terrestre":
-	 valor = 10;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "15Kg Terrestre":
-	 valor = 15;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "20Kg Terrestre":
-	 valor = 20;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "25Kg Terrestre":
-	 valor = 25;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "30Kg Terrestre":
-	 valor = 30;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "35Kg Terrestre":
-	 valor = 35;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "40Kg Terrestre":
-	 valor = 40;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
- case "45Kg Terrestre":
-	 valor = 45;
-    	if(PesoVol > valor){
-    		alert("El Peso Volumetrio sobre pasa al Kilataje");
-    	}
-     break;
-
-}
-	}1
+		$scope.pesoVol = PesoVol;
+		$scope.pesoVol=redondea($scope.pesoVol) * 1;
+		var valor = 0;
+		if($scope.paquete.paquete.largo && $scope.paquete.paquete.ancho && $scope.paquete.paquete.alto){
+			switch ($scope.paquete.tipoGuia) {
+		    case "1Kg Sobre Sig. Dia":
+		    	valor = 1;
+		    	if(PesoVol > valor){
+		    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+		    		$scope.disContinuar=true;
+		    	}else{
+		    		$scope.disContinuar=false;
+		    	}
+		    	
+		        break;
+			 case "1Kg Paquete Sig. Dia":
+				 valor = 1;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}  else{
+			    		$scope.disContinuar=false;
+			    	}	
+				 break;
+			 case "11:30 Sig. Dia":
+				 valor = 30;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "11:30 Sobre Sig. Dia":
+				 valor = 30;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "3Kg Sig. Dia":
+				 valor = 3;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "5Kg Terrestre":
+				 valor = 5;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "10Kg Terrestre":
+				 valor = 10;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "15Kg Terrestre":
+				 valor = 15;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "20Kg Terrestre":
+				 valor = 20;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "25Kg Terrestre":
+				 valor = 25;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "30Kg Terrestre":
+				 valor = 30;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "35Kg Terrestre":
+				 valor = 35;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "40Kg Terrestre":
+				 valor = 40;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+			 case "45Kg Terrestre":
+				 valor = 45;
+			    	if(PesoVol > valor){
+			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
+			    	}else{
+			    		$scope.disContinuar=false;
+			    	}
+			     break;
+		 
+		}
+		}
+		
 		
 		
 	}
@@ -369,6 +402,21 @@ case "1Kg Sobre Sig. Dia":
 			$scope.paquete.paquete.tipoPaquete="";
 			$scope.paquete.tipoEnvio="";
 		}
+	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
+		paqueteriaService.getGuiaByName(data,$cookieStore.get('usuario')).then(function(data) {
+			
+			$scope.paquete.guia=data.numero;
+			$scope.disGuia=true;
+			if(!$scope.paquete.guia){
+				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
+				    if (r == true) {
+				    	
+				    	$location.path("/guia");
+				    }   	
+				    
+				}
+	});
+	}
 	}
 	$scope.cleanMdl = function() {
 		$window.location.reload(true);
@@ -440,25 +488,15 @@ case "1Kg Sobre Sig. Dia":
 	
 	$scope.hide=true;
 	$scope.requerido=true;
+	$scope.disKilataje=true;
 	$scope.isEstafeta = function() {
+		$scope.disKilataje=false;
 		if ($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){
 			$scope.hide=false;
 			$scope.requerido=false;
 			document.getElementById("delTap").classList.add("tab");
 			
-			paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
-				
-				$scope.paquete.guia=data.numero;
-				$scope.disGuia=true;
-				if(!$scope.paquete.guia){
-					 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
-					    if (r == true) {
-					    	
-					    	$location.path("/guia");
-					    }   	
-					    
-					}
-		});
+		
 			
 		}else{
 			$scope.hide=true;
