@@ -413,7 +413,7 @@ public class VentaController {
 		 
 	//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
 				  System.out.println("si entra:");
-				  //response.setContentType("Application/Pdf");
+				  response.setContentType("Application/xls");
 				  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
 				  
 				  File newExcelFile = new File(nombreArchivo);		 

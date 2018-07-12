@@ -97,7 +97,7 @@ public class ReporteXls {
 	    		        for(int i = 0; i < titulos.length; i++) {
 	    		            // Creamos una celda en esa fila, en la posicion 
 	    		            // indicada por el contador del ciclo
-	    		        	System.out.println("IIIIIIIII numero de registros:"+regs.size());
+	    		        	//System.out.println("IIIIIIIII numero de registros:"+regs.size());
 	    		            Cell celda = fila.createCell(i);
 	    		           
 	    		            	          
@@ -127,6 +127,7 @@ public class ReporteXls {
 //		    		        	System.out.println("9-+"+r.getCostoSeguro());
 //		    		        	System.out.println("10-+"+r.getTotal());
 //		    		        	System.out.println("prec-+"+r.getPrecio());
+		    		        	System.out.println("registro:"+r);
 		    		        	
 		    		        	 String[] datos = { r.getFecha(),r.getFolio().toString(),r.getRemitente(), r.getGuia(), r.getRastreo().toString(), r.getTipoPaquete()
 		    		        			 ,r.getTipoEnvio(), r.getEmpresa(), "$ "+r.getPrecio().toString(),"$ "+r.getCostoSeguro(), "$ "+r.getTotal().toString()};
