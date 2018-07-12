@@ -449,13 +449,13 @@ public class VentaController {
 			    	System.out.println("El Directorio Temporal del Sistema Es: ");
 			        System.out.println( System.getProperty("java.io.tmpdir") );
 		//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-			       // response.getOutputStream().flush();
-			        //response.getOutputStream().close();
+			        response.getOutputStream().flush();
+			        response.getOutputStream().close();
 			    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
 			    	//generaOrdenPdf.GeneraOrdenPdf(ox));
 //		  }else{
 //				response.sendError(403);
-//		   }
+//		   }	
 		}
 	  
 	  

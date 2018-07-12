@@ -65,7 +65,7 @@ public class ReporteXls {
 	    	            style.setFont(font);
 	    	            
 	    	            CellStyle style2 = workbook.createCellStyle();
-	    	            style2.setBorderBottom(CellStyle.BORDER_THIN);
+	    	      //      style2.setBorderBottom(CellStyle.BORDER_THIN);
 	    	            style2.setAlignment(HorizontalAlignment.CENTER);
 	    	            style2.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
 	    	            font2.setBold(false);
@@ -74,7 +74,7 @@ public class ReporteXls {
 	    	            style2.setFont(font2);
 	    	            
 	    	            CellStyle style3 = workbook.createCellStyle();
-	    	            style3.setBorderBottom(CellStyle.BORDER_THIN);
+	    	         //   style3.setBorderBottom(CellStyle.BORDER_THIN);
 	    	            style3.setAlignment(HorizontalAlignment.RIGHT);
 	    	            style3.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
 	    	            font3.setBold(false);
