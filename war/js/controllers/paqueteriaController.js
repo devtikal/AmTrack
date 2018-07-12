@@ -269,7 +269,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		var valor = 0;
 		if($scope.paquete.paquete.largo && $scope.paquete.paquete.ancho && $scope.paquete.paquete.alto){
 			switch ($scope.paquete.tipoGuia) {
-		    case "1Kg Sobre Sig. Dia":
+		    case "1Kg Sobre Sig Dia":
 		    	valor = 1;
 		    	if(PesoVol > valor){
 		    		alert("El Peso Volumetrio sobre pasa al Kilataje");
@@ -279,7 +279,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		    	}
 		    	
 		        break;
-			 case "1Kg Paquete Sig. Dia":
+			 case "1Kg Paquete Sig Dia":
 				 valor = 1;
 			    	if(PesoVol > valor){
 			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
@@ -287,7 +287,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			    		$scope.disContinuar=false;
 			    	}	
 				 break;
-			 case "11:30 Sig. Dia":
+			 case "11:30 Sig Dia":
 				 valor = 30;
 			    	if(PesoVol > valor){
 			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
@@ -295,7 +295,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			    		$scope.disContinuar=false;
 			    	}
 			     break;
-			 case "11:30 Sobre Sig. Dia":
+			 case "11:30 Sobre Sig Dia":
 				 valor = 30;
 			    	if(PesoVol > valor){
 			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
@@ -303,7 +303,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			    		$scope.disContinuar=false;
 			    	}
 			     break;
-			 case "3Kg Sig. Dia":
+			 case "3Kg Sig Dia":
 				 valor = 3;
 			    	if(PesoVol > valor){
 			    		alert("El Peso Volumetrio sobre pasa al Kilataje");
@@ -390,18 +390,29 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 		
 	}
+	$scope.desMedidas = false;
+	$scope.cSobre= function(){
+		if($scope.paquete.paquete.tipoPaquete=="SOBRE"){
+			$scope.desMedidas = true;
+		}else{
+			$scope.desMedidas = false;
+		}
+	}	
 	$scope.paquete={
 			tipoEnvio:null , 
 			paquete:{tipoPaquete:null}
 	}
 	$scope.isSobre= function (data) {
-		if (data=='1Kg Sobre Sig. Dia' || data=='11:30 Sobre Sig. Dia'){
+		if (data=='1Kg Sobre Sig Dia' || data=='11:30 Sobre Sig Dia'){
 			$scope.paquete.paquete.tipoPaquete="SOBRE";
 			$scope.paquete.tipoEnvio="Dia Siguiente";
+			$scope.desMedidas = true;
 		}else{
 			$scope.paquete.paquete.tipoPaquete="";
 			$scope.paquete.tipoEnvio="";
+			$scope.desMedidas = false;
 		}
+	
 	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
 		paqueteriaService.getGuiaByName(data,$cookieStore.get('usuario')).then(function(data) {
 			

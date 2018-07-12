@@ -269,7 +269,7 @@
 								 <br>
 							<label>Descripcion:</label> <input type="text" class="form-control"
 								ng-model="paquete.paquete.descripcion" required> <br> 
-								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.paquete.tipoPaquete"
+								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.paquete.tipoPaquete" ng-change="cSobre()"
 										required>
 										<option></option>
 										<option>BOLSA</option>
@@ -303,7 +303,8 @@
 					</div>
 					<br> <br>
 					
-										<div ng-hide="hide">
+				<div ng-hide="hide">
+					<div ng-hide="desMedidas">
 					<div class="row" >
 						
 						<div class="col-md-2">
@@ -354,6 +355,7 @@
 							</div>
 						
 						</div>
+					</div>
 					</div>
 					</div>
 						<div class="row">
@@ -408,7 +410,7 @@
     <p><input  ng-model="paquete.cliente.enAtencion" required></p>
     
     CP:
-    <p><input type="number" ng-model="paquete.cliente.cp" ng-disabled="hide"></p>
+    <p><input type="number" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide"></p>
     Calle
     <p><input   ng-model="paquete.cliente.calle"  ng-disabled="hide"></p>
        Numero Ext
@@ -445,7 +447,7 @@
     <p><input ng-model="paquete.destinatario.enAtencion" required></p>
    
     CP:
-    <p><input  ng-model="paquete.destinatario.cp"></p>
+    <p><input  ng-model="paquete.destinatario.codigoPostal"></p>
      Calle
     <p><input   ng-model="paquete.destinatario.calle"></p>
     Numero Ext
