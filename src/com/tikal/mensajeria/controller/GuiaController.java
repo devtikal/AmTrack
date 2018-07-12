@@ -232,10 +232,10 @@ public class GuiaController {
 		public void getResumen(HttpServletResponse response, HttpServletRequest request) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
 			List<Sucursal> sucursales= new ArrayList<Sucursal>();
-//			for (Sucursal s:sucursales){
-//				List<Guia> guias = guiaDao.getBySucursal(s.getId());
-//			}
-//			
+			for (Sucursal s:sucursales){
+				List<Guia> guias = guiaDao.getBySucursal(s.getId());
+			}
+			
 //			
 //			List<Guia> lista = guiaDao.getBySucursal(idSucursal);
 //			if (lista == null) {

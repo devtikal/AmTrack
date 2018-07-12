@@ -172,6 +172,9 @@ public class EnvioController {
 			//Empresa e=new Empresa();
 		//	e=empresaDao.getByNombre(evo.getEmpresa());
 			c=ef.getCliente();
+			if (c.getCodigoPostal()==null || c.getCodigoPostal()==0){
+				c.setCodigoPostal(0);
+			}
 			personaDao.save(c);
 			
 			d=ef.getCliente();
@@ -245,10 +248,10 @@ public class EnvioController {
 	}
 	   
 	 
-	  	   @RequestMapping(value = { "/generaGuiaMervel/{idVenta}/{idEnvio}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+	  	   @RequestMapping(value = { "/generaGuiaMervel/{idEnvio}/{idVenta}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
 	 		public void generaGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio
 	 				, @PathVariable Long idVenta, @PathVariable String userName) throws IOException {
-	 	   System.out.println("genera ticket");
+	 	   System.out.println("genera guiiiiaaaaaaaaa MERVEL O ESTAFETA");
 //	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 	 	   Venta v = ventaDao.consult(idVenta);
 			  Envio envio = envioDao.consult(idEnvio) ; 

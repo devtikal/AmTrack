@@ -32,7 +32,7 @@ public class GeneraGuiaMervel {
 
     	
     	try {
-    		Rectangle envelope = new Rectangle(230, 690);
+    		Rectangle envelope = new Rectangle(200, 690);
         	//	Document pdfDoc = new Document(envelope, 230f, 10f, 100f, 0f);
         		Document document = new Document(envelope,0,0,0,0); 
     		//Document document = new Document(PageSize.A6,15,15,15,15);   	  
@@ -113,7 +113,7 @@ public class GeneraGuiaMervel {
             Paragraph p5 = new Paragraph(e.getGuia().toString(),f3);
             PdfPCell c5 = new PdfPCell(p5);
             c5.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c5.setColspan(1);c5.setRowspan(1);
+            c5.setColspan(3);c5.setRowspan(1);
             c5.setBorder(Rectangle.NO_BORDER);
             table.addCell(c5);
             
@@ -125,17 +125,17 @@ public class GeneraGuiaMervel {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph(v.getFecha(),f3);
+            Paragraph p6 = new Paragraph(v.getFecha().substring(0,19),f1);
             PdfPCell c6 = new PdfPCell(p6);
-            c6.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c6.setColspan(1);
+            c6.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            c6.setColspan(2);
             c6.setBorder(Rectangle.NO_BORDER);
             table.addCell(c6);
             
             Paragraph p7 = new Paragraph(e.getRastreo().toString(),f3);
             PdfPCell c7 = new PdfPCell(p7);
             c7.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c7.setColspan(4);c7.setBorder(Rectangle.NO_BORDER);
+            c7.setColspan(3);c7.setBorder(Rectangle.NO_BORDER);
             table.addCell(c7);
             table.addCell(c33);
             

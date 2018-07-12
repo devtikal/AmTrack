@@ -370,7 +370,7 @@ public class VentaController {
 							c.add(Calendar.DATE, 1);
 							datef = c.getTime();
 							
-							 String nombreArchivo = ("Reporte_Ventas_"+datei+"_"+datef);
+							 String nombreArchivo = ("C:/REPORTES_MENSAJERIA/Reporte_Ventas_"+datei+"_"+datef+".xlsx");
 							 
 							  File newExcelFile = new File(nombreArchivo);		 
 						        if (!newExcelFile.exists()){
@@ -407,57 +407,58 @@ public class VentaController {
 		  
 	  
 	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/xls" )
-	 
-			public void generaxls_(HttpServletResponse response, HttpServletRequest request,
-					@PathVariable String inicio,@PathVariable String fin, @PathVariable String userName) throws IOException, ParseException {
-			 
-		//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
-					  System.out.println("si entra:");
-					  //response.setContentType("Application/Pdf");
-					  String nombreArchivo = ("REPORTEVENTA.xls");//+inicio+"_"+fin);    /ventas/generaReporteXls_/07-10-2018/07-10-2018/Ris
-					  
-					  File newExcelFile = new File(nombreArchivo);		 
-					  if (!newExcelFile.exists()){
-				            try {
-				                newExcelFile.createNewFile();
-				                System.out.println("YA LO CREO... ");
-				            } catch (IOException ioe) {
-				                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
-				                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
-				                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
-				            }
-				        }
-					  
-				     //   FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
-						SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy"); //HH:mm:ss");
-					//	try {
-							Date datei = formatter.parse(inicio);
-							Date datef = formatter.parse(fin);
-							Calendar c = Calendar.getInstance();
-							c.setTime(datef);
-							c.add(Calendar.DATE, 1);
-							datef = c.getTime();
-							
-							 List<ReporteVo> regs= new ArrayList<ReporteVo>();
-							regs= getEventos(regs, datei,datef);
-							 System.out.println("------------existen :"+regs.size()+"envios en total" );
-				        System.out.println("empiezo a generar pdf..." );
-				        /////igual puedo 
-				    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
-				    	
-				    	
-				    	System.out.println("El Directorio Temporal del Sistema Es: ");
-				        System.out.println( System.getProperty("java.io.tmpdir") );
-			//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-				       // response.getOutputStream().flush();
-				        //response.getOutputStream().close();
-				    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
-				    	//generaOrdenPdf.GeneraOrdenPdf(ox));
-//			  }else{
-//					response.sendError(403);
-//			   }
-			}
-		
+		 
+		public void generaxls_(HttpServletResponse response, HttpServletRequest request,
+				@PathVariable String inicio,@PathVariable String fin, @PathVariable String userName) throws IOException, ParseException {
+		 
+	//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
+				  System.out.println("si entra:");
+				  //response.setContentType("Application/Pdf");
+				  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
+				  
+				  File newExcelFile = new File(nombreArchivo);		 
+				  if (!newExcelFile.exists()){
+			            try {
+			                newExcelFile.createNewFile();
+			                System.out.println("YA LO CREO... ");
+			            } catch (IOException ioe) {
+			                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
+			                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
+			                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
+			            }
+			        }
+				  
+			     //   FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
+					SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy"); //HH:mm:ss");
+				//	try {
+						Date datei = formatter.parse(inicio);
+						Date datef = formatter.parse(fin);
+						Calendar c = Calendar.getInstance();
+						c.setTime(datef);
+						c.add(Calendar.DATE, 1);
+						datef = c.getTime();
+						
+						 List<ReporteVo> regs= new ArrayList<ReporteVo>();
+						regs= getEventos(regs, datei,datef);
+						 System.out.println("------------existen :"+regs.size()+"envios en total" );
+			        System.out.println("empiezo a generar pdf..." );
+			        /////igual puedo 
+			    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
+			    	
+			    	
+			    	System.out.println("El Directorio Temporal del Sistema Es: ");
+			        System.out.println( System.getProperty("java.io.tmpdir") );
+		//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
+			       // response.getOutputStream().flush();
+			        //response.getOutputStream().close();
+			    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
+			    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+//		  }else{
+//				response.sendError(403);
+//		   }
+		}
+	  
+	  
 	  public List<ReporteVo> getEventos(List<ReporteVo> regs,Date datei, Date datef){
 		  List<Venta> lista= ventaDao.getVentas(datei, datef);
 		  System.out.println("ventas array:"+lista.size());
