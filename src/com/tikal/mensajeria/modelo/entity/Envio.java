@@ -15,9 +15,10 @@ public class Envio {
 	private Persona cliente;
 	private Persona destinatario;
 	@Index  String empresa;
-	private String kilataje;
+	
 	private Paquete paquete;	
 	@Index private String guia;
+	@Index private String tipoGuia;
 	@Index private String rastreo;
 	private String tipoEnvio;
 	private String tipoServicio;
@@ -37,13 +38,6 @@ public class Envio {
 		this.id = id;
 	}
 	
-	
-	public String getKilataje() {
-		return kilataje;
-	}
-	public void setKilataje(String kilataje) {
-		this.kilataje = kilataje;
-	}
 	public Persona getCliente() {
 		return cliente;
 	}
@@ -117,6 +111,12 @@ public class Envio {
 	}
 	public void setTipoServicio(String tipoServicio) {
 		this.tipoServicio = tipoServicio;
+	}
+	public String getTipoGuia() {
+		return tipoGuia;
+	}
+	public void setTipoGuia(String tipoGuia) {
+		this.tipoGuia = tipoGuia;
 	}
 	
 	

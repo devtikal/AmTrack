@@ -12,6 +12,7 @@ public class Guia {
 	@Index private String numero;
 	@Index private String estatus;
 	@Index private Long idSucursal;
+	@Index private String tipoGuia;
 	@Index private String sucursal;
 	
 	public Long getId() {
@@ -43,6 +44,12 @@ public class Guia {
 	}
 	public void setSucursal(String sucursal) {
 		this.sucursal = sucursal;
+	}
+	public String getTipoGuia() {
+		return tipoGuia;
+	}
+	public void setTipoGuia(String tipoGuia) {
+		this.tipoGuia = tipoGuia;
 	}
 	
 

@@ -43,37 +43,37 @@ public class GeneraTicket {
 
 	public GeneraTicket(List<Envio> e, Sucursal s, Venta v,OutputStream ops) throws MalformedURLException, IOException {
 
-    	  final String condiciones = "1.-Después de 15 días MERVEL EXPRESSno se hace responsable de su envío.\n\n"
-    	  		+ "2.-No nos hacemos responsablesen envíos con valor arriba de 80 dias de salario "
+    	  final String condiciones = "1.-Después de 15 días MERVEL EXPRESS no se hace responsable de su envío.\n\n"
+    	  		+ "2.-No nos hacemos responsables en envíos con valor arriba de 80 dias de salario "
     	  		+ "mínimo.\n\n"
-    	  		+"3.-Las partes convienenen que si el valor del ENVÍO no es declarado y sufre, por causa"
+    	  		+"3.-Las partes convienen que si el valor del ENVÍO no es declarado y sufre, por causa"
     	  		+ "imputable a MERVEL EXPRESS, la pédida total, daños o menoscabos, ésta pagará "
-    	  		+ "como maxima responsabilidad por la pérdida o daño, la cantidad equivalente de hasta "
+    	  		+ "como máxima responsabilidad por la pérdida o daño, la cantidad equivalente de hasta "
     	  		+ "30 veces el salario mínimo general vigente en el D. F., en la fecha en que se haya "
     	  		+ "recibido y documentado el ENVÍO. EL REMITENTE deberá justificar el valor comercial"
-    	  		+ "de la pérdida o de su reparación. En caso de envío de vlor declarado, deberá"
+    	  		+ "de la pérdida o de su reparación. En caso de envío de valor declarado, deberá "
     	  		+ "asegurarse y la responsabilidad es por el monto total. Conforme a lo siguiente:\n \n"
     	  		+ "4.-SEGURO OPCIONAL\n\n"
     	  		+ "5.-MERVEL EXPRESS tiene el derecho de revisar el paquete más no a obligación, por lo "
-    	  		+ "que podrá exigir al REMITENTE su apertura y reconocimiento, si ése se rehsare,"
+    	  		+ "que podrá exigir al REMITENTE su apertura y reconocimiento, si ése se rehusare,"
     	  		+ "MERVEL EXPRESS quedará libre de cualquier responsabilidad.\n\n"
-    	  		+ "6.-MERVEL EXPRESS se reserva el derecho de inspeccionar el envío en cualquier"
-    	  		+ "momento, así como permitir a las autoriddes competentes a llevar a cabo las"
-    	  		+ "inspecciones que consideren adecuadas. Asimismo, MERVEL EXPRESS se reserve el"
-    	  		+ "derecho a rechazar o suspender el porte de cualquier envío prohibido o que contenga"
-    	  		+ "materiales que dañen o puedan dañar otros envíos que puedan constituir un riesgo a"
+    	  		+ "6.-MERVEL EXPRESS se reserva el derecho de inspeccionar el envío en cualquier "
+    	  		+ "momento, así como permitir a las autoriddes competentes a llevar a cabo las "
+    	  		+ "inspecciones que consideren adecuadas. Asimismo, MERVEL EXPRESS se reserve el "
+    	  		+ "derecho a rechazar o suspender el porte de cualquier envío prohibido o que contenga "
+    	  		+ "materiales que dañen o puedan dañar otros envíos que puedan constituir un riesgo a "
     	  		+ "equipo o empleados de MERVEL EXPRESS o de sus prestadores de servicios.\n\n"
-    	  		+ "7.-En servicio internacional MERVEL EXPRESS se obliga a entregar puntualmente el"
-    	  		+ "envío siempre y cuando las autoridades aduaneras hayan cumplido con sus horarios"
-    	  		+ "normales oficiales. El plazo se contará a partir de la recepción y documentación del"
+    	  		+ "7.-En servicio internacional MERVEL EXPRESS se obliga a entregar puntualmente el "
+    	  		+ "envío siempre y cuando las autoridades aduaneras hayan cumplido con sus horarios "
+    	  		+ "normales oficiales. El plazo se contará a partir de la recepción y documentación del "
     	  		+ "ENVÍO.\n\n"
     	  		+ "** EL REMITENTE se obliga para con MERVEL EXPRESS\n\n"
     	  		+ "a) A pagar la tarifa y los impuestos del servicio.\n\n"
-    	  		+ "b) A entregar toda la documentación en cumplimiento de las disposiciones legales"
-    	  		+ "aplicables, de aduanas, de exportación e importación de los países a, desde, o a través"
-    	  		+ "de los cuales será transportado el ENVÍO y a efectuar el pago de los gastos y costos que"
+    	  		+ "b) A entregar toda la documentación en cumplimiento de las disposiciones legales "
+    	  		+ "aplicables, de aduanas, de exportación e importación de los países a, desde, o a través "
+    	  		+ "de los cuales será transportado el ENVÍO y a efectuar el pago de los gastos y costos que "
     	  		+ "origine incluyendo sin limitación alguna, recargos, aranceles, multas, honorarios,"
-    	  		+ "etc. Por lo que MERVEL EXPRESS no asume ninguna responsabilidad por el"
+    	  		+ "etc. Por lo que MERVEL EXPRESS no asume ninguna responsabilidad por el "
     	  		+ "incumplimiento de estas obligaciones.\n\n"
     	  		+ "8.-MERVEL EXPRESS se coordina con sevicios de mensajeria externos.\n\n"
     	  		+ "9.-MERVEL EXPRESS elegirá el trasporte que a su interés convenga.";
@@ -81,7 +81,7 @@ public class GeneraTicket {
     	 
     	  
     	try {
-    		Rectangle envelope = new Rectangle(230, 690);
+    		Rectangle envelope = new Rectangle(260, 690);
     	//	Document pdfDoc = new Document(envelope, 230f, 10f, 100f, 0f);
     		Document document = new Document(envelope,0,0,0,0);   	  
 	        PdfWriter.getInstance(document,ops);
@@ -152,16 +152,16 @@ public class GeneraTicket {
             Paragraph p2 = new Paragraph(s.getDomicilio(),f1);
             PdfPCell c2 = new PdfPCell(p2);
             c2.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c2.setColspan(3);c2.setRowspan(2);
+            c2.setColspan(6);c2.setRowspan(2);
             c2.setBorder(Rectangle.NO_BORDER);
             table.addCell(c2);
             
-            Paragraph p3 = new Paragraph(s.getTitular(),f1);
-            PdfPCell c3 = new PdfPCell(p3);
-            c3.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c3.setColspan(3);c3.setRowspan(1);
-            c3.setBorder(Rectangle.NO_BORDER);
-            table.addCell(c3);
+//            Paragraph p3 = new Paragraph(" ",f1);
+//            PdfPCell c3 = new PdfPCell(p3);
+//            c3.setHorizontalAlignment(Element.ALIGN_LEFT);
+//            c3.setColspan(3);c3.setRowspan(1);
+//            c3.setBorder(Rectangle.NO_BORDER);
+//            table.addCell(c3);
             
             Paragraph p5 = new Paragraph("RFC: "+s.getRfc(),f1);
             PdfPCell c5 = new PdfPCell(p5);

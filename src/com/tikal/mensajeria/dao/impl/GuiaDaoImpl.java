@@ -2,6 +2,7 @@ package com.tikal.mensajeria.dao.impl;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class GuiaDaoImpl implements GuiaDao {
 			old.setEstatus(g.getEstatus());
 			old.setIdSucursal(g.getIdSucursal());
 			old.setSucursal(g.getSucursal());
+			old.setTipoGuia(g.getTipoGuia());
 				
 		}
 
@@ -70,7 +72,15 @@ public class GuiaDaoImpl implements GuiaDao {
 	@Override
 	public List<Guia> getBySucursal(Long idSucursal) {
 		// TODO Auto-generated method stub
-		return ofy().load().type(Guia.class).filter("idSucursal",idSucursal).list();
+	
+		if (ofy().load().type(Guia.class).filter("idSucursal",idSucursal).list().isEmpty()) {
+			List<Guia> nuevo = new ArrayList<Guia>();
+			return nuevo;
+		}
+		List<Guia> nuevo = ofy().load().type(Guia.class).filter("idSucursal",idSucursal).list();
+		return nuevo;
+		
+		
 	}
 
 
@@ -82,10 +92,10 @@ public class GuiaDaoImpl implements GuiaDao {
 
 
 	@Override
-	public Guia getByEstSuc(String estatus, Long idSucursal) {
+	public Guia getByEstSuc(String tipoGuia, Long idSucursal) {
 		// TODO Auto-generated method stub
-		System.out.println("esta en daoimpl envio  get by status:"+estatus+" Suc:"+idSucursal);
-		List<Guia> g= ofy().load().type(Guia.class).filter("estatus",estatus).filter("idSucursal", idSucursal).order("numero").list();
+		System.out.println("esta en daoimpl envio  get by ASIGNADA, tipo guia::"+tipoGuia+" Suc:"+idSucursal);
+		List<Guia> g= ofy().load().type(Guia.class).filter("estatus","ASIGNADA").filter("idSucursal", idSucursal).filter("tipoGuia",tipoGuia).order("numero").list();
 		System.out.println(" cuantas guias :"+g.size());
 		if (g.size() == 0) {
 			return null;

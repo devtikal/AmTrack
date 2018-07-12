@@ -21,6 +21,7 @@ import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.modelo.entity.Empresa;
 import com.tikal.mensajeria.modelo.entity.Guia;
+import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.util.JsonConvertidor;
 import com.tikal.util.AsignadorDeCharset;
 
@@ -90,9 +91,9 @@ public class GuiaController {
 		}
 	
 	
-	@RequestMapping(value = { "/addM/{inicio}/{fin}" },  method = RequestMethod.GET)
+	@RequestMapping(value = { "/addM/{inicio}/{fin}/{tipoGuia}" },  method = RequestMethod.GET)
 	public void altaGuias(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable String inicio , @PathVariable String fin)throws IOException {
+			@PathVariable String inicio , @PathVariable String fin, @PathVariable String tipoGuia)throws IOException {
 	
 		//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 				AsignadorDeCharset.asignar(request, response);
@@ -115,6 +116,7 @@ public class GuiaController {
 				//	guia.setNumero(i);
 					//guia.setIdSucursal(Long.valueOf("9999"));
 					guia.setIdSucursal(usuarioDao.consultarUsuario("root").getIdSucursal());
+					guia.setTipoGuia(tipoGuia);
 					//guia.setSucursal(sucursalDao.consult(suc).getNombre());
 					guiaDao.save(guia); 
 				}
@@ -158,6 +160,7 @@ public class GuiaController {
 		//	guia.setNumero(i);
 			//guia.setIdSucursal(Long.valueOf("9999"));
 			guia.setIdSucursal(sucursalDao.consult(idSucursal).getId());
+			guia.setSucursal(sucursalDao.consult(idSucursal).getNombre());
 			//guia.setSucursal(sucursalDao.consult(suc).getNombre());
 			guiaDao.update(guia); 
 		}
@@ -188,12 +191,12 @@ public class GuiaController {
 		
 		
 	}
-	 @RequestMapping(value = { "/getGuia/{userName}" },  method = RequestMethod.GET, produces = "application/json")
-		public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
+	 @RequestMapping(value = { "/getGuia/{tipoGuia}/{userName}" },  method = RequestMethod.GET, produces = "application/json")
+		public void getGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable String tipoGuia, @PathVariable String userName) throws IOException {
 	   System.out.println("dame guia");
 	////   Guia g=guiaDao.getByEstSucK("ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal(), kilataje);
 	   
-	   Guia g=guiaDao.getByEstSuc("ASIGNADA", usuarioDao.consultarUsuario(userName).getIdSucursal());
+	   Guia g=guiaDao.getByEstSuc(tipoGuia, usuarioDao.consultarUsuario(userName).getIdSucursal());
 	   
 	   System.out.println("dame guia:"+g);
 	  //response.getWriter().println(g.getNumero());
@@ -223,5 +226,22 @@ public class GuiaController {
 			//response.getWriter().println(JsonConvertidor.toJson(lista));
 
 		}
+
 	 
+	 @RequestMapping(value = { "/getResumenGuias" }, method = RequestMethod.GET, produces = "application/json")
+		public void getResumen(HttpServletResponse response, HttpServletRequest request) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Sucursal> sucursales= new ArrayList<Sucursal>();
+//			for (Sucursal s:sucursales){
+//				List<Guia> guias = guiaDao.getBySucursal(s.getId());
+//			}
+//			
+//			
+//			List<Guia> lista = guiaDao.getBySucursal(idSucursal);
+//			if (lista == null) {
+//				lista = new ArrayList<Guia>();
+//			}
+//			response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
 }

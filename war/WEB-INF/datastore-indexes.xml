@@ -5,6 +5,7 @@
   <property name="estatus" direction="asc"/> 
   <property name="idSucursal" direction="asc"/> 
   <property name="numero" direction="asc"/>
+   <property name="tipoGuia" direction="asc"/>
    </datastore-index>
   
   <datastore-index kind="Venta" ancestor="false" source="manual"> 

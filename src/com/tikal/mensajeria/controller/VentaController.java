@@ -240,7 +240,8 @@ public class VentaController {
 //		int f=Integer.parseInt(fin);
 			
 		
-			ventaDao.save(v); 
+			ventaDao.save(v);
+			response.getWriter().println(JsonConvertidor.toJson(v.getId()));
 			//folio.incremeta();
 		//	ObjectifyService.ofy().save().entity(folio).now();
 	
