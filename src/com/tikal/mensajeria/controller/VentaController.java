@@ -406,14 +406,14 @@ public class VentaController {
 			}
 		  
 	  
-	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/xls" )
+	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/x-xls" )
 		 
 		public void generaxls_(HttpServletResponse response, HttpServletRequest request,
 				@PathVariable String inicio,@PathVariable String fin, @PathVariable String userName) throws IOException, ParseException {
 		 
 	//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
 				  System.out.println("si entra:");
-				  response.setContentType("Application/xls");
+				  response.setContentType("Application/x-xls");
 				  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
 				  
 				  File newExcelFile = new File(nombreArchivo);		 
