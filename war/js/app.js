@@ -53,6 +53,9 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/Guia.html",
 		controller : "guiaController"
 	});
+	$routeProvider.when('/error', {
+		templateUrl : "pages/error.html"
+	});
 	$routeProvider.when('/', {
 		templateUrl : "pages/welcome.html",
 		controller : "DHLController"
@@ -130,6 +133,7 @@ app.service('sessionService', [
 			$http.get("currentSession").success(function(data) {
 				$rootScope.UserData=data;
 				$cookieStore.put("usuario", data.usuario);
+				$cookieStore.put("perfil", data.perfil);
 //				console.log("Solo el Usuario a cookie",data.usuario);
 				$cookieStore.put("idSucursal", data.idSucursal);
 				$rootScope.authenticated = true;

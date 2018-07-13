@@ -151,6 +151,10 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 
 app.controller("guiaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','guiaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, guiaService,sessionService){
 	sessionService.isAuthenticated();
+	if($cookieStore.get('perfil')=='Cajero'){
+		$location.path("/error");
+//		window.location.reload;
+	}
 //	$cookieStore.get('usuario');
 	guiaService.getSucursal().then(function(data) {
 		$scope.sucursal=data;
