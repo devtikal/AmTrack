@@ -1,8 +1,12 @@
 package com.tikal.mensajeria.modelo.vo;
 
+import java.util.Date;
+
+import org.apache.poi.hssf.usermodel.HSSFRow;
+
 public class ReporteVo {
 	
-	private String fecha;
+	private Date fecha;
 	private Long folio;
 	private String remitente;
 	private String guia;
@@ -23,10 +27,10 @@ public class ReporteVo {
 	public void setFolio(Long folio) {
 		this.folio = folio;
 	}
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public String getRemitente() {
@@ -90,7 +94,25 @@ public class ReporteVo {
 		Acumulado = acumulado;
 	}
 	
-	
+	public void llenarRenglon(HSSFRow r){
+		for(int i=0;i<12;i++){
+			r.createCell(i);
+		}
+		
+		r.getCell(0).setCellValue(this.fecha);
+		r.getCell(1).setCellValue(this.folio);
+		r.getCell(2).setCellValue(this.remitente);		
+		r.getCell(3).setCellValue(this.guia);
+		r.getCell(4).setCellValue(this.rastreo);
+		r.getCell(5).setCellValue(this.tipoPaquete);
+		r.getCell(6).setCellValue(this.tipoEnvio);
+		r.getCell(7).setCellValue(this.empresa);
+		r.getCell(8).setCellValue(this.precio);
+		r.getCell(9).setCellValue(this.costoSeguro);		
+		r.getCell(10).setCellValue(this.Total);
+		//r.getCell(11).setCellValue(this.Acumulado);
+	}
+
 	
 
 }

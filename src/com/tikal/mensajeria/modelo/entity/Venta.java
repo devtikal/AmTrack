@@ -1,5 +1,6 @@
 package com.tikal.mensajeria.modelo.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import com.googlecode.objectify.annotation.Entity;
@@ -13,15 +14,22 @@ public class Venta {
 	@Id private Long id;
 	@Index private Usuario usuario;
 	@Index private Long folio;
-	@Index private String fecha;
+	@Index private Date fecha;
 	private Integer cantidad;
 	@Index private String estatus;
 	List<Long> envios;
 	private Double total;
+	@Index private Long idSucursal;
 	
 	
 	
 	
+	public Long getIdSucursal() {
+		return idSucursal;
+	}
+	public void setIdSucursal(Long idSucursal) {
+		this.idSucursal = idSucursal;
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -52,10 +60,10 @@ public class Venta {
 	public void setFolio(Long folio) {
 		this.folio = folio;
 	}
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public List<Long> getEnvios() {

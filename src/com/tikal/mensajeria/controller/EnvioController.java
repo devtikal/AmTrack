@@ -214,9 +214,12 @@ public class EnvioController {
 			envio.setMateriales(ef.getMateriales());
 			
 			envioDao.save(envio);
-			Guia g=guiaDao.getByNumero(ef.getGuia());
-			g.setEstatus("EN ENVIO");
-			guiaDao.update(g);
+			if (envio.getEmpresa().equals("MERVEL") || envio.getEmpresa().equals("ESTAFETA")){
+								
+				Guia g=guiaDao.getByNumero(ef.getGuia());
+				g.setEstatus("EN ENVIO");
+				guiaDao.update(g);
+			}			
 			//folio.incremeta();
 			
 			Venta v=ventaDao.consult(idVenta);

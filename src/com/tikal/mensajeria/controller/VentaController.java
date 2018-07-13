@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.dao.VentaDao;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
+import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
@@ -180,7 +182,7 @@ public class VentaController {
 		//Envio e2 = new Envio();
 		Contador folio= new Contador();
 		v.setFolio(folio.getFolio());
-		v.setFecha("25/06/2018");
+		//v.setFecha("25/06/2018");
 		
 		v.setEstatus("ABIERTA");
 		
@@ -214,18 +216,19 @@ public class VentaController {
 		AsignadorDeCharset.asignar(request, response);
 		Venta v = (Venta) JsonConvertidor.fromJson(json, Venta.class);
 		
-		if (ObjectifyService.ofy().load().type(Contador.class).list().isEmpty()){
-			Contador f= new Contador();
+		if (ObjectifyService.ofy().load().type(ContadorServicio.class).list().isEmpty()){
+			ContadorServicio f= new ContadorServicio();
 			f.getFolio();
 			v.setFolio(f.getFolio());
-			f.incremeta();
+			f.incrementar();
+			System.out.println("folio guardado:"+f.getFolio());
 			ObjectifyService.ofy().save().entity(f).now(); 
 		}else{
-			Contador f=ObjectifyService.ofy().load().type(Contador.class).list().get(0);
+			ContadorServicio f=ObjectifyService.ofy().load().type(ContadorServicio.class).list().get(0);
 			//int numero = (int) (Math.random() * 9999) + 1;
 			v.setFolio(f.getFolio());
 			//dato.setIdServicio(numero);
-			f.incremeta();
+			f.incrementar();
 			ObjectifyService.ofy().save().entity(f).now(); 
 		}
 		
@@ -235,6 +238,7 @@ public class VentaController {
 		v.setEstatus("ABIERTA");
 		v.setTotal(Double.parseDouble("0.00"));
 		v.setUsuario(usuarioDao.consultarUsuario(username));
+		v.setIdSucursal(usuarioDao.consultarUsuario(username).getIdSucursal());
 		//System.out.println(" yisus manda:"+json);
 //		int ini=Integer.parseInt(inicio);
 //		int f=Integer.parseInt(fin);
@@ -288,6 +292,16 @@ public class VentaController {
 		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
 			List<Venta> lista = ventaDao.findAllAbierta();
+			if (lista == null) {
+				lista = new ArrayList<Venta>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+		}
+	 
+	 @RequestMapping(value = { "/findAll/{userName} " }, method = RequestMethod.GET, produces = "application/json")
+		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Venta> lista = ventaDao.findAllAbiertaBySuc(usuarioDao.consultarUsuario(userName).getIdSucursal());
 			if (lista == null) {
 				lista = new ArrayList<Venta>();
 			}
@@ -348,109 +362,122 @@ public class VentaController {
 	 
 
 	  
-	  @RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
-	  //@RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
-			public void generaxls(HttpServletResponse response, HttpServletRequest request,@RequestBody String json ,
-					 @PathVariable String userName) throws IOException, ParseException {
-			 
-		//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
-					  System.out.println("si entra:");
-					  response.setContentType("Application/Pdf");
-					//  String nombreArchivo = ("Reporte_Ventas_"+inicio+"_"+fin);
-					  
-					
-					  
-				        FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
-						SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-					//	try {
-							Date datei = formatter.parse(f.getFechai());
-							Date datef = formatter.parse(f.getFechaf());
-							Calendar c = Calendar.getInstance();
-							c.setTime(datef);
-							c.add(Calendar.DATE, 1);
-							datef = c.getTime();
-							
-							 String nombreArchivo = ("C:/REPORTES_MENSAJERIA/Reporte_Ventas_"+datei+"_"+datef+".xlsx");
-							 
-							  File newExcelFile = new File(nombreArchivo);		 
-						        if (!newExcelFile.exists()){
-						            try {
-						                newExcelFile.createNewFile();
-						            } catch (IOException ioe) {
-						                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
-						                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
-						                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
-						            }
-						        }
-							  
-							 
-							 
-							 List<ReporteVo> regs= new ArrayList<ReporteVo>();
-							regs= getEventos(regs, datei,datef);
-					  
-				        System.out.println("empiezo a generar pdf..." );
-				        /////igual puedo 
-				    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
-				    	
-				    	System.out.println("nombre de archivo para edgar:");
-				    	System.out.println("El Directorio Temporal del Sistema Es: ");
-				        System.out.println( System.getProperty("java.io.tmpdir") );
-			//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-				       // response.getOutputStream().flush();
-				      //  response.getOutputStream().close();
-				    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
-				    	//generaOrdenPdf.GeneraOrdenPdf(ox));
-//			  }else{
-//					response.sendError(403);
-//			   }
-			}
-		  
+//	  @RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
+//	  //@RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
+//			public void generaxls(HttpServletResponse response, HttpServletRequest request,@RequestBody String json ,
+//					 @PathVariable String userName) throws IOException, ParseException {
+//			 
+//		//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
+//					  System.out.println("si entra:");
+//					  response.setContentType("Application/Pdf");
+//					//  String nombreArchivo = ("Reporte_Ventas_"+inicio+"_"+fin);
+//					  
+//					
+//					  
+//				        FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
+//						SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+//					//	try {
+//							Date datei = formatter.parse(f.getFechai());
+//							Date datef = formatter.parse(f.getFechaf());
+//							Calendar c = Calendar.getInstance();
+//							c.setTime(datef);
+//							c.add(Calendar.DATE, 1);
+//							datef = c.getTime();
+//							
+//							 String nombreArchivo = ("C:/REPORTES_MENSAJERIA/Reporte_Ventas_"+datei+"_"+datef+".xlsx");
+//							 
+//							  File newExcelFile = new File(nombreArchivo);		 
+//						        if (!newExcelFile.exists()){
+//						            try {
+//						                newExcelFile.createNewFile();
+//						            } catch (IOException ioe) {
+//						                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
+//						                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
+//						                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
+//						            }
+//						        }
+//							  
+//							 
+//							 
+//							 List<ReporteVo> regs= new ArrayList<ReporteVo>();
+//							regs= getEventos(regs, datei,datef);
+//					  
+//				        System.out.println("empiezo a generar pdf..." );
+//				        /////igual puedo 
+//				    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
+//				    	
+//				    	System.out.println("nombre de archivo para edgar:");
+//				    	System.out.println("El Directorio Temporal del Sistema Es: ");
+//				        System.out.println( System.getProperty("java.io.tmpdir") );
+//			//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
+//				       // response.getOutputStream().flush();
+//				      //  response.getOutputStream().close();
+//				    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
+//				    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+////			  }else{
+////					response.sendError(403);
+////			   }
+//			}
+//		  
 	  
-	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/x-xls" )
+	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/vnd.ms-excel" )
 		 
 		public void generaxls_(HttpServletResponse response, HttpServletRequest request,
 				@PathVariable String inicio,@PathVariable String fin, @PathVariable String userName) throws IOException, ParseException {
 		 
 	//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
-				  System.out.println("si entra:");
-				  response.setContentType("Application/x-xls");
-				  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
+				  System.out.println("si entra: con inicio"+inicio);
+				  System.out.println("si entra: con fin"+fin);
+				  //response.setContentType("Application/x-xls");
+				//  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
 				  
-				  File newExcelFile = new File(nombreArchivo);		 
-				  if (!newExcelFile.exists()){
-			            try {
-			                newExcelFile.createNewFile();
-			                System.out.println("YA LO CREO... ");
-			            } catch (IOException ioe) {
-			                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
-			                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
-			                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
-			            }
-			        }
+//				  File newExcelFile = new File(nombreArchivo);		 
+//				  if (!newExcelFile.exists()){
+//			            try {
+//			                newExcelFile.createNewFile();
+//			                System.out.println("YA LO CREO... ");
+//			            } catch (IOException ioe) {
+//			                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
+//			                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
+//			                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
+//			            }
+//			        }
 				  
 			     //   FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
 					SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy"); //HH:mm:ss");
 				//	try {
 						Date datei = formatter.parse(inicio);
+						System.out.println("formatter inicio"+datei);
 						Date datef = formatter.parse(fin);
+						System.out.println("formatter fin"+datef);
 						Calendar c = Calendar.getInstance();
 						c.setTime(datef);
 						c.add(Calendar.DATE, 1);
 						datef = c.getTime();
 						
+						
+						
 						 List<ReporteVo> regs= new ArrayList<ReporteVo>();
-						regs= getEventos(regs, datei,datef);
+						 System.out.println("-fecha inicio"+datei);
+						 System.out.println("-fecha fin"+datef);
+						regs= getEventos(regs, datei,datef, userName);
+						
 						 System.out.println("------------existen :"+regs.size()+"envios en total" );
 			        System.out.println("empiezo a generar pdf..." );
 			        /////igual puedo 
-			    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
+			    //	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
+			    	
+			    	ReporteXls rep = new ReporteXls();
+			    	rep.setRenglones(regs);
+			    	HSSFWorkbook reporteXls = rep.GetReporteXls();
+					reporteXls.write(response.getOutputStream());
 			    	
 			    	
-			    	System.out.println("El Directorio Temporal del Sistema Es: ");
-			        System.out.println( System.getProperty("java.io.tmpdir") );
-		//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-			        response.getOutputStream().flush();
-			        response.getOutputStream().close();
+//			    	System.out.println("El Directorio Temporal del Sistema Es: ");
+//			   //     System.out.println( System.getProperty("java.io.tmpdir") );
+//		//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
+//			        response.getOutputStream().flush();
+//			        response.getOutputStream().close();
 			    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
 			    	//generaOrdenPdf.GeneraOrdenPdf(ox));
 //		  }else{
@@ -459,44 +486,59 @@ public class VentaController {
 		}
 	  
 	  
-	  public List<ReporteVo> getEventos(List<ReporteVo> regs,Date datei, Date datef){
-		  List<Venta> lista= ventaDao.getVentas(datei, datef);
+	  public List<ReporteVo> getEventos(List<ReporteVo> regs,Date datei, Date datef, String userName){
+		  
+		  List<Venta> lista= ventaDao.getVentas(datei, datef, usuarioDao.consultarUsuario(userName).getIdSucursal());
 		  System.out.println("ventas array:"+lista.size());
 		  List<Envio> envios= new ArrayList<Envio>();
 		  List<Long> longs= new ArrayList<Long>();
 		//	ReporteVo r= new ReporteVo(); 				
 				for (Venta v : lista ){
+					
 					ReporteVo r= new ReporteVo(); 	
 					System.out.println("*********************");
+					//r.setFecha(v.getFecha().substring(0,19));
 					r.setFecha(v.getFecha());
 					r.setFolio(v.getFolio());
 					r.setTotal(v.getTotal());
-					longs = v.getEnvios();
-					System.out.println("eventos array:"+longs);
-					for (Long l: longs){
-						Envio e=envioDao.consult(l);
-						//envios.add(e);
-					//	System.out.println("---envios longs:"+envios);
-				///	}
-				//	for (Envio e : envios){
-						//Envio e = envioDao.consult(e.getCliente())
-						System.out.println("++++++++++++++++++++++::::+"+e.getCliente().getNombre());
-						
-						r.setRemitente(e.getCliente().getNombre());
-						r.setGuia(e.getGuia());
-						r.setRastreo(e.getRastreo());
-						r.setTipoPaquete(e.getPaquete().getTipoPaquete());
-						r.setTipoEnvio(e.getTipoEnvio());
-						r.setEmpresa(e.getEmpresa());
-						r.setPrecio(e.getPrecio());
-						r.setCostoSeguro(e.getCostoSeguro());						
-						regs.add(r);
-						System.out.println("regsssssssssss:.."+r.getGuia() );
+					System.out.println("VVVVVVVVVVVV venta:"+v.getId()+"---cant ENVIOOOOOOOs"+v.getCantidad());
+					
+					//System.out.println("eventos array:"+longs);
+					if  (v.getCantidad()==0){
+						System.out.println("no hay envios en la venta:"+v.getId() );
+					}else{
+						longs = v.getEnvios();
+						for (Long l: longs){
+							Envio e=envioDao.consult(l);
+							//envios.add(e);
+						//	System.out.println("---envios longs:"+envios);
+					///	}
+					//	for (Envio e : envios){
+							//Envio e = envioDao.consult(e.getCliente())
+							System.out.println("++++++++++++++++++++++::::+"+e.getCliente().getNombre());
+							
+							r.setRemitente(e.getCliente().getNombre());
+							r.setGuia(e.getGuia());
+							r.setRastreo(e.getRastreo());
+							r.setTipoPaquete(e.getPaquete().getTipoPaquete());
+							r.setTipoEnvio(e.getTipoEnvio());
+							r.setEmpresa(e.getEmpresa());
+							r.setPrecio(e.getPrecio());
+							r.setCostoSeguro(e.getCostoSeguro());						
+							regs.add(r);
+							System.out.println("regsssssssssss:.."+r.getGuia() );
+						}
 					}
+					System.out.println("no hay envios en las ventas..." );
 				}
 				System.out.println("objetos de envios:.."+regs );
 				return regs;
 	  }
-       
+
+	  @RequestMapping(value = "/setup/{folio}", method = RequestMethod.GET)
+		public void setUp(HttpServletResponse res,@PathVariable Long folio) throws IOException{
+			ventaDao.crearContador(folio);
+			res.getWriter().println("Setup finalizado");
+		}
 	   
 }

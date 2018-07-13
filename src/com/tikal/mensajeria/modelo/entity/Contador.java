@@ -8,7 +8,7 @@ import com.googlecode.objectify.annotation.Index;
 public class Contador {
 	 @Id private Long id;
 	 @Index
-	static Long folio;
+	 static Long folio;
 	
 	
 	
@@ -37,7 +37,7 @@ public class Contador {
 	}
 	
 	public void  reinicia(){
-		Contador.setFolio(Long.parseLong("0"));
+		Contador.setFolio(Long.parseLong("1000"));
 	}
 	
 	

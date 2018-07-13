@@ -13,6 +13,7 @@
   <property name="usuario" direction="asc"/> 
   <property name="folio" direction="asc"/>
   <property name="fecha" direction="asc"/>
+  <property name="idSucursal" direction="asc"/>
    </datastore-index>
   
 </datastore-indexes>

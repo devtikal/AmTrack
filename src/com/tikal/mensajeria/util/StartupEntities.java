@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.tikal.mensajeria.modelo.entity.Contador;
+import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
@@ -37,6 +38,7 @@ public class StartupEntities implements ServletContextListener {
 			ObjectifyService.register(Persona.class);
 			ObjectifyService.register(Guia.class);
 			ObjectifyService.register(Contador.class);
+			ObjectifyService.register(ContadorServicio.class);
 			ObjectifyService.register(Venta.class);
 		
 		}

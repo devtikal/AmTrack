@@ -3,7 +3,8 @@ package com.tikal.mensajeria.dao;
 import java.util.Date;
 import java.util.List;
 
-
+import com.googlecode.objectify.ObjectifyService;
+import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Venta;
 
 public interface VentaDao {
@@ -21,8 +22,11 @@ public interface VentaDao {
 	
 	public List<Venta> findAllAbierta();
 	
-	public List<Venta> getVentas(Date inicio, Date fin);
+	public List<Venta> findAllAbiertaBySuc(Long idSucursal) ;
 	
+	public List<Venta> getVentas(Date inicio, Date fin, Long idSucursal);
+	
+	public void crearContador(Long folio);
 	
 
 }

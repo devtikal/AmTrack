@@ -125,7 +125,7 @@ public class GeneraGuiaMervel {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph(v.getFecha().substring(0,19),f1);
+            Paragraph p6 = new Paragraph(v.getFecha().toGMTString(),f1);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c6.setColspan(2);
