@@ -44,18 +44,22 @@
 			<thead>
 				<tr>
 					<th width="10%"></th>
-					<th width="20%">Numero</th>
-					<th width="10%">Estatus</th>
-					<th width="40%">Sucursal</th>
+					<th width="20%">DE</th>
+					<th width="10%">HASTA</th>
+					<th width="40%">ESTATUS</th>
+					<th width="40%">SUCURSAL</th>
+					<th width="40%">TIPO DE GUIA</th>
 					<th width="20%">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="g in guias" class="{{g.clase}}">
 					<td></td>
-					<td>{{g.numero}}</td>
+					<td>{{g.inicia}}</td>
+					<td>{{g.termina}}</td>
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
+					<td>{{g.tipoGuia}}</td>
 					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" >
 							<i class="fa fa-building-o"></i>
 						</button>

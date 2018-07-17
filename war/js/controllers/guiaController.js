@@ -162,6 +162,7 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 	});
 	guiaService.getGuia().then(function(data) {
 		$scope.guias=data;
+		console.log("Nueva lista Guia ", data);
 		for (var o = 0; o < $scope.guias.length; o+=1) {
 						
 //			switch ($scope.guias[o].estatus) {
