@@ -537,7 +537,7 @@ public class VentaController {
 
 	  @RequestMapping(value = "/setup/{folio}", method = RequestMethod.GET)
 		public void setUp(HttpServletResponse res,@PathVariable Long folio) throws IOException{
-			ventaDao.crearContador(folio);
+			ventaDao.crearContador(folio);			
 			res.getWriter().println("Setup finalizado");
 		}
 	   

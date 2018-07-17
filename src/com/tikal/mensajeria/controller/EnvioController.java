@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.googlecode.objectify.ObjectifyService;
 import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.PaqueteDao;
@@ -28,6 +28,7 @@ import com.tikal.mensajeria.dao.VentaDao;
 import com.tikal.mensajeria.formatos.pdf.GeneraGuiaMervel;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
+import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
@@ -205,6 +206,9 @@ public class EnvioController {
 //			  System.out.println("no hay guias asignadas a esta sucursal");
 //			}
 			envio.setGuia(ef.getGuia());
+			
+			
+			
 			//envio.setGuia(evo.getGuia());
 			
 			envio.setPrecio(ef.getPrecio());
@@ -220,6 +224,8 @@ public class EnvioController {
 				g.setEstatus("EN ENVIO");
 				guiaDao.update(g);
 			}			
+			
+			
 			//folio.incremeta();
 			
 			Venta v=ventaDao.consult(idVenta);

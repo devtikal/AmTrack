@@ -65,7 +65,7 @@ public class GuiaDaoImpl implements GuiaDao {
 	public List<Guia> getByEstatus(String estatus) {
 		// TODO Auto-generated method stub
 		
-		return ofy().load().type(Guia.class).filter("estatus",estatus).list();
+		return ofy().load().type(Guia.class).filter("estatus",estatus).order("numero").list();
 	}
 
 
@@ -77,7 +77,7 @@ public class GuiaDaoImpl implements GuiaDao {
 			List<Guia> nuevo = new ArrayList<Guia>();
 			return nuevo;
 		}
-		List<Guia> nuevo = ofy().load().type(Guia.class).filter("idSucursal",idSucursal).list();
+		List<Guia> nuevo = ofy().load().type(Guia.class).filter("idSucursal",idSucursal).order("numero").list();
 		return nuevo;
 		
 		
@@ -120,9 +120,21 @@ public class GuiaDaoImpl implements GuiaDao {
 
 
 	@Override
-	public Guia getByEstSucK(String estatus, Long idSucursal, String kilataje) {
+	public List<Guia> getEstSucTipo(String sucursal,String tipoGuia) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		System.out.println("esta en daoimpl envio  get by estatus, sucursal y tipo de guia::"+tipoGuia+" Suc:"+sucursal);
+		List<Guia> g= ofy().load().type(Guia.class).filter("estatus","ASIGNADA").filter("sucursal", sucursal).filter("tipoGuia",tipoGuia).order("numero").list();
+		System.out.println(" cuantas guias :"+g.size());
+		return g;
+//		if (g.size() == 0) {
+//			return null;
+//		}
+		//Guia nuevo = g.get(0);
+		
+		
+		//return ofy().load().type(Guia.class).order("numero").list();
+
 	}
 
 

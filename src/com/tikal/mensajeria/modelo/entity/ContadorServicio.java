@@ -8,6 +8,9 @@ public class ContadorServicio {
 
 	@Id private Long id;
 	private Long folio;
+	private Long guia;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -28,8 +31,21 @@ public class ContadorServicio {
 		this.folio++;
 	}
 	
+	public void incrementarGuia() {
+		this.guia++;
+	}
 	public void setFolio(Long folio){
 		this.folio= folio;
+	}
+	public Long getGuia() {
+		if (guia==null){
+			guia=Long.parseLong("500000");
+		return guia;
+		}else
+			return guia;
+	}
+	public void setGuia(Long guia) {
+		this.guia = guia;
 	}
 	
 	

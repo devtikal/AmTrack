@@ -89,6 +89,7 @@ public class VentaDaoImpl implements VentaDao{
 	public void crearContador(Long folio){
 		ContadorServicio f= new ContadorServicio();
 		f.setFolio(folio);
+		f.setGuia(Long.parseLong("500000"));
 		ObjectifyService.ofy().save().entity(f);
 	}
 
