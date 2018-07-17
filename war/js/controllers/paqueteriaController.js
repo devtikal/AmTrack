@@ -436,7 +436,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
 		paqueteriaService.getGuiaByName(data,$scope.paquete.empresa,$cookieStore.get('usuario')).then(function(data) {
 			
-			$scope.paquete.guia=data.numero;
+			$scope.paquete.guia=data;
 			$scope.disGuia=true;
 			if(!$scope.paquete.guia){
 				 var r = confirm("No hay Guias en la Sucursal \n <" + $cookieStore.get('sucursal') + ">\n Click en Aceptar para Agregar o Asignar Guias");
