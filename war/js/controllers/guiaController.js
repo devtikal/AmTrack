@@ -22,7 +22,7 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 	
 	this.getGuia = function() {
 		var d = $q.defer();
-		$http.get("guia/findAll/").then(
+		$http.get("guia/getResumenGuias/").then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
