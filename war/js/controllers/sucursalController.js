@@ -52,7 +52,10 @@ app.controller("getSucursalController",['$scope','$rootScope','$window', '$locat
 } ]);	
 app.controller("sucursalController",['$scope','$rootScope','$window', '$location', '$cookieStore','sucursalService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore, sucursalService,sessionService){
 	sessionService.isAuthenticated();
-
+	if($cookieStore.get('perfil')=='Cajero'){
+		$location.path("/error");
+//		window.location.reload;
+	}
 $scope.EnviarFormulario = function() {
 	//console.log($scope.form.pass.$valid);
 //	$scope.validate();

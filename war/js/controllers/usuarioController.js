@@ -72,6 +72,10 @@ app.service("perfilservice",['$http', '$q', function($http, $q){
 }]);
 app.controller("userController",['$scope','$window', '$location', '$cookieStore','usuarioservice','sessionService','sucursalService',function($scope, $window, $location, $cookieStore, usuarioservice,sessionService,sucursalService){
 	sessionService.isAuthenticated();
+	if($cookieStore.get('perfil')=='Cajero'){
+		$location.path("/error");
+//		window.location.reload;
+	}
 	
 	sucursalService.getAllSucursal().then(function(data) {
 		$scope.listSuc = data;

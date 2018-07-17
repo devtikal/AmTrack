@@ -60,10 +60,29 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
-
-	this.getGuiaByName = function(tipo,user){
+	this.getVentaByUser = function(userName) {
 		var d = $q.defer();
-		$http.get("guia/getGuia/"+tipo+"/"+user).then(
+		$http.get("venta/findAll/"+userName).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	this.getGuiaByName = function(tipo,empresa,user){
+		var d = $q.defer();
+		$http.get("guia/getGuia/"+tipo+"/"+empresa+"/"+user).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -235,7 +254,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	$scope.idVenta=null;
-	paqueteriaService.getVenta().then(function(data) {
+	paqueteriaService.getVentaByUser($cookieStore.get('usuario')).then(function(data) {
 		$scope.ventas=data;
 		$scope.usuario=$cookieStore.get('usuario');
 		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
@@ -415,7 +434,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 	
 	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
-		paqueteriaService.getGuiaByName(data,$cookieStore.get('usuario')).then(function(data) {
+		paqueteriaService.getGuiaByName(data,$scope.paquete.empresa,$cookieStore.get('usuario')).then(function(data) {
 			
 			$scope.paquete.guia=data.numero;
 			$scope.disGuia=true;
@@ -459,6 +478,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	
 	
 	}
+	
+	$scope.limpiarFecha = function(){
+		alert("Entro a la funcion");
+		$scope.fechaInicio.value=" ";
+		$scope.fechaFin.value=" ";
+	}
+	
+	$('.report').on("click",function(){
+		setTimeout(function(){ $window.location.reload() }, 1000);
+		})
 
 	$scope.generarFolio = function(){
 		
@@ -558,9 +587,9 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
 	sessionService.isAuthenticated();
 	$scope.usuario=$cookieStore.get('usuario');
 	$scope.paqueteria={guia:null};
-	paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
-		$scope.paqueteria.guia=data.numero;
-	});
+//	paqueteriaService.getGuiaByName($cookieStore.get('usuario')).then(function(data) {
+//		$scope.paqueteria.guia=data.numero;
+//	});
 	$scope.products =[];
     $scope.addItem = function () {
         $scope.errortext = "";
