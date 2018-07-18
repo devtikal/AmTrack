@@ -172,7 +172,7 @@ public class GeneraTicket {
             
             Paragraph p4 = new Paragraph("Tel: "+s.getTelefono(),f1);
             PdfPCell c4 = new PdfPCell(p4);
-            c4.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c4.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c4.setColspan(6);c4.setRowspan(1);
             c4.setBorder(Rectangle.NO_BORDER);
             table.addCell(c4);
@@ -191,7 +191,7 @@ public class GeneraTicket {
             c6.setBorder(Rectangle.NO_BORDER);
             table.addCell(c6);
             
-            Paragraph p7 = new Paragraph(v.getFecha().toString(), f1);
+            Paragraph p7 = new Paragraph(v.getFecha().toGMTString(), f1);
             PdfPCell c7 = new PdfPCell(p7);
             c7.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c7.setColspan(3);c7.setBorder(Rectangle.NO_BORDER);

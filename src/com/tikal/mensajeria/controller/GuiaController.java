@@ -216,7 +216,7 @@ public class GuiaController {
 	   
 	   System.out.println("dame guia:"+numeroGuia);
 	  //response.getWriter().println(g.getNumero());
-	  response.getWriter().println(JsonConvertidor.toJson(numeroGuia));
+	  response.getWriter().println(numeroGuia );
 	
 	  
 	  
@@ -295,13 +295,18 @@ public class GuiaController {
 			////////////////////////////////////////las no asignadas
 			List<Guia> noA= new ArrayList<Guia>();
 			noA=guiaDao.getByEstatus("NO ASIGNADA");
-			ResumenGuia rg= new ResumenGuia();
-			rg.setInicia(noA.get(0).getNumero());
-			rg.setTermina(noA.get(noA.size()-1).getNumero());
-			rg.setEstatus("NO ASIGNADA");
-			rg.setSucursal("MASTER");
-			rg.setTipoGuia("-");	
-			res.add(rg);
+			if (noA.size()==0){
+				System.out.println("no hay guias NO ASIGNADAS...");
+			}else{
+				ResumenGuia rg= new ResumenGuia();
+				rg.setInicia(noA.get(0).getNumero());
+				rg.setTermina(noA.get(noA.size()-1).getNumero());
+				rg.setEstatus("NO ASIGNADA");
+				rg.setSucursal("MASTER");
+				rg.setTipoGuia("-");	
+				res.add(rg);
+			}
+			
 			System.out.println("res completo:"+res);
 //			
 //			List<Guia> lista = guiaDao.getBySucursal(idSucursal);

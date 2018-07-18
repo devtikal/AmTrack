@@ -67,8 +67,8 @@ public class GeneraGuiaMervel {
     	   
             PdfPTable table = new PdfPTable(3);              
             
-            Image imagen = Image.getInstance("img/Mervel.png");
-            imagen.scaleAbsolute(200, 50);
+            Image imagen = Image.getInstance("img/LogoMervel.png");
+            imagen.scaleAbsolute(150, 50);
            
       
             PdfPCell c1 = new PdfPCell(imagen);
@@ -125,7 +125,7 @@ public class GeneraGuiaMervel {
             table.addCell(c4);
                        
             
-            Paragraph p6 = new Paragraph(v.getFecha().toGMTString(),f1);
+            Paragraph p6 = new Paragraph(v.getFecha().toGMTString().substring(0,17),f1);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c6.setColspan(2);

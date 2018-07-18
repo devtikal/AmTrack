@@ -218,7 +218,7 @@ public class EnvioController {
 			envio.setMateriales(ef.getMateriales());
 			
 			envioDao.save(envio);
-			if (envio.getEmpresa().equals("MERVEL") || envio.getEmpresa().equals("ESTAFETA")){
+			if (envio.getEmpresa().equals("ESTAFETA")){
 								
 				Guia g=guiaDao.getByNumero(ef.getGuia());
 				g.setEstatus("EN ENVIO");
