@@ -26,6 +26,8 @@ public interface VentaDao {
 	
 	public List<Venta> getVentas(Date inicio, Date fin, Long idSucursal);
 	
+	public List<Venta> findAllAbiertaIF(Date inicio, Date fin); 
+	
 	public void crearContador(Long folio);
 	
 

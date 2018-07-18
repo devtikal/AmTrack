@@ -42,6 +42,7 @@ import com.tikal.mensajeria.modelo.login.Usuario;
 import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.modelo.vo.FechasVo;
 import com.tikal.mensajeria.modelo.vo.ReporteVo;
+import com.tikal.mensajeria.reportes.ReporteSucursal;
 import com.tikal.mensajeria.reportes.ReporteXls;
 import com.tikal.mensajeria.util.JsonConvertidor;
 import com.tikal.util.AsignadorDeCharset;
@@ -428,22 +429,7 @@ public class VentaController {
 	//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
 				  System.out.println("si entra: con inicio"+inicio);
 				  System.out.println("si entra: con fin"+fin);
-				  //response.setContentType("Application/x-xls");
-				//  String nombreArchivo = ("C://REPORTES_MENSAJERIA//REPORTEXXXXXX.xls");//+inicio+"_"+fin);
-				  
-//				  File newExcelFile = new File(nombreArchivo);		 
-//				  if (!newExcelFile.exists()){
-//			            try {
-//			                newExcelFile.createNewFile();
-//			                System.out.println("YA LO CREO... ");
-//			            } catch (IOException ioe) {
-//			                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
-//			                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
-//			                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
-//			            }
-//			        }
-				  
-			     //   FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
+
 					SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy"); //HH:mm:ss");
 				//	try {
 						Date datei = formatter.parse(inicio);
@@ -460,47 +446,74 @@ public class VentaController {
 						 List<ReporteVo> regs= new ArrayList<ReporteVo>();
 						 System.out.println("-fecha inicio"+datei);
 						 System.out.println("-fecha fin"+datef);
-						regs= getEventos(regs, datei,datef, userName);
+						regs= getEventos(regs, datei,datef, userName);						
+						
+						Double total= Double.valueOf("00.00");
+						for( ReporteVo ro:regs){
+							total=total+ro.getPrecio();
+						}
+						
+						System.out.println("total"+total);
 						
 						 System.out.println("------------existen :"+regs.size()+"envios en total" );
 			        System.out.println("empiezo a generar pdf..." );
 			        /////igual puedo 
 			    //	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
-			    	
-			    	ReporteXls rep = new ReporteXls();
-			    	rep.setRenglones(regs);
-			    	HSSFWorkbook reporteXls = rep.GetReporteXls();
-					reporteXls.write(response.getOutputStream());
-			    	
-			    	
-//			    	System.out.println("El Directorio Temporal del Sistema Es: ");
-//			   //     System.out.println( System.getProperty("java.io.tmpdir") );
-//		//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-//			        response.getOutputStream().flush();
-//			        response.getOutputStream().close();
-			    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
-			    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+			        String perfil=usuarioDao.consultarUsuario(userName).getPerfil();
+			    	if (perfil.equals("Administrador") || perfil.equals("SuperAdministrador")){
+			    		
+			    		ReporteXls rep = new ReporteXls();
+				    	rep.setRenglones(regs);
+				    	HSSFWorkbook reporteXls = rep.GetReporteXls(datei.toGMTString(),datef.toGMTString(), total);
+						reporteXls.write(response.getOutputStream());
+			    	}else{
+			    		ReporteSucursal repS = new ReporteSucursal();
+			    		repS.setRenglones(regs);
+			    		HSSFWorkbook reporteSucursal = repS.GetReporteSucursalXls(datei.toGMTString(),datef.toGMTString(), total);
+			    		reporteSucursal.write(response.getOutputStream());
+			    	}
+			    
 //		  }else{
 //				response.sendError(403);
 //		   }	
 		}
 	  
 	  
+	  
+	  
+	  
 	  public List<ReporteVo> getEventos(List<ReporteVo> regs,Date datei, Date datef, String userName){
 		  
-		  List<Venta> lista= ventaDao.getVentas(datei, datef, usuarioDao.consultarUsuario(userName).getIdSucursal());
+		  System.out.println("get eventos");
+		  List<Venta> lista= new ArrayList<Venta>();
+		  System.out.println("ififififififif");
+	      String perfil=usuarioDao.consultarUsuario(userName).getPerfil();
+	      System.out.println("perfil"+perfil);
+		  if (perfil.equals("Administrador") || perfil.equals("SuperAdministrador")){
+			  System.out.println("ififififififif");
+			  lista= ventaDao.findAllAbiertaIF(datei, datef);
+			  
+		  }else{
+			  System.out.println("eeeeeeee");
+			  lista= ventaDao.getVentas(datei, datef, usuarioDao.consultarUsuario(userName).getIdSucursal());
+		  }
+		  
+		 
 		  System.out.println("ventas array:"+lista.size());
 		  List<Envio> envios= new ArrayList<Envio>();
 		  List<Long> longs= new ArrayList<Long>();
-		//	ReporteVo r= new ReporteVo(); 				
+		//	ReporteVo r= new ReporteVo(); 	
+		  
 				for (Venta v : lista ){
 					
 					ReporteVo r= new ReporteVo(); 	
 					System.out.println("*********************");
 					//r.setFecha(v.getFecha().substring(0,19));
-					r.setFecha(v.getFecha());
+					r.setFecha(v.getFecha().toGMTString().substring(0, 17));
 					r.setFolio(v.getFolio());
+					r.setSucursal(sucursalDao.consult(v.getIdSucursal()).getNombre());
 					r.setTotal(v.getTotal());
+					
 					System.out.println("VVVVVVVVVVVV venta:"+v.getId()+"---cant ENVIOOOOOOOs"+v.getCantidad());
 					
 					//System.out.println("eventos array:"+longs);
@@ -527,6 +540,7 @@ public class VentaController {
 							r.setCostoSeguro(e.getCostoSeguro());						
 							regs.add(r);
 							System.out.println("regsssssssssss:.."+r.getGuia() );
+							System.out.println("sucursals:.."+r.getSucursal() );
 						}
 					}
 					System.out.println("no hay envios en las ventas..." );

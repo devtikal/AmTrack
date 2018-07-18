@@ -6,8 +6,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 
 public class ReporteVo {
 	
-	private Date fecha;
+	private String fecha;
 	private Long folio;
+	private String sucursal;
 	private String remitente;
 	private String guia;
 	private String rastreo;
@@ -18,19 +19,28 @@ public class ReporteVo {
 	private Double costoSeguro;
 	private Double Total;
 	private Double Acumulado;
+
 	
 	
 	
+	
+	
+	public String getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(String sucursal) {
+		this.sucursal = sucursal;
+	}
 	public Long getFolio() {
 		return folio;
 	}
 	public void setFolio(Long folio) {
 		this.folio = folio;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public String getRemitente() {
@@ -98,18 +108,19 @@ public class ReporteVo {
 		for(int i=0;i<12;i++){
 			r.createCell(i);
 		}
-		
+		//r.getCell().setCellValue(this.sucursal);
 		r.getCell(0).setCellValue(this.fecha);
 		r.getCell(1).setCellValue(this.folio);
-		r.getCell(2).setCellValue(this.remitente);		
-		r.getCell(3).setCellValue(this.guia);
-		r.getCell(4).setCellValue(this.rastreo);
-		r.getCell(5).setCellValue(this.tipoPaquete);
-		r.getCell(6).setCellValue(this.tipoEnvio);
-		r.getCell(7).setCellValue(this.empresa);
-		r.getCell(8).setCellValue(this.precio);
-		r.getCell(9).setCellValue(this.costoSeguro);		
-		r.getCell(10).setCellValue(this.Total);
+		r.getCell(2).setCellValue(this.sucursal);
+		r.getCell(3).setCellValue(this.remitente);		
+		r.getCell(4).setCellValue(this.guia);
+		r.getCell(5).setCellValue(this.rastreo);
+		r.getCell(6).setCellValue(this.tipoPaquete);
+		r.getCell(7).setCellValue(this.tipoEnvio);
+		r.getCell(8).setCellValue(this.empresa);
+		r.getCell(9).setCellValue(this.precio);
+		r.getCell(10).setCellValue(this.costoSeguro);		
+		r.getCell(11).setCellValue(this.Total);
 		//r.getCell(11).setCellValue(this.Acumulado);
 	}
 

@@ -1,5 +1,7 @@
 package com.tikal.mensajeria.reportes;
 
+
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,12 +36,14 @@ import com.tikal.mensajeria.modelo.vo.ReporteVo;
 
 
 
-public class ReporteXls {
+public class ReporteSucursal {
+
+
 	
 	
 	private List<ReporteVo> renglones;
 
-	public ReporteXls() {}
+	public ReporteSucursal() {}
 	
 	public void setRenglones(List<ReporteVo> renglones) {
 		this.renglones = renglones;
@@ -50,7 +54,7 @@ public class ReporteXls {
 	}
 	@SuppressWarnings("deprecation")
 	
-	public HSSFWorkbook GetReporteXls(String inicio, String fin, Double total) throws IOException  { //, OutputStream ops
+	public HSSFWorkbook GetReporteSucursalXls(String inicio, String fin, Double total) throws IOException  { //, OutputStream ops
 
 		HSSFFont headerFont;
 		HSSFFont contentFont;
@@ -163,11 +167,11 @@ public class ReporteXls {
 	    	            
 ///////////////////////////////////////////	    	            
 	    		 
-	    		        String[] titulos = {"Fecha", "Folio", "Sucursal",
+	    	            String[] titulos = {"Fecha", "Folio", "Sucursal",
 	                            "Remitente", "Guia", "Rastreo", "TipoPaquete", "Tipo Envío", "Empresa","Precio", "Costo Seguro", "Total Cobrado" };
 	    		        
 	    		        
-	    		       Integer[] wd = {256*20, 256*15,256*40, 256*40, 256*30, 256*20,256*15,256*20,256*15,256*10,256*15,256*15};        
+	    		       Integer[] wd = {256*20, 256*15,256*40, 256*40, 256*30, 256*20,256*15,256*20,256*15,256*10,256*15,256*15};
 	    		        // Creamos una fila en la hoja en la posicion 0
 	    		        Row fila = sheet.createRow(4);
 	    		        
@@ -220,7 +224,7 @@ public class ReporteXls {
 		    		       
 		    		       Row fil = sheet.createRow(1);
 		    		       Cell celda = fil.createCell(2);
-		    		       celda.setCellValue("CORTE DE CAJA GLOBAL");
+		    		       celda.setCellValue("CORTE DE CAJA");
 		    		       celda.setCellStyle(style);
 		    		       
 		    		       Cell celda11 = fil.createCell(3);

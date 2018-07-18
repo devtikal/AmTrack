@@ -79,6 +79,12 @@ public class VentaDaoImpl implements VentaDao{
 		// TODO Auto-generated method stub
 		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
 	}
+	
+	@Override
+	public List<Venta> findAllAbiertaIF(Date inicio, Date fin) {
+		// TODO Auto-generated method stub
+		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").filter("fecha >=",inicio).filter("fecha <=", fin).list();
+	}
 
 	@Override
 	public List<Venta> findAllAbiertaBySuc(Long idSucursal) {

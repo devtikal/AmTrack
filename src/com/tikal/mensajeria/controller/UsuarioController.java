@@ -232,8 +232,8 @@ public class UsuarioController {
 				
 				Sucursal sucursal = new Sucursal();
 				//sucursal.setId(Long.valueOf("9999"));
-				sucursal.setNombre("MASTER");
-				sucursal.setRfc("MASTER");
+				sucursal.setNombre("SIN SUCURSAL");
+				sucursal.setRfc("SIN SUCURSAL");
 				//sucursal.setCurp("MASTER9999");
 				sucursal.setDomicilio("CONOCIDO");
 				sucursal.setTelefono("--------");
