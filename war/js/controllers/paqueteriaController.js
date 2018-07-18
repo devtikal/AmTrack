@@ -246,6 +246,24 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	this.getCP = function(cp){
+		var d = $q.defer();
+		$http.get("https://api-codigos-postales.herokuapp.com/v2/codigo_postal/"+cp).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
@@ -581,6 +599,33 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		    }   	
 		    
 		}	
+	$scope.datosCP =[];
+	$scope.getCP = function(tipo){
+		if (tipo == "remitente"){
+//			var cp = $scope.paquete.cliente.codigoPostal;
+			 var value = document.getElementById('cpR').value;
+
+			if (value.length == 5){
+			$.getJSON("https://api-codigos-postales.herokuapp.com/v2/codigo_postal/"+value , function(data) {
+				$scope.colonia=data.colonias;
+				$scope.paquete.cliente.municipio=data.municipio;
+				$scope.paquete.cliente.estado=data.estado;
+			});
+			}
+	}else{
+		
+		 var value = document.getElementById('cpD').value;
+
+			if (value.length == 5){
+			$.getJSON("https://api-codigos-postales.herokuapp.com/v2/codigo_postal/"+value , function(data) {
+				$scope.coloniaD=data.colonias;
+				$scope.paquete.destinatario.municipio=data.municipio;
+				$scope.paquete.destinatario.estado=data.estado;
+			});
+			}
+		}
+	}
+	
 	
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){

@@ -154,7 +154,26 @@
 <!--             </li> -->
           </ul>
         </li>
-        
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administrar" ng-if="UserData.perfil!='Cajero'">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" data-target="#collapseAdmin">
+            <i class="fa fa-fw fa-cog fa-2x"></i>
+            <span class="nav-link-text">Administrar</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseAdmin">
+<!--           <li> -->
+<!--               <a href="#/altaPaquete">Envio</a> -->
+<!--             </li> -->
+            <li>
+              <a href="#/ModUsuario">Usuario</a>
+            </li>
+<!--             <li> -->
+<!--               <a href="#/AltaSucursal">Sucursal</a> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--               <a href="#/altaGuia">Guia</a> -->
+<!--             </li> -->
+          </ul>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">

@@ -33,6 +33,10 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 		templateUrl : "pages/AltaUsuario.html",
 		controller : "userController"
 	});
+	$routeProvider.when('/ModUsuario', {
+		templateUrl : "pages/modUsuario.html",
+		controller : "modUserController"
+	});
 	$routeProvider.when('/AltaSucursal', {
 		templateUrl : "pages/AltaSucursal.html",
 		controller : "sucursalController"

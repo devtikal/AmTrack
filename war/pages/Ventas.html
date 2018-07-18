@@ -404,35 +404,40 @@
   <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input  ng-model="paquete.cliente.nombre" required></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required></p>
      En Atencion a
-    <p><input  ng-model="paquete.cliente.enAtencion" required></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required></p>
     
     CP:
-    <p><input type="number" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide"></p>
+    <p><input class="input-lg" type="number" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide" ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
     Calle
-    <p><input   ng-model="paquete.cliente.calle"  ng-disabled="hide"></p>
+    <p><input class="input-lg"  ng-model="paquete.cliente.calle"  ng-disabled="hide"></p>
        Numero Ext
-    <p><input  ng-model="paquete.cliente.noExterior"  ng-disabled="hide"></p>
+    <p><input class="input-lg"  ng-model="paquete.cliente.noExterior"  ng-disabled="hide"></p>
     Numero Int
-    <p><input ng-model="paquete.cliente.noInterior" ng-disabled="hide"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.noInterior" ng-disabled="hide"></p>
    
      </div>
      <div class="col-md-6">
        Colonia
-    <p><input  ng-model="paquete.cliente.colonia"  ng-disabled="hide"></p>
+
+    <p><select ng-model="paquete.cliente.colonia" class="input-lg" style="width:100%">
+    <option disabled></option>
+			<option ng-repeat="c in colonia" selected>{{c}}</option>
+	  </select>
+	</p>
      
      Localidad
-    <p><input   ng-model="paquete.cliente.localidad"  ng-disabled="hide"></p>
+    <p><input   ng-model="paquete.cliente.localidad" class="input-lg" ng-disabled="hide"></p>
      Municipio
-    <p><input ng-model="paquete.cliente.municipio"  ng-disabled="hide"></p>
+    <p><input ng-model="paquete.cliente.municipio" class="input-lg" ng-disabled="hide"></p>
      Estado
-    <p><input ng-model="paquete.cliente.estado"  ng-disabled="hide"></p>
+    <p><input ng-model="paquete.cliente.estado" class="input-lg" ng-disabled="hide" ></p>
      
     Telefono
-    <p><input  ng-model="paquete.cliente.telefono" ng-disabled="hide"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.telefono" ng-disabled="hide"></p>
      Referencia
-    <p><input  ng-model="paquete.cliente.referencias" ng-disabled="hide"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.referencias" ng-disabled="hide"></p>
     </div>
   </div>
   </div>
@@ -441,37 +446,42 @@
    <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input ng-model="paquete.destinatario.nombre" required></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" required></p>
      En Antencion a
-    <p><input ng-model="paquete.destinatario.enAtencion" required></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" required></p>
    
     CP:
-    <p><input  ng-model="paquete.destinatario.codigoPostal"></p>
+    <p><input class="input-lg" id="cpD" ng-model="paquete.destinatario.codigoPostal" ng-keyup="getCP('destinatario')" ng-blur="getCP('remitente')"></p>
      Calle
-    <p><input   ng-model="paquete.destinatario.calle"></p>
+    <p><input class="input-lg"   ng-model="paquete.destinatario.calle"></p>
     Numero Ext
-    <p><input   ng-model="paquete.destinatario.noExterior" required></p>
+    <p><input class="input-lg"   ng-model="paquete.destinatario.noExterior" required></p>
     Numero Int
-    <p><input  ng-model="paquete.destinatario.noInterior"></p>
+    <p><input class="input-lg"  ng-model="paquete.destinatario.noInterior"></p>
    </div>
      <div class="col-md-6">
        Colonia
-    <p><input  ng-model="paquete.destinatario.colonia"></p>
+   
+     <p><select ng-model="paquete.destinatario.colonia" class="input-lg" style="width:100%">
+     <option disabled></option>
+			<option ng-repeat="c in coloniaD" selected>{{c}}</option>
+	  </select>
+	</p>
      
      Localidad
-    <p><input  ng-model="paquete.destinatario.localidad"></p>
+    <p><input class="input-lg"  ng-model="paquete.destinatario.localidad"></p>
     
      Municipio
-    <p><input  ng-model="paquete.destinatario.municipio"></p>
+    <p><input class="input-lg"  ng-model="paquete.destinatario.municipio"></p>
      Estado
-    <p><input ng-model="paquete.destinatario.estado"></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.estado"></p>
     
      
     
      Telefono
-    <p><input ng-model="paquete.destinatario.telefono"></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.telefono"></p>
      Referencia
-    <p><input  ng-model="paquete.destinatario.referencias"></p>
+    <p><input class="input-lg"  ng-model="paquete.destinatario.referencias"></p>
      </div>
   </div>
   </div>

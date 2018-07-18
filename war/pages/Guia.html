@@ -26,7 +26,7 @@
 		</div>
 		
 		<div class="col-md-1">
-		 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#modalAsignarMasivo">Asignar Masivo</button>
+		 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#modalAsignarMasivo">Asignar</button>
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
 		</div>
@@ -60,9 +60,10 @@
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
 					<td>{{g.tipoGuia}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" >
-							<i class="fa fa-building-o"></i>
-						</button>
+					<td HEIGHT="50">
+<!-- 					<button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" > -->
+<!-- 							<i class="fa fa-building-o"></i> -->
+<!-- 						</button> -->
 						
 						
 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
@@ -162,7 +163,7 @@
           </div>
           <br><br>
            <div class="form-group">
-            <label for="exampleInputEmail1">Nueva Sucursal</label>
+            <label for="exampleInputEmail1">Sucursal a Asignar</label>
             <select class="form-control" ng-model="addM.idSucursal"
 										required>
 										<option ng-repeat="s in sucursal" value="{{s.id}}" ng-if="s.nombre!='MASTER'">{{s.nombre}}</option>
