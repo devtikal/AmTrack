@@ -9,9 +9,12 @@ import com.googlecode.objectify.ObjectifyService;
 import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Envio;
+import com.tikal.mensajeria.modelo.entity.Factura;
+import com.tikal.mensajeria.modelo.entity.FacturaVTT;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.entity.Persona;
+import com.tikal.mensajeria.modelo.entity.Serial;
 import com.tikal.mensajeria.modelo.entity.Venta;
 import com.tikal.mensajeria.modelo.login.Perfil;
 import com.tikal.mensajeria.modelo.login.SessionEntity;
@@ -40,6 +43,9 @@ public class StartupEntities implements ServletContextListener {
 			ObjectifyService.register(Contador.class);
 			ObjectifyService.register(ContadorServicio.class);
 			ObjectifyService.register(Venta.class);
+			ObjectifyService.register(Factura.class);
+			ObjectifyService.register(FacturaVTT.class);
+			ObjectifyService.register(Serial.class);
 		
 		}
 

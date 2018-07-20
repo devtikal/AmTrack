@@ -218,8 +218,8 @@ public class EnvioController {
 			envio.setMateriales(ef.getMateriales());
 			
 			envioDao.save(envio);
-			if (envio.getEmpresa().equals("ESTAFETA")){
-								
+			if (envio.getEmpresa().equals("ESTAFETA")){		
+				System.out.println("guia numero2"+ef.getGuia());
 				Guia g=guiaDao.getByNumero(ef.getGuia());
 				g.setEstatus("EN ENVIO");
 				guiaDao.update(g);

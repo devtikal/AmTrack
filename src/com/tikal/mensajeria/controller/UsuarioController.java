@@ -211,7 +211,7 @@ public class UsuarioController {
 		
 		
 		@RequestMapping(value = { "/SuperAdministrador" }, method = RequestMethod.GET)
-		public void crearUsuarioUnico(HttpServletRequest request, HttpServletResponse response){
+		public void crearUsuarioUnico(HttpServletRequest request, HttpServletResponse response) throws IOException{
 			System.out.println("si entra a superadministrador");
 				Usuario usuario = new Usuario();
 				
@@ -245,7 +245,7 @@ public class UsuarioController {
 				//usuario.setSucursal(sucursal);
 				//usuario.setIdSucursal(9999);
 				usuarioDao.crearUsuario(usuario);
-				
+				///superadministrador
 				Perfil perfil = new Perfil();
 				perfil.setTipo("SuperAdministrador");
 				boolean[] arreglo = new boolean[10];
@@ -255,7 +255,29 @@ public class UsuarioController {
 				
 				perfil.setPermisos(arreglo);
 				perfilDAO.crearPerfil(perfil);
+				/// cajero
+				Perfil perfil1 = new Perfil();
+				perfil1.setTipo("Cajero");
+				boolean[] arreglo1 = new boolean[10];
+				for(int i=0; i < arreglo1.length; i++){
+					arreglo1[i] = true;
+				}
+				
+				perfil1.setPermisos(arreglo1);
+				perfilDAO.crearPerfil(perfil1);
+				////////administrador
+				Perfil perfilA = new Perfil();
+				perfilA.setTipo("Administrador");
+				boolean[] arregloA = new boolean[10];
+				for(int i=0; i < arregloA.length; i++){
+					arregloA[i] = true;
+				}
+				
+				perfilA.setPermisos(arregloA);
+				perfilDAO.crearPerfil(perfilA);
 						
+				
+				response.getWriter().println("Usuario Creado ...");
 		}
 
 }

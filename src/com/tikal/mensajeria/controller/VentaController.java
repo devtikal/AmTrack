@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,16 +23,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.itextpdf.text.DocumentException;
+import com.tikal.cacao.dao.FacturaVttDAO;
+import com.tikal.cacao.sat.cfd.Comprobante;
+import com.tikal.cacao.service.FacturaVTTService;
+import com.tikal.mensajeria.dao.EmisorDAO;
 import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.dao.GuiaDao;
 import com.tikal.mensajeria.dao.PaqueteDao;
 import com.tikal.mensajeria.dao.PersonaDao;
+import com.tikal.mensajeria.dao.SerialDAO;
 import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.dao.VentaDao;
+import com.tikal.mensajeria.facturacion.ComprobanteVentaFactory33;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.ContadorServicio;
+import com.tikal.mensajeria.modelo.entity.Emisor;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
@@ -39,9 +48,11 @@ import com.tikal.mensajeria.modelo.entity.Persona;
 import com.tikal.mensajeria.modelo.entity.Venta;
 import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
+import com.tikal.mensajeria.modelo.vo.DatosEmisor;
 import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.modelo.vo.FechasVo;
 import com.tikal.mensajeria.modelo.vo.ReporteVo;
+import com.tikal.mensajeria.modelo.vo.VentaFac;
 import com.tikal.mensajeria.reportes.ReporteSucursal;
 import com.tikal.mensajeria.reportes.ReporteXls;
 import com.tikal.mensajeria.util.JsonConvertidor;
@@ -81,6 +92,10 @@ public class VentaController {
 	@Autowired
 	@Qualifier("guiaDao")
 	GuiaDao guiaDao;
+	
+
+
+	
 	
 	@RequestMapping(value={"/prueba"},method = RequestMethod.GET)
 	   
@@ -549,6 +564,10 @@ public class VentaController {
 				return regs;
 	  }
 
+	  
+	
+	  
+	  
 	  @RequestMapping(value = "/setup/{folio}", method = RequestMethod.GET)
 		public void setUp(HttpServletResponse res,@PathVariable Long folio) throws IOException{
 			ventaDao.crearContador(folio);			

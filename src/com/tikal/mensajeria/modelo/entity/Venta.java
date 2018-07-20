@@ -19,6 +19,7 @@ public class Venta {
 	@Index private String estatus;
 	List<Long> envios;
 	private Double total;
+	@Index String numeroFactura;
 	@Index private Long idSucursal;
 	
 	
@@ -77,6 +78,12 @@ public class Venta {
 	}
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+	public String getNumeroFactura() {
+		return numeroFactura;
+	}
+	public void setNumeroFactura(String numeroFactura) {
+		this.numeroFactura = numeroFactura;
 	}
 	
 	

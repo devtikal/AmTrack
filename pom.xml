@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -24,10 +23,10 @@
 	</prerequisites>
 
 	<build>
-	
+
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
-		
+
 		<resources>
 			<resource>
 				<directory>src</directory>
@@ -37,70 +36,70 @@
 			</resource>
 		</resources>
 		<pluginManagement>
-		<plugins>
-		    
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>org.nekorp.workflow.desktop.control.MainClass</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>default-cli</id>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/war/WEB-INF/lib/</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-							<excludeArtifactIds>gwt-user,gwt-dev</excludeArtifactIds>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.google.appengine</groupId>
-				<artifactId>appengine-maven-plugin</artifactId>
-				<version>1.9.42</version>
-			</plugin>
-			<plugin>
-    			 <groupId> org.eclipse.jetty</groupId >
-   				  <artifactId> jetty-maven-plugin</artifactId >
-    				 <configuration>
-     					<webAppConfig>
-     				 			   <contextPath> /${project.artifactId}</contextPath >
-      				  			 <webInfIncludeJarPattern> busines-letter-*.</webInfIncludeJarPattern >
-     					</webAppConfig>
-     				</configuration>
-     		</plugin>
-		</plugins>
+			<plugins>
+
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+								<mainClass>org.nekorp.workflow.desktop.control.MainClass</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<id>default-cli</id>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${basedir}/war/WEB-INF/lib/</outputDirectory>
+								<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer>
+								<excludeArtifactIds>gwt-user,gwt-dev</excludeArtifactIds>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-maven-plugin</artifactId>
+					<version>1.9.42</version>
+				</plugin>
+				<plugin>
+					<groupId> org.eclipse.jetty</groupId>
+					<artifactId> jetty-maven-plugin</artifactId>
+					<configuration>
+						<webAppConfig>
+							<contextPath> /${project.artifactId}</contextPath>
+							<webInfIncludeJarPattern> busines-letter-*.</webInfIncludeJarPattern>
+						</webAppConfig>
+					</configuration>
+				</plugin>
+			</plugins>
 		</pluginManagement>
 	</build>
 	<dependencies>
@@ -148,7 +147,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
@@ -200,14 +199,55 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.16</version>
+		</dependency>
+
+		<!-- This has the connection pool DataSource class for Cloud SQL -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- Cloud MySQL dependency -->
+		<dependency>
+			<groupId>com.google.cloud.sql</groupId>
+			<artifactId>mysql-socket-factory</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+	<dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>5.3.2.Final</version>
+	</dependency>
+		
+	<!-- 	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency> -->
 		
 		<dependency>
-   			 <groupId>org.apache.poi</groupId>
-    		 <artifactId>poi</artifactId>
-  			 <version>3.16</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.3.2.Final</version>
 		</dependency>
-	
-   
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-tx</artifactId>
+    	<version>2.5.4</version>
+	</dependency>
 
 	</dependencies>
 </project>

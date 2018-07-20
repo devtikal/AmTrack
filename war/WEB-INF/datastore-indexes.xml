@@ -15,6 +15,14 @@
   <property name="fecha" direction="asc"/>
   <property name="idSucursal" direction="asc"/>
    </datastore-index>
+   
+   <datastore-index kind="Envio" ancestor="false" source="manual"> 
+  <property name="empresa" direction="asc"/> 
+  <property name="guia" direction="asc"/> 
+  <property name="tipoGuia" direction="asc"/>
+  <property name="rastreo" direction="asc"/>
+ 
+   </datastore-index>
   
 </datastore-indexes>
 

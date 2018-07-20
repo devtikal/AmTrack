@@ -188,8 +188,12 @@ public class GuiaController {
 		AsignadorDeCharset.asignar(request, response);
 		
 			Guia guia = guiaDao.consult(idGuia);
-			guia.setEstatus("CANCELADA");
-			guiaDao.update(guia);
+			if (guia.getEstatus().equals("EN ENVIO")){
+				System.out.println("la guia no se puede cancelar");
+			}else{
+				guia.setEstatus("CANCELADA");
+				guiaDao.update(guia);
+			}
 			//System.out.println(" yisus manda:"+json);
 		
 		
