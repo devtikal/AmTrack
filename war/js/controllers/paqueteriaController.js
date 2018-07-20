@@ -163,6 +163,26 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	this.factura = function(idVenta,datos){
+		var d = $q.defer();
+		$http.post("/factura/facturar/"+idVenta,datos).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 	this.makePDF = function(idEnvio,usuario){
 		var d = $q.defer();
 		$http.get("venta/generaTicket/"+idEnvio+"/"+usuario).then(
@@ -600,6 +620,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		    
 		}	
 	$scope.datosCP =[];
+	$scope.maskGuia = function(){
+		var guia = document.getElementById('guia').value;
+		if (guia.length == 10){
+			document.getElementById('guia').value = document.getElementById('guia').value + "-";
+		}
+	}
 	$scope.getCP = function(tipo){
 		if (tipo == "remitente"){
 //			var cp = $scope.paquete.cliente.codigoPostal;
@@ -625,8 +651,17 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			}
 		}
 	}
-	
-	
+	$scope.getIdVenta=null;
+	$scope.preFacturar = function(venta){
+		$scope.getIdVenta=venta.id;
+		console.log("Venta a Facturar", venta);
+		$("#modalFactura").modal();
+	}
+	$scope.facturar=function(){
+		paqueteriaService.factura($scope.getIdVenta, $scope.factura).then(function(data) {
+			alert("Se ha facturado Correctamente");
+		})
+	}
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();

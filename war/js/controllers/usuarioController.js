@@ -25,10 +25,28 @@ app.service("usuarioservice", [
 						});
 				return d.promise;
 			}
+			this.update = function(usuario,userData) {
+				var d = $q.defer();
+				$http.post("usuario/update/"+usuario, userData).then(
+						function(response) {
+							console.log(response);
+							d.resolve(response.data);
+						},
+						function(response) {
+						
+							if (response.status == 403) {
+								// alert("No tiene permiso de realizar esta
+								// acción");
+								// $location.path("/login");
+							}
+							d.reject(response);
+							$window.location.reload;
+						});
+				return d.promise;
+			}
 			this.getUsuario = function() {
 				var d = $q.defer();
 				$http.get("usuario/getAll").then(function(response) {
-					console.log(response);
 					d.resolve(response.data);
 				}, function(response) {
 					if (response.status == 403) {
@@ -208,15 +226,47 @@ app.controller("modUserController", [
 			if ($cookieStore.get('perfil') == 'Cajero') {
 				$location.path("/error");
 			}
-
-			sucursalService.getAllSucursal().then(function(data) {
-				$scope.sucursal = data;
-				$scope.getUsers();
-			});
-			$scope.getUsers = function() {
+			$scope.sucursal=[];
+			
+			
 				usuarioservice.getUsuario().then(function(data) {
 					$scope.usuariosLista = data;
 					console.log("Usuario ", data);
+					sucursalService.getAllSucursal().then(function(data) {
+						$scope.sucursal = data;
+						console.log("Datos de Sucursal ", data);
+						
+					});
 				})
+				  $scope.sucFunc = function ciudadFunc(id){
+			        for (var i = 0; i < $scope.sucursal.length; i++){
+			        if ($scope.sucursal[i].id == id){
+			          return $scope.sucursal[i].nombre;
+			        } 
+			      }
+			    }
+				$scope.hide=false;
+				$scope.showSelect = function(valor){
+					$scope.hide=valor;
+				}
+				$scope.newPsw=function(user){
+					
+					$("#modalnewPsw").modal();
+				}
+			$scope.updateUser = function(user){
+				var usuario = user;
+				console.log(usuario);
+				usuarioservice.update(user.usuario, user).then(function(data) {
+					alert("Usuario Modificado Correctamente");
+					$window.location.reload();
+				});
 			}
+			$scope.validatePass = function() {
+				if ($scope.user.password != $scope.user.passconfirm) {
+					$scope.IsMatchP = false;
+				}else{
+					$scope.IsMatchP = true;
+				}
+			}
+
 		} ]);

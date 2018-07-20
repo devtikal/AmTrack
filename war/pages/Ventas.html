@@ -57,12 +57,13 @@
 		<table class="table .table-striped">
 			<thead>
 				<tr>
-					<th width="5%"></th>
-					<th>Folio</th>
-					<th>Fecha</th>
-					<th>Cantidad</th>
-					<th>Estatus</th>
-					<th>Acciones</th>
+					<th width="1%"></th>
+					<th width="10%">Folio</th>
+					<th width="10%">Fecha</th>
+					<th width="10%">Cantidad</th>
+					<th width="10%">Estatus</th>
+					<th width="10%">Acciones</th>
+					<th width="10%">Factura</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -92,6 +93,16 @@
 <!-- 							<i class="glyphicon glyphicon-print"></i> -->
 <!-- 						</a>	 -->
 					</td>
+					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0">
+							<i class="glyphicon glyphicon-list-alt"></i>
+						</button>
+						<button class="btn btn-danger" title="PDF" ng-disabled="v.cantidad==0">
+							<i class="fa fa-file-pdf-o"></i>
+						</button>
+						<button class="btn btn-success" title="XML" ng-disabled="v.cantidad==0">
+							<i class="fa fa-file-excel-o"></i>
+						</button>
+						</td>
 				</tr>
 			</tbody>	
 		</table>
@@ -250,7 +261,7 @@
   <div class="row">
 			<div class="col-md-6">
 							<label>Guia</label>
-								<input class="form-control" style="font-size:20px" ng-model="paquete.guia" required ng-disabled="disGuia">
+								<input class="form-control" id="guia" style="font-size:20px" ng-model="paquete.guia" required ng-disabled="disGuia"  minlength="23" maxlength="23" ng-keyup="maskGuia()">
 						</div>
 						<div class="col-md-6">
 							
@@ -705,7 +716,147 @@
     </div>
  </div>
 <!-- FIN -->
+<!--   MODAL FACTURA -->
+   <div class="modal modal-wide fade" id="modalFactura" role="dialog">
+<div class="modal-dialog modal-lg">
+      <div class="modal-content">
+<!--         <div class="modal-header"> -->
+          
+<!--           <h4 class="modal-title">Detalle de Venta</h4> -->
+<!--         </div> -->
+        <div class="modal-body">
+        <div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label for="example-text-input" class="col-10 col-form-label">M&eacute;todo
+							de Pago:</label>
+						<div class="col-15">
+							<select class="form-control"
+								ng-model="factura.metodoPago">
+								<option value="PUE">Pago en una sola exhibici&oacute;n</option>
+								<option value="PPD">Pago en parcialidades o diferido</option>
+							</select>
+							<!-- <input class="form-control facInp" type="text" value=""
+								id="metodo" name="metodo" ng-model="comprobante.metodoDePago"> -->
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<label for="example-text-input" class="col-10 col-form-label">Forma
+						de Pago:</label>
+					<div class="col-15">
+						<select class="form-control"
+							ng-model="factura.formaPago">
+							<option value="01">01-Efectivo</option>
+							<option value="02">02-Cheque nominativo</option>
+							<option value="03">03-Transferencia electr&oacute;nica
+								de fondos</option>
+							<option value="04">04-Tarjeta de Cr&eacute;dito</option>
+							<option value="05">05-Monedero Electr&oacute;nico</option>
+							<option value="06">06-Dinero electr&oacute;nico</option>
+							<option value="08">08-Vales de despensa</option>
+							<option value="28">28-Tarjeta de D&eacute;bito</option>
+							<option value="29">29-Tarjeta de Servicio</option>
+							<option value="99">99-Por definir</option>
+						</select>
+						<!-- <input class="form-control facInp" type="text"
+							ng-model="comprobante.formaDePago"> -->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label for="example-text-input" class="col-2 col-form-label">RFC:</label>
+						<div class="col-10">
+							<input class="form-control " type="text" value="" id="rfc"
+								ng-model="factura.rfc" name="rfc">
+						</div>
+					</div>
+				</div>
+				</div>
+						
+			<div class="row">
+				
+				<div class="col-md-6">
+					<div class="form-group ">
+						<label for="example-text-input" class="col-10 col-form-label">Nombre
+							o Raz&oacute;n Social</label>
+						<div class="col-16">
+							<input class="form-control " type="text" value=""
+								id="nombre" name="nombre" ng-model="factura.nombre">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group ">
+						<label for="example-text-input" class="col-10 col-form-label">Correo</label>
+						<div class="col-16">
+							<input type="email"form-control " type="text" value=""
+								id="nombre" name="nombre" ng-model="factura.mail">
+						</div>
+					</div>
+				</div>
+			</div>
+     		<div class="form-group ">
+							<label for="example-text-input" class="col-12 col-form-label input-lg">Uso
+								de CFDI:</label>
+							<div class="col-15">
+								<!-- 							<input class="form-control facInp" type="text" value="" -->
+								<!-- 								id="condPago" name="condPago" -->
+								<!-- 								ng-model="comprobante.receptor.usoCFDI.valor"> -->
+								<select class="form-control"
+									ng-model="factura.usoCfdi"
+									 required>
+									<option value="G01">G01-Adquisici&oacute;n de
+										mercancias</option>
+									<option value="G02">G02-Devoluciones, descuentos o
+										bonificaciones</option>
+									<option value="G03">G03-Gastos en general</option>
+									<option value="I01">I01-Construcciones</option>
+									<option value="I02">I02-Mobilario y equipo de oficina
+										por inversiones</option>
+									<option value="I03">I03-Equipo de transporte</option>
+									<option value="I04">I04-Equipo de computo y accesorios</option>
+									<option value="I05">I05-Dados, troqueles, moldes,
+										matrices y herramental</option>
+									<option value="I06">I06-Comunicaciones
+										telef&oacute;nicas</option>
+									<option value="I07">I07-Comunicaciones satelitales</option>
+									<option value="I08">I08-Otra maquinaria y equipo</option>
+									<option value="D01" class="nomoral">D01-Honorarios
+										m&eacute;dicos, dentales y gastos hospitalarios.</option>
+									<option value="D02" class="nomoral">D02-Gastos
+										m&eacute;dicos por incapacidad o discapacidad</option>
+									<option value="D03" class="nomoral">D03-Gastos
+										funerales.</option>
+									<option value="D04" class="nomoral">D04-Donativos.</option>
+									<option value="D05" class="nomoral">D05-Intereses
+										reales efectivamente pagados por cr&eacute;ditos hipotecarios
+										(casa habitaci&oacute;n).</option>
+									<option value="D06" class="nomoral">D06-Aportaciones
+										voluntarias al SAR.</option>
+									<option value="D07" class="nomoral">D07-Primas por
+										seguros de gastos m&eacute;dicos.</option>
+									<option value="D08" class="nomoral">D08-Gastos de
+										transportaci&oacute;n escolar obligatoria.</option>
+									<option value="D09" class="nomoral">D09-Dep&oacute;sitos
+										en cuentas para el ahorro, primas que tengan como base planes
+										de pensiones.</option>
+									<option value="D10" class="nomoral">D10-Pagos por
+										servicios educativos (colegiaturas)</option>
+									<option value="P01">P01-Por definir</option>
+								</select>
+							</div><br>
+							<button type="button" class="btn btn-success" ng-click="facturar()">Timbrar</button>
+						</div>
 
+     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
+    </div>
+ </div>
 </div>	
 	</div>
 

@@ -43,38 +43,30 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th width="10%"></th>
+					<th width="5%"></th>
 					<th width="20%">DE</th>
 					<th width="20%">HASTA</th>
 					<th width="10%">ESTATUS</th>
 					<th width="20%">SUCURSAL</th>
 					<th width="10%">TIPO DE GUIA</th>
-					<th width="10%">Acciones</th>
+<!-- 					<th width="10%">Acciones</th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="g in guias" class="{{g.clase}}">
 					<td></td>
-					<td>{{g.inicia}}</td>
+					<td HEIGHT="50">{{g.inicia}}</td>
 					<td>{{g.termina}}</td>
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
 					<td>{{g.tipoGuia}}</td>
-					<td HEIGHT="50">
-<!-- 					<button class="btn btn-success" ng-click="ver(g)" title="Asignar Sucursal" data-toggle="modal" data-target="#modalAsignar" ng-if="g.estatus=='NO ASIGNADA'" > -->
-<!-- 							<i class="fa fa-building-o"></i> -->
+<!-- 					<td HEIGHT="50"> -->
+						
+<!-- 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'"> -->
+<!-- 							<i class="fa fa-trash"></i> -->
 <!-- 						</button> -->
-						
-						
-						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'">
-							<i class="fa fa-trash"></i>
-						</button>
-<!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
-<!-- 							title="Imprimir OT" -->
-<!-- 							href=" ots/descargaOt/{{ot.id}}" download="ordenDeTrabajo.pdf"> -->
-<!-- 							<i class="glyphicon glyphicon-print"></i> -->
-<!-- 						</a>	 -->
-					</td>
+
+<!-- 					</td> -->
 				</tr>
 			</tbody>	
 		</table>
