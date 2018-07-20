@@ -1,6 +1,8 @@
 package com.tikal.mensajeria.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +39,7 @@ import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.dao.VentaDao;
 import com.tikal.mensajeria.facturacion.ComprobanteVentaFactory33;
 import com.tikal.mensajeria.modelo.entity.Emisor;
+import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.FacturaVTT;
 import com.tikal.mensajeria.modelo.entity.Serial;
 import com.tikal.mensajeria.modelo.entity.Venta;
@@ -126,7 +129,16 @@ public class FacturaController {
 				//if(Util.verificarPermiso(re, usuariodao, perfildao, 3)){
 				AsignadorDeCharset.asignar(re, rs);
 					VentaFac ventavo= (VentaFac) JsonConvertidor.fromJson(json, VentaFac.class);
+					
+					
 					Venta venta= ventaDao.consult(idVenta);
+					List<Envio> envios =new ArrayList<Envio>();
+					for (Long envio: venta.getEnvios()){
+						Envio e= envioDao.consult(envio);
+						envios.add(e);
+					}
+					
+					ventavo.setEnvios(envios);
 				//	Receptor r = creaReceptor();
 					//Emisor e=crearEmisor(ventavo);
 					Serial s=new Serial();
@@ -137,17 +149,20 @@ public class FacturaController {
 					Comprobante c= ComprobanteVentaFactory33.generarFactura(ventavo,cliente, emisor );
 					//facturar
 					c.setFolio(folio.toString());
-					c.setSerie("FS");
+				//	c.setSerie("");
 					c.getReceptor().setUsoCFDI(new C_UsoCFDI(ventavo.getUsoCfdi()));
 					
 					ComprobanteVO comprobanteVO= new ComprobanteVO();
 					comprobanteVO.setComprobante(c);
 					comprobanteVO.setEmail(ventavo.getMail());
+					System.out.println("comprobante vo: "+comprobanteVO);
+					System.out.println("session: "+re.getSession());
+					System.out.println("factura: "+facturaVTTService);
 					RespuestaWebServicePersonalizada respuestaws = facturaVTTService.timbrarPOS(comprobanteVO, re.getSession());
 					String uuid= respuestaws.getUuidFactura();
 					String[] respuesta= new String[2];
 					if (uuid!=null) {
-//						venta.setXml(cfdiXML);
+						//venta.setXml(cfdiXML);
 						venta.setEstatus("FACTURADO");
 					//	venta.setUuid(uuid);
 						venta.setNumeroFactura(folio.toString());

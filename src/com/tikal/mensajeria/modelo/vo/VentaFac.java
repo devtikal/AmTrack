@@ -1,9 +1,16 @@
 package com.tikal.mensajeria.modelo.vo;
 
-import com.tikal.cacao.sat.cfd.TUbicacion;
+import java.util.List;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.tikal.cacao.sat.cfd.TUbicacion;
+import com.tikal.mensajeria.modelo.entity.Envio;
+
+@Entity
 public class VentaFac {
 	
+	@Id private Long id;
 	private String usoCfdi;
 	private String formaPago;
 	private String metodoPago;
@@ -11,7 +18,23 @@ public class VentaFac {
 	private String nombre;
 	private TUbicacion domicilio;
 	private String mail;
+	private List<Envio> envios;
 	
+	
+	
+	
+	public List<Envio> getEnvios() {
+		return envios;
+	}
+	public void setEnvios(List<Envio> envios) {
+		this.envios = envios;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getUsoCfdi() {
 		return usoCfdi;
 	}
