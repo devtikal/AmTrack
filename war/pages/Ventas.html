@@ -96,12 +96,16 @@
 					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0">
 							<i class="glyphicon glyphicon-list-alt"></i>
 						</button>
-						<button class="btn btn-danger" title="PDF" ng-disabled="v.cantidad==0">
+							<a class="btn btn-danger" data-toggle="tooltip" ng-if="v.uuid"
+							title="Descargar PDF"
+							href="factura/pdfFactura/{{v.uuid}}" download="Factura-{{v.uuid}}.pdf">
 							<i class="fa fa-file-pdf-o"></i>
-						</button>
-						<button class="btn btn-success" title="XML" ng-disabled="v.cantidad==0">
+							</a>
+							<a class="btn btn-success" data-toggle="tooltip" ng-if="v.uuid"
+							title="Descargar XML"
+							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml">
 							<i class="fa fa-file-excel-o"></i>
-						</button>
+							</a>
 						</td>
 				</tr>
 			</tbody>	
