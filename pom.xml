@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -9,32 +10,18 @@
 	<groupId>com.tikal</groupId>
 	<artifactId>tikal.mensajeria</artifactId>
 
-	<!-- <properties>
+	<properties>
 		<appengine.maven.plugin.version>1.3.1</appengine.maven.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-	</properties> -->
-	<properties>
-		<!-- INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance Details 
-			> Properties or gcloud sql instances describe <instance> project:region:instance 
-			for Cloud SQL 2nd Generation or project:instance for Cloud SQL 1st Generation -->
-		<INSTANCE_CONNECTION_NAME>stdsistema2:us-central1:std2sql</INSTANCE_CONNECTION_NAME>
-		<user>ismael</user>
-		<password>nMVKLZ7yuj</password>
-		<database>catalogos</database>
-
-		<spring-framework.version>4.1.5.RELEASE</spring-framework.version>
-
-		<hibernate.version>4.3.8.Final</hibernate.version>
-
 	</properties>
+
 	<prerequisites>
 		<maven>3.3.9</maven>
 	</prerequisites>
-
 	<build>
 
 		<sourceDirectory>src</sourceDirectory>
@@ -159,7 +146,12 @@
 			<artifactId>httpclient-cache</artifactId>
 			<version>4.4.1</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.1</version>
+		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -208,7 +200,7 @@
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>1.9.57</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
@@ -240,32 +232,45 @@
 
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-		
+
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-	<dependency>
-    	<groupId>org.hibernate</groupId>
-    	<artifactId>hibernate-core</artifactId>
-    	<version>5.3.2.Final</version>
-	</dependency>
-		
-	<!-- 	<dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency> -->
-		
+			<version>5.3.2.Final</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
+			<version>${hibernate.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.3.2.Final</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
-	<dependency>
-    	<groupId>org.springframework</groupId>
-    	<artifactId>spring-tx</artifactId>
-    	<version>2.5.4</version>
-	</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.39</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mailapi</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.endpoints/endpoints-framework-tools -->
+		<dependency>
+			<groupId>com.google.endpoints</groupId>
+			<artifactId>endpoints-framework-tools</artifactId>
+			<version>2.0.14</version>
+		</dependency>
 	</dependencies>
 </project>
