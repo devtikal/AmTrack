@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.tikal.cacao.dao.FacturaVttDAO;
 import com.tikal.cacao.factura.RespuestaWebServicePersonalizada;
+import com.tikal.cacao.factura.ws.WSClient;
+import com.tikal.cacao.factura.ws.WSClientCfdi33;
 import com.tikal.cacao.sat.cfd.catalogos.dyn.C_UsoCFDI;
 //import com.tikal.cacao.sat.cfd.Comprobante.Receptor;
 import com.tikal.cacao.sat.cfd33.Comprobante;
@@ -53,8 +57,14 @@ import com.tikal.util.AsignadorDeCharset;
 	
 
 @Controller
-@RequestMapping("/factura")
+@RequestMapping(value = { "/factura"})
 public class FacturaController {
+	
+	@Autowired
+	private WSClient client;
+
+	@Autowired
+	private WSClientCfdi33 client33;
 	
 	@Autowired
 	@Qualifier("usuarioDao")
@@ -74,8 +84,7 @@ public class FacturaController {
 	@Qualifier("paqueteDao")
 	PaqueteDao paqueteDao;
 	
-	@Autowired
-	
+	@Autowired	
 	@Qualifier("personaDao")
 	PersonaDao personaDao;
 	
@@ -105,17 +114,43 @@ public class FacturaController {
 	@Qualifier("receptordao")
 	ReceptorDAO receptordao;
 	
-	//@Autowired
+	@Autowired
 	@Qualifier("facturaVTTDAO")
 	FacturaVttDAO facturaVTTDAO;
-	
-	//@Autowired	
+//	
+	@Autowired	
 	@Qualifier("facturaVTTService")
 	FacturaVTTService facturaVTTService;
 	
 	
 	
-	@RequestMapping(value={"/prueba"},method = RequestMethod.GET)
+	
+	@PostConstruct
+	public void init() {
+		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+		// this package must match the package with the WSDL java classes
+		marshaller.setContextPath("localhost");
+
+		client.setDefaultUri("http://www.timbracfdipruebas.mx/serviciointegracionpruebas/Timbrado.asmx");
+		client.setMarshaller(marshaller);
+		client.setUnmarshaller(marshaller);
+
+		// init Web Service Timbrado Cfdi v3.3
+		Jaxb2Marshaller marshallerV33 = new Jaxb2Marshaller();
+		marshallerV33.setContextPath("org.tempuri");
+
+		client33.setDefaultUri("https://cfdi33-pruebas.buzoncfdi.mx:1443/Timbrado.asmx");
+		client33.setMarshaller(marshallerV33);
+		client33.setUnmarshaller(marshallerV33);
+		
+		
+		
+//		client.setMarshaller(marshaller);
+//		client.setUnmarshaller(marshaller);
+	}
+	
+	
+	@RequestMapping(value={"/prueba"},method = RequestMethod.GET)	
 	   
 	   public void prueba(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		   response.getWriter().println("Prueba del mètodo Venta prueba");
@@ -162,14 +197,16 @@ public class FacturaController {
 					String uuid= respuestaws.getUuidFactura();
 					String[] respuesta= new String[2];
 					if (uuid!=null) {
-						//venta.setXml(cfdiXML);
+						System.out.println("uuid no nulo");
+		//ojo				venta.setXml(cfdiXML);
 						venta.setEstatus("FACTURADO");
-					//	venta.setUuid(uuid);
+		//ojo				venta.setUuid(uuid);
 						venta.setNumeroFactura(folio.toString());
 						s.incrementa();
 						ventaDao.update(venta);
 						respuesta[0]="0";
 					}else{
+						System.out.println("uuid nulo");
 						respuesta[0]="1";
 						String mensaje=respuestaws.getMensajeRespuesta();
 						respuesta[1]="Mensaje de respuesta: " +mensaje ;
@@ -185,7 +222,7 @@ public class FacturaController {
 		public void pdf(HttpServletRequest re, HttpServletResponse res, @PathVariable String id) throws IOException{
 		//	if(Util.verificarPermiso(re, usuariodao, perfildao, 1,3)){
 			res.setContentType("Application/PDF");
-			FacturaVTT factura=facturaVTTDAO.consultar(id);
+			FacturaVTT factura=facturaVTTService.consultar(id);
 			try {
 				PdfWriter writer = facturaVTTService.obtenerPDF(factura, res.getOutputStream());
 				if(writer!=null){
@@ -195,7 +232,8 @@ public class FacturaController {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			} catch (DocumentException e) {
+			} 
+				catch (DocumentException e) {
 				e.printStackTrace();
 			}
 //			}else{
@@ -208,13 +246,13 @@ public class FacturaController {
 			//if(Util.verificarPermiso(re, usuariodao, perfildao, 1,3)){
 			VentaFac vf= (VentaFac)JsonConvertidor.fromJson(json, VentaFac.class);
 			String mail= vf.getMail();
-			//FacturaVTT f= facturaVTTDAO.consultar(vf.getUuid());
-		//	if(f!=null){
+			FacturaVTT f= facturaVTTDAO.consultar(vf.getUuid());
+			if(f!=null){
 				if(mail!=null){
-		//			facturaVTTService.enviarEmail(mail, f.getUuid(), re.getSession());
+					facturaVTTService.enviarEmail(mail, f.getUuid(), re.getSession());
 					res.getWriter().print("Se envió");
 				}
-		//	}
+			}
 //			}else{
 //				res.sendError(403);
 //			}

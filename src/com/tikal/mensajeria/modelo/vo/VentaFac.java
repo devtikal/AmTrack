@@ -19,10 +19,17 @@ public class VentaFac {
 	private TUbicacion domicilio;
 	private String mail;
 	private List<Envio> envios;
+	private String uuid;
 	
 	
 	
 	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	public List<Envio> getEnvios() {
 		return envios;
 	}

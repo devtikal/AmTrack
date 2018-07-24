@@ -2,11 +2,16 @@ package com.tikal.cacao.dao.sqlimpl;
 
 import java.util.List;
 
-import com.tikal.cacao.dao.SimpleHibernateDAO;
+import com.tikal.cacao.dao.sql.SimpleHibernateDAO;
+import com.tikal.cacao.model.orm.FormaDePago;
 import com.tikal.cacao.model.orm.TipoDeComprobante;
 
 public class TipoDeComprobanteHibernateDAOImpl extends AbstractDAOHibernate implements SimpleHibernateDAO<TipoDeComprobante> {
 
+	public TipoDeComprobanteHibernateDAOImpl(){
+		System.out.println("TipoDeComprobanteHibernateDAOImpl");
+	}
+	
 	@Override
 	public void guardar(TipoDeComprobante entity) {
 		this.initSessionTx();

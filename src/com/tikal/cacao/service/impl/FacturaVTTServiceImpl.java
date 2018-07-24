@@ -98,11 +98,11 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 	@Qualifier("regimenFiscalDAOH")
 	private RegimenFiscalDAO regimenFiscalDAO;
 
-	@Autowired
+	//@Autowired
 	@Qualifier("formaDePagoDAOH")
 	private SimpleHibernateDAO<FormaDePago> formaDePagoDAO;
 
-	@Autowired
+	//@Autowired
 	@Qualifier("tipoDeComprobanteDAOH")
 	private SimpleHibernateDAO<TipoDeComprobante> tipoDeComprobanteDAO;
 	

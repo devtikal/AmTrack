@@ -5,22 +5,21 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.tikal.cacao.dao.TipoDAO;
+import com.tikal.cacao.dao.sql.TipoDAO;
 import com.tikal.cacao.model.orm.Tipo;
 
 public class TipoDAOHibernateImpl implements TipoDAO {
 	
-	private SessionFactory sessionFactory;
+	private SessionFactory sessionFac;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        this.sessionFac = sessionFactory;
     }
 
 	@Override
 	public void guardar(Tipo t) {
-		Session sesion = this.sessionFactory.openSession();
+		Session sesion = this.sessionFac.openSession();
 		Transaction tx = sesion.beginTransaction();
 		sesion.persist(t);
 		tx.commit();
@@ -30,7 +29,7 @@ public class TipoDAOHibernateImpl implements TipoDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tipo> consultarTodos() {
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFac.openSession();
 		List<Tipo> tipos = session.createQuery("from Tipo").list();
 		session.close();
 		return tipos;
@@ -38,7 +37,7 @@ public class TipoDAOHibernateImpl implements TipoDAO {
 
 	@Override
 	public Tipo consultarPorId(String id) {
-		Session session = this.sessionFactory.openSession();
+		Session session = this.sessionFac.openSession();
 		Tipo t = (Tipo)session.get(Tipo.class, id);
 		session.close();
 		return t;

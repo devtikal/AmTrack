@@ -59,7 +59,7 @@ import com.tikal.mensajeria.util.JsonConvertidor;
 import com.tikal.util.AsignadorDeCharset;
 
 @Controller
-@RequestMapping("/venta")
+@RequestMapping(value = { "/venta"})
 public class VentaController {
 	
 	@Autowired

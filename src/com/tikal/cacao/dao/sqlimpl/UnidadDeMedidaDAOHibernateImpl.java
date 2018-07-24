@@ -3,7 +3,7 @@ package com.tikal.cacao.dao.sqlimpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tikal.cacao.dao.UnidadDeMedidaDAO;
+import com.tikal.cacao.dao.sql.UnidadDeMedidaDAO;
 import com.tikal.cacao.model.orm.UnidadDeMedida;
 
 public class UnidadDeMedidaDAOHibernateImpl extends AbstractDAOHibernate implements UnidadDeMedidaDAO {

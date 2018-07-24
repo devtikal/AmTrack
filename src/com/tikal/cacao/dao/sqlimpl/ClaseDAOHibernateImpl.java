@@ -2,7 +2,7 @@ package com.tikal.cacao.dao.sqlimpl;
 
 import java.util.List;
 
-import com.tikal.cacao.dao.ClaseDAO;
+import com.tikal.cacao.dao.sql.ClaseDAO;
 import com.tikal.cacao.model.orm.Clase;
 
 public class ClaseDAOHibernateImpl extends AbstractDAOHibernate implements ClaseDAO {

@@ -11,31 +11,34 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-     <context:component-scan base-package="com.tikal.mensajeria.util"/>
  	<context:component-scan base-package="com.tikal.mensajeria.controller"/>
+    <context:component-scan base-package="com.tikal.mensajeria.service.impl"/>
   <context:component-scan base-package="com.tikal.mensajeria.prueba"/>
-     <context:component-scan base-package="com.tikal.mensajeria.dao"/>
+     <context:component-scan base-package="com.tikal.mensajeria.dao"/>   
     <context:component-scan base-package="com.tikal.mensajeria.dao.impl"/>
-   
-    
-    <context:component-scan
+    <context:component-scan base-package="com.tikal.mensajerial.util"/>
+    <context:component-scan base-package="com.tikal.cacao.springController.orm"/>
+     <context:component-scan base-package="com.tikal.cacao.dao.sql"/>
+      <context:component-scan base-package="com.tikal.cacao.service"/>
+       <context:component-scan base-package="com.tikal.cacao.dao"/>
+  <context:component-scan base-package="com.tikal.cacao.dao.sqlimpl.FormaDePagoHibernateDAOImpl"/>
+       
+     <context:component-scan
 		base-package="com.tikal.cacao.springController, com.tikal.cacao.sat.calculos,
-		 com.tikal.cacao.factura, com.tikal.cacao.factura.ws,
-		 com.tikal.cacao.service.impl,com.tikal.cacao.service, com.tikal.cacao.dao, com.tikal.cacao.dao.imp" />
+  		 com.tikal.cacao.factura, com.tikal.cacao.factura.ws, 
+ 		 com.tikal.cacao.service.impl,com.tikal.cacao.service, com.tikal.cacao.dao, com.tikal.cacao.dao.imp" />
     
    <!-- Data source Cloud SQL Bean -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- Production GoogleDriver -->
-		<!-- <property name="driverClassName" value="com.mysql.jdbc.GoogleDriver" 
-			/> -->
-		<!-- <property name="url" value="jdbc:google:mysql://stdsistema2:us-central1:std2sql/catalogos" 
-			/> -->
-		<!-- <property name="username" value="ismael" /> -->
-		<!-- <property name="password" value="nMVKLZ7yuj" /> -->
+<!-- 		<property name="driverClassName" value="com.mysql.jdbc.GoogleDriver"/> -->
+<!-- 		<property name="url" value="jdbc:google:mysql://stdsistema2:us-central1:std2sql/catalogos"/> -->
+<!-- 		<property name="username" value="ismael" /> -->
+<!-- 		<property name="password" value="nMVKLZ7yuj" /> -->
 
 		<!-- Development Driver -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.100.200:3306/catalogos" />
+		<property name="url" value="jdbc:mysql://192.168.100.200:3306/catalogos?useSSL=false" />
 		<property name="username" value="admin" />
 		<property name="password" value="123456" />
 
@@ -75,7 +78,7 @@
 	
 	
 	<bean id="tipoDAOH" class="com.tikal.cacao.dao.sqlimpl.TipoDAOHibernateImpl">
-		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"  />
 	</bean>
 
 	<bean id="divisionDAOH" class="com.tikal.cacao.dao.sqlimpl.DivisionDAOHibernateImpl">
@@ -127,13 +130,10 @@
 	</bean>
 	
 	
-<!-- 	<bean class="com.tikal.cacao.dao.imp.FacturaVttDAOmpl"></bean>
-	<bean class="com.tikal.cacao.dao.imp.FacturaVTTServiceImpl"></bean> -->
-<!-- 	<bean class="com.tikal.cacao.dao.imp.ReporteRenglonDAOImpl" />
+	<!-- <bean class="com.tikal.cacao.dao.imp.FacturaDAOImpl"></bean> -->
+	<!-- <bean class="com.tikal.cacao.dao.imp.ReporteRenglonDAOImpl" />
 	<bean class="com.tikal.cacao.dao.imp.SerialDAOImp"></bean>-->
-	<!-- <bean class="com.tikal.cacao.dao.imp.FacturaVttDAOImpl" /> -->
+	<bean class="com.tikal.cacao.dao.imp.FacturaVttDAOImpl" /> 
     <mvc:annotation-driven/>
-
-    
-    
 </beans>
+    

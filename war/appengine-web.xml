@@ -7,22 +7,42 @@
   -->
   <threadsafe>true</threadsafe>
   
- <static-files>
+ <!-- <static-files>
         <include path="/favicon.ico" />
         <include path="/images/**" />
          <include path="/img/**" />
           <include path="/pdf/**" />
-    </static-files>
+    </static-files> -->
     
   <!-- Configure java.util.logging -->
-  <system-properties>
+<!--   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
-  </system-properties>
+  </system-properties> -->
   
   <runtime>java8</runtime>
      
   <sessions-enabled>true</sessions-enabled>
-  <sessions-enabled>true</sessions-enabled> 
+
+  <!-- Configure serving/caching of GWT files -->
+	<static-files>
+		<include path="**" />
+
+		<!-- The following line requires App Engine 1.3.2 SDK -->
+		<include path="**.nocache.*" expiration="0s" />
+
+		<include path="**.cache.*" expiration="365d" />
+		<exclude path="**.gwt.rpc" />
+	</static-files>
+
+	<!-- Configure java.util.logging -->
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+		<property name="file.encoding" value="UTF-8" />
+		<property name="DEFAULT_ENCODING" value="UTF-8" />
+
+		<property name="ae-cloudsql.cloudsql-database-url"
+			value="jdbc:google:mysql://stdsistema2:us-central1:std2sql/catalogos?user=ismael&amp;password=nMVKLZ7yuj" />
+	</system-properties>
 
  <!--
     HTTP Sessions are disabled by default. To enable HTTP sessions specify:

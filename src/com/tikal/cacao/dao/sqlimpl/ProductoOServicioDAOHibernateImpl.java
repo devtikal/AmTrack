@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.tikal.cacao.dao.ProductoServicioDAO;
+import com.tikal.cacao.dao.sql.ProductoServicioDAO;
 import com.tikal.cacao.model.orm.ProductoOServicio;
 
 public class ProductoOServicioDAOHibernateImpl implements ProductoServicioDAO {
