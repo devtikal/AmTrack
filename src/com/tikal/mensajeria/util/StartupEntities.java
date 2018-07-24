@@ -20,6 +20,8 @@ import com.tikal.mensajeria.modelo.login.Perfil;
 import com.tikal.mensajeria.modelo.login.SessionEntity;
 import com.tikal.mensajeria.modelo.login.Sucursal;
 import com.tikal.mensajeria.modelo.login.Usuario;
+import com.tikal.mensajeria.modelo.vo.ClienteFac;
+import com.tikal.mensajeria.modelo.vo.VentaFac;
 
 
 
@@ -46,6 +48,8 @@ public class StartupEntities implements ServletContextListener {
 			ObjectifyService.register(Factura.class);
 			ObjectifyService.register(FacturaVTT.class);
 			ObjectifyService.register(Serial.class);
+			ObjectifyService.register(VentaFac.class);
+			ObjectifyService.register(ClienteFac.class);
 		
 		}
 

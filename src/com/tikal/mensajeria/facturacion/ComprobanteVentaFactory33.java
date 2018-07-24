@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.tikal.cacao.factura.FormatoFecha;
@@ -29,6 +31,7 @@ import com.tikal.cacao.sat.cfd33.Comprobante.Impuestos.Traslados.Traslado;
 import com.tikal.cacao.sat.cfd33.Comprobante.Receptor;
 import com.tikal.mensajeria.modelo.vo.ClienteFac;
 import com.tikal.mensajeria.modelo.vo.DatosEmisor;
+import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Venta;
 
@@ -44,6 +47,10 @@ import com.tikal.mensajeria.modelo.vo.VentaFac;
  */
 @Service
 public class ComprobanteVentaFactory33 {
+	
+	@Autowired
+	@Qualifier("envioDao")
+	EnvioDao envioDao;
 	
 	
 	public static  Comprobante generarFactura(VentaFac venta, ClienteFac cliente, DatosEmisor emisor) {
@@ -63,8 +70,8 @@ public class ComprobanteVentaFactory33 {
 		}
 		
 		comprobante.setEmisor(construirEmisor(emisor));
-		comprobante.setReceptor(construirReceptor(cliente));
-		//construirConceptos(venta.getDetalles(), comprobante);
+		comprobante.setReceptor(construirReceptor(cliente, venta));
+		construirConceptos(venta.getEnvios(), comprobante);
 		
 		//comprobante.setImpuestos(construirImuestos(comprobante.getSubTotal()));
 		BigDecimal total = comprobante.getSubTotal().add(comprobante.getImpuestos().getTotalImpuestosTrasladados());
@@ -100,13 +107,15 @@ public class ComprobanteVentaFactory33 {
 		Emisor emisor = new Comprobante.Emisor();
 		emisor.setRfc("MERA680707KA3");
 		emisor.setNombre("ADOLFO FERMÍN MERCADO RUBIO");
+		emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
+
 //		switch(de.getRegimen()){
 //			case "Personas F�sicas con Actividades Empresariales y Profesionales":{
-//				emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
+			//	emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
 //				break;
 //			}
 //			default:{
-				emisor.setRegimenFiscal(new C_RegimenFiscal("601"));
+				//emisor.setRegimenFiscal(new C_RegimenFiscal("601"));
 			//	break;
 //			}
 //		}
@@ -115,20 +124,24 @@ public class ComprobanteVentaFactory33 {
 		return emisor;
 	}
 	
-	private static Receptor construirReceptor(ClienteFac cliente) {
+	private static Receptor construirReceptor(ClienteFac cliente, VentaFac vf) {
 		Receptor receptor = new Comprobante.Receptor();
 		if(cliente!=null){
-		receptor.setRfc(cliente.getRfc());
-		receptor.setNombre(cliente.getNombre());
-		receptor.setUsoCFDI(new C_UsoCFDI("P01"));
+			receptor.setRfc(cliente.getRfc());
+			receptor.setNombre(cliente.getNombre());
+			receptor.setUsoCFDI(new C_UsoCFDI(vf.getUsoCfdi()));
+		
 		}
 		return receptor;
 	}
 	
-	private void construirConceptos(List<Envio> envios, Comprobante c) {
+	private static void construirConceptos(List<Envio> envios, Comprobante c) {
+		
+		
 		Conceptos conceptos = new Conceptos();
 		BigDecimal subtotal = new BigDecimal(0);
 		BigDecimal importeImpuesto= new BigDecimal(0);
+		
 		double importeTotalIVA = 0;
 		for (Envio envio : envios) {
 			Concepto concepto = new Concepto();
@@ -171,7 +184,7 @@ public class ComprobanteVentaFactory33 {
 		c.setImpuestos(construirImuestos(importeImpuesto));
 	}
 	
-	private Impuestos construirImuestos(BigDecimal importe) {
+	private static Impuestos construirImuestos(BigDecimal importe) {
 		Impuestos impuestos = new Impuestos();
 		Traslados traslados = new Traslados();
 		

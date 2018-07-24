@@ -2,8 +2,7 @@ package com.tikal.cacao.dao.sqlimpl;
 
 import java.util.List;
 
-import com.tikal.cacao.dao.SimpleHibernateDAO;
-import com.tikal.cacao.model.orm.MetodoDePago;
+import com.tikal.cacao.dao.sql.SimpleHibernateDAO;
 import com.tikal.cacao.model.orm.Pais;
 
 public class PaisDAOHibernateImpl extends AbstractDAOHibernate implements SimpleHibernateDAO<Pais> {

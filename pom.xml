@@ -9,15 +9,28 @@
 	<groupId>com.tikal</groupId>
 	<artifactId>tikal.mensajeria</artifactId>
 
-	<properties>
+	<!-- <properties>
 		<appengine.maven.plugin.version>1.3.1</appengine.maven.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-	</properties>
+	</properties> -->
+	<properties>
+		<!-- INSTANCE_CONNECTION_NAME from Cloud Console > SQL > Instance Details 
+			> Properties or gcloud sql instances describe <instance> project:region:instance 
+			for Cloud SQL 2nd Generation or project:instance for Cloud SQL 1st Generation -->
+		<INSTANCE_CONNECTION_NAME>stdsistema2:us-central1:std2sql</INSTANCE_CONNECTION_NAME>
+		<user>ismael</user>
+		<password>nMVKLZ7yuj</password>
+		<database>catalogos</database>
 
+		<spring-framework.version>4.1.5.RELEASE</spring-framework.version>
+
+		<hibernate.version>4.3.8.Final</hibernate.version>
+
+	</properties>
 	<prerequisites>
 		<maven>3.3.9</maven>
 	</prerequisites>
@@ -116,6 +129,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
+			<version>4.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>4.1.5.RELEASE</version>
 		</dependency>
 		<dependency>

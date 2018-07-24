@@ -29,7 +29,7 @@ import com.tikal.mensajeria.util.JsonConvertidor;
 import com.tikal.util.AsignadorDeCharset;
 
 @Controller
-@RequestMapping("/guia")
+@RequestMapping(value = { "/guia"})
 public class GuiaController {
 	
 

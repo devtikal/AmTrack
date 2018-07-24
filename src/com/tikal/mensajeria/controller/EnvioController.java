@@ -41,7 +41,7 @@ import com.tikal.mensajeria.util.AsignadorDeCharset;
 import com.tikal.util.JsonConvertidor;
 
 @Controller
-@RequestMapping("/envio")
+@RequestMapping(value = { "/envio"})
 public class EnvioController {
 	
 	@Autowired

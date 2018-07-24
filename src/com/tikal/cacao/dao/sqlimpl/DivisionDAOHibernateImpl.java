@@ -2,18 +2,12 @@ package com.tikal.cacao.dao.sqlimpl;
 
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.type.StringType;
-import org.hibernate.type.Type;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.tikal.cacao.dao.DivisionDAO;
+import com.tikal.cacao.dao.sql.DivisionDAO;
 import com.tikal.cacao.model.orm.Division;
-import com.tikal.cacao.model.orm.InstruccionSQL;
-import com.tikal.cacao.model.orm.Tipo;
 
 public class DivisionDAOHibernateImpl implements DivisionDAO {
 	

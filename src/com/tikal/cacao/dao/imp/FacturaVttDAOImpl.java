@@ -5,13 +5,13 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.tikal.cacao.dao.FacturaVttDAO;
 import com.tikal.cacao.factura.Estatus;
 import com.tikal.mensajeria.modelo.entity.FacturaVTT;
 
-@Component("facturaVTTDAO")
+@Service("facturaVTTDAO")
 public class FacturaVttDAOImpl implements FacturaVttDAO {
 
 	@Override

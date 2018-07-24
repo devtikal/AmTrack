@@ -24,7 +24,7 @@ import com.tikal.util.JsonConvertidor;
 
 
 @Controller
-@RequestMapping("/persona")
+@RequestMapping(value = { "/persona"})
 public class PersonaController {
 
 	

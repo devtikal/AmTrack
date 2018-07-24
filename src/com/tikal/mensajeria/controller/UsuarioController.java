@@ -101,6 +101,20 @@ public class UsuarioController {
 		//	response.sendError(403);
 		//}
 	}
+	
+	
+	
+	@RequestMapping(value = { "/getUser/{name}" }, method = RequestMethod.GET, produces = "application/json")
+	public void consultarUsuarios(HttpServletRequest request, HttpServletResponse response, @PathVariable String name) throws IOException {
+		//if(SesionController.verificarPermiso(request, usuarioDao, perfilDAO, 8)){
+			AsignadorDeCharset.asignar(request, response);
+			Usuario u= usuarioDao.consultarUsuario(name);
+			
+			response.getWriter().println(JsonConvertidor.toJson(u));
+	////	}else{
+		//	response.sendError(403);
+		//}
+	}
 
 	@RequestMapping(value = { "/update/{userName}" }, method = RequestMethod.POST, consumes = "Application/Json")
 	public void actualizarUsuario(HttpServletRequest request, HttpServletResponse response, @RequestBody String json, @PathVariable String userName)
