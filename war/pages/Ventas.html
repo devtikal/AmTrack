@@ -771,7 +771,7 @@
 					<div class="form-group ">
 						<label for="example-text-input" class="col-2 col-form-label">RFC:</label>
 						<div class="col-10">
-							<input class="form-control " type="text" value="" id="rfc"
+							<input class="form-control " type="text" value="" id="rfc" onkeyup="javascript:this.value=this.value.toUpperCase();"
 								ng-model="factura.rfc" name="rfc">
 						</div>
 					</div>
@@ -794,7 +794,7 @@
 					<div class="form-group ">
 						<label for="example-text-input" class="col-10 col-form-label">Correo</label>
 						<div class="col-16">
-							<input type="email"form-control " type="text" value=""
+							<input type="email" class="form-control " type="text" 
 								id="nombre" name="nombre" ng-model="factura.mail">
 						</div>
 					</div>
