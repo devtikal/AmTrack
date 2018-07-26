@@ -578,6 +578,15 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	
 	$scope.savePaquete = function(data){
 		console.log("Datos de Paquete", data);
+		if(!$scope.paquete.costoSeguro){
+			$scope.paquete.costoSeguro= 0;
+		}
+		if(!$scope.paquete.paquete.peso){
+			$scope.paquete.paquete.peso= 0;
+		}
+		if(!$scope.paquete.precio){
+			$scope.paquete.precio= 0;
+		}
 		$scope.guardarEnvio();
 	}
 	
@@ -716,9 +725,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 				$scope.paquete.cliente.calle = data.calle;
 				$scope.paquete.cliente.noExterior = data.noExterior;
 				$scope.paquete.cliente.noInterior = data.noInterior;
-//				$scope.paquete.cliente.colonia= data.colonia;
 				$scope.colonia=[data.colonia];
-//				document.getElementById("slCol").value = data.colonia;
 				$scope.paquete.cliente.localidad = data.localidad;
 				$scope.paquete.cliente.municipio = data.municipio;
 				$scope.paquete.cliente.estado = data.estado;

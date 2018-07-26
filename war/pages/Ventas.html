@@ -429,7 +429,7 @@
     CP:
     <p><input class="input-lg" type="number" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide"  ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
     Calle
-    <p><input class="input-lg"  ng-model="paquete.cliente.calle"  ng-disabled="hide"></p>
+    <p><input class="input-lg"  ng-model="paquete.cliente.calle" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-disabled="hide"></p>
        Numero Ext
     <p><input class="input-lg"  ng-model="paquete.cliente.noExterior"  ng-disabled="hide"></p>
     Numero Int
@@ -471,7 +471,7 @@
     CP:
     <p><input class="input-lg" id="cpD" ng-model="paquete.destinatario.codigoPostal" ng-keyup="getCP('destinatario')" ng-blur="getCP('remitente')"></p>
      Calle
-    <p><input class="input-lg"   ng-model="paquete.destinatario.calle"></p>
+    <p><input class="input-lg"   ng-model="paquete.destinatario.calle" onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     Numero Ext
     <p><input class="input-lg"   ng-model="paquete.destinatario.noExterior" required></p>
     Numero Int
