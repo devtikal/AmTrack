@@ -703,6 +703,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.facturar=function(){
 		paqueteriaService.factura($scope.getIdVenta, $scope.factura).then(function(data) {
 			alert("Se ha facturado Correctamente");
+			$window.location.reload();
 		})
 	}
 	$scope.buscaUsuario=function(){
