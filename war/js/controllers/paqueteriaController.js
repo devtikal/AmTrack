@@ -318,13 +318,16 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 	}
 }]);
 
-app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
+app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService','sucursalService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService,sucursalService){
 	sessionService.isAuthenticated();
 	$scope.perfil = $cookieStore.get('perfil');
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	$scope.idVenta=null;
-	
+	sucursalService.getAllSucursal().then(function(data) {
+		$scope.sucursal = data;
+		
+	});
 	if($scope.perfil == "Administrador" || $scope.perfil =="SuperAdministrador"){
 		paqueteriaService.getVenta().then(function(data) {
 			$scope.ventas=data;
@@ -779,6 +782,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		 $scope.factura=[];
 		 $scope.factura.mail=null;
  });
+	 $scope.showSuc=function(id){
+		  for (var i = 0; i < $scope.sucursal.length; i++){
+		        if ($scope.sucursal[i].id == id){
+		          return $scope.sucursal[i].nombre;
+	 }
+		  }}
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
