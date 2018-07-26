@@ -16,7 +16,7 @@
 					</button>
 				</div>
 				<div class="col-md-3"></div>
-		<div class="col-md-3">
+		<div class="col-md-3" ng-if="perfil !='Administrador'">
 		 <button type="button" class="btn btn-info " ng-click="generarFolio()" >Agregar Venta</button>
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
@@ -74,7 +74,7 @@
 					<td>{{v.fecha | date}}</td>
 					<td>{{v.cantidad}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio">
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio" ng-if="v.estatus !='FACTURADA'">
 							<i class="fa fa-plus"></i>
 						</button>
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" ng-disabled="v.cantidad==0">
@@ -84,7 +84,7 @@
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
-						<button class="btn btn-warning" ng-click="eliminarVenta(v)" title="Eliminar Venta">
+						<button class="btn btn-warning" ng-click="eliminarVenta(v)" title="Eliminar Venta" ng-if="v.estatus !='FACTURADA'">
 							<i class="fa fa-trash"></i>
 						</button>
 <!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
@@ -93,7 +93,7 @@
 <!-- 							<i class="glyphicon glyphicon-print"></i> -->
 <!-- 						</a>	 -->
 					</td>
-					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0">
+					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0" ng-if="v.estatus !='FACTURADA'">
 							<i class="glyphicon glyphicon-list-alt"></i>
 						</button>
 							<a class="btn btn-danger" data-toggle="tooltip" ng-if="v.uuid"
@@ -106,6 +106,9 @@
 							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml">
 							<i class="fa fa-file-excel-o"></i>
 							</a>
+							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Facturar" >
+							<i class="glyphicon glyphicon-list-alt"></i>
+						</button>
 						</td>
 				</tr>
 			</tbody>	
@@ -269,7 +272,7 @@
 						</div>
 						<div class="col-md-6">
 							
-								<label>Rastreo</label><input type="number" class="form-control" ng-model="paquete.rastreo" required>
+								<label>Rastreo</label><input type="number" class="form-control" ng-model="paquete.rastreo" minlength="10" maxlength="10" required>
 							</div>
 			 </div>
 					<div class="row">
@@ -282,7 +285,7 @@
 <!-- 								ng-model="paquete.cantidad" required> -->
 								 <br>
 							<label>Descripcion:</label> <input type="text" class="form-control"
-								ng-model="paquete.paquete.descripcion" required> <br> 
+								ng-model="paquete.paquete.descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();" required> <br> 
 								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.paquete.tipoPaquete" ng-change="cSobre()"
 										required>
 										<option></option>
@@ -419,12 +422,12 @@
   <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required id="buscaCliente" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-blur="buscaUsuario()"></p>
      En Atencion a
-    <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     
     CP:
-    <p><input class="input-lg" type="number" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide" ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
+    <p><input class="input-lg" type="number" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide"  ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
     Calle
     <p><input class="input-lg"  ng-model="paquete.cliente.calle"  ng-disabled="hide"></p>
        Numero Ext
@@ -436,14 +439,14 @@
      <div class="col-md-6">
        Colonia
 
-    <p><select ng-model="paquete.cliente.colonia" class="input-lg" style="width:100%">
-    <option disabled></option>
+    <p><select id="slCol" ng-model="paquete.cliente.colonia" class="input-lg" style="width:100%" ng-disabled="hide">
+    		<option></option>
 			<option ng-repeat="c in colonia" selected>{{c}}</option>
 	  </select>
 	</p>
      
      Localidad
-    <p><input   ng-model="paquete.cliente.localidad" class="input-lg" ng-disabled="hide"></p>
+    <p><input  ng-model="paquete.cliente.localidad" class="input-lg" ng-disabled="hide"></p>
      Municipio
     <p><input ng-model="paquete.cliente.municipio" class="input-lg" ng-disabled="hide" readonly></p>
      Estado
@@ -452,7 +455,7 @@
     Telefono
     <p><input class="input-lg" ng-model="paquete.cliente.telefono" ng-disabled="hide"></p>
      Referencia
-    <p><input class="input-lg" ng-model="paquete.cliente.referencias" ng-disabled="hide"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.referencias" ng-disabled="hide" onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     </div>
   </div>
   </div>
@@ -461,9 +464,9 @@
    <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" required></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
      En Antencion a
-    <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" required></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
    
     CP:
     <p><input class="input-lg" id="cpD" ng-model="paquete.destinatario.codigoPostal" ng-keyup="getCP('destinatario')" ng-blur="getCP('remitente')"></p>
@@ -496,7 +499,7 @@
      Telefono
     <p><input class="input-lg" ng-model="paquete.destinatario.telefono"></p>
      Referencia
-    <p><input class="input-lg"  ng-model="paquete.destinatario.referencias"></p>
+    <p><input class="input-lg"  ng-model="paquete.destinatario.referencias" onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
      </div>
   </div>
   </div>
@@ -508,7 +511,7 @@
 							<div class="form-group ">
 								
 								<div class="col-200">
-									<input type="text" placeholder="Descripcion" ng-model="addMe" class="form-control">
+									<input type="text" placeholder="Descripcion" ng-model="addMe" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();">
 								</div>
 							</div>
 							</div>
@@ -718,6 +721,22 @@
     </object>
 
     </div>
+ </div>
+<!-- FIN -->
+<!--   MODAL Cancelar Factura -->
+   <div class="modal modal-wide fade" id="modalCancelFacct" role="dialog">
+<div class="modal-dialog ">
+   <div class="modal-content">
+   <div class="modal-body">
+   		<div align="center"><H3><code>CLICK EN ACEPTAR PARA CANCELAR LA FACTURA</code></H3></div>
+   		<br><br>
+   <div align="right">
+				<button type="button" class="btn btn-danger" ng-click="cancelarFactura()">Aceptar</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" >Cerrar</button>
+   </div>
+	</div>
+    </div>
+ </div>
  </div>
 <!-- FIN -->
 <!--   MODAL FACTURA -->

@@ -283,12 +283,44 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
-	
+	this.cancelFact = function(idVenta){
+		var d = $q.defer();
+		$http.get("factura/cancelarAck/"+idVenta).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	this.buscaCliente = function(name){
+		var d = $q.defer();
+		$http.get("persona/getByNombre/"+name).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
-
+	$scope.perfil = $cookieStore.get('perfil');
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	$scope.idVenta=null;
@@ -543,9 +575,9 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		});
 	    }
 	}
+	
 	$scope.savePaquete = function(data){
 		console.log("Datos de Paquete", data);
-		
 		$scope.guardarEnvio();
 	}
 	
@@ -626,6 +658,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			document.getElementById('guia').value = document.getElementById('guia').value + "-";
 		}
 	}
+	
 	$scope.getCP = function(tipo){
 		if (tipo == "remitente"){
 //			var cp = $scope.paquete.cliente.codigoPostal;
@@ -657,11 +690,78 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		console.log("Venta a Facturar", venta);
 		$("#modalFactura").modal();
 	}
+	
+	$scope.preCancelar = function(dato){
+		$scope.datoFact= dato;
+		$("#modalCancelFacct").modal();
+	}
+	$scope.cancelarFactura = function(){
+		paqueteriaService.cancelFact($scope.datoFact).then(function(data) {
+			$window.location.reload();
+		})
+	}
 	$scope.facturar=function(){
 		paqueteriaService.factura($scope.getIdVenta, $scope.factura).then(function(data) {
 			alert("Se ha facturado Correctamente");
 		})
 	}
+	$scope.buscaUsuario=function(){
+		if($scope.paquete.empresa == 'MERVEL' || $scope.paquete.empresa == 'ESTAFETA'){
+	
+		paqueteriaService.buscaCliente($scope.paquete.cliente.nombre).then(function(data){
+			console.log("Datos del Cliente ", data);
+				$scope.paquete.cliente.enAtencion = data.enAtencion;
+				$scope.paquete.cliente.codigoPostal = data.codigoPostal;
+				$scope.paquete.cliente.calle = data.calle;
+				$scope.paquete.cliente.noExterior = data.noExterior;
+				$scope.paquete.cliente.noInterior = data.noInterior;
+//				$scope.paquete.cliente.colonia= data.colonia;
+				$scope.colonia=[data.colonia];
+//				document.getElementById("slCol").value = data.colonia;
+				$scope.paquete.cliente.localidad = data.localidad;
+				$scope.paquete.cliente.municipio = data.municipio;
+				$scope.paquete.cliente.estado = data.estado;
+				$scope.paquete.cliente.telefono = data.telefono;
+				$scope.paquete.cliente.referencias = data.referencias;
+			
+		})
+		}
+	}
+	
+//	$scope.$watch('busca',function(){
+////		if($scope.busca.length>3){
+//			$scope.buscar();
+////		}
+//	},true);
+//	
+//	$scope.buscar=function(){
+//		paqueteriaService.buscaCliente($scope.busca).then(function(data){
+//			
+//			$scope.found=[];
+//			for(var i=0; i< data.length; i++){
+//				$scope.found.push(data[i].nombre);
+//				
+//			}
+//
+//			
+//			$('#buscaCliente').typeahead({
+//
+//			    source: $scope.found,
+//
+//			    updater:function (item) {
+//			    	$scope.paquete.cliente.nombre= item;
+//			        return item;
+//			    }
+//			
+//			});
+//			$('#buscaCliente').data('typeahead').source=$scope.found;
+//		});
+//	}
+	
+	 $("#modalFactura").on('hidden.bs.modal', function () {
+		 $scope.factura=[];
+		 $scope.factura.mail=null;
+ });
 } ]);
 app.controller("paqueteriaController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService){
 	sessionService.isAuthenticated();
