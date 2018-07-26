@@ -106,7 +106,7 @@
 							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml">
 							<i class="fa fa-file-excel-o"></i>
 							</a>
-							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Facturar" ng-if="v.uuid && v.estatus != 'FACTURA-CANCELADA'">
+							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Cancelar Facturar" ng-if="v.uuid && v.estatus != 'FACTURA-CANCELADA'">
 							<i class="fa fa-times"></i>
 						</button>
 						</td>
