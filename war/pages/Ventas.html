@@ -76,7 +76,7 @@
 					<td>{{v.cantidad}}</td>
 					<td>{{showSuc(v.idSucursal)}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio" ng-if="v.estatus !='FACTURADA'">
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio" ng-if="v.estatus !='FACTURADA' && perfil !='Administrador'">
 							<i class="fa fa-plus"></i>
 						</button>
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" ng-disabled="v.cantidad==0">
@@ -86,7 +86,7 @@
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 						
-						<button class="btn btn-warning" ng-click="eliminarVenta(v)" title="Eliminar Venta" ng-if="v.estatus !='FACTURADA'">
+						<button class="btn btn-warning" ng-click="eliminarVenta(v)" title="Eliminar Venta" ng-if="v.estatus !='FACTURADA' && perfil !='Administrador'">
 							<i class="fa fa-trash"></i>
 						</button>
 <!-- 						<a class="btn btn-info" data-toggle="tooltip" -->
@@ -95,7 +95,7 @@
 <!-- 							<i class="glyphicon glyphicon-print"></i> -->
 <!-- 						</a>	 -->
 					</td>
-					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0" ng-if="v.estatus !='FACTURADA'">
+					<td><button class="btn btn-info" ng-click="preFacturar(v)" title="Facturar" ng-disabled="v.cantidad==0" ng-if="v.estatus !='FACTURADA' && perfil !='Administrador'">
 							<i class="glyphicon glyphicon-list-alt"></i>
 						</button>
 							<a class="btn btn-danger" data-toggle="tooltip" ng-if="v.uuid"
@@ -108,7 +108,7 @@
 							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml">
 							<i class="fa fa-file-excel-o"></i>
 							</a>
-							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Cancelar Facturar" ng-if="v.uuid && v.estatus != 'FACTURA-CANCELADA'">
+							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Cancelar Facturar" ng-if="v.uuid && v.estatus != 'FACTURA-CANCELADA' && perfil !='Administrador'">
 							<i class="fa fa-times"></i>
 						</button>
 						</td>
