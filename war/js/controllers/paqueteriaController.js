@@ -285,7 +285,7 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 	}
 	this.cancelFact = function(idVenta){
 		var d = $q.defer();
-		$http.get("factura/cancelarAck/"+idVenta).then(
+		$http.post("factura/cancelarAck/"+idVenta).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
