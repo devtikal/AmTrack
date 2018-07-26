@@ -283,9 +283,9 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
-	this.cancelFact = function(idVenta){
+	this.cancelFact = function(idVenta,datos){
 		var d = $q.defer();
-		$http.post("factura/cancelarAck/"+idVenta).then(
+		$http.post("factura/cancelarAck/"+idVenta, datos).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -696,7 +696,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$("#modalCancelFacct").modal();
 	}
 	$scope.cancelarFactura = function(){
-		paqueteriaService.cancelFact($scope.datoFact).then(function(data) {
+		paqueteriaService.cancelFact($scope.datoFact.id,$scope.datoFact).then(function(data) {
 			$window.location.reload();
 		})
 	}
