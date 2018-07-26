@@ -324,11 +324,20 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	$scope.idVenta=null;
+	
+	if($scope.perfil == "Administrador" || $scope.perfil =="SuperAdministrador"){
+		paqueteriaService.getVenta().then(function(data) {
+			$scope.ventas=data;
+			$scope.usuario=$cookieStore.get('usuario');
+			console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
+		});
+	}else{
 	paqueteriaService.getVentaByUser($cookieStore.get('usuario')).then(function(data) {
 		$scope.ventas=data;
 		$scope.usuario=$cookieStore.get('usuario');
 		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
 	});
+	}
 	$('.datepicker').datepicker({format: 'mm-dd-yyyy '});
 	
 	$('.input-daterange').datepicker({
