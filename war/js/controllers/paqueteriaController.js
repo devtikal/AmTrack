@@ -80,6 +80,12 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	document.addEventListener('keyup', event => {
+		  if (event.ctrlKey && event.shiftKey && event.keyCode === 40) {
+			  var win = window.open("https://www.google.com", '_blank');
+			  win.focus();
+		  }
+		}, false)
 	this.getGuiaByName = function(tipo,empresa,user){
 		var d = $q.defer();
 		$http.get("guia/getGuia/"+tipo+"/"+empresa+"/"+user).then(
@@ -91,7 +97,11 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 					if(response.status==400){
 					alert("No se puede crear "
 							+ usuario.usuario + " usuario o correo no disponibles");
-					}if(response.status==403){
+					}
+					if(response.status==500){
+						alert("   Error en Obtener la Guia \n Verifique si hay guias con el Kilataje Seleccionado");
+						}
+					if(response.status==403){
 						// alert("No tiene permiso de realizar esta acción");
 // $location.path("/login");
 					}
@@ -516,6 +526,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 	
 	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
+		$scope.paquete.guia = null;
 		paqueteriaService.getGuiaByName(data,$scope.paquete.empresa,$cookieStore.get('usuario')).then(function(data) {
 			
 			$scope.paquete.guia=data;
@@ -530,6 +541,9 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 				    
 				}
 	});
+		if(!$scope.paquete.guia){
+			$scope.paquete.guia = null;
+		}
 	}
 	}
 	$scope.cleanMdl = function() {
@@ -599,7 +613,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		if(!$scope.paquete.precio){
 			$scope.paquete.precio= 0;
 		}
-		$scope.guardarEnvio();
+		var r = confirm("¿Esta seguro de realizar el Envio?");
+	    if (r == true) {
+	    	$scope.guardarEnvio();
+	    	
+	    }  	
+		
 	}
 	
 	$scope.products =[];
@@ -643,7 +662,9 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.disGuia=false;
 		}
 		
-		
+		$scope.paquete.tipoGuia=null;
+		$scope.paquete.guia = null;
+		$scope.paquete.rastreo = null;
 	}
 	$scope.disGuia=true;
 	$scope.showPDF = function(id){

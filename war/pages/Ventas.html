@@ -274,7 +274,7 @@
 						</div>
 						<div class="col-md-6">
 							
-								<label>Rastreo</label><input type="number" class="form-control" ng-model="paquete.rastreo" minlength="10" maxlength="10" required>
+								<label>Rastreo</label><input class="form-control" ng-model="paquete.rastreo" minlength="10" maxlength="10" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required>
 							</div>
 			 </div>
 					<div class="row">
