@@ -694,7 +694,7 @@
 					<td>{{e.tipoEnvio}}</td>
 					<td>{{e.precio | currency}}</td>
 					<td>
-					<button ng-if="e.empresa=='MERVEL' || e.empresa=='ESTAFETA'" class="btn btn-danger" title="Imprimir" ng-click="showPDFM(e.id)">
+					<button ng-if="e.empresa=='MERVEL' || e.empresa=='ESTAFETA'" class="btn btn-danger" title="Imprimir" ng-click="showPDFM(e)">
 							<i class="fa fa-file-pdf-o"></i>
 						</button>
 					<button class="btn btn-small btn-warning" ng-click="eliminarEnvio(e)">

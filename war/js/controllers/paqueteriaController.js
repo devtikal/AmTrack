@@ -671,8 +671,13 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
 		$("#modalPDF").modal();
 	}
-	$scope.showPDFM = function(id){
-		$scope.url = "envio/generaGuiaMervel/"+id+"/"+$scope.idVenta+"/"+$scope.usuario;
+	$scope.showPDFM = function(datos){
+		if(datos.empresa=='ESTAFETA'){
+			$scope.url = "envio/generaGuiaEstafeta/"+datos.id+"/"+$scope.idVenta+"/"+$scope.usuario;
+		}else{
+			$scope.url = "envio/generaGuiaMervel/"+datos.id+"/"+$scope.idVenta+"/"+$scope.usuario;
+		}
+		
 		$("#modalPDF").modal();
 	}
 	$scope.eliminarVenta = function(datos){
