@@ -668,8 +668,14 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	$scope.disGuia=true;
 	$scope.showPDF = function(id){
+		$("#mdlLoad").modal();
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
-		$("#modalPDF").modal();
+		setTimeout(() => {
+			$('#mdlLoad').modal('toggle');	
+			$("#modalPDF").modal();
+			
+		}, 3000);
+		
 	}
 	$scope.showPDFM = function(datos){
 		if(datos.empresa=='ESTAFETA'){
@@ -747,8 +753,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$window.location.reload();
 		})
 	}
+	$scope.loading=function(){
+		$("#mdlLoad").modal();
+		setTimeout(() => {
+			$('#mdlLoad').modal('toggle');
+		}, 5000);
+	}
 	$scope.facturar=function(){
+		$("#mdlLoad").modal();
 		paqueteriaService.factura($scope.getIdVenta, $scope.factura).then(function(data) {
+			$('#mdlLoad').modal('toggle');
 			alert("Se ha facturado Correctamente");
 			$window.location.reload();
 		})

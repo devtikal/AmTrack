@@ -46,14 +46,14 @@
 			</div>
 			<div class="col-md-2">
 				<div ng-if="perfil =='Administrador'">
-				<a class="btn btn-small btn-success report" data-toggle="tooltip" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls">
+				<a class="btn btn-small btn-success report" data-toggle="tooltip" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls" ng-click="loading()">
 				<i class="fa fa-file-excel-o fa-lg"></i>
 					Descargar Reporte
 				</a>
 				</div>
 				
 				<div ng-if="perfil =='Cajero'">
-				<a class="btn btn-small btn-danger report" data-toggle="tooltip" href="{{'venta/generaReportePdf/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.pdf">
+				<a class="btn btn-small btn-danger report" data-toggle="tooltip" href="{{'venta/generaReportePdf/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.pdf" ng-click="loading()">
 				<i class="fa fa-file-pdf-o fa-lg"></i>
 					Descargar Reporte
 				</a>
@@ -110,12 +110,12 @@
 						</button>
 							<a class="btn btn-danger" data-toggle="tooltip" ng-if="v.uuid"
 							title="Descargar PDF"
-							href="factura/pdfFactura/{{v.uuid}}" download="Factura-{{v.uuid}}.pdf">
+							href="factura/pdfFactura/{{v.uuid}}" download="Factura-{{v.uuid}}.pdf" ng-click="loading()">
 							<i class="fa fa-file-pdf-o"></i>
 							</a>
 							<a class="btn btn-success" data-toggle="tooltip" ng-if="v.uuid"
 							title="Descargar XML"
-							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml">
+							href="factura/xmlDescarga/{{v.uuid}}" download="Factura-{{v.uuid}}.xml" ng-click="loading()">
 							<i class="fa fa-file-excel-o"></i>
 							</a>
 							<button class="btn btn-warning" ng-click="preCancelar(v.id)" title="Cancelar Facturar" ng-if="v.uuid && v.estatus != 'FACTURA-CANCELADA' && perfil !='Administrador'">
@@ -892,6 +892,18 @@
       </div>
     </div>
  </div>
+ <!--   MODAL Loading -->
+   <div class="modal modal-wide fade" id="mdlLoad" tabindex="-1" role="dialog" data-backdrop="static">
+<div class="modal-dialog modal-sm " align="center" >
+   <div style="background-color: #d6f5d6;">
+   <br>
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><br>
+<span><h4>Procesando...</h4></span>
+<br>
+</div>
+    </div>
+ </div>
+<!-- FIN -->
 </div>	
 	</div>
 
