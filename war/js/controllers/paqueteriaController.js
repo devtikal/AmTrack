@@ -671,20 +671,24 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$("#mdlLoad").modal();
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
 		setTimeout(() => {
-			$('#mdlLoad').modal('toggle');	
+			
 			$("#modalPDF").modal();
 			
 		}, 3000);
 		
 	}
 	$scope.showPDFM = function(datos){
+		$("#mdlLoad").modal();
 		if(datos.empresa=='ESTAFETA'){
 			$scope.url = "envio/generaGuiaEstafeta/"+datos.id+"/"+$scope.idVenta+"/"+$scope.usuario;
 		}else{
 			$scope.url = "envio/generaGuiaMervel/"+datos.id+"/"+$scope.idVenta+"/"+$scope.usuario;
 		}
+		setTimeout(() => {
+			$('#mdlLoad').modal('toggle');	
+			$("#modalPDF").modal();
+		}, 2000);
 		
-		$("#modalPDF").modal();
 	}
 	$scope.eliminarVenta = function(datos){
 		 var r = confirm("Click en Aceptar para Eliminar la Venta. \n" + datos.folio);
