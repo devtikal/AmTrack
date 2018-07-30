@@ -157,6 +157,7 @@ C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\org\tempuri\TimbraRetencion.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\localhost\CancelaCFDIAckResponse.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\mensajeria\dao\impl\ContadorDaoImpl.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\mensajeria\dao\DestinatarioDao.java
+C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\mensajeria\reportes\ReportePdf.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\org\w3\_2000\_09\xmldsig_\RSAKeyValueType.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\factura\VersionCFDI.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\dao\sqlimpl\FormaDePagoHibernateDAOImpl.java
@@ -181,6 +182,7 @@ C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\springController\vi
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\dao\sqlimpl\UsoDeCFDIDAOHibernateImpl.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\dao\GrupoDAO.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\util\NumberToLetterConverter.java
+C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\mensajeria\formatos\pdf\GeneraGuiaEstafeta.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\mensajeria\modelo\login\SessionEntity.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\org\w3\_2000\_09\xmldsig_\X509DataType.java
 C:\Users\Lenovo\gitPaqueteria\Paqueteria\src\com\tikal\cacao\util\xmladapters\C_MetodoDePagoAdapter.java

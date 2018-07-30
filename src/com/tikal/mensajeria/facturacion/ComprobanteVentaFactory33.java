@@ -89,11 +89,14 @@ public class ComprobanteVentaFactory33 {
 
 	private static Emisor construirEmisor() {
 		Emisor emisor = new Comprobante.Emisor();
+		
+		/////Produccion
 		emisor.setRfc("MERA680707KA3");
-		//emisor.setRfc("AAA010101AAA");
 		emisor.setNombre("ADOLFO FERMÍN MERCADO RUBIO");
-		//emisor.setRegimenFiscal(new C_RegimenFiscal("601"));		
-		emisor.setRegimenFiscal(new C_RegimenFiscal("612"));		
+		emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
+		///////Local
+//		emisor.setRfc("AAA010101AAA");
+//		emisor.setRegimenFiscal(new C_RegimenFiscal("601"));			
 		return emisor;
 	}
 	

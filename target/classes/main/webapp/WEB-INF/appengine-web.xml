@@ -44,6 +44,8 @@
 			value="jdbc:google:mysql://stdsistema2:us-central1:std2sql/catalogos?user=ismael&amp;password=nMVKLZ7yuj" />
 	</system-properties>
 
+	
+		
  <!--
     HTTP Sessions are disabled by default. To enable HTTP sessions specify:
 
