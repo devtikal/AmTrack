@@ -209,6 +209,7 @@ public class GuiaController {
 			//int numero = (int) (Math.random() * 9999) + 1;
 		   System.out.println("++++++++ guia:"+f.getGuia());
 			numeroGuia=("0101343450-7717189"+f.getGuia().toString());
+			
 			//dato.setIdServicio(numero);
 //			f.incrementarGuia();
 //			ObjectifyService.ofy().save().entity(f).now(); 
