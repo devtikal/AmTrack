@@ -16,7 +16,7 @@
 					</button>
 				</div>
 				<div class="col-md-3"></div>
-		<div class="col-md-3" ng-if="perfil !='Administrador'">
+		<div class="col-md-3" ng-if="perfil == 'Cajero'">
 		 <button type="button" class="btn btn-info " ng-click="generarFolio()" >Agregar Venta</button>
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
@@ -45,11 +45,21 @@
 				</div>
 			</div>
 			<div class="col-md-2">
+				<div ng-if="perfil =='Administrador'">
 				<a class="btn btn-small btn-success report" data-toggle="tooltip" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls">
 				<i class="fa fa-file-excel-o fa-lg"></i>
 					Descargar Reporte
 				</a>
+				</div>
+				
+				<div ng-if="perfil =='Cajero'">
+				<a class="btn btn-small btn-danger report" data-toggle="tooltip" href="{{'venta/generaReportePdf/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.pdf">
+				<i class="fa fa-file-pdf-o fa-lg"></i>
+					Descargar Reporte
+				</a>
+				</div>
 			</div>
+			
 		</div>
 
 	</div>

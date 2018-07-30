@@ -15,7 +15,7 @@ app.config([ '$routeProvider','$httpProvider', function($routeProvider,$httpProv
 	});
 	$routeProvider.when('/welcome', {
 		templateUrl : "pages/welcome.html",
-		controller : "DHLController"
+		controller : "welcomeController"
 	});
 	$routeProvider.when('/dhl', {
 		templateUrl : "pages/dhl.html",
@@ -92,12 +92,13 @@ app.factory("userFactory", function(){
 app.service('sessionService', [
 	'$rootScope',
 	'$http',
+	'$window',
 	'$location',
 	'$q',
 	'userFactory',
 	'$cookieStore',
 	'sucursalService',
-	function($rootScope,$http, $location, $q,userFactory,$cookieStore,sucursalService) {
+	function($rootScope,$http, $window,$location, $q,userFactory,$cookieStore,sucursalService) {
 		this.authenticate = function(credentials, callback) {
 
 			var headers = credentials ? {
@@ -115,7 +116,8 @@ app.service('sessionService', [
 //					$http.get("/notificacion/numAlertas/"+ data.id).then(function(response){
 //						$rootScope.numNotificaciones=response.data;
 //					})
-					$location.path("/");
+					$location.path("/welcome");
+					$window.location.reload();
 				} else {
 					$rootScope.authenticated = false;
 				}
@@ -145,7 +147,8 @@ app.service('sessionService', [
 				sucursalService.getSucursal(data.idSucursal).then(function(data) {
 					$rootScope.sucursalData=data;
 					$rootScope.SucursalName=data.nombre;
-					$cookieStore.put("sucursal", data.nombre);
+					$cookieStore.put("sucursal_name", data.nombre);
+					$cookieStore.put("sucursal_dirs", data.ubicacion);
 				
 //					console.log("La Sucursal",$rootScope.sucursalData);
 				})
@@ -166,7 +169,7 @@ app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope
 			sessionService.authenticate($scope.credentials, function() {
 				if ($rootScope.authenticated) {
 					$scope.error = false;
-					$location.path("/");
+					$location.path("/welcome");
 				} else {
 					$location.path("/login");
 					$scope.error = true;
