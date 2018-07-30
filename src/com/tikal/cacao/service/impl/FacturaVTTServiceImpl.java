@@ -98,11 +98,11 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 	@Qualifier("regimenFiscalDAOH")
 	private RegimenFiscalDAO regimenFiscalDAO;
 
-	//@Autowired
+	@Autowired
 	@Qualifier("formaDePagoDAOH")
 	private SimpleHibernateDAO<FormaDePago> formaDePagoDAO;
 
-	//@Autowired
+	@Autowired
 	@Qualifier("tipoDeComprobanteDAOH")
 	private SimpleHibernateDAO<TipoDeComprobante> tipoDeComprobanteDAO;
 	
@@ -599,6 +599,11 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 		comprobante.setSerie("FS");
 		//comprobante.setFolio( serialdao.getSerieFactura()+ "");
 		String xmlCFDI = Util.marshallComprobante33(comprobante, false);
+		
+		UsoDeCFDI usoCFDIHB = usoDeCFDIDAO.consultarPorId(comprobante.getReceptor().getUsoCFDI().getValor());
+		RegimenFiscal regimenFiscal = regimenFiscalDAO.consultarPorId(comprobante.getEmisor().getRegimenFiscal().getValor());
+		FormaDePago formaDePago = formaDePagoDAO.consultar(comprobante.getFormaPago().getValor());
+		TipoDeComprobante tipoDeComprobante = tipoDeComprobanteDAO.consultar(comprobante.getTipoDeComprobante().getValor());
 
 		TimbraCFDIResponse timbraCFDIResponse = webServiceClient33.getTimbraCFDIResponse(xmlCFDI);
 		List<Object> respuestaWB = timbraCFDIResponse.getTimbraCFDIResult().getAnyType();
@@ -632,7 +637,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 				facturaVTTDAO.guardar(facturaTimbrada);
 				this.crearReporteRenglon(facturaTimbrada);
 
-				EmailSender mailero = new EmailSender();
+				EmailSender mailero = new EmailSender(usoCFDIHB.getDescripcion(), regimenFiscal.getDescripcion(), formaDePago.getDescripcion(), tipoDeComprobante.getDescripcion());
 				Imagen imagen = imagenDAO.get("AAA010101AAA");
 				if (email != null) {
 					mailero.enviaFactura(email, facturaTimbrada, "", imagen, cfdiTimbrado);

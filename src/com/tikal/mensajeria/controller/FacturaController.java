@@ -1,6 +1,7 @@
 package com.tikal.mensajeria.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.googlecode.objectify.ObjectifyService;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.tikal.cacao.dao.FacturaVttDAO;
@@ -41,7 +43,9 @@ import com.tikal.mensajeria.dao.SerialDAO;
 import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.dao.VentaDao;
+import com.tikal.mensajeria.dao.VentaFacDao;
 import com.tikal.mensajeria.facturacion.ComprobanteVentaFactory33;
+import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Emisor;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.FacturaVTT;
@@ -122,7 +126,9 @@ public class FacturaController {
 	@Qualifier("facturaVTTService")
 	FacturaVTTService facturaVTTService;
 	
-	
+	@Autowired	
+	@Qualifier("ventaFacDao")
+	VentaFacDao ventaFacDao;
 	
 	
 	@PostConstruct
@@ -164,7 +170,7 @@ public class FacturaController {
 				//if(Util.verificarPermiso(re, usuariodao, perfildao, 3)){
 				AsignadorDeCharset.asignar(re, rs);
 					VentaFac ventavo= (VentaFac) JsonConvertidor.fromJson(json, VentaFac.class);
-					
+					ventaFacDao.crear(ventavo);
 					
 					Venta venta= ventaDao.consult(idVenta);
 					List<Envio> envios =new ArrayList<Envio>();
@@ -174,19 +180,14 @@ public class FacturaController {
 					}
 					
 					ventavo.setEnvios(envios);
-				//	Receptor r = creaReceptor();
-					//Emisor e=crearEmisor(ventavo);
-					Serial s=new Serial();
-					
-					Long folio = s.getFolio();
-					ClienteFac cliente= cargaCliente(ventavo);
-					DatosEmisor emisor=new DatosEmisor();
-					Comprobante c= ComprobanteVentaFactory33.generarFactura(ventavo,cliente, emisor );
-					//facturar
+					//Serial s=new Serial();		
+					ContadorServicio f=ObjectifyService.ofy().load().type(ContadorServicio.class).list().get(0);
+					Long folio = f.getFactura();		
+					Comprobante c= ComprobanteVentaFactory33.generarFactura(ventavo);
+					System.out.println("comprobante c: "+c);
 					c.setFolio(folio.toString());
-				//	c.setSerie("");
+					c.setSerie("FS");
 					c.getReceptor().setUsoCFDI(new C_UsoCFDI(ventavo.getUsoCfdi()));
-					
 					ComprobanteVO comprobanteVO= new ComprobanteVO();
 					comprobanteVO.setComprobante(c);
 					comprobanteVO.setEmail(ventavo.getMail());
@@ -198,11 +199,12 @@ public class FacturaController {
 					String[] respuesta= new String[2];
 					if (uuid!=null) {
 						System.out.println("uuid no nulo");
-		//ojo				venta.setXml(cfdiXML);
-						venta.setEstatus("FACTURADO");
-		//ojo				venta.setUuid(uuid);
-						venta.setNumeroFactura(folio.toString());
-						s.incrementa();
+						venta.setEstatus("FACTURADA");			
+						venta.setUuid(uuid);
+						venta.setNumeroFactura("FS"+folio.toString());
+						venta.setIdVentaFac(ventavo.getId());
+						f.incrementarFactura();
+						ObjectifyService.ofy().save().entity(f).now(); 
 						ventaDao.update(venta);
 						respuesta[0]="0";
 					}else{
@@ -218,11 +220,12 @@ public class FacturaController {
 			//	}
 			}
 	  
-	  @RequestMapping(value = {"/pdfFactura/{id}" }, method = RequestMethod.GET)
-		public void pdf(HttpServletRequest re, HttpServletResponse res, @PathVariable String id) throws IOException{
+	  @RequestMapping(value = {"/pdfFactura/{uuid}" }, method = RequestMethod.GET)
+		public void pdf(HttpServletRequest re, HttpServletResponse res, @PathVariable String uuid) throws IOException{
 		//	if(Util.verificarPermiso(re, usuariodao, perfildao, 1,3)){
 			res.setContentType("Application/PDF");
-			FacturaVTT factura=facturaVTTService.consultar(id);
+			AsignadorDeCharset.asignar(re, res);
+			FacturaVTT factura=facturaVTTService.consultar(uuid);
 			try {
 				PdfWriter writer = facturaVTTService.obtenerPDF(factura, res.getOutputStream());
 				if(writer!=null){
@@ -259,9 +262,41 @@ public class FacturaController {
 		}
 	  
 	  
+		@RequestMapping(value = "/xmlDescarga/{uuid}", method = RequestMethod.GET, produces = "text/xml")
+		public void obtenerXML(HttpServletRequest req, HttpServletResponse res, @PathVariable String uuid) throws IOException {
+		//	if(Util.verificarPermiso(req, usuariodao, perfildao, 1,3)){
+				AsignadorDeCharset.asignar(req, res);
+				FacturaVTT factura = facturaVTTDAO.consultar(uuid);
+				PrintWriter writer = res.getWriter();
+				if (factura != null) {
+					res.setContentType("text/xml");
+					writer.println(factura.getCfdiXML());
+				} else {
+					writer.println("La factura con el folio fiscal (uuid) ".concat(uuid).concat(" no existe"));
+				}
+//			}else{
+//				res.sendError(403);
+//			}
+		}
 	  
-	  
-	 
+		@RequestMapping(value = "/cancelarAck/{idVenta}", method = RequestMethod.POST)
+		public void cancelarAck(HttpServletRequest req, HttpServletResponse res, @PathVariable Long idVenta) throws IOException {
+		//if(Util.verificarPermiso(req, usuariodao, perfildao, 3)){
+		//	VentaFac vf= (VentaFac)JsonConvertidor.fromJson(json, VentaFac.class);
+			AsignadorDeCharset.asignar(req, res);
+			VentaFac vf = ventaFacDao.consultar(ventaDao.consult(idVenta).getIdVentaFac());
+			String mensaje=facturaVTTService.cancelarAck(vf.getUuid(), "MERA680707KA3", req.getSession());
+			if(mensaje.compareTo("Comprobante cancelado")==0){
+				Venta v= ventaDao.consult(idVenta);
+				v.setEstatus("FACTURA-CANCELADA");
+				ventaDao.update(v);
+			}
+			res.getWriter().print(mensaje);
+			
+	//		}else{
+		//		res.sendError(403);
+			//}
+		}	 
 		  
 		  public ClienteFac cargaCliente(VentaFac vf){
 				ClienteFac cf= new ClienteFac();
@@ -272,7 +307,7 @@ public class FacturaController {
 			  return cf;
 			}
 
-		  public Emisor creaEmisor(VentaFac vf){
+		  public Emisor creaEmisor(){
 				Emisor e= new Emisor();				
 				e.setRfc("MERA680707KA3");	
 				emisordao.crear(e);			  

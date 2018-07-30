@@ -25,6 +25,7 @@ import com.tikal.mensajeria.dao.PersonaDao;
 import com.tikal.mensajeria.dao.SucursalDao;
 import com.tikal.mensajeria.dao.UsuarioDao;
 import com.tikal.mensajeria.dao.VentaDao;
+import com.tikal.mensajeria.formatos.pdf.GeneraGuiaEstafeta;
 import com.tikal.mensajeria.formatos.pdf.GeneraGuiaMervel;
 import com.tikal.mensajeria.formatos.pdf.GeneraTicket;
 import com.tikal.mensajeria.modelo.entity.Contador;
@@ -168,19 +169,17 @@ public class EnvioController {
 			Paquete p = new Paquete();
 			Envio envio = new Envio();
 			Persona c= new Persona();
-			Persona d= new Persona();
+			
 			//Destinatario des= new Destinatario();
 			//Empresa e=new Empresa();
 		//	e=empresaDao.getByNombre(evo.getEmpresa());
 			c=ef.getCliente();
+			System.out.println("cliente:"+c.getNombre());
 			if (c.getCodigoPostal()==null || c.getCodigoPostal()==0){
 				c.setCodigoPostal(0);
 			}
 			personaDao.save(c);
-			
-			d=ef.getCliente();
-			personaDao.save(d);
-			
+					
 			p=ef.getPaquete();
 			if (p.getAlto()==null){ p.setAlto(Double.valueOf("0.00"));}
 			if (p.getAncho()==null){ p.setAncho(Double.valueOf("0.00"));}
@@ -189,10 +188,17 @@ public class EnvioController {
 			paqueteDao.save(p);
 						
 			envio.setCliente(c);
-			envio.setDestinatario(d);
+			
 			envio.setPaquete(p);
 			
 			envio.setEmpresa(ef.getEmpresa());
+			if(envio.getEmpresa().equals("MERVEL") || envio.getEmpresa().equals("ESTAFETA")){
+				Persona d= new Persona();
+				d=ef.getDestinatario();
+				System.out.println(" destinatario"+d.getNombre());
+				personaDao.save(d);
+				envio.setDestinatario(d);
+			}
 			if (ef.getCostoSeguro()==null){
 				envio.setCostoSeguro(Double.valueOf("0.00"));
 			}else{
@@ -216,7 +222,7 @@ public class EnvioController {
 			envio.setTipoEnvio(ef.getTipoEnvio());
 			envio.setTipoServicio(ef.getTipoServicio());
 			envio.setMateriales(ef.getMateriales());
-			
+			envio.setTotalEnvio(ef.getCostoSeguro()+ef.getPrecio());
 			envioDao.save(envio);
 			if (envio.getEmpresa().equals("ESTAFETA")){		
 				System.out.println("guia numero2"+ef.getGuia());
@@ -224,6 +230,14 @@ public class EnvioController {
 				g.setEstatus("EN ENVIO");
 				guiaDao.update(g);
 			}			
+			if (envio.getEmpresa().equals("MERVEL")){		
+				System.out.println("guia MERVEL:"+ef.getGuia());
+				 ContadorServicio f=ObjectifyService.ofy().load().type(ContadorServicio.class).list().get(0);
+				 System.out.println("guia MERVEL otra vez:"+f.getGuia());
+				 f.incrementarGuia();
+				 ObjectifyService.ofy().save().entity(f).now(); 
+				
+			}
 			
 			
 			//folio.incremeta();
@@ -237,8 +251,8 @@ public class EnvioController {
 				ids.add(envio.getId());
 				v.setEnvios(ids);
 				v.setCantidad(ids.size());
-				System.out.println("precio envio"+envio.getPrecio());
-				v.setTotal(envio.getPrecio());
+				//System.out.println("precio envio"+envio.getPrecio());
+				v.setTotal(v.getTotal()+envio.getTotalEnvio());
 				ventaDao.update(v); 
 				System.out.println("total venta"+v.getTotal());
 				System.out.println("lista de eids de envios"+ids);
@@ -247,7 +261,7 @@ public class EnvioController {
 				ids.add(envio.getId());
 				v.setEnvios(ids);
 				v.setCantidad(ids.size());
-				v.setTotal(v.getTotal()+envio.getPrecio());
+				v.setTotal(v.getTotal()+envio.getTotalEnvio());
 				ventaDao.update(v); 
 				System.out.println("lista ids de envios"+ids);
 			}
@@ -260,7 +274,7 @@ public class EnvioController {
 	  	   @RequestMapping(value = { "/generaGuiaMervel/{idEnvio}/{idVenta}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
 	 		public void generaGuia(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio
 	 				, @PathVariable Long idVenta, @PathVariable String userName) throws IOException {
-	 	   System.out.println("genera guiiiiaaaaaaaaa MERVEL O ESTAFETA");
+	 	   System.out.println("genera guiiiiaaaaaaaaa MERVEL");
 //	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 	 	   Venta v = ventaDao.consult(idVenta);
 			  Envio envio = envioDao.consult(idEnvio) ; 
@@ -292,6 +306,41 @@ public class EnvioController {
 //	 		}
 	 	}
 	   
+	  	 @RequestMapping(value = { "/generaGuiaEstafeta/{idEnvio}/{idVenta}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+	 		public void generaGuiaE(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio
+	 				, @PathVariable Long idVenta, @PathVariable String userName) throws IOException {
+	 	   System.out.println("genera guiiiiaaaaaaaaa ESTAFETA");
+//	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+	 	   Venta v = ventaDao.consult(idVenta);
+			  Envio envio = envioDao.consult(idEnvio) ; 
+			  
+	 		   response.setContentType("Application/Pdf");
+	 		  Envio e = envioDao.consult(idEnvio) ;  
+	 	        File newPdfFile = new File(idEnvio+".pdf");		 
+	 	        if (!newPdfFile.exists()){
+	 	            try {
+	 	            	newPdfFile.createNewFile();
+	 	            } catch (IOException ioe) {
+	 	                System.out.println("(Error al crear el fichero nuevo ......)" + ioe);
+	 	            }
+	 	        }
+	        
+	 	   
+	 	        System.out.println("Empiezo a generar pdf...." );
+	 	    	GeneraGuiaEstafeta gge = new GeneraGuiaEstafeta(v,envio, response.getOutputStream());
+	 	    //ystem.out.println("nombre de archivo para edgar:"+tik.getNombreArchivo().substring(10) );
+	 	    	//response.getWriter().println((vpdf.getNombreArchivo().substring(10)));
+	 	    	  response.getOutputStream().flush();
+	 		        response.getOutputStream().close();
+	 	    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
+	 	    	//generaOrdenPdf.GeneraOrdenPdf(ox));
+//	 	   }else{
+//	 			response.sendError(403);
+//	 		}
+	 	}
+	  	   
+	  	   
+	  	   
 	   @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
 			AsignadorDeCharset.asignar(request, response);

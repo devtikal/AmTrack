@@ -53,6 +53,7 @@ import com.tikal.mensajeria.modelo.vo.EnvioVo;
 import com.tikal.mensajeria.modelo.vo.FechasVo;
 import com.tikal.mensajeria.modelo.vo.ReporteVo;
 import com.tikal.mensajeria.modelo.vo.VentaFac;
+import com.tikal.mensajeria.reportes.ReportePdf;
 import com.tikal.mensajeria.reportes.ReporteSucursal;
 import com.tikal.mensajeria.reportes.ReporteXls;
 import com.tikal.mensajeria.util.JsonConvertidor;
@@ -248,7 +249,9 @@ public class VentaController {
 			ObjectifyService.ofy().save().entity(f).now(); 
 		}
 		
-		
+		//SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+		//Calendar c = Calendar.getInstance();
+		System.out.println("fecha calendar:"+v.getFecha());
 		//Contador folio= new Contador();
 	//	v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
@@ -297,8 +300,9 @@ public class VentaController {
 		AsignadorDeCharset.asignar(request, response);
 		
 			Venta v = ventaDao.consult(idVenta);
-			v.setEstatus("CANCELADA");
-			ventaDao.update(v);
+			ventaDao.delete(v);
+			//v.setEstatus("CANCELADA");
+		//	ventaDao.update(v);
 			//System.out.println(" yisus manda:"+json);
 		
 		
@@ -313,6 +317,8 @@ public class VentaController {
 			}
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 		}
+	 
+	
 	 
 	 @RequestMapping(value = { "/findAll/{userName} " }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
@@ -375,66 +381,72 @@ public class VentaController {
 //			response.sendError(403);
 //		}
 	}
-	 
 
+	  @RequestMapping(value = { "/generaReportePdf/{inicio}/{fin}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
+		public void generaRep(HttpServletResponse response, HttpServletRequest request,@PathVariable String inicio,
+				@PathVariable String fin, @PathVariable String userName) throws IOException, ParseException {
+	   System.out.println("genera ticket");
+//	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+		   response.setContentType("Application/Pdf");
+		  
+		   
+		   System.out.println("si entra: con inicio"+inicio);
+			  System.out.println("si entra: con fin"+fin);
+
+				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy"); //HH:mm:ss");
+			//	try {
+					Date datei = formatter.parse(inicio);
+					System.out.println("formatter inicio"+datei);
+					Date datef = formatter.parse(fin);
+					System.out.println("formatter fin"+datef);
+					Calendar c = Calendar.getInstance();
+					c.setTime(datef);
+					c.add(Calendar.DATE, 1);
+					datef = c.getTime();
+					
+					
+					
+					 List<ReporteVo> regs= new ArrayList<ReporteVo>();
+					 System.out.println("-fecha inicio"+datei);
+					 System.out.println("-fecha fin"+datef);
+					regs= getEventos(regs, datei,datef, userName);			
+					Double total= Double.valueOf("00.00");
+					for( ReporteVo ro:regs){
+						total=total+ro.getTotal();
+					}
+					
+					 File newPdfFile = new File("ReporteVentasPdf_"+datei+"-"+datef+".pdf");		 
+				        if (!newPdfFile.exists()){
+				            try {
+				            	newPdfFile.createNewFile();
+				            } catch (IOException ioe) {
+				                System.out.println("(Error al crear el fichero nuevo ......)" + ioe);
+				            }
+				        }
+					
+				
+	       
+   
+	     //   rep.GetReporteXls(datei.toGMTString(),datef.toGMTString(), total);
+	        ReportePdf rpdf= new ReportePdf(regs,datei.toGMTString(),datef.toGMTString(), total,  response.getOutputStream());
+	      //  Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
 	  
-//	  @RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
-//	  //@RequestMapping(value = { "/generaReporteXls/{userName}" }, method = RequestMethod.GET,consumes = "application/json", produces = "application/pdf" )
-//			public void generaxls(HttpServletResponse response, HttpServletRequest request,@RequestBody String json ,
-//					 @PathVariable String userName) throws IOException, ParseException {
-//			 
-//		//	  if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 4, sessionDao,userName)){
-//					  System.out.println("si entra:");
-//					  response.setContentType("Application/Pdf");
-//					//  String nombreArchivo = ("Reporte_Ventas_"+inicio+"_"+fin);
-//					  
-//					
-//					  
-//				        FechasVo f= (FechasVo) JsonConvertidor.fromJson(json, FechasVo.class);
-//						SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-//					//	try {
-//							Date datei = formatter.parse(f.getFechai());
-//							Date datef = formatter.parse(f.getFechaf());
-//							Calendar c = Calendar.getInstance();
-//							c.setTime(datef);
-//							c.add(Calendar.DATE, 1);
-//							datef = c.getTime();
-//							
-//							 String nombreArchivo = ("C:/REPORTES_MENSAJERIA/Reporte_Ventas_"+datei+"_"+datef+".xlsx");
-//							 
-//							  File newExcelFile = new File(nombreArchivo);		 
-//						        if (!newExcelFile.exists()){
-//						            try {
-//						                newExcelFile.createNewFile();
-//						            } catch (IOException ioe) {
-//						                System.out.println("(Error al crear el fichero nuevo ......)"+ ioe);
-//						                System.out.println("(ruta absoluta ......)"+newExcelFile.getAbsolutePath());
-//						                System.out.println("(ruta canonica..)"+newExcelFile.getPath());
-//						            }
-//						        }
-//							  
-//							 
-//							 
-//							 List<ReporteVo> regs= new ArrayList<ReporteVo>();
-//							regs= getEventos(regs, datei,datef);
-//					  
-//				        System.out.println("empiezo a generar pdf..." );
-//				        /////igual puedo 
-//				    	ReporteXls rep = new ReporteXls(regs,nombreArchivo);//,response.getOutputStream()
-//				    	
-//				    	System.out.println("nombre de archivo para edgar:");
-//				    	System.out.println("El Directorio Temporal del Sistema Es: ");
-//				        System.out.println( System.getProperty("java.io.tmpdir") );
-//			//	    	response.getWriter().println((ox.getNombreArchivo().substring(7)));
-//				       // response.getOutputStream().flush();
-//				      //  response.getOutputStream().close();
-//				    	//generaOrdenPdf.GeneraOrdenPdf(new File(ox.getNombreArchivo()));
-//				    	//generaOrdenPdf.GeneraOrdenPdf(ox));
-////			  }else{
-////					response.sendError(403);
-////			   }
-//			}
-//		  
+//	        System.out.println("Empiezo a generar pdf..envios.."+objE );
+//	        System.out.println("Empiezo a generar pdf...suc."+s );
+//	        System.out.println("Empiezo a generar pdf...venta."+v );
+	    //	GeneraReporte gt = new GeneraRepPdf(datei.toGMTString(),datef.toGMTString(), total,  response.getOutputStream());
+	 
+	    	  response.getOutputStream().flush();
+		        response.getOutputStream().close();
+	    	
+//	   }else{
+//			response.sendError(403);
+//		}
+	}
+	
+	  
+
+	    
 	  
 	  @RequestMapping(value = { "/generaReporteXls_/{inicio}/{fin}/{userName}" }, method = RequestMethod.GET, produces = "application/vnd.ms-excel" )
 		 
@@ -464,10 +476,12 @@ public class VentaController {
 						regs= getEventos(regs, datei,datef, userName);						
 						
 						Double total= Double.valueOf("00.00");
-						for( ReporteVo ro:regs){
-							total=total+ro.getPrecio();
+						if (regs.size()!=0){
+							
+							for( ReporteVo ro:regs){
+								total=total+ro.getTotal();
+							}
 						}
-						
 						System.out.println("total"+total);
 						
 						 System.out.println("------------existen :"+regs.size()+"envios en total" );
@@ -507,44 +521,39 @@ public class VentaController {
 		  if (perfil.equals("Administrador") || perfil.equals("SuperAdministrador")){
 			  System.out.println("ififififififif");
 			  lista= ventaDao.findAllAbiertaIF(datei, datef);
+			  System.out.println("ventas array:"+lista.size());
 			  
 		  }else{
 			  System.out.println("eeeeeeee");
 			  lista= ventaDao.getVentas(datei, datef, usuarioDao.consultarUsuario(userName).getIdSucursal());
+			  System.out.println("ventas array:"+lista.size());
 		  }
 		  
 		 
-		  System.out.println("ventas array:"+lista.size());
+		 
 		  List<Envio> envios= new ArrayList<Envio>();
 		  List<Long> longs= new ArrayList<Long>();
 		//	ReporteVo r= new ReporteVo(); 	
 		  
-				for (Venta v : lista ){
-					
-					ReporteVo r= new ReporteVo(); 	
-					System.out.println("*********************");
-					//r.setFecha(v.getFecha().substring(0,19));
-					r.setFecha(v.getFecha().toGMTString().substring(0, 17));
-					r.setFolio(v.getFolio());
-					r.setSucursal(sucursalDao.consult(v.getIdSucursal()).getNombre());
-					r.setTotal(v.getTotal());
-					
+				for (Venta v : lista ){					
 					System.out.println("VVVVVVVVVVVV venta:"+v.getId()+"---cant ENVIOOOOOOOs"+v.getCantidad());
 					
 					//System.out.println("eventos array:"+longs);
 					if  (v.getCantidad()==0){
 						System.out.println("no hay envios en la venta:"+v.getId() );
 					}else{
+						
 						longs = v.getEnvios();
-						for (Long l: longs){
-							Envio e=envioDao.consult(l);
-							//envios.add(e);
-						//	System.out.println("---envios longs:"+envios);
-					///	}
-					//	for (Envio e : envios){
-							//Envio e = envioDao.consult(e.getCliente())
-							System.out.println("++++++++++++++++++++++::::+"+e.getCliente().getNombre());
-							
+						System.out.println("---envios longs:"+longs);
+						for (int i = 0; i <= longs.size()-1;i++ ){
+							ReporteVo r= new ReporteVo(); 	
+							//r.setFecha(v.getFecha().toGMTString().substring(0, 17));
+							r.setFecha(v.getFecha().toString().substring(0, 17));
+							r.setFolio(v.getFolio());
+							r.setSucursal(sucursalDao.consult(v.getIdSucursal()).getNombre());
+							r.setTotal(v.getTotal());
+							Envio e=envioDao.consult(longs.get(i));					
+						//	System.out.println("envio numero:.."+e.getId());
 							r.setRemitente(e.getCliente().getNombre());
 							r.setGuia(e.getGuia());
 							r.setRastreo(e.getRastreo());
@@ -552,15 +561,17 @@ public class VentaController {
 							r.setTipoEnvio(e.getTipoEnvio());
 							r.setEmpresa(e.getEmpresa());
 							r.setPrecio(e.getPrecio());
-							r.setCostoSeguro(e.getCostoSeguro());						
+							r.setCostoSeguro(e.getCostoSeguro());	
+							r.setTotal(e.getTotalEnvio());
 							regs.add(r);
-							System.out.println("regsssssssssss:.."+r.getGuia() );
-							System.out.println("sucursals:.."+r.getSucursal() );
+							System.out.println("guia numero:.."+r.getGuia() );
+							System.out.println("--------------------------------------------------");
 						}
+						System.out.println("registros para reporte:"+regs );
 					}
-					System.out.println("no hay envios en las ventas..." );
+					System.out.println("siguiente venta.." );
 				}
-				System.out.println("objetos de envios:.."+regs );
+				//System.out.println("" );
 				return regs;
 	  }
 
@@ -571,7 +582,7 @@ public class VentaController {
 	  @RequestMapping(value = "/setup/{folio}", method = RequestMethod.GET)
 		public void setUp(HttpServletResponse res,@PathVariable Long folio) throws IOException{
 			ventaDao.crearContador(folio);			
-			res.getWriter().println("Setup finalizado");
+			res.getWriter().println("Setup finalizado...");
 		}
 	   
 }

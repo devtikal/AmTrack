@@ -31,6 +31,7 @@ import com.tikal.cacao.sat.cfd33.Comprobante.Impuestos.Traslados.Traslado;
 import com.tikal.cacao.sat.cfd33.Comprobante.Receptor;
 import com.tikal.mensajeria.modelo.vo.ClienteFac;
 import com.tikal.mensajeria.modelo.vo.DatosEmisor;
+import com.tikal.mensajeria.dao.EmisorDAO;
 import com.tikal.mensajeria.dao.EnvioDao;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Venta;
@@ -52,8 +53,12 @@ public class ComprobanteVentaFactory33 {
 	@Qualifier("envioDao")
 	EnvioDao envioDao;
 	
+	@Autowired
+	@Qualifier("emisorDao")
+	static EmisorDAO emisorDao;
 	
-	public static  Comprobante generarFactura(VentaFac venta, ClienteFac cliente, DatosEmisor emisor) {
+	
+	public static  Comprobante generarFactura(VentaFac venta) {
 		Comprobante comprobante = new Comprobante();
 		comprobante.setVersion("3.3");
 		comprobante.setFecha(Util.getXMLDate(new Date(), FormatoFecha.COMPROBANTE));
@@ -69,8 +74,8 @@ public class ComprobanteVentaFactory33 {
 			comprobante.setMetodoPago(new C_MetodoDePago("PUE"));
 		}
 		
-		comprobante.setEmisor(construirEmisor(emisor));
-		comprobante.setReceptor(construirReceptor(cliente, venta));
+		comprobante.setEmisor(construirEmisor());
+		comprobante.setReceptor(construirReceptor(venta));
 		construirConceptos(venta.getEnvios(), comprobante);
 		
 		//comprobante.setImpuestos(construirImuestos(comprobante.getSubTotal()));
@@ -81,54 +86,22 @@ public class ComprobanteVentaFactory33 {
 //		venta.setXml();
 	}
 	
-//	public Comprobante generarNota(VentaFac venta, ClienteFac cliente, DatosEmisor emisor) {
-//		Comprobante comprobante = new Comprobante();
-//		comprobante.setVersion("3.3");
-//		comprobante.setFecha(Util.getXMLDate(new Date(), FormatoFecha.COMPROBANTE));
-//		comprobante.setMoneda(new C_Moneda("MXN"));
-//		comprobante.setLugarExpedicion(new C_CodigoPostal(emisor.getDomicilioFiscal().getCodigoPostal()));
-//		comprobante.setTipoDeComprobante(new C_TipoDeComprobante("I"));
-//		comprobante.setFormaPago(new C_FormaDePago(this.getFormaPago(venta.getFormaDePago())));
-//		comprobante.setMetodoPago(new C_MetodoDePago("PUE"));
-//		
-//		comprobante.setEmisor(construirEmisor(emisor));
-//		comprobante.setReceptor(construirReceptor(cliente));
-//		if(venta.getDetalles()!=null){
-//			construirConceptos(venta.getDetalles(), comprobante);
-//		}
-//		//comprobante.setImpuestos(construirImuestos(comprobante.getSubTotal()));
-////		BigDecimal total = comprobante.getSubTotal().add(comprobante.getImpuestos().getTotalImpuestosTrasladados());
-//		comprobante.setTotal(new BigDecimal(venta.getMonto()).setScale(2, RoundingMode.HALF_UP));
-//
-//		return comprobante;
-//	}
-	
-	private static Emisor construirEmisor(DatosEmisor de) {
+
+	private static Emisor construirEmisor() {
 		Emisor emisor = new Comprobante.Emisor();
 		emisor.setRfc("MERA680707KA3");
+		//emisor.setRfc("AAA010101AAA");
 		emisor.setNombre("ADOLFO FERMÍN MERCADO RUBIO");
-		emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
-
-//		switch(de.getRegimen()){
-//			case "Personas F�sicas con Actividades Empresariales y Profesionales":{
-			//	emisor.setRegimenFiscal(new C_RegimenFiscal("612"));
-//				break;
-//			}
-//			default:{
-				//emisor.setRegimenFiscal(new C_RegimenFiscal("601"));
-			//	break;
-//			}
-//		}
-		
-		
+		//emisor.setRegimenFiscal(new C_RegimenFiscal("601"));		
+		emisor.setRegimenFiscal(new C_RegimenFiscal("612"));		
 		return emisor;
 	}
 	
-	private static Receptor construirReceptor(ClienteFac cliente, VentaFac vf) {
+	private static Receptor construirReceptor(VentaFac vf) {
 		Receptor receptor = new Comprobante.Receptor();
-		if(cliente!=null){
-			receptor.setRfc(cliente.getRfc());
-			receptor.setNombre(cliente.getNombre());
+		if(vf!=null){
+			receptor.setRfc(vf.getRfc());
+			receptor.setNombre(vf.getNombre());
 			receptor.setUsoCFDI(new C_UsoCFDI(vf.getUsoCfdi()));
 		
 		}
@@ -148,10 +121,10 @@ public class ComprobanteVentaFactory33 {
 			double cantidad = Double.parseDouble("1.00");
 			concepto.setNoIdentificacion("002");//////////////id de producto
 			concepto.setCantidad( BigDecimal.valueOf( (double)cantidad ) );
-			concepto.setUnidad("ENVIO");          /////////////unidad
+			concepto.setUnidad("Envío "+envio.getRastreo()+" "+envio.getGuia()+" "+envio.getPaquete().getTipoPaquete());          /////////////unidad
 			concepto.setClaveUnidad(new C_ClaveUnidad("SX")); ///cve de unidad
 			concepto.setClaveProdServ("78102203");     ///clave sat
-			concepto.setDescripcion(envio.getTipoEnvio()); //descripcion
+			concepto.setDescripcion("Envío"); //descripcion
 			
 			double valorUnitarioSinIVA = envio.getPrecio() / 1.16;
 			double importeIVA = valorUnitarioSinIVA * 0.16 * cantidad;

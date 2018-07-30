@@ -7,6 +7,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.tikal.mensajeria.modelo.login.Usuario;
+import com.tikal.mensajeria.modelo.vo.VentaFac;
 
 @Entity
 public class Venta {
@@ -21,10 +22,18 @@ public class Venta {
 	private Double total;
 	@Index String numeroFactura;
 	@Index private Long idSucursal;
+	private String uuid;
+	private Long idVentaFac;
 	
 	
 	
 	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	public Long getIdSucursal() {
 		return idSucursal;
 	}
@@ -85,6 +94,13 @@ public class Venta {
 	public void setNumeroFactura(String numeroFactura) {
 		this.numeroFactura = numeroFactura;
 	}
+	public Long getIdVentaFac() {
+		return idVentaFac;
+	}
+	public void setIdVentaFac(Long idVentaFac) {
+		this.idVentaFac = idVentaFac;
+	}
+
 	
 	
 	

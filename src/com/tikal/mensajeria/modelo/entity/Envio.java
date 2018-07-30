@@ -25,7 +25,7 @@ public class Envio {
 	private Double precio;	
 	private Double costoSeguro;
 	private List<Material> materiales;
-	
+	private Double totalEnvio;
 	
 	
 //	@Index private String fecha;
@@ -117,6 +117,12 @@ public class Envio {
 	}
 	public void setTipoGuia(String tipoGuia) {
 		this.tipoGuia = tipoGuia;
+	}
+	public Double getTotalEnvio() {
+		return totalEnvio;
+	}
+	public void setTotalEnvio(Double totalEnvio) {
+		this.totalEnvio = totalEnvio;
 	}
 	
 	

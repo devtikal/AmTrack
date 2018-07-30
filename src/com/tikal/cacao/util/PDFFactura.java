@@ -63,7 +63,7 @@ public class PDFFactura {
 	
 	private Font fontHead = new Font(Font.FontFamily.HELVETICA, 8.5F, Font.NORMAL);
 	private BaseColor tikalColor;
-	//fontHead.setColor(BaseColor.WHITE);
+	//fontHead.setColor(BaseColor.GREEN);
 
 	private PdfPCell emptyCell = new PdfPCell();
 	private PdfPCell celdaEspacio = new PdfPCell();
@@ -73,7 +73,7 @@ public class PDFFactura {
 		fontHead.setColor(BaseColor.WHITE);
 		emptyCell.setBorderWidth(1);
 		emptyCell.setBorderColor(BaseColor.GRAY);
-		tikalColor = new CustomColor(ExtendedColor.TYPE_RGB, 142F / 255F, 0F / 255F, 32F / 255F);
+		tikalColor = new CustomColor(ExtendedColor.TYPE_RGB, 50F / 255F, 173F / 255F, 16F / 255F);
 		
 		celdaEspacio.setBorder(PdfPCell.NO_BORDER);
 		//celdaEspacio.addElement(Chunk.NEWLINE);
@@ -340,13 +340,13 @@ public class PDFFactura {
 		PdfPCell celdaLogo = new PdfPCell();
 		celdaLogo.setBorder(PdfPCell.NO_BORDER);
 		Image imgLogo;
-		if (imagen != null) {
-			imgLogo = Image.getInstance(new URL(imagen.getImage()));
-		} else {
-			imgLogo = Image.getInstance("images/Logo-Tikal.png");
+//		if (imagen != null) {
+//			imgLogo = Image.getInstance(new URL(imagen.getImage()));
+//		} else {
+			imgLogo = Image.getInstance("img/LogoMervel.png");
 			imgLogo.setScaleToFitHeight(false);
 			imgLogo.scaleToFit(125F, 37.25F);
-		}
+		//}
 		Chunk chunkLogo = new Chunk(imgLogo, 0, -35);
 		celdaLogo.addElement(chunkLogo);
 		subTablaLogo.addCell(celdaLogo);
@@ -394,9 +394,9 @@ public class PDFFactura {
 		tablaReceptorYHoraCert.setWidthPercentage(100);
 		tablaReceptorYHoraCert.setWidths(new float[] { 35, 20, 45 });
 
-		agregarCeldaConFondo("Nombre o raz�n social", fontHead, tablaReceptorYHoraCert, false);
+		agregarCeldaConFondo("Nombre o razón social", fontHead, tablaReceptorYHoraCert, false);
 		agregarCeldaConFondo("R.F.C.", fontHead, tablaReceptorYHoraCert, false);
-		agregarCeldaConFondo("Lugar y fecha de emisi�n / hora de certificaci�n", fontHead, tablaReceptorYHoraCert,
+		agregarCeldaConFondo("Lugar y fecha de emisión / hora de certificación", fontHead, tablaReceptorYHoraCert,
 				false);
 
 		agregarCelda(comprobante.getReceptor().getNombre(), font3, tablaReceptorYHoraCert, false);
@@ -416,7 +416,7 @@ public class PDFFactura {
 		tablaDirYOtrosDatosFis.setWidthPercentage(100);
 		tablaDirYOtrosDatosFis.setWidths(new float[] { 40, 60 });
 
-		agregarCeldaConFondo("Direcci�n", fontHead, tablaDirYOtrosDatosFis, false);
+		agregarCeldaConFondo("Dirección", fontHead, tablaDirYOtrosDatosFis, false);
 		agregarCeldaConFondo("Otros datos fiscales", fontHead, tablaDirYOtrosDatosFis, false);
 
 		agregarCelda(comprobante.getReceptor().getDomicilio().toString(), font3, tablaDirYOtrosDatosFis, false);
@@ -452,7 +452,7 @@ public class PDFFactura {
 
 		agregarCeldaConFondo("Unidad", fontHead, tablaConceptos, true);
 
-		agregarCeldaConFondo("Descripci�n", fontHead, tablaConceptos, true);
+		agregarCeldaConFondo("Descripción", fontHead, tablaConceptos, true);
 
 		agregarCeldaConFondo("Valor unitario", fontHead, tablaConceptos, true);
 
@@ -503,14 +503,14 @@ public class PDFFactura {
 			fraseLeyenda.add(Chunk.NEWLINE);
 		}
 		if (!estatus.equals(Estatus.GENERADO)) {
-			Chunk chunkLeyenda = new Chunk("Este documento es una representaci�n impresa de un CFDI", fontTituloSellos);
+			Chunk chunkLeyenda = new Chunk("Este documento es una representación impresa de un CFDI", fontTituloSellos);
 			//fraseLeyenda.add(Chunk.NEWLINE);
 			fraseLeyenda.add(chunkLeyenda);
 		}
 		// fraseLeyenda.add(Chunk.NEWLINE);
 
 		fraseLeyenda.add(Chunk.NEWLINE);
-		String strMetodoPago = "M�todo de pago: ".concat(comprobante.getMetodoDePago())
+		String strMetodoPago = "Método de pago: ".concat(comprobante.getMetodoDePago())
 				.concat("                 Moneda: ").concat(comprobante.getMoneda());
 		Chunk chunkMetodoDePago = new Chunk(strMetodoPago, fontLeyendaFiscal);
 		fraseLeyenda.add(chunkMetodoDePago);
@@ -537,7 +537,7 @@ public class PDFFactura {
 		String numCtaPago = comprobante.getNumCtaPago();
 		if (numCtaPago != null) {
 			if ( !numCtaPago.contentEquals("") ) {
-				String strNumCtaPago = "N�mero de cuenta de pago: ".
+				String strNumCtaPago = "Número de cuenta de pago: ".
 						concat(numCtaPago);
 				Chunk chunkCondicionesDePago = new Chunk(strNumCtaPago, fontLeyendaFiscal);
 				fraseLeyenda.add(chunkCondicionesDePago);
@@ -701,7 +701,7 @@ public class PDFFactura {
 		// cell5table7.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 
 		Phrase fraseCadenaOriginal = new Phrase();
-		Chunk chunkCadenaOriginalEtq = new Chunk("Cadena original del complemento de certificaci�n digital del SAT ",
+		Chunk chunkCadenaOriginalEtq = new Chunk("Cadena original del complemento de certificación digital del SAT ",
 				fontTituloSellos);
 		Chunk chunkCadenaOriginalValor = new Chunk(selloDigital, fontContenidoSellos);
 		fraseCadenaOriginal.add(chunkCadenaOriginalEtq);
@@ -739,7 +739,7 @@ public class PDFFactura {
 		Image imgTikal;
 		Chunk chunkTikal;
 		try {
-			imgTikal = Image.getInstance("images/Logo-Tikal.png");
+			imgTikal = Image.getInstance("img/LogoMervel.png");
 			imgTikal.setScaleToFitHeight(false);
 			imgTikal.scaleToFit(25f, 7.45f);
 			chunkTikal = new Chunk(imgTikal,0,0);
@@ -833,11 +833,11 @@ public class PDFFactura {
 			Phrase footerSello = new Phrase();
 			
 			if (masivo) {
-				Chunk chunkHojaNum = new Chunk("Hoja n�mero ".concat(Integer.toString(1)).concat(" de ")
+				Chunk chunkHojaNum = new Chunk("Hoja número ".concat(Integer.toString(1)).concat(" de ")
 						.concat(Integer.toString(1)).concat(" del CFDI con UUID:").concat(uuid), ffont);
 				footer.add(chunkHojaNum);
 			} else {
-				Chunk chunkHojaNum = new Chunk("Hoja n�mero ".concat(Integer.toString(document.getPageNumber()))
+				Chunk chunkHojaNum = new Chunk("Hoja número ".concat(Integer.toString(document.getPageNumber()))
 						.concat(" del CFDI con UUID:").concat(uuid), ffont);
 //				Chunk chunkHojaNum = new Chunk("Hoja n�mero ".concat(Integer.toString(document.getPageNumber())).concat(" de ")
 //						.concat(Integer.toString(writer.getPageNumber())).concat(" del CFDI con UUID:").concat(uuid), ffont);
@@ -845,7 +845,7 @@ public class PDFFactura {
 			}
 			
 			if (fechaCancel != null) {
-				Chunk chunkFecha = new Chunk("Fecha de Cancelaci�n: ".concat(fechaCancel.toString()), ffont);
+				Chunk chunkFecha = new Chunk("Fecha de Cancelación: ".concat(fechaCancel.toString()), ffont);
 				//footer.add(Chunk.NEWLINE);
 				footerFecha.add(chunkFecha);
 				
@@ -854,7 +854,7 @@ public class PDFFactura {
 			}
 			
 			if (selloCancel != null) {
-				Chunk chunkEtqSelloCancel = new Chunk("Sello digital SAT (Cancelaci�n): ", ffontBold);
+				Chunk chunkEtqSelloCancel = new Chunk("Sello digital SAT (Cancelación): ", ffontBold);
 				Chunk chunkSelloCancel = new Chunk(selloCancel, ffont);
 				//footer.add(Chunk.NEWLINE);
 				footerSello.add(chunkEtqSelloCancel);

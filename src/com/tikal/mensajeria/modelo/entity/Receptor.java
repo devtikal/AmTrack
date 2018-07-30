@@ -1,13 +1,16 @@
 package com.tikal.mensajeria.modelo.entity;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 import com.tikal.cacao.sat.cfd.TUbicacion;
 
 /**
  * @author Tikal
  *
  */
+@Entity
 public class Receptor {
-
+	@Id
 	private String rfc;
 	
 	private TUbicacion domicilio;

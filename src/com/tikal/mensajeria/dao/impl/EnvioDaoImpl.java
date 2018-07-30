@@ -44,6 +44,7 @@ public class EnvioDaoImpl implements EnvioDao{
 			old.setTipoEnvio(e.getTipoEnvio());
 			old.setTipoServicio(e.getTipoServicio());
 			old.setMateriales(e.getMateriales());
+			old.setTotalEnvio(e.getTotalEnvio());
 				
 		}
 

@@ -108,6 +108,7 @@ public class UsuarioController {
 	public void consultarUsuarios(HttpServletRequest request, HttpServletResponse response, @PathVariable String name) throws IOException {
 		//if(SesionController.verificarPermiso(request, usuarioDao, perfilDAO, 8)){
 			AsignadorDeCharset.asignar(request, response);
+			System.out.println("nadaaaaa");
 			Usuario u= usuarioDao.consultarUsuario(name);
 			
 			response.getWriter().println(JsonConvertidor.toJson(u));

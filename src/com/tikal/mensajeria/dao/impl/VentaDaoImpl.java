@@ -53,7 +53,7 @@ public class VentaDaoImpl implements VentaDao{
     
 
 	public Venta consult(Long id) {
-	   System.out.println("si esta en daoimpl consultando la vanta.."+id);
+	   System.out.println("si esta en daoimpl consultando la venta.."+id);
       return ofy().load().type(Venta.class).id(id).now();
 		
 	}
@@ -62,6 +62,7 @@ public class VentaDaoImpl implements VentaDao{
    
 	public List<Venta> findAll() {
 		return ofy().load().type(Venta.class).list();
+		//return ofy().load().type(Venta.class).filter("estatus !=","CANCELADA").list();
 	}
 
 
@@ -69,27 +70,40 @@ public class VentaDaoImpl implements VentaDao{
 
 		public List<Venta> getVentas(Date inicio, Date fin,Long idSucursal) {  //abiertAS
 			
-			return ofy().load().type(Venta.class).filter("estatus","ABIERTA").filter("idSucursal", idSucursal).filter("fecha >=",inicio).filter("fecha <=", fin).list();
+		//List<Venta> lista =ofy().load().type(Venta.class).filter("estatus ","ABIERTA").filter("idSucursal", idSucursal).filter("fecha >=",inicio).filter("fecha <=", fin).list();
+		//lista.addAll(ofy().load().type(Venta.class).filter("estatus ","FACTURADA").filter("idSucursal", idSucursal).filter("fecha >=",inicio).filter("fecha <=", fin).list());
+		//lista.addAll(ofy().load().type(Venta.class).filter("estatus ","FACTURA-CANCELADA").filter("idSucursal", idSucursal).filter("fecha >=",inicio).filter("fecha <=", fin).list());
+			return ofy().load().type(Venta.class).filter("idSucursal", idSucursal).filter("fecha >=",inicio).filter("fecha <=", fin).order("- fecha").list();
 			//return ofy().load().type(Venta.class).filter("estatus","ABIERTA").filter("idSucursal", idSucursal).list();
+	//	return lista;
 		}
 
 
 	@Override
 	public List<Venta> findAllAbierta() {
 		// TODO Auto-generated method stub
-		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
+		//return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
+		return ofy().load().type(Venta.class).order("- fecha").list();
 	}
 	
 	@Override
 	public List<Venta> findAllAbiertaIF(Date inicio, Date fin) {
 		// TODO Auto-generated method stub
-		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").filter("fecha >=",inicio).filter("fecha <=", fin).list();
+//		List<Venta> lista =ofy().load().type(Venta.class).filter("estatus", "ABIERTA").filter("fecha >=",inicio).filter("fecha <=", fin).list();
+//		lista.addAll(ofy().load().type(Venta.class).filter("estatus", "FACTURADA").filter("fecha >=",inicio).filter("fecha <=", fin).list());
+//		lista.addAll(ofy().load().type(Venta.class).filter("estatus", "FACTURA-CANCELADA").filter("fecha >=",inicio).filter("fecha <=", fin).list());
+		return ofy().load().type(Venta.class).filter("fecha >=",inicio).filter("fecha <=", fin).order("- fecha").list();
+		//return lista;
 	}
 
 	@Override
 	public List<Venta> findAllAbiertaBySuc(Long idSucursal) {
 		// TODO Auto-generated method stub
-		return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").filter("idSucursal", idSucursal).list();
+//		List<Venta> lista =ofy().load().type(Venta.class).filter("estatus", "ABIERTA").filter("idSucursal", idSucursal).list();
+//		lista.addAll(ofy().load().type(Venta.class).filter("estatus", "FACTURADA").filter("idSucursal", idSucursal).list());
+//		lista.addAll(ofy().load().type(Venta.class).filter("estatus", "FACTURA-CANCELADA").filter("idSucursal", idSucursal).list());
+		return ofy().load().type(Venta.class).filter("idSucursal", idSucursal).order("- fecha").list();
+		//return lista;
 	}
 	@Override
 	public void crearContador(Long folio){

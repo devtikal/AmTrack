@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component;
 import com.googlecode.objectify.ObjectifyService;
 import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.ContadorServicio;
+import com.tikal.mensajeria.modelo.entity.Emisor;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Factura;
 import com.tikal.mensajeria.modelo.entity.FacturaVTT;
 import com.tikal.mensajeria.modelo.entity.Guia;
 import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.entity.Persona;
+import com.tikal.mensajeria.modelo.entity.Receptor;
 import com.tikal.mensajeria.modelo.entity.Serial;
 import com.tikal.mensajeria.modelo.entity.Venta;
 import com.tikal.mensajeria.modelo.login.Perfil;
@@ -50,7 +52,8 @@ public class StartupEntities implements ServletContextListener {
 			ObjectifyService.register(Serial.class);
 			ObjectifyService.register(VentaFac.class);
 			ObjectifyService.register(ClienteFac.class);
-		
+			ObjectifyService.register(Emisor.class);
+			ObjectifyService.register(Receptor.class);
 		}
 
 	@Override

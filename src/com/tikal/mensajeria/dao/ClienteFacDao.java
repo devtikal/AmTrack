@@ -1,6 +1,6 @@
 package com.tikal.mensajeria.dao;
 
-import com.tikal.mensajeria.modelo.entity.Emisor;
+
 
 import com.tikal.mensajeria.modelo.vo.ClienteFac;
 

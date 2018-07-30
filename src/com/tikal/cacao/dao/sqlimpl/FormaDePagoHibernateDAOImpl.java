@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.tikal.cacao.dao.sql.SimpleHibernateDAO;
+import com.tikal.cacao.dao.SimpleHibernateDAO;
 import com.tikal.cacao.model.orm.FormaDePago;
 import com.tikal.cacao.util.Util;
 

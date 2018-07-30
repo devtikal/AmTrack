@@ -9,7 +9,7 @@ public class ContadorServicio {
 	@Id private Long id;
 	private Long folio;
 	private Long guia;
-	
+	private Long factura;
 	
 	public Long getId() {
 		return id;
@@ -20,7 +20,7 @@ public class ContadorServicio {
 	public Long getFolio() {
 		
 		if (folio==0){
-			folio=Long.parseLong("1000");
+			folio=Long.parseLong("2000");
 		return folio;
 		}else
 			return folio;
@@ -30,9 +30,13 @@ public class ContadorServicio {
 	public void incrementar() {
 		this.folio++;
 	}
-	
 	public void incrementarGuia() {
 		this.guia++;
+	}
+
+
+	public void incrementarFactura() {
+		this.factura++;
 	}
 	public void setFolio(Long folio){
 		this.folio= folio;
@@ -47,6 +51,15 @@ public class ContadorServicio {
 	public void setGuia(Long guia) {
 		this.guia = guia;
 	}
+	public void setFactura(Long factyra) {
+		this.factura = factura;
+	}
 	
-	
+	public Long getFactura() {
+		if (factura==null){
+			factura=Long.parseLong("1000");
+		return factura;
+		}else
+			return factura;
+	}
 }

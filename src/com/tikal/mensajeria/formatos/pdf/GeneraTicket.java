@@ -81,7 +81,7 @@ public class GeneraTicket {
     	 
     	  
     	try {
-    		Rectangle envelope = new Rectangle(200, 690);
+    		Rectangle envelope = new Rectangle(320, 500);
     	//	Document pdfDoc = new Document(envelope, 230f, 10f, 100f, 0f);
     		Document document = new Document(envelope,0,0,0,0);   	  
 	        PdfWriter.getInstance(document,ops);
@@ -109,29 +109,29 @@ public class GeneraTicket {
     	    
     	    Font f0 = new Font();
       	  //  f1.setStyle(1);
-      	    f0.setSize(2);
+      	    f0.setSize(4);
       	    f0.setColor(BaseColor.BLACK);
     	    
     	    
     	    Font f1 = new Font();
     	  //  f1.setStyle(1);
-    	    f1.setSize(8);
+    	    f1.setSize(10);
     	    f1.setColor(BaseColor.BLACK);
     	    
     	    Font f2 = new Font();
     	   // f2.setStyle(2);
-    	    f2.setSize(12);
+    	    f2.setSize(14);
     	    f2.setColor(BaseColor.BLACK);
     	    f2.setStyle(1);
     	    
     	    Font f3 = new Font();
     	    f3.setStyle(1);
-    	    f3.setSize(8);
+    	    f3.setSize(10);
     	    f3.setColor(BaseColor.BLACK);
     	   
     	    Font f4 = new Font();
         	  //  f1.setStyle(1);
-        	    f4.setSize(4);
+        	    f4.setSize(8);
         	    f4.setColor(BaseColor.BLACK);
         	    
             PdfPTable table = new PdfPTable(6);   
@@ -191,7 +191,9 @@ public class GeneraTicket {
             c6.setBorder(Rectangle.NO_BORDER);
             table.addCell(c6);
             
-            Paragraph p7 = new Paragraph(v.getFecha().toGMTString(), f1);
+       //     Paragraph p7 = new Paragraph(v.getFecha().toGMTString().substring(0, 20), f1);
+            
+            Paragraph p7 = new Paragraph(v.getFecha().toString().substring(0, 20), f1);
             PdfPCell c7 = new PdfPCell(p7);
             c7.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c7.setColspan(3);c7.setBorder(Rectangle.NO_BORDER);
@@ -475,7 +477,7 @@ public class GeneraTicket {
                 
                 
                  
-                 Paragraph p162 = new Paragraph("$ "+en.getPrecio().toString(),f3);
+                 Paragraph p162 = new Paragraph("$ "+en.getTotalEnvio().toString(),f3);
                  PdfPCell c162 = new PdfPCell(p162);
                  c162.setHorizontalAlignment(Element.ALIGN_CENTER);
                 // c15.setBackgroundColor(BaseColor.BLACK);
