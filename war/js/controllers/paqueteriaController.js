@@ -778,14 +778,20 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		paqueteriaService.buscaCliente($scope.paquete.cliente.nombre).then(function(data){
 			$scope.listaCliente = data;
 			if(data[0].nombre){
+			$('#modalEnvio').modal('toggle');
 			$("#mdlSelClient").modal();
 			console.log("Datos del Cliente ", data);
 			}
 		})
 		}
 	}
+	$scope.cancelSeleccion = function(){
+		$('#mdlSelClient').modal('toggle');
+		$('#modalEnvio').modal();
+	}
 	$scope.ClienteSeleccionado = function(data){
 		$('#mdlSelClient').modal('toggle');
+		$('#modalEnvio').modal();
 		$scope.paquete.cliente.enAtencion = data.enAtencion;
 		$scope.paquete.cliente.codigoPostal = data.codigoPostal;
 		$scope.paquete.cliente.calle = data.calle;
