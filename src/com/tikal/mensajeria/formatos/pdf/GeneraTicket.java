@@ -23,6 +23,7 @@ import com.tikal.mensajeria.util.NumberToLetterConverter;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.print.Doc;
@@ -193,7 +194,10 @@ public class GeneraTicket {
             
        //     Paragraph p7 = new Paragraph(v.getFecha().toGMTString().substring(0, 20), f1);
             
-            Paragraph p7 = new Paragraph(v.getFecha().toString().substring(0, 20), f1);
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+			String fec= formatter.format(v.getFecha()).substring(0, 16);
+            Paragraph p7 = new Paragraph(fec, f1);
+         //   Paragraph p7 = new Paragraph(v.getFecha().toString().substring(0, 20), f1);
             PdfPCell c7 = new PdfPCell(p7);
             c7.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c7.setColspan(3);c7.setBorder(Rectangle.NO_BORDER);

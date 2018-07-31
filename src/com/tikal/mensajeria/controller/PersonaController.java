@@ -73,7 +73,7 @@ public class PersonaController {
 		 @RequestMapping(value = { "/getByNombre/{nombre}" }, method = RequestMethod.GET, produces = "application/json")
 			public void getNombre(HttpServletResponse response, HttpServletRequest request, @PathVariable String nombre) throws IOException {
 				AsignadorDeCharset.asignar(request, response);
-				Persona p = personaDao.getByNombre(nombre);
+				List<Persona> p = personaDao.getByNombre(nombre);
 				
 				response.getWriter().println(JsonConvertidor.toJson(p));
 

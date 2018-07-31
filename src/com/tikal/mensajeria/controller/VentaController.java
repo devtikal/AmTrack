@@ -139,6 +139,9 @@ public class VentaController {
 		v.setTotal(Double.parseDouble("0.00"));
 		v.setUsuario(usuarioDao.consultarUsuario(username));
 		v.setIdSucursal(usuarioDao.consultarUsuario(username).getIdSucursal());
+		
+	//	SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+		////Date datei = formatter.parse(v.getFecha());
 		//System.out.println(" yisus manda:"+json);
 //		int ini=Integer.parseInt(inicio);
 //		int f=Integer.parseInt(fin);

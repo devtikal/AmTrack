@@ -68,15 +68,15 @@ public class PersonaDaoImpl implements PersonaDao {
 
 
 	@Override
-	public Persona getByNombre(String nombre) {
+	public List<Persona> getByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		List<Persona> lista= ofy().load().type(Persona.class).filter("nombre", nombre).list();
 		System.out.println(" lista de personas :"+lista.size());
 		if (lista.size() == 0) {
 			return null;
 		}
-		Persona nuevo = lista.get(0);
-		return nuevo;
+		//Persona nuevo = lista.get(0);
+		return lista;
 	}
 
 

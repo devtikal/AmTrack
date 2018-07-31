@@ -21,6 +21,6 @@ public interface PersonaDao {
     
 	public List<Persona> findAll();	
 	
-	public Persona getByNombre(String nombre);
+	public List<Persona> getByNombre(String nombre);
 
 }

@@ -323,7 +323,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 				facturaVTTDAO.guardar(facturaACancelar);
 //				repRenglonDAO.guardar(repRenglon);
 
-				String evento = "Se cancel� la factura guardada con el id:" + facturaACancelar.getUuid();
+				String evento = "Se canceló la factura guardada con el id:" + facturaACancelar.getUuid();
 //				RegistroBitacora registroBitacora = Util.crearRegistroBitacora(sesion, "Operacional", evento);
 //				bitacoradao.addReg(registroBitacora);
 				return (String) respuestaWB.get(2); // regresa "Comprobante
@@ -429,7 +429,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 //						RegistroBitacora registroBitacora = Util.crearRegistroBitacora(sesion, "Operacional",
 //								respPersonalizada.getMensajeRespuesta() + " UUID:" + uuid);
 //						bitacoradao.addReg(registroBitacora);
-						return "Error al obtener el Acuse de Cancelaci�n";
+						return "Error al obtener el Acuse de Cancelación";
 
 					}
 				} else {
@@ -542,7 +542,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 		Imagen imagen = imagenDAO.get("AAA010101AAA");
 
 		mailero.enviaFactura(email, factura, "", imagen, cfdi);
-		String evento = "Se envi�  la factura con id: " + factura.getUuid() + " al correo: " + email;
+		String evento = "Se envió  la factura con id: " + factura.getUuid() + " al correo: " + email;
 //		RegistroBitacora registroBitacora = Util.crearRegistroBitacora(sesion, "Operacional", evento);
 //		bitacoradao.addReg(registroBitacora);
 	}
@@ -643,7 +643,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 					mailero.enviaFactura(email, facturaTimbrada, "", imagen, cfdiTimbrado);
 				}
 				respPersonalizada = new RespuestaWebServicePersonalizada();
-				respPersonalizada.setMensajeRespuesta("�La factura se timbr� con �xito!");
+				respPersonalizada.setMensajeRespuesta("�La factura se timbró con éxito!");
 				respPersonalizada.setUuidFactura(timbreFD.getUUID());
 				return respPersonalizada;
 			} // FIN TIMBRADO EXITOSO
@@ -659,9 +659,9 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 	}
 
 	private RespuestaWebServicePersonalizada construirMensajeError(List<Object> respuestaWB) {
-		StringBuilder respuestaError = new StringBuilder("Excepci�n en caso de error: ");
+		StringBuilder respuestaError = new StringBuilder("Excepción en caso de error: ");
 		respuestaError.append(respuestaWB.get(0) + "\r\n");
-		respuestaError.append("C�digo de error: " + respuestaWB.get(1) + "\r\n");
+		respuestaError.append("Código de error: " + respuestaWB.get(1) + "\r\n");
 		respuestaError.append("Mensaje de respuesta: " + respuestaWB.get(2) + "\r\n");
 		respuestaError.append(respuestaWB.get(6) + "\r\n");
 		respuestaError.append(respuestaWB.get(7) + "\r\n");

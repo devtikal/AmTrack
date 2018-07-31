@@ -23,6 +23,7 @@ import com.tikal.mensajeria.util.NumberToLetterConverter;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 //import java.util.Date;
 //import java.util.List; 
@@ -110,7 +111,7 @@ public class GeneraGuiaMervel {
             c33.setBorder(Rectangle.NO_BORDER);
             table.addCell(c33);
             
-            Paragraph p5 = new Paragraph(e.getGuia().toString(),f3);
+            Paragraph p5 = new Paragraph(e.getGuia().toString(),f1);
             PdfPCell c5 = new PdfPCell(p5);
             c5.setHorizontalAlignment(Element.ALIGN_LEFT);
             c5.setColspan(3);c5.setRowspan(1);
@@ -124,8 +125,10 @@ public class GeneraGuiaMervel {
             c4.setBorder(Rectangle.NO_BORDER);
             table.addCell(c4);
                        
-            
-            Paragraph p6 = new Paragraph(v.getFecha().toString().substring(0,17),f1);
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+			String fec= formatter.format(v.getFecha()).substring(0, 16);
+          
+            Paragraph p6 = new Paragraph(fec,f1);
             PdfPCell c6 = new PdfPCell(p6);
             c6.setHorizontalAlignment(Element.ALIGN_RIGHT);
             c6.setColspan(2);
