@@ -776,23 +776,29 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		if($scope.paquete.empresa == 'MERVEL' || $scope.paquete.empresa == 'ESTAFETA'){
 	
 		paqueteriaService.buscaCliente($scope.paquete.cliente.nombre).then(function(data){
+			$scope.listaCliente = data;
+			if(data[0].nombre){
+			$("#mdlSelClient").modal();
 			console.log("Datos del Cliente ", data);
-				$scope.paquete.cliente.enAtencion = data.enAtencion;
-				$scope.paquete.cliente.codigoPostal = data.codigoPostal;
-				$scope.paquete.cliente.calle = data.calle;
-				$scope.paquete.cliente.noExterior = data.noExterior;
-				$scope.paquete.cliente.noInterior = data.noInterior;
-				$scope.colonia=[data.colonia];
-				$scope.paquete.cliente.localidad = data.localidad;
-				$scope.paquete.cliente.municipio = data.municipio;
-				$scope.paquete.cliente.estado = data.estado;
-				$scope.paquete.cliente.telefono = data.telefono;
-				$scope.paquete.cliente.referencias = data.referencias;
-			
+			}
 		})
 		}
 	}
-	
+	$scope.ClienteSeleccionado = function(data){
+		$('#mdlSelClient').modal('toggle');
+		$scope.paquete.cliente.enAtencion = data.enAtencion;
+		$scope.paquete.cliente.codigoPostal = data.codigoPostal;
+		$scope.paquete.cliente.calle = data.calle;
+		$scope.paquete.cliente.noExterior = data.noExterior;
+		$scope.paquete.cliente.noInterior = data.noInterior;
+		$scope.colonia=[data.colonia];
+		$scope.paquete.cliente.localidad = data.localidad;
+		$scope.paquete.cliente.municipio = data.municipio;
+		$scope.paquete.cliente.estado = data.estado;
+		$scope.paquete.cliente.telefono = data.telefono;
+		$scope.paquete.cliente.referencias = data.referencias;
+		
+	}
 //	$scope.$watch('busca',function(){
 ////		if($scope.busca.length>3){
 //			$scope.buscar();
