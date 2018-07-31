@@ -754,6 +754,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	$scope.cancelarFactura = function(){
 		paqueteriaService.cancelFact($scope.datoFact).then(function(data) {
+			alert(data);
 			$window.location.reload();
 		})
 	}

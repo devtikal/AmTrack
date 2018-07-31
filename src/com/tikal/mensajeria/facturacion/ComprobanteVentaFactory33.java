@@ -124,10 +124,10 @@ public class ComprobanteVentaFactory33 {
 			double cantidad = Double.parseDouble("1.00");
 			concepto.setNoIdentificacion("002");//////////////id de producto
 			concepto.setCantidad( BigDecimal.valueOf( (double)cantidad ) );
-			concepto.setUnidad("Envío "+envio.getRastreo()+" "+envio.getGuia()+" "+envio.getPaquete().getTipoPaquete());          /////////////unidad
+			concepto.setUnidad("ENVIO");          /////////////unidad
 			concepto.setClaveUnidad(new C_ClaveUnidad("SX")); ///cve de unidad
 			concepto.setClaveProdServ("78102203");     ///clave sat
-			concepto.setDescripcion("Envío"); //descripcion
+			concepto.setDescripcion("Envío "+envio.getRastreo()+" "+envio.getGuia()+" "+envio.getPaquete().getTipoPaquete()); //descripcion
 			
 			double valorUnitarioSinIVA = envio.getPrecio() / 1.16;
 			double importeIVA = valorUnitarioSinIVA * 0.16 * cantidad;
