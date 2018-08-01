@@ -613,6 +613,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		if(!$scope.paquete.precio){
 			$scope.paquete.precio= 0;
 		}
+		if($scope.paquete.rastreo == null){
+			alert("No se ha capturado \n El Numero de Rastreo");
+			return
+		}
+		
+		if($scope.paquete.precio == 0){
+			alert("No se ha capturado \n El Precio");
+			return
+		}
+		
 		var r = confirm("¿Esta seguro de realizar el Envio?");
 	    if (r == true) {
 	    	$scope.guardarEnvio();
