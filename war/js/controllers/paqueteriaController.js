@@ -671,7 +671,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$("#mdlLoad").modal();
 		$scope.url = "venta/generaTicket/"+id+"/"+$scope.usuario;
 		setTimeout(() => {
-			
+			$("#mdlLoad").modal('toggle');
 			$("#modalPDF").modal();
 			
 		}, 3000);
