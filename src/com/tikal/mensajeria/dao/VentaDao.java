@@ -30,6 +30,10 @@ public interface VentaDao {
 	
 	public List<Venta> findAllAbiertaBySuc(Long idSucursal) ;
 	
+	public int findAllpagsSuc(Long idSucursal);
+	
+	public List<Venta> findAllAbiertaBySucP(Long isSucursal, int page);
+	
 	public List<Venta> getVentas(Date inicio, Date fin, Long idSucursal);
 	
 	public List<Venta> findAllAbiertaIF(Date inicio, Date fin); 

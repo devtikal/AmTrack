@@ -218,6 +218,7 @@ public class VentaController {
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 		}
 	 
+	 
 	 @RequestMapping(value = { "/findAll/{userName} " }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
@@ -493,6 +494,22 @@ public class VentaController {
 		public void findAllByPage(HttpServletResponse response, HttpServletRequest request, @PathVariable int page) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
 			List<Venta> lista = ventaDao.findAllPage(page);
+			if (lista == null) {
+				lista = new ArrayList<Venta>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+		}
+	  
+	  @RequestMapping(value = "/numPaginasSuc/{idSucursal}", method = RequestMethod.GET)
+		public void numpagsSuc(HttpServletRequest req, HttpServletResponse res,@PathVariable Long idSucursal) throws IOException {
+			int paginas = ventaDao.findAllpagsSuc(idSucursal);
+			res.getWriter().print(paginas);
+		}
+	  
+	  @RequestMapping(value = { "/findAllPage/{userName}/{page} " }, method = RequestMethod.GET, produces = "application/json")
+		public void findAllP(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName,@PathVariable int page) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Venta> lista = ventaDao.findAllAbiertaBySucP(usuarioDao.consultarUsuario(userName).getIdSucursal(), page);
 			if (lista == null) {
 				lista = new ArrayList<Venta>();
 			}

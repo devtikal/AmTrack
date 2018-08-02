@@ -126,6 +126,19 @@ public class VentaDaoImpl implements VentaDao{
 		return ofy().load().type(Venta.class).filter("idSucursal", idSucursal).order("- fecha").list();
 		//return lista;
 	}
+	
+	@Override
+	public int findAllpagsSuc(Long idSucursal) {
+		return ((ofy().load().type(Venta.class).filter("idSucursal", idSucursal).order("- fecha").count()-1)/10)+1;
+	}
+	
+	@Override
+	public List<Venta> findAllAbiertaBySucP(Long idSucursal, int page) {
+	
+		return ofy().load().type(Venta.class).filter("idSucursal", idSucursal).order("- fecha").offset((page-1)*10).limit(10).list();
+		
+	}
+	
 	@Override
 	public void crearContador(Long folio){
 		ContadorServicio f= new ContadorServicio();
