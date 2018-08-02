@@ -40,9 +40,9 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 		return d.promise;
 	}
 	
-	this.getVenta = function() {
+	this.getVenta = function(p) {
 		var d = $q.defer();
-		$http.get("venta/findAll").then(
+		$http.get("venta/findAllP/"+p).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -60,9 +60,9 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
-	this.getVentaByUser = function(userName) {
+	this.getVentaByUser = function(userName,p) {
 		var d = $q.defer();
-		$http.get("venta/findAll/"+userName).then(
+		$http.get(" venta/findAllPage/"+userName+"/"+p).then(
 				function(response) {
 					console.log(response);
 					d.resolve(response.data);
@@ -326,6 +326,41 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	
+	this.getPages = function(){
+		var d = $q.defer();
+		$http.get("venta/numPaginas").then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
+	this.getPagesBySuc = function(idSucursal){
+		var d = $q.defer();
+		$http.get("venta/numPaginasSuc/"+idSucursal).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 }]);
 
 app.controller("EnvioController",['$scope','$rootScope','$window', '$location', '$cookieStore','$cookies','paqueteriaService','sessionService','sucursalService',function($scope,$rootScope, $window, $location, $cookieStore,$cookies, paqueteriaService,sessionService,sucursalService){
@@ -334,23 +369,66 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.paquete={guia:null};
 	$scope.venta={fecha: new Date()};
 	$scope.idVenta=null;
+	$scope.paginaActual=1;
 	sucursalService.getAllSucursal().then(function(data) {
 		$scope.sucursal = data;
 		
 	});
+	$scope.loadVentas = function(page){
 	if($scope.perfil == "Administrador" || $scope.perfil =="SuperAdministrador"){
-		paqueteriaService.getVenta().then(function(data) {
+		paqueteriaService.getPages().then(function(data) {
+			$scope.maxPage=data;
+			$scope.llenarPags();
+		});
+		paqueteriaService.getVenta(page).then(function(data) {
 			$scope.ventas=data;
 			$scope.usuario=$cookieStore.get('usuario');
-			console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
+			$scope.llenarPags();
+//			console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
 		});
 	}else{
-	paqueteriaService.getVentaByUser($cookieStore.get('usuario')).then(function(data) {
+		paqueteriaService.getPagesBySuc($cookieStore.get('idSucursal')).then(function(data) {
+			$scope.maxPage=data;
+			$scope.llenarPags();
+		});
+	paqueteriaService.getVentaByUser($cookieStore.get('usuario'),page).then(function(data) {
 		$scope.ventas=data;
 		$scope.usuario=$cookieStore.get('usuario');
-		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
+		$scope.llenarPags();
+//		console.log("List Ventas", $scope.ventas, "Usuario",$scope.usuario);
 	});
 	}
+	}
+	$scope.loadVentas(1);
+	
+	$scope.cargarPagina=function(pag){
+		if($scope.paginaActual!=pag){
+			$scope.paginaActual=pag;
+			$scope.loadVentas(pag);
+		}
+	}
+	$scope.llenarPags=function(){
+		var inicio=0;
+		if($scope.paginaActual>5){
+			inicio=$scope.paginaActual-5;
+		}
+		var fin = inicio+9;
+		if(fin>$scope.maxPage){
+			fin=$scope.maxPage;
+		}
+		$scope.paginas=[];
+		for(var i = inicio; i< fin; i++){
+			$scope.paginas.push(i+1);
+		}
+		for(var i = inicio; i<= fin; i++){
+			$('#pagA'+i).removeClass("active");
+			$('#pagB'+i).removeClass("active");
+		}
+		$('#pagA'+$scope.paginaActual).addClass("active");
+		$('#pagB'+$scope.paginaActual).addClass("active");
+	}
+	
+	
 	$('.datepicker').datepicker({format: 'mm-dd-yyyy '});
 	
 	$('.input-daterange').datepicker({

@@ -63,7 +63,19 @@
 		</div>
 
 	</div>
+	
+
+		
 	</div><br><br>
+		<div class="col-md-6">
+			<ul class="pagination .pagination-lg" style="margin:0;">
+				<li ng-repeat="abc in paginas" id="{{'pagA'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+
+			</ul>
+			
+		</div>
+		<br>
 		<table class="table .table-striped">
 			<thead>
 				<tr>
@@ -125,7 +137,13 @@
 				</tr>
 			</tbody>	
 		</table>
-    
+    <div class="col-md-6">
+	 		<ul class="pagination .pagination-lg">
+				<li ng-repeat="abc in paginas" id="{{'pagB'+abc}}"
+					ng-click="cargarPagina(abc)"><a>{{abc}}</a></li>
+			</ul>
+			
+		</div>
 <!--     </div> -->
     
 <!--    MODAL AGREGAR GUIA -->
