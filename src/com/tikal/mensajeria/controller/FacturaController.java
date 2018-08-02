@@ -203,9 +203,11 @@ public class FacturaController {
 						venta.setUuid(uuid);
 						venta.setNumeroFactura("FS"+folio.toString());
 						venta.setIdVentaFac(ventavo.getId());
+						ventavo.setUuid(uuid);
 						f.incrementarFactura();
 						ObjectifyService.ofy().save().entity(f).now(); 
 						ventaDao.update(venta);
+						ventaFacDao.crear(ventavo);
 						respuesta[0]="0";
 					}else{
 						System.out.println("uuid nulo");
@@ -286,6 +288,7 @@ public class FacturaController {
 			AsignadorDeCharset.asignar(req, res);
 			VentaFac vf = ventaFacDao.consultar(ventaDao.consult(idVenta).getIdVentaFac());
 			String mensaje=facturaVTTService.cancelarAck(vf.getUuid(), "MERA680707KA3", req.getSession());
+			//String mensaje=facturaVTTService.cancelarAck(vf.getUuid(), "AAA010101AAA", req.getSession());
 			if(mensaje.compareTo("Comprobante cancelado")==0){
 				Venta v= ventaDao.consult(idVenta);
 				v.setEstatus("FACTURA-CANCELADA");

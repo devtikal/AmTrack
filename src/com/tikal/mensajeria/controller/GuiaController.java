@@ -154,6 +154,8 @@ public class GuiaController {
 		Integer ini= Integer.parseInt(inicio.substring(15));
 		Integer fini= Integer.parseInt(fin.substring(15));
 		
+		System.out.println("*******inicio:"+inicio);
+		System.out.println("*******fin:"+fin);
 		for (int i=ini; i<=fini; i++) {
 			Guia guia = guiaDao.getByNumero(gui+i);
 			guia.setEstatus("ASIGNADA");
@@ -271,21 +273,27 @@ public class GuiaController {
 		//	System.out.println("lista de resumen"+guias);
 			List<String> tipos= new ArrayList<String>();
 			tipos.add("1Kg Sobre Sig Dia");	tipos.add("1Kg Paquete Sig Dia");tipos.add("11:30 Sig Dia");tipos.add("11:30 Sobre Sig Dia");tipos.add("3Kg Sig Dia");tipos.add("5Kg Terrestre");
-			tipos.add("10Kg Terrestre");tipos.add("15Kg Terrestre");tipos.add("20Kg Terrestre");tipos.add("25Kg Terrestre");tipos.add("30Kg Terrestre");tipos.add("35Kg Terrestre");
-			tipos.add("40Kg Terrestre");tipos.add("45Kg Terrestre");
+			tipos.add("10Kg Terrestre");tipos.add("15Kg Terrestre");tipos.add("20Kg Terrestre");tipos.add("25Kg Terrestre");tipos.add("30Kg Terrestre");
+			tipos.add("35Kg Terrestre");	tipos.add("40Kg Terrestre");tipos.add("45Kg Terrestre");
+			
 			String estatusAsignada= "ASIGNADA";
 			String estatusNo= "NO ASIGNADA";
 			System.out.println("TIPOS:"+tipos.toString());
 			for (Sucursal s:sucursales){
 				System.out.println("SUCURSAL:"+s.getNombre());
 				for (String tipo: tipos){
-					System.out.println("TIPO:"+tipo);
+				 // for (int i=0; i<=15;i++)
+					//System.out.println("TIPO:"+tipos.get(i));
+				    
+				  //	String tipo=tipos.get(i);
+				//	List<Guia> guias = guiaDao.getEstSucTipo(s.getNombre(),"1Kg Sobre Sig Dia");
 					List<Guia> guias = guiaDao.getEstSucTipo(s.getNombre(),tipo);
 					System.out.println("SIZE:"+guias.size());
-					ResumenGuia rg= new ResumenGuia();
+					
 					if (guias.size()==0){
-						break;
+						//break;
 					}else{
+						ResumenGuia rg= new ResumenGuia();
 						rg.setInicia(guias.get(0).getNumero());
 						rg.setTermina(guias.get(guias.size()-1).getNumero());
 						rg.setEstatus("ASIGNADA");
@@ -307,7 +315,7 @@ public class GuiaController {
 				rg.setInicia(noA.get(0).getNumero());
 				rg.setTermina(noA.get(noA.size()-1).getNumero());
 				rg.setEstatus("NO ASIGNADA");
-				rg.setSucursal("MASTER");
+				rg.setSucursal("SIN SUCURSAL");
 				rg.setTipoGuia("-");	
 				res.add(rg);
 			}

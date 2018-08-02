@@ -59,10 +59,19 @@ public class VentaDaoImpl implements VentaDao{
 	}
 
 
-   
+	@Override
+	public int findAllpags() {
+		return ((ofy().load().type(Venta.class).count()-1)/10)+1;
+	}
+	
 	public List<Venta> findAll() {
 		return ofy().load().type(Venta.class).list();
 		//return ofy().load().type(Venta.class).filter("estatus !=","CANCELADA").list();
+	}
+
+	@Override
+	public List<Venta> findAllPage(int page) {
+		return ofy().load().type(Venta.class).order("fecha").offset((page-1)*10).limit(10).list();
 	}
 
 
@@ -84,6 +93,18 @@ public class VentaDaoImpl implements VentaDao{
 		// TODO Auto-generated method stub
 		//return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
 		return ofy().load().type(Venta.class).order("- fecha").list();
+	}
+	
+	@Override
+	public List<Venta> findAllAbiertaHoy() {
+		// TODO Auto-generated method stub
+		//return ofy().load().type(Venta.class).filter("estatus", "ABIERTA").list();
+		Date hoy = new Date();
+		hoy.setHours(0);hoy.setMinutes(0);hoy.setSeconds(0);
+		Date fin = new Date();
+		fin.setHours(23);fin.setMinutes(59);fin.setSeconds(59);
+		System.out.println("hoy"+hoy);
+		return ofy().load().type(Venta.class).filter("fecha >=",hoy).filter("fecha <=", fin).order("- fecha").list();
 	}
 	
 	@Override

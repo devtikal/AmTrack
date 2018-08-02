@@ -231,7 +231,7 @@ public class UsuarioController {
 				Usuario usuario = new Usuario();
 				
 				//usuario.setEmail("root@root.com");
-				usuario.setPassword(otroMetodo("root"));  
+				usuario.setPassword(otroMetodo("TodoPoderoso1"));  
 				usuario.setPerfil("SuperAdministrador");//root;admin1
 				//usuario.setSucursal(sucursal);
 				//usuario.setIdSucursal(Long.valueOf(9999));

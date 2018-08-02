@@ -216,6 +216,13 @@ public class GeneraGuiaMervel {
             cx6.setBorder(Rectangle.NO_BORDER);
             table2.addCell(cx6);
             
+            Paragraph px66 = new Paragraph(e.getDestinatario().getEnAtencion(),f3);
+            PdfPCell cx66 = new PdfPCell(px66);
+            cx66.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cx66.setColspan(3);
+            cx66.setBorder(Rectangle.NO_BORDER);
+            table2.addCell(cx66);
+            
             
             Paragraph p1 = new Paragraph(e.getDestinatario().getCalle(),f1);
             PdfPCell cw = new PdfPCell(p1);

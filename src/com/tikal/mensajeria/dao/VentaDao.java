@@ -20,7 +20,13 @@ public interface VentaDao {
 	//public static AeronaveEntity consult(String numeroSerie);
 	public List<Venta> findAll();
 	
+	public int findAllpags();
+	
+	public List<Venta> findAllPage(int page);
+	
 	public List<Venta> findAllAbierta();
+	
+	public List<Venta> findAllAbiertaHoy();
 	
 	public List<Venta> findAllAbiertaBySuc(Long idSucursal) ;
 	

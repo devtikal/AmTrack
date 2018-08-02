@@ -133,6 +133,11 @@ public class VentaController {
 		//SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
 		//Calendar c = Calendar.getInstance();
 		System.out.println("fecha calendar:"+v.getFecha());
+		Date nueva = v.getFecha();
+		nueva.setHours(nueva.getHours()-5);
+		
+		System.out.println("fecha menos 5 horas:"+nueva);
+		v.setFecha(nueva);
 		//Contador folio= new Contador();
 	//	v.setFolio(folio.getFolio());
 		v.setEstatus("ABIERTA");
@@ -202,7 +207,16 @@ public class VentaController {
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 		}
 	 
-	
+	 @RequestMapping(value = { "/findAllHoy" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAllHoy(HttpServletResponse response, HttpServletRequest request) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Venta> lista = ventaDao.findAllAbiertaHoy();
+			if (lista == null) {
+				lista = new ArrayList<Venta>();
+			}
+			System.out.println("size"+lista.size());
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+		}
 	 
 	 @RequestMapping(value = { "/findAll/{userName} " }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request, @PathVariable String userName) throws IOException {
@@ -469,4 +483,20 @@ public class VentaController {
 			res.getWriter().println("Setup finalizado...");
 		}
 	   
+	  @RequestMapping(value = "/numPaginas", method = RequestMethod.GET)
+		public void numpags(HttpServletRequest req, HttpServletResponse res) throws IOException {
+			int paginas = ventaDao.findAllpags();
+			res.getWriter().print(paginas);
+		}
+	  
+	  @RequestMapping(value = { "/findAllP/{page}" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAllByPage(HttpServletResponse response, HttpServletRequest request, @PathVariable int page) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Venta> lista = ventaDao.findAllPage(page);
+			if (lista == null) {
+				lista = new ArrayList<Venta>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+		}
+	  
 }

@@ -287,6 +287,7 @@ public class FacturaVTTServiceImpl implements FacturaVTTService {
 	@Override
 	public String cancelarAck(String uuid, String rfcEmisor, HttpSession sesion) {
 		CancelaCFDIAckResponse cancelaCFDIAckResponse = webServiceClient33.getCancelaCFDIAckResponse(uuid, rfcEmisor);
+		System.out.println("UUID: "+uuid+" RFC: "+rfcEmisor);
 		List<Object> respuestaWB = cancelaCFDIAckResponse.getCancelaCFDIAckResult().getAnyType();
 		int codigoRespuesta = -1;
 		String strCodigoRespuesta = "";
