@@ -182,22 +182,37 @@ public class GuiaController {
 		
 	}
 	
-	@RequestMapping(value = { "/cancelar/{idGuia}" },  method = RequestMethod.GET)
-	public void asignaM(HttpServletRequest request, HttpServletResponse response, 
-			@PathVariable Long idGuia )throws IOException  {
+	@RequestMapping(value = { "/eliminar/{inicio}/{fin}" },  method = RequestMethod.GET)
+	public void delete(HttpServletRequest request, HttpServletResponse response, 
+			@PathVariable String inicio, @PathVariable String fin )throws IOException  {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		
-			Guia guia = guiaDao.consult(idGuia);
-			if (guia.getEstatus().equals("EN ENVIO")){
-				System.out.println("la guia no se puede cancelar");
-			}else{
-				guia.setEstatus("CANCELADA");
-				guiaDao.update(guia);
-			}
-			//System.out.println(" yisus manda:"+json);
+		String gui = inicio.substring(0,15);		
+		Integer ini= Integer.parseInt(inicio.substring(15));
+		Integer fini= Integer.parseInt(fin.substring(15));
 		
+		System.out.println("*******inicio:"+inicio);
+		System.out.println("*******fin:"+fin);
+		String mensaje="";
+		for (int i=ini; i<=fini; i++) {
+			Guia guia = guiaDao.getByNumero(gui+i);
+			if (guia.getEstatus().equals("EN ENVIO") || guia.getEstatus().equals("ASIGNADA")){
+				System.out.println("la guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO");
+				mensaje=mensaje+"\nLa guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO";
+				
+			}else{
+	
+				//guia.setEstatus("CANCELADA");
+				//guiaDao.update(guia);
+				guiaDao.delete(guia);
+				mensaje ="Guias eliminadas correctamente...";
+			}
+			response.getWriter().write(JsonConvertidor.toJson(mensaje));
+		}
+		
+		 
 		
 	}
 	 @RequestMapping(value = { "/getGuia/{tipoGuia}/{empresa}/{userName}" },  method = RequestMethod.GET, produces = "application/json")
