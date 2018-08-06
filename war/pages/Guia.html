@@ -60,13 +60,13 @@
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
 					<td>{{g.tipoGuia}}</td>
-<!-- 					<td HEIGHT="50"> -->
+					<td HEIGHT="50">
 						
-<!-- 						<button class="btn btn-warning" ng-click="cancelar(g)" title="Cancelar" ng-if="g.estatus!='CANCELADA'"> -->
-<!-- 							<i class="fa fa-trash"></i> -->
-<!-- 						</button> -->
+						<button class="btn btn-danger" ng-click="eliminar(g.inicia,g.termina)" title="Eliminar" ng-if="g.estatus=='NO ASIGNADA'">
+							<i class="fa fa-trash"></i>
+						</button>
 
-<!-- 					</td> -->
+					</td>
 				</tr>
 			</tbody>	
 		</table>

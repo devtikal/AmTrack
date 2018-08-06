@@ -61,6 +61,26 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 				});
 		return d.promise;
 	}
+	this.eliminarGuia = function(i,f) {
+		var d = $q.defer();
+		$http.get("guia/eliminar/"+i+"/"+f).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						//alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 	
 	this.asignarGuia = function(idSuc,idGuia) {
 		var d = $q.defer();
@@ -247,6 +267,17 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		    if (r == true) {
 		    	guiaService.cancelarGuia(g.id).then(function(data) {
 		    		alert("Se ha Cancelado la Guia: ", g.numero);
+		    		$window.location.reload();
+		    	});
+		    }
+		
+	}
+	
+	$scope.eliminar = function (i,f){
+		 var r = confirm("¿Desea Continuar con la Eliminacion? \n De " + i+ " a "+f );
+		    if (r == true) {
+		    	guiaService.eliminarGuia(i,f).then(function(data) {
+		    		alert("Se han Eliminado las Guias: \n De "+ i+ " a "+f );
 		    		$window.location.reload();
 		    	});
 		    }
