@@ -278,6 +278,7 @@ public class EnvioController {
 //	 	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 	 	   Venta v = ventaDao.consult(idVenta);
 			  Envio envio = envioDao.consult(idEnvio) ; 
+			  envio=quitaNull(envio);
 			  
 	 		   response.setContentType("Application/Pdf");
 	 		  Envio e = envioDao.consult(idEnvio) ;  
@@ -316,6 +317,18 @@ public class EnvioController {
 			  
 	 		   response.setContentType("Application/Pdf");
 	 		  Envio e = envioDao.consult(idEnvio) ;  
+	 		  e=quitaNull(e);
+	 		 System.out.println("cliente.calle:");
+	 		System.out.println("cliente.colinia:");
+	 		System.out.println("cliente.municipio:");
+	 		System.out.println("cliente.localidad:");
+	 		System.out.println("dest.calle:");
+	 		System.out.println("dest.colonia:");
+	 		System.out.println("dest.municipi:");
+	 		System.out.println("dest.localidad:");
+	 		
+	 		  
+	 		  
 	 	        File newPdfFile = new File(idEnvio+".pdf");		 
 	 	        if (!newPdfFile.exists()){
 	 	            try {
@@ -412,6 +425,68 @@ public class EnvioController {
 
 		}
 	
+	   
+		public Envio quitaNull(Envio e) {
+			 if (e.getCliente().getCalle()==null){
+	 			  e.getCliente().setCalle("");	 			  
+	 		  }
+			 if (e.getCliente().getNoExterior()==null){
+	 			  e.getCliente().setNoExterior("");	 			  
+	 		  }
+			 if (e.getCliente().getNoInterior()==null){
+	 			  e.getCliente().setNoInterior("");	 			  
+	 		  }
+			 
+			 if (e.getCliente().getColonia()==null){
+	 			  e.getCliente().setColonia("");	 			  
+	 		  }
+			 
+			 if (e.getCliente().getLocalidad()==null){
+	 			  e.getCliente().setLocalidad("");	 			  
+	 		  }
+			 if (e.getCliente().getMunicipio()==null){
+	 			  e.getCliente().setMunicipio("");	 			  
+	 		  }
+			 if (e.getCliente().getEstado()==null){
+	 			  e.getCliente().setEstado("");	 			  
+	 		  }
+			 if (e.getCliente().getTelefono()==null){
+	 			  e.getCliente().setTelefono("");	 			  
+	 		  }
+			 if (e.getDestinatario().getEnAtencion()==null){
+	 			  e.getDestinatario().setEnAtencion("");	 			  
+	 		  }
+			 if (e.getDestinatario().getCalle()==null){
+	 			  e.getDestinatario().setCalle("");	 			  
+	 		  }
+			 if (e.getDestinatario().getNoExterior()==null){
+	 			  e.getDestinatario().setNoExterior("");	 			  
+	 		  }
+			 if (e.getDestinatario().getNoInterior()==null){
+	 			  e.getDestinatario().setNoInterior("");	 			  
+	 		  }
+			 if (e.getDestinatario().getColonia()==null){
+	 			  e.getDestinatario().setColonia("");	 			  
+	 		  }
+			 
+			 if (e.getDestinatario().getLocalidad()==null){
+	 			  e.getDestinatario().setLocalidad("");	 			  
+	 		  }
+			 if (e.getDestinatario().getMunicipio()==null){
+	 			  e.getDestinatario().setMunicipio("");	 			  
+	 		  }
+			 if (e.getDestinatario().getEstado()==null){
+	 			  e.getDestinatario().setEstado("");	 			  
+	 		  }
+			 if (e.getDestinatario().getTelefono()==null){
+	 			  e.getDestinatario().setTelefono("");	 			  
+	 		  }
+			 if (e.getDestinatario().getReferencias()==null){
+	 			  e.getDestinatario().setReferencias("");	 			  
+	 		  }
+			 envioDao.save(e);
+			 return e;
+		}
 }
 
 

@@ -68,6 +68,7 @@ public class GeneraGuiaEstafeta {
     	    f4.setSize(22);
     	    f4.setColor(BaseColor.BLACK);
     	   
+    	    String calle="";String calle1="";
             PdfPTable table = new PdfPTable(3);              
       
             Paragraph p33 = new Paragraph("    \n\n\n\n\n\n\n\n\n\n\n\n\n\n   ",f2);
@@ -122,7 +123,19 @@ public class GeneraGuiaEstafeta {
             c37.setBorder(Rectangle.NO_BORDER);
             table.addCell(c37);
             
-            Paragraph p8 = new Paragraph("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"+e.getCliente().getCalle(),f1);
+            
+            if (e.getCliente().getCalle()=="" && e.getCliente().getNoExterior()=="" && e.getCliente().getNoInterior()==""){
+            	calle="";
+            }else{
+            	if (e.getCliente().getNoExterior()==""){
+            		calle=e.getCliente().getCalle();
+            	}
+            	if (e.getCliente().getNoInterior()==""){
+            		calle=e.getCliente().getCalle()+" #"+e.getCliente().getNoExterior();
+            	} 
+            	calle="\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"+e.getCliente().getCalle()+" #"+e.getCliente().getNoExterior()+", int:"+e.getCliente().getNoInterior();
+            }
+            Paragraph p8 = new Paragraph(calle,f1);
             PdfPCell c8 = new PdfPCell(p8);
             c8.setHorizontalAlignment(Element.ALIGN_LEFT);
             c8.setColspan(4);c8.setRowspan(5);
@@ -196,13 +209,19 @@ public class GeneraGuiaEstafeta {
             cx66.setBorder(Rectangle.NO_BORDER);
             table2.addCell(cx66);
             
-//            String dato ="";
-//            if (e.getDestinatario().getCalle().equals(null)){
-//            	dato ="";
-//            }else {
-//            	dato="\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"+e.getDestinatario().getCalle();
-//            }
-            Paragraph p1 = new Paragraph("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"+e.getDestinatario().getCalle(),f1);
+            
+            if (e.getDestinatario().getCalle()=="" && e.getDestinatario().getNoExterior()=="" && e.getDestinatario().getNoInterior()==""){
+            	calle1="";
+            }else{
+            	if (e.getDestinatario().getNoExterior()==""){
+            		calle1=e.getDestinatario().getCalle();
+            	}
+            	if (e.getDestinatario().getNoInterior()==""){
+            		calle1=e.getDestinatario().getCalle()+" #"+e.getDestinatario().getNoExterior();
+            	} 
+            	calle1="\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"+e.getDestinatario().getCalle()+" #"+e.getDestinatario().getNoExterior()+", int:"+e.getDestinatario().getNoInterior();
+            }
+            Paragraph p1 = new Paragraph(calle1,f1);
             PdfPCell cw = new PdfPCell(p1);
             cw.setHorizontalAlignment(Element.ALIGN_LEFT);
             cw.setColspan(3);

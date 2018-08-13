@@ -39,7 +39,8 @@ public class GeneraGuiaMervel {
     		//Document document = new Document(PageSize.A6,15,15,15,15);   	  
     	        PdfWriter.getInstance(document,ops);
     	    document.open();
-    	    
+    	    String calle="";
+    	    String calle1="";
     	    Font f0 = new Font();
       	  //  f1.setStyle(1);
       	    f0.setSize(4);
@@ -149,7 +150,19 @@ public class GeneraGuiaMervel {
             c37.setBorder(Rectangle.NO_BORDER);
             table.addCell(c37);
             
-            Paragraph p8 = new Paragraph(e.getCliente().getCalle(),f1);
+            
+            if (e.getCliente().getCalle()=="" && e.getCliente().getNoExterior()=="" && e.getCliente().getNoInterior()==""){
+            	calle="";
+            }else{
+            	if (e.getCliente().getNoExterior()==""){
+            		calle=e.getCliente().getCalle();
+            	}
+            	if (e.getCliente().getNoInterior()==""){
+            		calle=e.getCliente().getCalle()+" #"+e.getCliente().getNoExterior();
+            	} 
+            	calle=e.getCliente().getCalle()+" #"+e.getCliente().getNoExterior()+", int:"+e.getCliente().getNoInterior();
+            }
+            Paragraph p8 = new Paragraph(calle,f1);
             PdfPCell c8 = new PdfPCell(p8);
             c8.setHorizontalAlignment(Element.ALIGN_LEFT);
             c8.setColspan(4);c8.setRowspan(5);
@@ -224,7 +237,18 @@ public class GeneraGuiaMervel {
             table2.addCell(cx66);
             
             
-            Paragraph p1 = new Paragraph(e.getDestinatario().getCalle(),f1);
+            if (e.getDestinatario().getCalle()=="" && e.getDestinatario().getNoExterior()=="" && e.getDestinatario().getNoInterior()==""){
+            	calle1="";
+            }else{
+            	if (e.getDestinatario().getNoExterior()==""){
+            		calle1=e.getDestinatario().getCalle();
+            	}
+            	if (e.getDestinatario().getNoInterior()==""){
+            		calle1=e.getDestinatario().getCalle()+" #"+e.getDestinatario().getNoExterior();
+            	} 
+            	calle1=e.getDestinatario().getCalle()+" #"+e.getDestinatario().getNoExterior()+", int:"+e.getDestinatario().getNoInterior();
+            }
+            Paragraph p1 = new Paragraph(calle1,f1);
             PdfPCell cw = new PdfPCell(p1);
             cw.setHorizontalAlignment(Element.ALIGN_LEFT);
             cw.setColspan(3);
