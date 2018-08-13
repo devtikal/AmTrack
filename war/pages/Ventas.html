@@ -296,13 +296,17 @@
 						
 						</div><br>
   <div class="row">
-			<div class="col-md-6">
+			<div class="col-md-6" ng-hide="isDFU">
+			
 							<label>Guia</label>
-								<input class="form-control" id="guia" style="font-size:20px" ng-model="paquete.guia" required ng-disabled="disGuia"  minlength="23" maxlength="23" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-keyup="maskGuia()">
+								<input class="form-control" id="guia" style="font-size:20px" 
+								ng-model="paquete.guia" required ng-disabled="disGuia"  minlength="23" maxlength="23" 
+								onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-keyup="maskGuia()">
+								
 						</div>
 						<div class="col-md-6">
 							
-								<label>Rastreo</label><input class="form-control" ng-model="paquete.rastreo" minlength="10" maxlength="10" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required>
+								<label>Rastreo</label><input class="form-control" ng-model="paquete.rastreo" minlength="10" maxlength="{{maxchar}}" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" required>
 							</div>
 			 </div>
 					<div class="row">

@@ -729,12 +729,30 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
         $scope.products.splice(x, 1);
         console.log( $scope.products);
     }
-	
+	$scope.maxchar = 10;
 	$scope.hide=true;
+	$scope.isDFU=false;
 	$scope.requerido=true;
 	$scope.disKilataje=true;
 	$scope.isEstafeta = function() {
 		$scope.disKilataje=false;
+		$scope.maxchar = 10;
+		if ($scope.paquete.empresa=="DHL"){
+			$scope.maxchar = 10;
+		}
+		if ($scope.paquete.empresa=="FEDEX"){
+			$scope.maxchar = 12;		
+				}
+		if ($scope.paquete.empresa=="UPS"){
+			$scope.maxchar = 18;
+		}
+		if ($scope.paquete.empresa=="DHL" || $scope.paquete.empresa=="FEDEX" || $scope.paquete.empresa=="UPS"){
+			$scope.isDFU=true;
+		}else{
+			$scope.isDFU=false;
+		}
+		
+		
 		if ($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){
 			$scope.hide=false;
 			$scope.requerido=false;
