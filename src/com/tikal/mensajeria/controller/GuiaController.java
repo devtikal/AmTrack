@@ -198,7 +198,7 @@ public class GuiaController {
 		String mensaje="";
 		for (int i=ini; i<=fini; i++) {
 			Guia guia = guiaDao.getByNumero(gui+i);
-			if (guia.getEstatus().equals("EN ENVIO") || guia.getEstatus().equals("ASIGNADA")){
+			if (guia.getEstatus().equals("EN ENVIO")){
 				System.out.println("la guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO");
 				mensaje=mensaje+"\nLa guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO";
 				

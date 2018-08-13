@@ -515,5 +515,7 @@ public class VentaController {
 			}
 			response.getWriter().println(JsonConvertidor.toJson(lista));
 		}
+
+	  
 	  
 }
