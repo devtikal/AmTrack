@@ -474,8 +474,8 @@
        Colonia
 
     <p><select id="slCol" ng-model="paquete.cliente.colonia" class="input-lg" style="width:100%" ng-disabled="hide">
-    		<option></option>
-			<option ng-repeat="c in colonia" selected>{{c}}</option>
+    		
+			<option ng-repeat="c in colonia">{{c}}</option>
 	  </select>
 	</p>
      
@@ -515,8 +515,8 @@
        Colonia
    
      <p><select ng-model="paquete.destinatario.colonia" class="input-lg" style="width:100%">
-     <option disabled></option>
-			<option ng-repeat="c in coloniaD" selected>{{c}}</option>
+    
+			<option ng-repeat="c in coloniaD">{{c}}</option>
 	  </select>
 	</p>
      
