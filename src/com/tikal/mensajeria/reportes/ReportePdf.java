@@ -48,7 +48,7 @@ public class ReportePdf {
 	
 
 
-	public  ReportePdf( List<ReporteVo> regs, String inicio, String fin, Double total, OutputStream ops) throws MalformedURLException, IOException  {
+	public  ReportePdf( List<ReporteVo> regs, String sucursal,String inicio, String fin, Double total, OutputStream ops) throws MalformedURLException, IOException  {
 
     	
     	try {
@@ -111,7 +111,7 @@ public class ReportePdf {
         	    
             PdfPTable table = new PdfPTable(6);   
             
-            
+            String g="";
             Image imagen = Image.getInstance("img/LogoMervel.png");
             imagen.scaleAbsolute(100, 40);
            
@@ -142,7 +142,7 @@ public class ReportePdf {
             c211.setBorder(Rectangle.NO_BORDER);
             table.addCell(c211);
             
-            Paragraph p100 = new Paragraph(regs.get(0).getSucursal(),f3);
+            Paragraph p100 = new Paragraph(sucursal,f3);
             PdfPCell c100 = new PdfPCell(p100);
             c100.setHorizontalAlignment(Element.ALIGN_CENTER);
             c211.setVerticalAlignment(Element.ALIGN_CENTER);        
@@ -295,8 +295,13 @@ public class ReportePdf {
                  table2.addCell(c16);
 //
               
-               	  
-                 Paragraph p18 = new Paragraph(rvo.getGuia(),f1);
+                 
+                 if (rvo.getGuia()==null){
+                	 g="";
+                 }else{
+                	 g=rvo.getGuia().toString();
+                 }
+                 Paragraph p18 = new Paragraph(g,f1);
                  PdfPCell c18= new PdfPCell(p18);
                  c18.setHorizontalAlignment(Element.ALIGN_LEFT);
                 //.setBackgroundColor(BaseColor.BLACK);

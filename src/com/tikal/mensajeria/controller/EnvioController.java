@@ -395,10 +395,22 @@ public class EnvioController {
 		public void deleteVenta(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idEnvio, @PathVariable Long idVenta) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
 			double precio= envioDao.consult(idEnvio).getPrecio();
-			envioDao.delete(envioDao.consult(idEnvio));
+			
 			
 			Venta v = ventaDao.consult(idVenta);
 			Envio e = envioDao.consult(idEnvio);
+			System.out.println("empresa :"+e.getEmpresa());
+			if (e.getEmpresa().equals("ESTAFETA")){
+				System.out.println("empresa estafeta, si entra guia:"+e.getGuia());
+				
+				//Long guia=Long.parseLong(e.getGuia().substring(0,23));
+			//	System.out.println(" guia:"+guia);
+				Guia g=guiaDao.getByNumero(e.getGuia());
+				g.setEstatus("ASIGNADA");
+				guiaDao.update(g);
+			}
+			
+			envioDao.delete(e);
 			List<Long> ids = ventaDao.consult(idVenta).getEnvios();
 			ids.remove(idEnvio);
 			if (ids.size()==0){
@@ -414,6 +426,9 @@ public class EnvioController {
 		
 			v.setCantidad(ids.size());
 			ventaDao.update(v);
+			//Envio e=envioDao.consult(id);
+			envioDao.delete(e);
+			
 			System.out.println("nuevo total de venta:"+v.getTotal());
 //			List<Envio> envios= new ArrayList<Envio>();
 //			for (Long id:ids){
@@ -421,6 +436,8 @@ public class EnvioController {
 //				envios.add(e);
 //			}
 			
+			
+			envioDao.delete(e);
 			response.getWriter().println(JsonConvertidor.toJson(ids));
 
 		}

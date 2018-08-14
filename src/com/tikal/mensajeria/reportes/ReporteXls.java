@@ -57,7 +57,7 @@ public class ReporteXls {
 		HSSFWorkbook workbook= new HSSFWorkbook();
 	    
 				int renglon=0;
-			  	int columna=0;
+			  	int columna=0; 	
 				System.out.println("ya esta escribiendo..........:");
 	    		// 	FileInputStream file = new FileInputStream(new File(archivo));
 	    		 	

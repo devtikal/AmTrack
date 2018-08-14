@@ -30,7 +30,8 @@ public class GuiaDaoImpl implements GuiaDao {
 	public void update(Guia g) {
 	   System.out.print("Guia:"+g.getId());
 	   Guia old = this.consult(g.getId());
-	System.out.print("old:"+old);
+	//System.out.print("old estatus:"+old.getEstatus());
+	//System.out.print("new estatus:"+g.getEstatus());
 		if (old != null) {
 			old.setNumero(g.getNumero());
 			old.setEstatus(g.getEstatus());
