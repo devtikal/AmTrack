@@ -606,7 +606,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	if($scope.paquete.empresa=="ESTAFETA" || $scope.paquete.empresa=="MERVEL"){	
 		$scope.paquete.guia = null;
 		paqueteriaService.getGuiaByName(data,$scope.paquete.empresa,$cookieStore.get('usuario')).then(function(data) {
-			
+			$scope.guardGuia=data;
 			$scope.paquete.guia=data;
 			$scope.disGuia=true;
 			if(!$scope.paquete.guia){
@@ -694,6 +694,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		if($scope.paquete.rastreo == null){
 			alert("No se ha capturado \n El Numero de Rastreo");
 			return
+		}
+		if($scope.paquete.empresa=='ESTAFETA'){
+			if($scope.adicional=='-'){
+				alert("No se ha capturado el Numero a agregar a la GUIA");
+				return
+			}
 		}
 		
 		if($scope.paquete.precio == 0){
@@ -821,7 +827,17 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			document.getElementById('guia').value = document.getElementById('guia').value + "-";
 		}
 	}
-	
+	$scope.addGuiaPre = function(valor){
+		
+		var r = confirm("¿Desea Continuar?");
+	    if (r == true) {
+	    	$scope.paquete.guia= valor + "" + $scope.guardGuia;
+			
+	    } else{
+	    	$scope.adicional="-";
+	    	$scope.paquete.guia= $scope.guardGuia;
+	    }
+	}
 	$scope.getCP = function(tipo){
 		if (tipo == "remitente"){
 //			var cp = $scope.paquete.cliente.codigoPostal;
