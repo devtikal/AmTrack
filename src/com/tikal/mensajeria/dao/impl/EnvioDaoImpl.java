@@ -21,7 +21,7 @@ public class EnvioDaoImpl implements EnvioDao{
 
     
     public void delete(Envio e) {
-    	 System.out.println("si esta en daoimpl eliminando"+e);
+    	 System.out.println("si esta en daoimpl eliminando envio"+e);
         ofy().delete().entity(e).now();
         System.out.println("eliminando...envio");
     }

@@ -288,7 +288,7 @@ public class VentaController {
 //	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 		   response.setContentType("Application/Pdf");
 		  
-		   
+		   String sucursal=sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal()).getNombre();
 		   System.out.println("si entra: con inicio"+inicio);
 			  System.out.println("si entra: con fin"+fin);
 
@@ -327,7 +327,7 @@ public class VentaController {
 	       
    
 	     //   rep.GetReporteXls(datei.toGMTString(),datef.toGMTString(), total);
-	        ReportePdf rpdf= new ReportePdf(regs,datei.toGMTString(),datef.toGMTString(), total,  response.getOutputStream());
+	        ReportePdf rpdf= new ReportePdf(regs, sucursal, datei.toGMTString(),datef.toGMTString(), total,  response.getOutputStream());
 	      //  Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
 	  
 //	        System.out.println("Empiezo a generar pdf..envios.."+objE );

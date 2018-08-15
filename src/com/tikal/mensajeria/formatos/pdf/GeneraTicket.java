@@ -87,7 +87,7 @@ public class GeneraTicket {
     		Document document = new Document(envelope,0,0,0,0);   	  
 	        PdfWriter.getInstance(document,ops);
 	        document.open();
-	        
+	        String g="";
 //    		PrintService service = PrintServiceLookup.lookupDefaultPrintService();
 //    		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
 //    		DocPrintJob pj = service.createPrintJob(); 
@@ -303,7 +303,13 @@ public class GeneraTicket {
                   c14.setColspan(2);
                   table2.addCell(c14);
                   
-                  Paragraph p15 = new Paragraph(en.getGuia().toString(),f3);
+                  if (en.getGuia()==null){
+                 	 g="";
+                  }else{
+                 	 g=en.getGuia().toString();
+                  }
+                  
+                  Paragraph p15 = new Paragraph(g,f3);
                   PdfPCell c15 = new PdfPCell(p15);
                   c15.setHorizontalAlignment(Element.ALIGN_LEFT);
                  // c15.setBackgroundColor(BaseColor.BLACK);
@@ -451,7 +457,14 @@ public class GeneraTicket {
                  c141.setColspan(2);
                  table2.addCell(c141);
                  
-                 Paragraph p151 = new Paragraph(en.getGuia().toString(),f3);
+                 
+                 if (en.getGuia()==null){
+                	 g="";
+                 }else{
+                	 g=en.getGuia().toString();
+                 }
+                	 
+                 Paragraph p151 = new Paragraph(g,f3);
                  PdfPCell c151 = new PdfPCell(p151);
                  c151.setHorizontalAlignment(Element.ALIGN_LEFT);
                 // c15.setBackgroundColor(BaseColor.BLACK);
