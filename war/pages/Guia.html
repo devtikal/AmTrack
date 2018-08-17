@@ -88,12 +88,12 @@
         <form name="formMasive">
           <div class="form-group">
             <label id="idDe">De</label>
-            <input class="form-control" id="de" type="text" placeholder="Ingresar Inicio Guia" ng-model="de"  ng-change="validate('de')" required>
+            <input class="form-control" id="de" type="text" placeholder="Ingresar Inicio Guia" ng-model="de"   ng-keyup="maskGuia('de')" maxlength="22" required>
           </div>
        
          <div class="form-group">
             <label id="idHasta">Hasta</label>
-            <input class="form-control" id="hasta" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta"  required ng-change="validate('hasta')">
+            <input class="form-control" id="hasta" type="text"  placeholder="Ingresar Fin Guia" ng-model="hasta"  required  maxlength="22" ng-keyup="maskGuia('hasta')">
           </div>
           
           <div class="form-group">

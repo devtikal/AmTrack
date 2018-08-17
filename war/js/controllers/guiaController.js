@@ -180,6 +180,26 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		$scope.sucursal=data;
 		console.log("Sucursal", $scope.sucursal);
 	});
+	$scope.maskGuia = function(tipo){
+		var de = document.getElementById('de').value;
+		var hasta = document.getElementById('hasta').value;
+		if(tipo=="de"){
+			
+			if (de.length == 9){
+				document.getElementById('de').value = document.getElementById('de').value + "-";
+			}
+			
+		}else{
+				
+			
+			if (hasta.length == 9){
+			document.getElementById('hasta').value = document.getElementById('hasta').value + "-";
+		}
+	}
+		if (de.length == 22 && hasta.length == 22){
+			$scope.btnGuardar=false;
+		}else{$scope.btnGuardar=true;}
+	}
 	guiaService.getGuia().then(function(data) {
 		$scope.guias=data;
 		console.log("Nueva lista Guia ", data);
@@ -213,31 +233,31 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		
 	});
 	$scope.btnGuardar=true;
-	$scope.validate = function(ref){
-		if(ref=="de"){
-			if($scope.de.length<= 15){
-				document.getElementById("idDe").classList.add("error");
-				$scope.btnGuardar=true;
-				console.log("Error");
-			}else{
-				document.getElementById("idDe").classList.remove("error");
-				
-				console.log("No,Error");
-			}
-		}else{
-			if($scope.hasta.length<= 15){
-				document.getElementById("idHasta").classList.add("error");
-				$scope.btnGuardar=true;
-			}else{
-				document.getElementById("idHasta").classList.remove("error");
-				
-			}
-		}
-		
-	 if($scope.de.length> 15 && $scope.hasta.length > 15){
-		 $scope.btnGuardar=false;
-	 }
-	}
+//	$scope.validate = function(ref){
+//		if(ref=="de"){
+//			if($scope.de.length<= 15){
+//				document.getElementById("idDe").classList.add("error");
+//				$scope.btnGuardar=true;
+//				console.log("Error");
+//			}else{
+//				document.getElementById("idDe").classList.remove("error");
+//				
+//				console.log("No,Error");
+//			}
+//		}else{
+//			if($scope.hasta.length<= 15){
+//				document.getElementById("idHasta").classList.add("error");
+//				$scope.btnGuardar=true;
+//			}else{
+//				document.getElementById("idHasta").classList.remove("error");
+//				
+//			}
+//		}
+//		
+//	 if($scope.de.length> 15 && $scope.hasta.length > 15){
+//		 $scope.btnGuardar=false;
+//	 }
+//	}
 
 	$scope.addguias = function(dato1,dato2) {
 		
