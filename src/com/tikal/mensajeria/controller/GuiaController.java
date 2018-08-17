@@ -100,10 +100,16 @@ public class GuiaController {
 	
 		//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 				AsignadorDeCharset.asignar(request, response);
-				String gui = inicio.substring(0,15);
-				
-				Integer ini= Integer.parseInt(inicio.substring(15));
-				Integer fini= Integer.parseInt(fin.substring(15));
+				String gui = inicio.substring(0,19);
+				String ni= inicio.substring(19);
+				System.out.println("-------------- :   ni:"+ni);
+				if (ni.startsWith("0")){
+					System.out.println("-------------- es un cero:   ni:"+ni);
+					gui=inicio.substring(0,20);
+					System.out.println("-------------- entonces gui es:"+gui);
+				}
+				Integer ini= Integer.parseInt(inicio.substring(19));
+				Integer fini= Integer.parseInt(fin.substring(19));
 				System.out.println("-------------- cuerpo guia:"+gui);
 				System.out.println("-------------- ini:"+ini);
 				System.out.println("-------------- fin:"+fini);
@@ -150,9 +156,16 @@ public class GuiaController {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-		String gui = inicio.substring(0,15);		
-		Integer ini= Integer.parseInt(inicio.substring(15));
-		Integer fini= Integer.parseInt(fin.substring(15));
+		String gui = inicio.substring(0,19);		
+		Integer ini= Integer.parseInt(inicio.substring(19));
+		Integer fini= Integer.parseInt(fin.substring(19));
+		String ni= inicio.substring(19);
+		System.out.println("-------------- :   ni:"+ni);
+		if (ni.startsWith("0")){
+			System.out.println("-------------- es un cero:   ni:"+ni);
+			gui=inicio.substring(0,20);
+			System.out.println("-------------- entonces gui es:"+gui);
+		}
 		
 		System.out.println("*******inicio:"+inicio);
 		System.out.println("*******fin:"+fin);
@@ -189,9 +202,9 @@ public class GuiaController {
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		
-		String gui = inicio.substring(0,15);		
-		Integer ini= Integer.parseInt(inicio.substring(15));
-		Integer fini= Integer.parseInt(fin.substring(15));
+		String gui = inicio.substring(0,19);		
+		Integer ini= Integer.parseInt(inicio.substring(19));
+		Integer fini= Integer.parseInt(fin.substring(19));
 		
 		System.out.println("*******inicio:"+inicio);
 		System.out.println("*******fin:"+fin);

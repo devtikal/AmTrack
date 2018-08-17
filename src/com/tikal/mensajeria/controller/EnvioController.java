@@ -226,7 +226,7 @@ public class EnvioController {
 			envioDao.save(envio);
 			if (envio.getEmpresa().equals("ESTAFETA")){		
 				System.out.println("guia numero2"+ef.getGuia());
-				Guia g=guiaDao.getByNumero(ef.getGuia());
+				Guia g=guiaDao.getByNumero(ef.getGuia().substring(1));
 				g.setEstatus("EN ENVIO");
 				guiaDao.update(g);
 			}			
@@ -405,7 +405,9 @@ public class EnvioController {
 				
 				//Long guia=Long.parseLong(e.getGuia().substring(0,23));
 			//	System.out.println(" guia:"+guia);
-				Guia g=guiaDao.getByNumero(e.getGuia());
+				String guia= e.getGuia().substring(1);
+		 		System.out.println(" guia menos un digito:"+guia);
+				Guia g=guiaDao.getByNumero(guia);
 				g.setEstatus("ASIGNADA");
 				guiaDao.update(g);
 			}
