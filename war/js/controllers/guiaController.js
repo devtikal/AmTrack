@@ -262,6 +262,10 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 	$scope.addguias = function(dato1,dato2) {
 		
 		guiaService.addGuia(dato1,dato2,$scope.tipoGuia).then(function(data) {
+			if(data){
+				alert(data);
+				return
+		}
 			alert("Guias Agregadas correctamente");
 			$window.location.reload();
 		});
