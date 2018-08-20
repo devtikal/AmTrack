@@ -97,19 +97,32 @@ public class GuiaController {
 	@RequestMapping(value = { "/addM/{inicio}/{fin}/{tipoGuia}" },  method = RequestMethod.GET)
 	public void altaGuias(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable String inicio , @PathVariable String fin, @PathVariable String tipoGuia)throws IOException {
-	
+		System.out.println("*********ALTA DE GUIAS");
 		//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
+		if (guiaDao.getByNumero(inicio)==null && guiaDao.getByNumero(fin)==null){   //si ya existe la guia inicial o final
 				AsignadorDeCharset.asignar(request, response);
+				Integer ini= Integer.parseInt(inicio.substring(19));
+				Integer fini= Integer.parseInt(fin.substring(19));
+				
+				System.out.println("-------------- ini:"+ini);
+				System.out.println("-------------- fin:"+fini);
+				
 				String gui = inicio.substring(0,19);
+				System.out.println("-------------- cuerpo guia inicial gui:"+gui);
 				String ni= inicio.substring(19);
 				System.out.println("-------------- :   ni:"+ni);
 				if (ni.startsWith("0")){
 					System.out.println("-------------- es un cero:   ni:"+ni);
 					gui=inicio.substring(0,20);
 					System.out.println("-------------- entonces gui es:"+gui);
+					ni=inicio.substring(20);
+					if (ni.startsWith("0") && (fini - ini <=9)){
+						System.out.println("-------------- es un cero:   ni:"+ni);
+						gui=inicio.substring(0,21);
+						System.out.println("-------------- entonces gui es:"+gui);
+					}
 				}
-				Integer ini= Integer.parseInt(inicio.substring(19));
-				Integer fini= Integer.parseInt(fin.substring(19));
+				
 				System.out.println("-------------- cuerpo guia:"+gui);
 				System.out.println("-------------- ini:"+ini);
 				System.out.println("-------------- fin:"+fini);
@@ -129,6 +142,14 @@ public class GuiaController {
 					//guia.setSucursal(sucursalDao.consult(suc).getNombre());
 					guiaDao.save(guia); 
 				}
+				
+		}else{
+			if (guiaDao.getByNumero(inicio)!=null || guiaDao.getByNumero(fin)!=null){
+				String mensaje="La guia:"+inicio+" o la guia:"+fin+" ya han sido dadas de alta anteriormente...";
+				response.getWriter().write(JsonConvertidor.toJson(mensaje));
+				System.out.println(mensaje);
+			}
+		}
 			
 //					} else {
 //						response.sendError(403);
