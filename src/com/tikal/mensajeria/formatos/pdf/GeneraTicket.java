@@ -82,9 +82,10 @@ public class GeneraTicket {
     	 
     	  
     	try {
-    		Rectangle envelope = new Rectangle(320, 500);
+    		Rectangle envelope = new Rectangle(200, 500);
     	//	Document pdfDoc = new Document(envelope, 230f, 10f, 100f, 0f);
-    		Document document = new Document(envelope,0,0,0,0);   	  
+    		Document document = new Document(envelope,0,0,0,0);  
+    	
 	        PdfWriter.getInstance(document,ops);
 	        document.open();
 	        String g="";
@@ -116,23 +117,23 @@ public class GeneraTicket {
     	    
     	    Font f1 = new Font();
     	  //  f1.setStyle(1);
-    	    f1.setSize(10);
+    	    f1.setSize(8);
     	    f1.setColor(BaseColor.BLACK);
     	    
     	    Font f2 = new Font();
     	   // f2.setStyle(2);
-    	    f2.setSize(14);
+    	    f2.setSize(12);
     	    f2.setColor(BaseColor.BLACK);
     	    f2.setStyle(1);
     	    
     	    Font f3 = new Font();
     	    f3.setStyle(1);
-    	    f3.setSize(10);
+    	    f3.setSize(8);
     	    f3.setColor(BaseColor.BLACK);
     	   
     	    Font f4 = new Font();
         	  //  f1.setStyle(1);
-        	    f4.setSize(8);
+        	    f4.setSize(6);
         	    f4.setColor(BaseColor.BLACK);
         	    
             PdfPTable table = new PdfPTable(6);   
@@ -263,7 +264,7 @@ public class GeneraTicket {
             
             Paragraph p10 = new Paragraph(v.getCantidad().toString(),f1);//e.getCantidad().toString()),f1);
             PdfPCell c10 = new PdfPCell(p10);
-            c10.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c10.setHorizontalAlignment(Element.ALIGN_RIGHT);
             //c10.setBackgroundColor(BaseColor.BLACK);
             c10.setColspan(2);
             table2.addCell(c10);
@@ -275,7 +276,7 @@ public class GeneraTicket {
             c12.setColspan(3);
             table2.addCell(c12);
             
-            Paragraph p13 = new Paragraph("$ "+ v.getTotal().toString(),f2);//String.valueOf());//e.getPrecio()),f1);
+            Paragraph p13 = new Paragraph("$ "+ v.getTotal().toString()+"0",f2);//String.valueOf());//e.getPrecio()),f1);
             PdfPCell c13 = new PdfPCell(p13);
             c13.setHorizontalAlignment(Element.ALIGN_LEFT);
             //c13.setBackgroundColor(BaseColor.BLACK);
@@ -494,7 +495,7 @@ public class GeneraTicket {
                 
                 
                  
-                 Paragraph p162 = new Paragraph("$ "+en.getTotalEnvio().toString(),f3);
+                 Paragraph p162 = new Paragraph("$ "+en.getTotalEnvio().toString()+"0",f3);
                  PdfPCell c162 = new PdfPCell(p162);
                  c162.setHorizontalAlignment(Element.ALIGN_CENTER);
                 // c15.setBackgroundColor(BaseColor.BLACK);
@@ -518,7 +519,7 @@ public class GeneraTicket {
             
             table2.addCell(cv);table2.addCell(cv);
             
-            Paragraph p30 = new Paragraph("Total: $ "+v.getTotal().toString(),f2);
+            Paragraph p30 = new Paragraph("Total: $ "+v.getTotal().toString()+"0",f2);
             PdfPCell c30= new PdfPCell(p30);
             c30.setHorizontalAlignment(Element.ALIGN_RIGHT);
            //.setBackgroundColor(BaseColor.BLACK);

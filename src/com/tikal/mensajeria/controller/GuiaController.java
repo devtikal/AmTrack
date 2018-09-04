@@ -111,30 +111,27 @@ public class GuiaController {
 				System.out.println("-------------- cuerpo guia inicial gui:"+gui);
 				String ni= inicio.substring(19);
 				System.out.println("-------------- :   ni:"+ni);
-				if (ni.startsWith("0")){
-					System.out.println("-------------- es un cero:   ni:"+ni);
-					gui=inicio.substring(0,20);
-					System.out.println("-------------- entonces gui es:"+gui);
-					ni=inicio.substring(20);
-					if (ni.startsWith("0") && (fini - ini <=9)){
-						System.out.println("-------------- es un cero:   ni:"+ni);
-						gui=inicio.substring(0,21);
-						System.out.println("-------------- entonces gui es:"+gui);
-					}
-				}
 				
 				System.out.println("-------------- cuerpo guia:"+gui);
 				System.out.println("-------------- ini:"+ini);
 				System.out.println("-------------- fin:"+fini);
-//				int ini=Integer.parseInt(inicio);
-			//	int 1==9;
-//				int f=Integer.parseInt(fin);
+
 				for (int i=ini; i<=fini; i++) {
 					Guia guia = new Guia();
 					guia.setEstatus("NO ASIGNADA");
-					guia.setNumero(gui+i);
+					String N= String.valueOf(i);
+					System.out.println("NNNN:"+N);
+					if (N.length()<3){
+						for (int x=0;x<=2; x++){
+							if (N.length()<3){
+								N="0"+N;
+								System.out.println("nuevo NNNN:"+N);
+							}
+						}				
+					}
+					guia.setNumero(gui+N);
 					System.out.println("*******ini:"+i);
-					System.out.println("------------guia:"+gui+i);
+					System.out.println("------------guia:"+gui+N);
 				//	guia.setNumero(i);
 					//guia.setIdSucursal(Long.valueOf("9999"));
 					guia.setIdSucursal(usuarioDao.consultarUsuario("root").getIdSucursal());
@@ -329,7 +326,7 @@ public class GuiaController {
 			String estatusNo= "NO ASIGNADA";
 			System.out.println("TIPOS:"+tipos.toString());
 			for (Sucursal s:sucursales){
-				System.out.println("SUCURSAL:"+s.getNombre());
+				//System.out.println("SUCURSAL:"+s.getNombre());
 				for (String tipo: tipos){
 				 // for (int i=0; i<=15;i++)
 					//System.out.println("TIPO:"+tipos.get(i));
@@ -337,7 +334,7 @@ public class GuiaController {
 				  //	String tipo=tipos.get(i);
 				//	List<Guia> guias = guiaDao.getEstSucTipo(s.getNombre(),"1Kg Sobre Sig Dia");
 					List<Guia> guias = guiaDao.getEstSucTipo(s.getNombre(),tipo);
-					System.out.println("SIZE:"+guias.size());
+				//	System.out.println("SIZE:"+guias.size());
 					
 					if (guias.size()==0){
 						//break;
@@ -349,7 +346,7 @@ public class GuiaController {
 						rg.setSucursal(s.getNombre());
 						rg.setTipoGuia(tipo);	
 						res.add(rg);
-						System.out.println("res:"+res);
+						//System.out.println("res:"+res);
 					}
 				}
 				
@@ -369,7 +366,7 @@ public class GuiaController {
 				res.add(rg);
 			}
 			
-			System.out.println("res completo:"+res);
+	//		System.out.println("res completo:"+res);
 //			
 //			List<Guia> lista = guiaDao.getBySucursal(idSucursal);
 //			if (lista == null) {

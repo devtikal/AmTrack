@@ -695,12 +695,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			alert("No se ha capturado \n El Numero de Rastreo");
 			return
 		}
-		if($scope.paquete.empresa=='ESTAFETA'){
-			if($scope.adicional=='-'){
-				alert("No se ha capturado el Numero a agregar a la GUIA");
-				return
-			}
-		}
+//		if($scope.paquete.empresa=='ESTAFETA'){
+//			if($scope.adicional=='-'){
+//				alert("No se ha capturado el Numero a agregar a la GUIA");
+//				return
+//			}
+//		}
 		
 		if($scope.paquete.precio == 0){
 			alert("No se ha capturado \n El Precio");
@@ -829,14 +829,8 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	}
 	$scope.addGuiaPre = function(valor){
 		
-		var r = confirm("¿Desea Continuar?");
-	    if (r == true) {
 	    	$scope.paquete.guia= valor + "" + $scope.guardGuia;
-			
-	    } else{
-	    	$scope.adicional="-";
-	    	$scope.paquete.guia= $scope.guardGuia;
-	    }
+		
 	}
 	$scope.getCP = function(tipo){
 		if (tipo == "remitente"){

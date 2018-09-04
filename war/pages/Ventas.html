@@ -287,7 +287,7 @@
 										<option>25Kg Terrestre</option>
 										<option>30Kg Terrestre</option>
 										<option>35Kg Terrestre</option>
-										.<option>40Kg Terrestre</option>
+										<option>40Kg Terrestre</option>
 										<option>45Kg Terrestre</option>
 										
 										</select>
@@ -495,11 +495,11 @@
 	</p>
      
      Localidad
-    <p><input  ng-model="paquete.cliente.localidad" class="input-lg" ng-disabled="hide"></p>
+    <p><input  ng-model="paquete.cliente.localidad" class="input-lg" ng-disabled="hide" onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
      Municipio
-    <p><input ng-model="paquete.cliente.municipio" class="input-lg" ng-disabled="hide" readonly></p>
+    <p><input ng-model="paquete.cliente.municipio" class="input-lg" ng-disabled="hide" readonly onchange="javascript:this.value=this.value.toUpperCase();"></p>
      Estado
-    <p><input ng-model="paquete.cliente.estado" class="input-lg" ng-disabled="hide" readonly></p>
+    <p><input ng-model="paquete.cliente.estado" class="input-lg" ng-disabled="hide" readonly onchange="javascript:this.value=this.value.toUpperCase();"></p>
      
     Telefono
     <p><input class="input-lg" ng-model="paquete.cliente.telefono" ng-disabled="hide"></p>

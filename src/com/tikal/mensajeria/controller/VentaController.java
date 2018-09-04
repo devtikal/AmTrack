@@ -265,9 +265,10 @@ public class VentaController {
 	                System.out.println("(Error al crear el fichero nuevo ......)" + ioe);
 	            }
 	        }
+	        
      
-	        Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
-	  
+	        //Sucursal s= sucursalDao.consult(usuarioDao.consultarUsuario(userName).getIdSucursal());
+	        Sucursal s= sucursalDao.consult(v.getIdSucursal());
 	        System.out.println("Empiezo a generar pdf..envios.."+objE );
 	        System.out.println("Empiezo a generar pdf...suc."+s );
 	        System.out.println("Empiezo a generar pdf...venta."+v );
