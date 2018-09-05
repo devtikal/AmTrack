@@ -755,9 +755,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.kilatajeHide=false;
 	$scope.mdhide=false;
 	$scope.isCajaFd = function(dato){
-		if($scope.paquete.empresa=="FEDEX" && dato=="Caja"){
+		if(($scope.paquete.empresa=="DHL" || $scope.paquete.empresa=="FEDEX" || $scope.paquete.empresa=="UPS") && dato=="Caja"){
 		$scope.mdhide=false
-		}else{$scope.mdhide=true}
+		}else{
+		$scope.mdhide=true
+		}
 	}
 	$scope.isEstafeta = function() {
 		$scope.disKilataje=false;
@@ -768,11 +770,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 		if ($scope.paquete.empresa=="FEDEX"){
 			$scope.maxchar = 12;
-			$scope.tipoPaq=catalogoPqueteFedex();
+			
 			$scope.kilatajeHide=true;
 			$scope.mdhide=true;
 				}else{
-					$scope.tipoPaq=catalogoPquete();
+					
 					$scope.mdhide=false
 				}
 		if ($scope.paquete.empresa=="UPS"){
@@ -781,9 +783,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 		if ($scope.paquete.empresa=="DHL" || $scope.paquete.empresa=="FEDEX" || $scope.paquete.empresa=="UPS"){
 			$scope.isDFU=true;
+			$scope.tipoPaq=catalogoPqueteFedex();
 		}else{
 			$scope.isDFU=false;
 			$scope.kilatajeHide=false;
+			$scope.tipoPaq=catalogoPquete();
 		}
 		
 		
