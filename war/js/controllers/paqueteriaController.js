@@ -700,7 +700,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			var LCP = $scope.paquete.cliente.codigoPostal;
 			var len =LCP.toString().length;
 			if( len != 5){
-				alert("El Codigo Postal debe ser de 5 digitos y solo capturo "+len);
+				alert("El C\u00f3digo Postal debe ser de 5 d\u00edgitos y s\u00f3lo captur\u00f3 "+len);
 				nextPrev(-2);
 				
 				return;
