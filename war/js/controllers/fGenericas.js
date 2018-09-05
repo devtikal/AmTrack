@@ -58,6 +58,25 @@ function TiposOperacion (){
 	return tiposOp;
 }
 
+function catalogoPquete (){
+	var catPaq = [
+	{id:1, tipo:"BOLSA"},
+	{id:2,tipo:"CAJA"},
+	{id:3,tipo:"IRREGULAR"},
+	{id:4,tipo:"SOBRE"}
+	]
+	return catPaq;
+}
+function catalogoPqueteFedex (){
+	var catPaq = [
+	{id:1,tipo: "Pak"},
+	{id:2,tipo: "Box Small"},
+	{id:3,tipo: "Box Medium"},
+	{id:4,tipo: "Box Large"}
+	]
+	return catPaq;
+}
+
 function catalogoBancos(){
 	var catBancos = [{ id:1, nombre: "ABC Capital"},
 					{ id:2, nombre: "American Express Bank (M\u00E9xico)"},

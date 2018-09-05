@@ -695,6 +695,14 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			alert("No se ha capturado \n El Numero de Rastreo");
 			return
 		}
+		if($scope.paquete.empresa == "ESTAFETA" ||$scope.paquete.empresa == "MERVEL" ){
+			var LCP = $scope.paquete.cliente.codigoPostal;
+			var len =LCP.toString().length;
+			if( len != 5){
+				alert("El Codigo Postal debe ser de 5 Numeros");
+				return;
+			}
+		}
 //		if($scope.paquete.empresa=='ESTAFETA'){
 //			if($scope.adicional=='-'){
 //				alert("No se ha capturado el Numero a agregar a la GUIA");
@@ -740,6 +748,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.isDFU=false;
 	$scope.requerido=true;
 	$scope.disKilataje=true;
+	$scope.kilatajeHide=false;
 	$scope.isEstafeta = function() {
 		$scope.disKilataje=false;
 		$scope.maxchar = 10;
@@ -747,7 +756,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.maxchar = 10;
 		}
 		if ($scope.paquete.empresa=="FEDEX"){
-			$scope.maxchar = 12;		
+			$scope.maxchar = 12;
+			$scope.tipoPaq=catalogoPqueteFedex();
+			$scope.kilatajeHide=true;
+				}else{
+					$scope.tipoPaq=catalogoPquete();
+					$scope.kilatajeHide=false;
 				}
 		if ($scope.paquete.empresa=="UPS"){
 			$scope.maxchar = 18;
