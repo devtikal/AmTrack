@@ -758,6 +758,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		$scope.maxchar = 10;
 		if ($scope.paquete.empresa=="DHL"){
 			$scope.maxchar = 10;
+			$scope.kilatajeHide=true;
 		}
 		if ($scope.paquete.empresa=="FEDEX"){
 			$scope.maxchar = 12;
@@ -765,15 +766,17 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.kilatajeHide=true;
 				}else{
 					$scope.tipoPaq=catalogoPquete();
-					$scope.kilatajeHide=false;
+					
 				}
 		if ($scope.paquete.empresa=="UPS"){
 			$scope.maxchar = 18;
+			$scope.kilatajeHide=true;
 		}
 		if ($scope.paquete.empresa=="DHL" || $scope.paquete.empresa=="FEDEX" || $scope.paquete.empresa=="UPS"){
 			$scope.isDFU=true;
 		}else{
 			$scope.isDFU=false;
+			$scope.kilatajeHide=false;
 		}
 		
 		
