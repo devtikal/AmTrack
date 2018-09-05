@@ -43,42 +43,20 @@ public class GeneraTicket {
    
 
 	public GeneraTicket(List<Envio> e, Sucursal s, Venta v,OutputStream ops) throws MalformedURLException, IOException {
-
-    	  final String condiciones = "1.-Después de 15 días MERVEL EXPRESS no se hace responsable de su envío.\n\n"
-    	  		+ "2.-No nos hacemos responsables en envíos con valor arriba de 80 dias de salario "
-    	  		+ "mínimo.\n\n"
-    	  		+"3.-Las partes convienen que si el valor del ENVÍO no es declarado y sufre, por causa"
-    	  		+ "imputable a MERVEL EXPRESS, la pédida total, daños o menoscabos, ésta pagará "
-    	  		+ "como máxima responsabilidad por la pérdida o daño, la cantidad equivalente de hasta "
-    	  		+ "30 veces el salario mínimo general vigente en el D. F., en la fecha en que se haya "
-    	  		+ "recibido y documentado el ENVÍO. EL REMITENTE deberá justificar el valor comercial"
-    	  		+ "de la pérdida o de su reparación. En caso de envío de valor declarado, deberá "
-    	  		+ "asegurarse y la responsabilidad es por el monto total. Conforme a lo siguiente:\n \n"
-    	  		+ "4.-SEGURO OPCIONAL\n\n"
-    	  		+ "5.-MERVEL EXPRESS tiene el derecho de revisar el paquete más no a obligación, por lo "
-    	  		+ "que podrá exigir al REMITENTE su apertura y reconocimiento, si ése se rehusare,"
-    	  		+ "MERVEL EXPRESS quedará libre de cualquier responsabilidad.\n\n"
-    	  		+ "6.-MERVEL EXPRESS se reserva el derecho de inspeccionar el envío en cualquier "
-    	  		+ "momento, así como permitir a las autoriddes competentes a llevar a cabo las "
-    	  		+ "inspecciones que consideren adecuadas. Asimismo, MERVEL EXPRESS se reserve el "
-    	  		+ "derecho a rechazar o suspender el porte de cualquier envío prohibido o que contenga "
-    	  		+ "materiales que dañen o puedan dañar otros envíos que puedan constituir un riesgo a "
-    	  		+ "equipo o empleados de MERVEL EXPRESS o de sus prestadores de servicios.\n\n"
-    	  		+ "7.-En servicio internacional MERVEL EXPRESS se obliga a entregar puntualmente el "
-    	  		+ "envío siempre y cuando las autoridades aduaneras hayan cumplido con sus horarios "
-    	  		+ "normales oficiales. El plazo se contará a partir de la recepción y documentación del "
-    	  		+ "ENVÍO.\n\n"
-    	  		+ "** EL REMITENTE se obliga para con MERVEL EXPRESS\n\n"
-    	  		+ "a) A pagar la tarifa y los impuestos del servicio.\n\n"
-    	  		+ "b) A entregar toda la documentación en cumplimiento de las disposiciones legales "
-    	  		+ "aplicables, de aduanas, de exportación e importación de los países a, desde, o a través "
-    	  		+ "de los cuales será transportado el ENVÍO y a efectuar el pago de los gastos y costos que "
-    	  		+ "origine incluyendo sin limitación alguna, recargos, aranceles, multas, honorarios,"
-    	  		+ "etc. Por lo que MERVEL EXPRESS no asume ninguna responsabilidad por el "
-    	  		+ "incumplimiento de estas obligaciones.\n\n"
-    	  		+ "8.-MERVEL EXPRESS se coordina con sevicios de mensajeria externos.\n\n"
-    	  		+ "9.-MERVEL EXPRESS elegirá el trasporte que a su interés convenga.";
-    	  
+		
+		final String condi="1.- Después de 15 días MERVEL no se hace responsable de su envío.\n"+
+"2.- No nos hacemos responsables en envíos con un valor arriba de 30 días de salario mínimo.\n"+
+ "3.- Las partes convienen en que, si el valor del ENVÍO no es declarado y sufre, por causa imputable a MERVEL, la pérdida total, daños o menoscabos, ésta pagará como máxima responsabilidad por la pérdida o daño, la cantidad equivalente de hasta 30 veces salario mínimo general vigente, en la fecha en que se haya recibido y documentado el ENVÍO, EL REMITENTE deberá justificar el valor comercial de la pérdida o de su reparación. En caso de envié de valor declarado, deberá asegurarse y responsabilidad  es por el monto total.\n"+ 
+"Conforme a lo siguiente:\n"+
+ "4.- SEGURO OPCIONAL.\n"+
+ "5.- MERVEL tiene el derecho de revisar el paquete más no la obligación, por lo que podrá exigir al REMITENTE su apertura y reconocimiento, si éste se rehusare, MERVEL quedará libre de cualquier responsabilidad.\n"+
+"6.- MERVEL se reserva el derecho de inspeccionar el envío en cualquier momento, así como permitir a las autoridades competentes a llevar a cabo las inspecciones que consideren adecuadas. Asimismo, MERVEL se reserva el derecho a rechazar o suspender el porte de cualquier envío prohibido o que contenga materiales que dañen o puedan dañar otros envíos o que puedan constituir un riesgo al equipo o empleados de MERVEL o de sus prestadores de servicios.\n"+
+"7.- En servicio internacional MERVEL se obliga a entregar puntualmente el envío siempre y cuando las autoridades aduaneras hayan cumplido con sus horarios normales oficiales. El plazo se contara a partir de la recepción y documentación del ENVÍO.\n"+
+"      EL REMITENTE se obliga para con MERVEL\n"+
+"a)	A pagar la tarifa y los impuestos del servicio\n"+
+"b)	A entregar toda la documentación en cumplimiento de las disposiciones legales aplicables, de aduanas, de exportación e importación de los países a, desde, o a través de los cuales será transportado el ENVÍO y a efectuar el pago de los gastos y costos que se origine incluyendo sin limitación alguna, recargos, aranceles, multas, honorarios, etc. Por lo que MERVEL no asume ninguna responsabilidad por el incumplimiento de estas obligaciones.\n"+ 
+"8.- MERVEL se coordina con servicios de mensajería externos.\n"+
+"9.- MERVEL elegirá el transporte que a su interés convenga.\n";
     	 
     	  
     	try {
@@ -535,9 +513,9 @@ public class GeneraTicket {
             c32.setColspan(8);
             table2.addCell(c32);
             
-            Paragraph p33 = new Paragraph(condiciones,f4);
+            Paragraph p33 = new Paragraph(condi,f4);
             PdfPCell c33 = new PdfPCell(p33);
-            c33.setHorizontalAlignment(Element.ALIGN_LEFT);
+            c33.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
             c33.setBorder(Rectangle.NO_BORDER);
            // c15.setBackgroundColor(BaseColor.BLACK);
             c33.setColspan(8);
