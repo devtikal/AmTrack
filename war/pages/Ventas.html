@@ -335,7 +335,7 @@
 								 <br>
 							<label>Descripcion:</label> <input type="text" class="form-control"
 								ng-model="paquete.paquete.descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();" required> <br> 
-								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.paquete.tipoPaquete" ng-change="cSobre()"
+								<label> Tipo de Paquete: </label><select class="form-control" ng-model="paquete.paquete.tipoPaquete" ng-change="cSobre(); isCajaFd(paquete.paquete.tipoPaquete);"
 										required>
 										<option ng-repeat="t in tipoPaq">{{t.tipo}}</option>
 <!-- 										<option>BOLSA</option> -->
@@ -370,7 +370,7 @@
 					<br> <br>
 					
 				
-					<div class="row" >
+					<div class="row" ng-hide="mdhide">
 						
 						<div class="col-md-2">
 							<div class="form-group ">

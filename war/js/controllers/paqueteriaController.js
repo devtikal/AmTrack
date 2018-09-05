@@ -753,6 +753,12 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.requerido=true;
 	$scope.disKilataje=true;
 	$scope.kilatajeHide=false;
+	$scope.mdhide=false;
+	$scope.isCajaFd = function(dato){
+		if($scope.paquete.empresa=="FEDEX" && dato=="Caja"){
+		$scope.mdhide=false
+		}
+	}
 	$scope.isEstafeta = function() {
 		$scope.disKilataje=false;
 		$scope.maxchar = 10;
@@ -764,9 +770,10 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.maxchar = 12;
 			$scope.tipoPaq=catalogoPqueteFedex();
 			$scope.kilatajeHide=true;
+			$scope.mdhide=true;
 				}else{
 					$scope.tipoPaq=catalogoPquete();
-					
+					$scope.mdhide=false
 				}
 		if ($scope.paquete.empresa=="UPS"){
 			$scope.maxchar = 18;
