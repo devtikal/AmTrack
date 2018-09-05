@@ -693,13 +693,16 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 		if($scope.paquete.rastreo == null){
 			alert("No se ha capturado \n El Numero de Rastreo");
+			nextPrev(-3);
 			return
 		}
 		if($scope.paquete.empresa == "ESTAFETA" ||$scope.paquete.empresa == "MERVEL" ){
 			var LCP = $scope.paquete.cliente.codigoPostal;
 			var len =LCP.toString().length;
 			if( len != 5){
-				alert("El Codigo Postal debe ser de 5 Numeros");
+				alert("El Codigo Postal debe ser de 5 digitos y solo capturo "+len);
+				nextPrev(-2);
+				
 				return;
 			}
 		}
@@ -712,6 +715,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 		if($scope.paquete.precio == 0){
 			alert("No se ha capturado \n El Precio");
+			nextPrev(-3);
 			return
 		}
 		
