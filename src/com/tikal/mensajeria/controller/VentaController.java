@@ -181,7 +181,7 @@ public class VentaController {
 		}
 	
 	
-	@RequestMapping(value = { "/cancelar/{idVenta}" },  method = RequestMethod.GET)
+	@RequestMapping(value = { "/cancelar/{idVenta}" },  method = RequestMethod.GET, produces = "application/json")
 	public void asignaM(HttpServletRequest request, HttpServletResponse response, 
 			@PathVariable Long idVenta )throws IOException {
 	
@@ -189,11 +189,20 @@ public class VentaController {
 		AsignadorDeCharset.asignar(request, response);
 		
 			Venta v = ventaDao.consult(idVenta);
-			ventaDao.delete(v);
+			if (v.getEnvios().size()<=0){
+				ventaDao.delete(v);
+				response.getWriter().println("venta sin envios, eliminada");
+			}else {
+				response.getWriter().println("la venta contiene envios, primero debe eliminarlos ...");
+			}
+			
+			
+			
+			//ventaDao.delete(v);
 			//v.setEstatus("CANCELADA");
 		//	ventaDao.update(v);
 			//System.out.println(" yisus manda:"+json);
-		
+		//	response.getWriter().println(mensaje);
 		
 	}
 	
@@ -244,11 +253,12 @@ public class VentaController {
 
 	  @RequestMapping(value = { "/generaTicket/{idVenta}/{userName}" },  method = RequestMethod.GET, produces = "application/pdf")
 		public void generaVale(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idVenta, @PathVariable String userName) throws IOException {
-	   System.out.println("genera ticket");
+	   
 //	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
 		   response.setContentType("Application/Pdf");
 		   
 		   Venta v = ventaDao.consult(idVenta);
+		   System.out.println("genera ticket con precio"+v.getTotal());
 		 // Envio e = envioDao.consult(idEnvio) ; 
 		   List<Envio> objE= new ArrayList<Envio>();
 		    List<Long> envios = ventaDao.consult(idVenta).getEnvios();

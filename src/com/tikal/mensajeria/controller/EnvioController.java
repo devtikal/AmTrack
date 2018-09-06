@@ -222,7 +222,7 @@ public class EnvioController {
 			envio.setTipoEnvio(ef.getTipoEnvio());
 			envio.setTipoServicio(ef.getTipoServicio());
 			envio.setMateriales(ef.getMateriales());
-			envio.setTotalEnvio(ef.getCostoSeguro()+ef.getPrecio());
+			envio.setTotalEnvio(ef.getCostoSeguro()+(ef.getPrecio()*1));
 			envioDao.save(envio);
 			if (envio.getEmpresa().equals("ESTAFETA")){		
 				System.out.println("guia numero:"+ef.getGuia());

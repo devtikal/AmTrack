@@ -129,7 +129,7 @@ public class ComprobanteVentaFactory33 {
 			concepto.setClaveProdServ("78102203");     ///clave sat
 			concepto.setDescripcion("Envío "+envio.getRastreo()+" "+envio.getGuia()+" "+envio.getPaquete().getTipoPaquete()); //descripcion
 			
-			double valorUnitarioSinIVA = envio.getPrecio() / 1.16;
+			double valorUnitarioSinIVA = (envio.getPrecio() + envio.getCostoSeguro() )/ 1.16;
 			double importeIVA = valorUnitarioSinIVA * 0.16 * cantidad;
 			double importe = valorUnitarioSinIVA * cantidad;
 			

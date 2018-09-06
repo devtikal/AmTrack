@@ -290,13 +290,13 @@ public class GuiaController {
 		  
 }
 	 
-	 @RequestMapping(value = { "/saveGuia/{numeroGuia}" },  method = RequestMethod.GET)
+	 @RequestMapping(value = { "/liberarGuia/{numeroGuia}" },  method = RequestMethod.GET)
 		public void guargaGuia(HttpServletResponse response, HttpServletRequest request,@PathVariable String numeroGuia) throws IOException {
 	
 	
 		 System.out.println("guia numero"+numeroGuia);
-			Guia g=guiaDao.getByNumero(numeroGuia.substring(1));
-			g.setEstatus("EN ENVIO");
+			Guia g=guiaDao.getByNumero(numeroGuia);//.substring(1));
+			g.setEstatus("ASIGNADA");
 			guiaDao.update(g);
 	   
 	  // System.out.println("dame guia:"+numeroGuia);

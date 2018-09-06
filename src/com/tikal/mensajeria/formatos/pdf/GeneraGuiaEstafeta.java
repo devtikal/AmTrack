@@ -60,7 +60,7 @@ public class GeneraGuiaEstafeta {
     	    
     	    Font f3 = new Font();
     	    f3.setStyle(1);
-    	    f3.setSize(7);
+    	    f3.setSize(6);
     	    f3.setColor(BaseColor.BLACK);
     	    
     	    Font f4 = new Font();
@@ -128,9 +128,17 @@ public class GeneraGuiaEstafeta {
             Paragraph p37 = new Paragraph(e.getCliente().getNombre(),f3);
             PdfPCell c37 = new PdfPCell(p37);
             c37.setHorizontalAlignment(Element.ALIGN_LEFT);
-            c37.setColspan(3);c37.setRowspan(1);
+            c37.setColspan(1);c37.setRowspan(1);
             c37.setBorder(Rectangle.NO_BORDER);
             table.addCell(c37);
+            
+            Paragraph p333 = new Paragraph(" ",f2);
+          PdfPCell c333 = new PdfPCell(p333);
+          c333.setHorizontalAlignment(Element.ALIGN_CENTER);
+          c333.setColspan(1);c333.setRowspan(2);
+          c333.setBorder(Rectangle.NO_BORDER);
+          table.addCell(c333);table.addCell(c333);
+          
             
             
             if (e.getCliente().getCalle()=="" && e.getCliente().getNoExterior()=="" && e.getCliente().getNoInterior()==""){
