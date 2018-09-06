@@ -265,6 +265,10 @@ public class GuiaController {
 		   
 	   }else{
 		   numeroGuia=guiaDao.getByEstSuc(tipoGuia, usuarioDao.consultarUsuario(userName).getIdSucursal()).getNumero();
+		   System.out.println("guia numero"+numeroGuia);
+			Guia g=guiaDao.getByNumero(numeroGuia);
+			g.setEstatus("EN USO");
+			guiaDao.update(g);
 	   }
 	   
 	   System.out.println("dame guia:"+numeroGuia);
@@ -283,6 +287,23 @@ public class GuiaController {
 //	}
 
 //	   if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 20, sessionDao,userName)){
+		  
+}
+	 
+	 @RequestMapping(value = { "/saveGuia/{numeroGuia}" },  method = RequestMethod.GET)
+		public void guargaGuia(HttpServletResponse response, HttpServletRequest request,@PathVariable String numeroGuia) throws IOException {
+	
+	
+		 System.out.println("guia numero"+numeroGuia);
+			Guia g=guiaDao.getByNumero(numeroGuia.substring(1));
+			g.setEstatus("EN ENVIO");
+			guiaDao.update(g);
+	   
+	  // System.out.println("dame guia:"+numeroGuia);
+	  //response.getWriter().println(g.getNumero());
+	  //response.getWriter().println(ok );
+	
+	 
 		  
 }
 	

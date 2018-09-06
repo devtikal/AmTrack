@@ -225,7 +225,7 @@ public class EnvioController {
 			envio.setTotalEnvio(ef.getCostoSeguro()+ef.getPrecio());
 			envioDao.save(envio);
 			if (envio.getEmpresa().equals("ESTAFETA")){		
-				System.out.println("guia numero2"+ef.getGuia());
+				System.out.println("guia numero:"+ef.getGuia());
 				Guia g=guiaDao.getByNumero(ef.getGuia().substring(1));
 				g.setEstatus("EN ENVIO");
 				guiaDao.update(g);
