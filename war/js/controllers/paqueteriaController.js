@@ -688,7 +688,8 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		
 		$scope.libGuia($scope.guardGuia);
 		if($scope.venta.cantidad == 0){
-			$scope.eliminarVenta($scope.idVenta);
+			var data = {id: $scope.idVenta}
+			$scope.eliminarVenta(data);
 		}
 		
 	}
