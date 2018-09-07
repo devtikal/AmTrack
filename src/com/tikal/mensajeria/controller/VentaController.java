@@ -189,7 +189,8 @@ public class VentaController {
 		AsignadorDeCharset.asignar(request, response);
 		
 			Venta v = ventaDao.consult(idVenta);
-			if (v.getEnvios().size()<=0){
+			System.out.println(" envios:"+v.getEnvios());
+			if (v.getEnvios()==null ){
 				ventaDao.delete(v);
 				response.getWriter().println("venta sin envios, eliminada");
 			}else {
