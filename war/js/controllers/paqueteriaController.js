@@ -80,6 +80,26 @@ app.service("paqueteriaService",['$http', '$q','$window', function($http, $q,$wi
 				});
 		return d.promise;
 	}
+	this.liberaGuias = function(noGuia) {
+		var d = $q.defer();
+		$http.get("guia/liberarGuia/"+noGuia).then(
+				function(response) {
+					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==400){
+					alert("No se puede crear "
+							+ usuario.usuario + " usuario o correo no disponibles");
+					}if(response.status==403){
+						// alert("No tiene permiso de realizar esta acción");
+// $location.path("/login");
+					}
+					d.reject(response);
+					$window.location.reload;
+				});
+		return d.promise;
+	}
 	document.addEventListener('keyup', event => {
 		  if (event.ctrlKey && event.shiftKey && event.keyCode === 40) {
 			  var win = window.open("https://www.google.com", '_blank');
@@ -367,8 +387,9 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	sessionService.isAuthenticated();
 	$scope.perfil = $cookieStore.get('perfil');
 	$scope.paquete={guia:null};
-	$scope.venta={fecha: new Date()};
+	$scope.venta={fecha: new Date(),cantidad: 0 };
 	$scope.idVenta=null;
+	//$scope.venta={cantidad:0};
 	$scope.paginaActual=1;
 	sucursalService.getAllSucursal().then(function(data) {
 		$scope.sucursal = data;
@@ -593,6 +614,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			paquete:{tipoPaquete:null}
 	}
 	$scope.isSobre= function (data) {
+		$scope.libGuia($scope.guardGuia);
 		if (data=='1Kg Sobre Sig Dia' || data=='11:30 Sobre Sig Dia'){
 			$scope.paquete.paquete.tipoPaquete="SOBRE";
 			$scope.paquete.tipoEnvio="Dia Siguiente";
@@ -646,13 +668,30 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	});
 	}
 	
-	$scope.prePaquete = function(inf){
+	$scope.prePaquete = function(inf,cant){
 		$scope.idVenta=inf;
+		if(cant >=0){
+			$scope.venta.cantidad = cant;
+		}
+		
 		$("#modalEnvio").modal();
 	
 	
 	}
-	
+	$scope.libGuia= function(g){
+		if($scope.paquete.empresa == "ESTAFETA")
+		paqueteriaService.liberaGuias(g).then(function(data) {
+			console.log("se ha eliminado la guia ", g);
+		});
+	}
+	$scope.delVenta = function(){
+		
+		$scope.libGuia($scope.guardGuia);
+		if($scope.venta.cantidad == 0){
+			$scope.eliminarVenta($scope.idVenta);
+		}
+		
+	}
 	$scope.limpiarFecha = function(){
 		alert("Entro a la funcion");
 		$scope.fechaInicio.value=" ";
@@ -672,7 +711,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$scope.venta.folio = data;
 		});
 		
-		$scope.venta.cantidad=0;
+		
 		paqueteriaService.addVenta($cookieStore.get('usuario'), $scope.venta).then(function(data) {
 			$scope.idVenta = data;
 			$scope.prePaquete(data);
@@ -838,6 +877,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		 var r = confirm("Click en Aceptar para Eliminar la Venta. \n" + datos.folio);
 		    if (r == true) {
 		    	paqueteriaService.eliminarVenta(datos.id).then(function(data) {
+		    		alert(data);
 					$window.location.reload();
 				});
 		    }   	
@@ -852,6 +892,9 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		    }   	
 		    
 		}	
+//	window.onbeforeunload = function(e) {
+//        return 'leave?';
+//      }
 	$scope.datosCP =[];
 	$scope.maskGuia = function(){
 		var guia = document.getElementById('guia').value;

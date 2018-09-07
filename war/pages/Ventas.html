@@ -16,7 +16,7 @@
 					</button>
 				</div>
 				<div class="col-md-3"></div>
-		<div class="col-md-3" ng-if="perfil == 'Cajero'">
+		<div class="col-md-3" ng-if="perfil == 'Cajero' || perfil == 'SuperAdministrador'">
 		 <button type="button" class="btn btn-info " ng-click="generarFolio()" >Agregar Venta</button>
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
@@ -45,15 +45,15 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<div ng-if="perfil =='Administrador'">
-				<a class="btn btn-small btn-success report" data-toggle="tooltip" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls" ng-click="loading()">
+				<div ng-if="perfil =='Administrador' || perfil == 'SuperAdministrador'">
+				<a class="btn btn-small btn-success report" title="Administrador" data-toggle="tooltip" href="{{'/venta/generaReporteXls_/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.xls" ng-click="loading()">
 				<i class="fa fa-file-excel-o fa-lg"></i>
 					Descargar Reporte
 				</a>
 				</div>
 				
-				<div ng-if="perfil =='Cajero'">
-				<a class="btn btn-small btn-danger report" data-toggle="tooltip" href="{{'venta/generaReportePdf/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.pdf" ng-click="loading()">
+				<div ng-if="perfil =='Cajero' || perfil == 'SuperAdministrador'">
+				<a class="btn btn-small btn-danger report" title="Caja" data-toggle="tooltip" href="{{'venta/generaReportePdf/'+fechaInicio+'/'+fechaFin+'/'+usuario}}" download="ReporteVenta_{{fechaInicio}}_A_{{fechaFin}}.pdf" ng-click="loading()">
 				<i class="fa fa-file-pdf-o fa-lg"></i>
 					Descargar Reporte
 				</a>
@@ -98,7 +98,7 @@
 					<td>{{v.cantidad}}</td>
 					<td>{{showSuc(v.idSucursal)}}</td>
 					<td>{{v.estatus}}</td>
-					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id)" title="Agregar Envio" ng-if="v.estatus !='FACTURADA' && perfil !='Administrador'">
+					<td HEIGHT="50"><button class="btn btn-success" ng-click="prePaquete(v.id,v.cantidad)" title="Agregar Envio" ng-if="v.estatus !='FACTURADA' && perfil !='Administrador'">
 							<i class="fa fa-plus"></i>
 						</button>
 						<button class="btn btn-info" ng-click="ver(v)" title="Ver Detalles" ng-disabled="v.cantidad==0">
@@ -241,7 +241,7 @@
         <div class="modal-header">
           
           <h4 class="modal-title" align="center">Registrar Envios</h4>
-          <button type="button" class="close" data-dismiss="modal" ng-click="cleanMdl(); ">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" ng-click="cleanMdl(); delVenta();">&times;</button>
         </div>
         <div class="modal-body">
           <form id="altaPaquete" name="myForm">
@@ -439,7 +439,7 @@
 								<br> <label for="example-text-input"
 									class="col-10 col-form-label">Peso (kg):</label>
 								<div class="col-10">
-									<input type="text" class="form-control" min="0"
+									<input type="text" class="form-control" 
 										ng-model="paquete.paquete.peso" ng-required="requerido">
 								</div>
 							</div>
@@ -631,7 +631,7 @@
 </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-link" data-dismiss="modal" ng-click="cleanMdl(); ">Cerrar</button>
+          <button type="button" class="btn btn-link" data-dismiss="modal" ng-click="cleanMdl(); delVenta();">Cerrar</button>
         </div>
       </div>
     </div></div>
