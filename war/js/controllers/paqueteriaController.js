@@ -796,9 +796,11 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	$scope.mdhide=false;
 	$scope.isCajaFd = function(dato){
 		if(($scope.paquete.empresa=="DHL" || $scope.paquete.empresa=="FEDEX" || $scope.paquete.empresa=="UPS") && dato=="Caja"){
-		$scope.mdhide=false
+		$scope.mdhide=false;
+		}else if($scope.paquete.empresa=="ESTAFETA"){
+		$scope.mdhide=false;
 		}else{
-		$scope.mdhide=true
+		$scope.mdhide=true;
 		}
 	}
 	$scope.isEstafeta = function() {
