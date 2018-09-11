@@ -378,8 +378,10 @@ public class GuiaController {
 			if (noA.size()==0){
 				System.out.println("no hay guias NO ASIGNADAS...");
 			}else{
+				
 				ResumenGuia rg= new ResumenGuia();
-				rg.setInicia(noA.get(0).getNumero());
+				ResumenGuia faltan= new ResumenGuia();
+				rg.setInicia(noA.get(0).getNumero());				
 				rg.setTermina(noA.get(noA.size()-1).getNumero());
 				rg.setEstatus("NO ASIGNADA");
 				rg.setSucursal("SIN SUCURSAL");

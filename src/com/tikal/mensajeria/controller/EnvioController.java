@@ -32,6 +32,7 @@ import com.tikal.mensajeria.modelo.entity.Contador;
 import com.tikal.mensajeria.modelo.entity.ContadorServicio;
 import com.tikal.mensajeria.modelo.entity.Envio;
 import com.tikal.mensajeria.modelo.entity.Guia;
+import com.tikal.mensajeria.modelo.entity.Material;
 import com.tikal.mensajeria.modelo.entity.Paquete;
 import com.tikal.mensajeria.modelo.entity.Persona;
 import com.tikal.mensajeria.modelo.entity.Venta;
@@ -222,7 +223,8 @@ public class EnvioController {
 			envio.setTipoEnvio(ef.getTipoEnvio());
 			envio.setTipoServicio(ef.getTipoServicio());
 			envio.setMateriales(ef.getMateriales());
-			envio.setTotalEnvio(ef.getCostoSeguro()+(ef.getPrecio()*1));
+			double tm= totalMaterial(ef.getMateriales());
+			envio.setTotalEnvio(ef.getCostoSeguro()+(ef.getPrecio()*1)+ tm);
 			envioDao.save(envio);
 			if (envio.getEmpresa().equals("ESTAFETA")){		
 				System.out.println("guia numero:"+ef.getGuia());
@@ -505,6 +507,20 @@ public class EnvioController {
 	 		  }
 			 envioDao.save(e);
 			 return e;
+		}
+		
+		public Double totalMaterial(List<Material> lm) {
+			double totalMat=0;
+			if (lm!=null && lm.size()>0){
+				for(Material m: lm){
+					if (m.getCosto()!= null){
+						
+					}
+					totalMat=totalMat+m.getCosto();
+				}
+			}
+			return totalMat;
+			
 		}
 }
 

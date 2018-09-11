@@ -192,8 +192,10 @@ public class VentaController {
 			System.out.println(" envios:"+v.getEnvios());
 			if (v.getEnvios()==null ){
 				ventaDao.delete(v);
+				System.out.println(" venta sin envios, eliminada");
 				response.getWriter().println("venta sin envios, eliminada");
 			}else {
+				System.out.println("la venta contiene envios, primero debe eliminarlos ...");
 				response.getWriter().println("la venta contiene envios, primero debe eliminarlos ...");
 			}
 			
