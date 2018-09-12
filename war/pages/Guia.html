@@ -40,23 +40,25 @@
 <!--     <div class="container"> -->
     
     <br>
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
-				<tr>
-					<th width="5%"></th>
-					<th width="20%">DE</th>
-					<th width="20%">HASTA</th>
+				<tr align="center">
+<!-- 					<th width="5%"></th> -->
+					<th width="15%">DE</th>
+					<th width="15%">HASTA</th>
+					<th width="10%">CANTIDAD</th>
 					<th width="10%">ESTATUS</th>
-					<th width="20%">SUCURSAL</th>
+					<th width="30%">SUCURSAL</th>
 					<th width="10%">TIPO DE GUIA</th>
-<!-- 					<th width="10%">Acciones</th> -->
+					<th width="10%"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="g in guias" class="{{g.clase}}">
-					<td></td>
+				<tr ng-repeat="g in guias" class="{{g.clase}}" align="center">
+<!-- 					<td></td> -->
 					<td HEIGHT="50">{{g.inicia}}</td>
 					<td>{{g.termina}}</td>
+					<td>{{cGuias(g.inicia,g.termina)}}</td>
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
 					<td>{{g.tipoGuia}}</td>

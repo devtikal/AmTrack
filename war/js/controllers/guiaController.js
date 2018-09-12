@@ -314,6 +314,14 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 			$window.location.reload();
 		});
 	}
+	$scope.cGuias = function(d,h){
+		var inicio = d.split('-');
+		var fin = h.split('-');
+		var op = fin[1] - inicio[1];
+		
+		return op; 
+		
+	}
 		$scope.clearGuia = function(){
 			$scope.de=null;
 			$scope.hasta=null;

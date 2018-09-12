@@ -773,7 +773,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
         if (!$scope.addMe) {return;}
         if ($scope.products.indexOf($scope.addMe) == -1) {
 // $scope.products.push($scope.addMe,$scope.addMe2);
-            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
+            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2 , costo:$scope.addMe3});
             console.log($scope.products);
             $scope.paquete.materiales=$scope.products;
         } else {
@@ -781,6 +781,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
         }
         $scope.addMe="";
         $scope.addMe2="";
+        $scope.addMe3="";
     }
     $scope.removeItem = function (x) {
         $scope.errortext = "";    
@@ -861,6 +862,18 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$("#modalPDF").modal();
 			
 		}, 3000);
+		
+	}
+	$scope.infGuida=null;
+	$scope.inGuia = false;
+	$scope.detalleGuia = function(data){
+		console.log(data);
+		$scope.infGuia = data;
+		$scope.sumMat = 0;
+		for(i in data.materiales){
+			$scope.sumMat = $scope.sumMat + data.materiales[i].costo;
+		}
+		$scope.inGuia=true;
 		
 	}
 	$scope.showPDFM = function(datos){
@@ -1053,7 +1066,7 @@ app.controller("paqueteriaController",['$scope','$rootScope','$window', '$locati
         if (!$scope.addMe) {return;}
         if ($scope.products.indexOf($scope.addMe) == -1) {
 // $scope.products.push($scope.addMe,$scope.addMe2);
-            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2});
+            $scope.products.push({descripcion:$scope.addMe, cantidad:$scope.addMe2, costo:$scope.addMe3});
             console.log($scope.products);
         } else {
             $scope.errortext = "Ya se encuentra en la lista.";

@@ -11,11 +11,12 @@ function catalogoPquete (){
 }
 function catalogoPqueteFedex (){
 	var catPaq = [
+	{id:0,tipo: "Envelope"},
 	{id:1,tipo: "Pak"},
 	{id:2,tipo: "Box Small"},
 	{id:3,tipo: "Box Medium"},
 	{id:4,tipo: "Box Large"},
-	{id:4,tipo: "Caja"}
+	{id:5,tipo: "Caja"}
 	]
 	return catPaq;
 }
