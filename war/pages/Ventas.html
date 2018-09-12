@@ -826,7 +826,15 @@
 		<div ng-hide="!inGuia">
 		
 <div align="center"><h5>Detalle del Envio</h5></div>
-
+<br>
+<div class="row">
+<div class="col-md-3" ng-if="infGuia.guia" style="font-size: 16px;"><b>Guia : </b>{{infGuia.guia}} </div>
+<div class="col-md-3" nf-if="infGuia.rastreo" style="font-size: 16px;"><b>Rastreo:</b> {{infGuia.rastreo}}</div>
+<div class="col-md-3" nf-if="infGuia.precio" style="font-size: 16px;"><b>Costo de la Guia:</b> {{infGuia.precio | currency}}</div>
+<div class="col-md-3" nf-if="infGuia.totalEnvio" style="font-size: 16px;"><b>Costo total Envio: </b>{{infGuia.totalEnvio | currency}}</div>
+<br>
+<br>
+</div>
 
       	 <table class="table">
 			<thead align="center">
@@ -852,15 +860,19 @@
 					<td>{{infGuia.paquete.largo}} </td>
 					<td>{{infGuia.paquete.pesoVol}}</td>
 					<td>{{infGuia.paquete.peso}} </td>
-					<td>{{infGuia.costoSeguro}}</td>
+					<td>{{infGuia.costoSeguro | currency}}</td>
 					<td>{{sumMat | currency}}</td>
 					
 				</tr>
 			</tbody>	
 		</table>
+		<br>
+<br>
 		<div align="right"><button class="btn btn-info" ng-click="inGuia = false">
 							<i class="fa fa-times">Terminar Vista</i>
 						</button></div>
+						<br>
+<br>
 		</div>
      
         </div>
