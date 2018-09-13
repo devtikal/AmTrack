@@ -1,7 +1,10 @@
 package com.tikal.mensajeria.modelo.vo;
 
+import java.util.List;
+
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.tikal.mensajeria.modelo.entity.Guia;
 
 public class ResumenGuia {
 	
@@ -11,6 +14,24 @@ public class ResumenGuia {
 	 private String estatus;
 	 private String sucursal;
 	 private String tipoGuia;
+	 private Integer cantidad;
+	 private List<Guia> guias;
+	 
+	 
+	 
+	 
+	public List<Guia> getGuias() {
+		return guias;
+	}
+	public void setGuias(List<Guia> guias) {
+		this.guias = guias;
+	}
+	public Integer getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
 	public Long getId() {
 		return id;
 	}

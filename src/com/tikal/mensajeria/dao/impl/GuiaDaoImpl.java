@@ -89,9 +89,9 @@ public class GuiaDaoImpl implements GuiaDao {
 	public Guia getByNumero(String numero) {
 		// TODO Auto-generated method stub
 		System.out.println(" guias con el numero:"+numero);
-		//String num= numero.substring(0, 22);
-		//System.out.println("num:"+num);
-		List<Guia> lista = ofy().load().type(Guia.class).filter("numero",numero).list();
+		String num= numero.substring(0, 22);
+		System.out.println("num:"+num);
+		List<Guia> lista = ofy().load().type(Guia.class).filter("numero",num).list();
 		System.out.println(" guias con el numero:"+numero);
 		//String num= numero.substring(0, 22);
 		System.out.println("lista:"+lista);

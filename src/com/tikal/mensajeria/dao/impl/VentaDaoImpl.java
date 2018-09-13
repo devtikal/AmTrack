@@ -71,7 +71,7 @@ public class VentaDaoImpl implements VentaDao{
 
 	@Override
 	public List<Venta> findAllPage(int page) {
-		return ofy().load().type(Venta.class).order("fecha").offset((page-1)*10).limit(10).list();
+		return ofy().load().type(Venta.class).order("- fecha").offset((page-1)*10).limit(10).list();
 	}
 
 

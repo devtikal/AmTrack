@@ -361,11 +361,15 @@ public class GuiaController {
 						//break;
 					}else{
 						ResumenGuia rg= new ResumenGuia();
+						rg.setGuias(guias);
 						rg.setInicia(guias.get(0).getNumero());
 						rg.setTermina(guias.get(guias.size()-1).getNumero());
 						rg.setEstatus("ASIGNADA");
 						rg.setSucursal(s.getNombre());
 						rg.setTipoGuia(tipo);	
+				//		int ini= Integer.parseInt(rg.getInicia());
+				//		int fin = Integer.parseInt(rg.getTermina());
+						rg.setCantidad(guias.size());
 						res.add(rg);
 						//System.out.println("res:"+res);
 					}
@@ -376,16 +380,18 @@ public class GuiaController {
 			List<Guia> noA= new ArrayList<Guia>();
 			noA=guiaDao.getByEstatus("NO ASIGNADA");
 			if (noA.size()==0){
-				System.out.println("no hay guias NO ASIGNADAS...");
+				System.out.println("no hay guias NO ASIGNADAS...cuantas"+noA.size());
 			}else{
 				
 				ResumenGuia rg= new ResumenGuia();
+				rg.setGuias(noA);
 				ResumenGuia faltan= new ResumenGuia();
 				rg.setInicia(noA.get(0).getNumero());				
 				rg.setTermina(noA.get(noA.size()-1).getNumero());
 				rg.setEstatus("NO ASIGNADA");
 				rg.setSucursal("SIN SUCURSAL");
 				rg.setTipoGuia("-");	
+				rg.setCantidad(noA.size());
 				res.add(rg);
 			}
 			
