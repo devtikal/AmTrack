@@ -44,8 +44,8 @@
 			<thead>
 				<tr align="center">
 <!-- 					<th width="5%"></th> -->
-					<th width="15%">DE</th>
-					<th width="15%">HASTA</th>
+					<th width="15%">INICIAL</th>
+					<th width="15%">FINAL</th>
 					<th width="10%">CANTIDAD</th>
 					<th width="10%">ESTATUS</th>
 					<th width="30%">SUCURSAL</th>
@@ -58,7 +58,8 @@
 <!-- 					<td></td> -->
 					<td HEIGHT="50">{{g.inicia}}</td>
 					<td>{{g.termina}}</td>
-					<td>{{cGuias(g.inicia,g.termina)}}</td>
+					<td><button type="button" class="btn btn-link"
+										ng-click="showGuias(g)" style="color:black;">{{g.cantidad}}</button></td>
 					<td>{{g.estatus}}</td>
 					<td>{{g.sucursal}}</td>
 					<td>{{g.tipoGuia}}</td>
@@ -228,6 +229,62 @@
     </div>
   </div>
 
+
+<!--     MODAL VER GUIAS -->
+
+    <div class="modal fade" id="mdlGuias" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Lista de Gu&iacute;as</h4>
+        </div>
+        <div class="modal-body">
+             
+      
+      <div class="card-body">
+      <div class="row">
+      
+      <div class="col-md-6" style="font-size: 16px">Inicial: <b>{{ListGuias.inicia}}</b></div>
+      <div class="col-md-6" style="font-size: 16px">Final: <b>{{ListGuias.termina}}</b></div>
+      <br>
+      <br>
+      
+      </div>
+				<table class="table ">
+			<thead>
+				<tr align="center">
+<!-- 					<th width="5%"></th> -->
+					<th>N&uacute;mero de Gu&iacute;a</th>
+					<th>Tipo de Gu&iacute;a</th>
+					<th>Estatus</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="l in ListGuias.guias" class="{{g.clase}}" align="center">
+<!-- 					<td></td> -->
+					
+					<td>{{l.numero}}</td>
+					<td>{{l.tipoGuia}}</td>
+					<td>{{l.estatus}}</td>
+				</tr>
+				<tr align="center">
+				<td></td>
+				<td></td>
+					<td style="font-size: 14px">Total: <b>{{ListGuias.cantidad}}</b></td>
+				
+				</tr>
+			</tbody>	
+		</table>
+
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
 	

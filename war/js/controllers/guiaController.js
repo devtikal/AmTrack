@@ -327,7 +327,11 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 			$scope.hasta=null;
 		}
 		
-
+		$scope.showGuias = function(data){
+			$scope.ListGuias=data;
+			console.log("Detalle de Las Guias",$scope.ListGuias);
+			$("#mdlGuias").modal();
+		}
 
 } ]);
 
