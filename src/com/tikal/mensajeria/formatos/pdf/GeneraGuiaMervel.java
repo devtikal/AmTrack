@@ -205,7 +205,7 @@ public class GeneraGuiaMervel {
             cx4.setBorder(Rectangle.NO_BORDER);
             table.addCell(cx4);
             
-            Paragraph px = new Paragraph("C.P. "+e.getCliente().getCodigoPostal().toString(),f4);
+            Paragraph px = new Paragraph("C.P. "+e.getCliente().getCodigoPostal(),f4);
             PdfPCell cx = new PdfPCell(px);
             cx.setHorizontalAlignment(Element.ALIGN_LEFT);
             cx.setColspan(3);
@@ -296,7 +296,7 @@ public class GeneraGuiaMervel {
             c13.setColspan(3);
             table2.addCell(c13);
 //            
-            Paragraph p14 = new Paragraph("C.P. "+e.getDestinatario().getCodigoPostal().toString(),f4);
+            Paragraph p14 = new Paragraph("C.P. "+e.getDestinatario().getCodigoPostal(),f4);
             PdfPCell c14 = new PdfPCell(p14);
             c14.setHorizontalAlignment(Element.ALIGN_LEFT);
            //.setBackgroundColor(BaseColor.BLACK);

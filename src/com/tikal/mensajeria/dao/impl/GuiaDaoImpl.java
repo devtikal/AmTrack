@@ -88,21 +88,25 @@ public class GuiaDaoImpl implements GuiaDao {
 	@Override
 	public Guia getByNumero(String numero) {
 		// TODO Auto-generated method stub
-		System.out.println(" guias con el numero:"+numero);
-		String num= numero.substring(0, 22);
-		System.out.println("num:"+num);
-		List<Guia> lista = ofy().load().type(Guia.class).filter("numero",num).list();
-		System.out.println(" guias con el numero:"+numero);
-		//String num= numero.substring(0, 22);
-		System.out.println("lista:"+lista);
-		if (lista.size() == 0) {
-			System.out.println("no hay:");
-			return null;
-		}
-		System.out.println("lista de guias :"+lista); 
-		Guia nuevo = lista.get(0);
-		return nuevo;
-		
+		//if (numero == null){
+			System.out.println(" el numero de guia viene en nulo....");
+		//	return null;
+		//}else{
+			System.out.println(" guias con el numero:"+numero);
+			String num= numero.substring(0, 22);
+			System.out.println("num:"+num);
+			List<Guia> lista = ofy().load().type(Guia.class).filter("numero",num).list();
+			System.out.println(" guias con el numero:"+numero);
+			//String num= numero.substring(0, 22);
+			System.out.println("lista:"+lista);
+			if (lista.size() == 0) {
+				System.out.println("no hay:");
+				return null;
+			}
+			System.out.println("lista de guias :"+lista); 
+			Guia nuevo = lista.get(0);
+			return nuevo;
+		//}
 	}
 
 

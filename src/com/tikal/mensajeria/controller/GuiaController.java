@@ -296,9 +296,13 @@ public class GuiaController {
 	
 		 System.out.println("guia numero"+numeroGuia);
 			Guia g=guiaDao.getByNumero(numeroGuia);//.substring(1));
-			g.setEstatus("ASIGNADA");
-			guiaDao.update(g);
-	   
+			if (g==null){
+				response.getWriter().println("error... no hay guia con ese numero");
+			}else{
+			
+				g.setEstatus("ASIGNADA");
+				guiaDao.update(g);
+			}
 	  // System.out.println("dame guia:"+numeroGuia);
 	  //response.getWriter().println(g.getNumero());
 	  //response.getWriter().println(ok );
