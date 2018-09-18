@@ -473,7 +473,7 @@
     <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     
     CP:
-    <p><input class="input-lg" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide"  ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
+    <p><input class="input-lg" id="cpR" ng-model="paquete.cliente.codigoPostal" ng-disabled="hide" onkeypress="return Numero(event)" ng-keyup="getCP('remitente')" ng-blur="getCP('remitente')"></p>
     Calle
     <p><input class="input-lg"  ng-model="paquete.cliente.calle" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-disabled="hide"></p>
        Numero Ext
@@ -515,7 +515,7 @@
     <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
    
     CP:
-    <p><input class="input-lg" id="cpD" ng-model="paquete.destinatario.codigoPostal" ng-keyup="getCP('destinatario')" ng-blur="getCP('remitente')"></p>
+    <p><input class="input-lg" id="cpD" ng-model="paquete.destinatario.codigoPostal" onkeypress="return Numero(event)" ng-keyup="getCP('destinatario')" ng-blur="getCP('remitente')"></p>
      Calle
     <p><input class="input-lg"   ng-model="paquete.destinatario.calle" onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     Numero Ext
