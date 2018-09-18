@@ -9,7 +9,7 @@ public class Direccion {
 	private String localidad;
 	private String municipio;
 	private String estado;
-	private Integer codigoPostal;
+	private String codigoPostal;
 	public String getCalle() {
 		return calle;
 	}
@@ -52,10 +52,10 @@ public class Direccion {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Integer getCodigoPostal() {
+	public String getCodigoPostal() {
 		return codigoPostal;
 	}
-	public void setCodigoPostal(Integer codigoPostal) {
+	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 	
