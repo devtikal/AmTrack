@@ -18,7 +18,7 @@ public class Persona {
 	private String localidad;
 	private String municipio;
 	private String estado;
-	private Integer codigoPostal;
+	private String codigoPostal;
 	private String referencias;
 	private String telefono;
 	
@@ -84,10 +84,10 @@ public class Persona {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Integer getCodigoPostal() {
+	public String getCodigoPostal() {
 		return codigoPostal;
 	}
-	public void setCodigoPostal(Integer codigoPostal) {
+	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 	public String getReferencias() {

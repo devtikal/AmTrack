@@ -30,5 +30,6 @@ public interface GuiaDao {
 	
 	public Guia getByNumero (String numero);
 	
+	public Guia getByNumeroDel (String numero);
 	public void deleteAll();
 }
