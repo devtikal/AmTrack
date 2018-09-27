@@ -979,37 +979,72 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			$window.location.reload();
 		})
 	}
-	$scope.buscaUsuario=function(){
+	$scope.buscaUsuario=function(cli){
 		if($scope.paquete.empresa == 'MERVEL' || $scope.paquete.empresa == 'ESTAFETA'){
-	
+			if(cli=="re"){
 		paqueteriaService.buscaCliente($scope.paquete.cliente.nombre).then(function(data){
 			$scope.listaCliente = data;
 			if(data[0].nombre){
 			$('#modalEnvio').modal('toggle');
-			$("#mdlSelClient").modal();
+			
+			$("#mdlSelClient").modal('show');
+			
+			
 			console.log("Datos del Cliente ", data);
 			}
 		})
+		}else{
+			paqueteriaService.buscaCliente($scope.paquete.destinatario.nombre).then(function(data){
+				$scope.listaCliente = data;
+				if(data[0].nombre){
+				$('#modalEnvio').modal('toggle');
+				$("#mdlSelClientDes").modal();
+				}});
+		}
 		}
 	}
-	$scope.cancelSeleccion = function(){
-		$('#mdlSelClient').modal('toggle');
+	$scope.cancelSeleccion = function(cli){
+		if(cli=="re"){
+			$('#mdlSelClient').modal('toggle');
+		}else{
+			$('#mdlSelClientDes').modal('toggle');
+		}
 		$('#modalEnvio').modal();
 	}
-	$scope.ClienteSeleccionado = function(data){
-		$('#mdlSelClient').modal('toggle');
-		$('#modalEnvio').modal();
-		$scope.paquete.cliente.enAtencion = data.enAtencion;
-		$scope.paquete.cliente.codigoPostal = data.codigoPostal;
-		$scope.paquete.cliente.calle = data.calle;
-		$scope.paquete.cliente.noExterior = data.noExterior;
-		$scope.paquete.cliente.noInterior = data.noInterior;
-		$scope.colonia=[data.colonia];
-		$scope.paquete.cliente.localidad = data.localidad;
-		$scope.paquete.cliente.municipio = data.municipio;
-		$scope.paquete.cliente.estado = data.estado;
-		$scope.paquete.cliente.telefono = data.telefono;
-		$scope.paquete.cliente.referencias = data.referencias;
+	$scope.ClienteSeleccionado = function(data,tipo){
+		if(tipo=="re"){
+			$('#mdlSelClient').modal('toggle');
+			$('#modalEnvio').modal();
+			$scope.paquete.cliente.enAtencion = data.enAtencion;
+			$scope.paquete.cliente.codigoPostal = data.codigoPostal;
+			$scope.paquete.cliente.calle = data.calle;
+			$scope.paquete.cliente.noExterior = data.noExterior;
+			$scope.paquete.cliente.noInterior = data.noInterior;
+			//document.getElementById("slCol").value = [data.colonia];
+			$scope.colonia=[data.colonia];
+			$scope.paquete.cliente.localidad = data.localidad;
+			$scope.paquete.cliente.municipio = data.municipio;
+			$scope.paquete.cliente.estado = data.estado;
+			$scope.paquete.cliente.telefono = data.telefono;
+			$scope.paquete.cliente.referencias = data.referencias;
+		}else{
+			$('#mdlSelClientDes').modal('toggle');
+			$('#modalEnvio').modal();
+			$scope.paquete.destinatario.enAtencion = data.enAtencion;
+			$scope.paquete.destinatario.codigoPostal = data.codigoPostal;
+			$scope.paquete.destinatario.calle = data.calle;
+			$scope.paquete.destinatario.noExterior = data.noExterior;
+			$scope.paquete.destinatario.noInterior = data.noInterior;
+			//document.getElementById("slDes").value = [data.colonia];
+			$scope.coloniaD=[data.colonia];
+			//$scope.paquete.destinatario.colonia=data.colonia;
+			$scope.paquete.destinatario.localidad = data.localidad;
+			$scope.paquete.destinatario.municipio = data.municipio;
+			$scope.paquete.destinatario.estado = data.estado;
+			$scope.paquete.destinatario.telefono = data.telefono;
+			$scope.paquete.destinatario.referencias = data.referencias;
+		}
+
 		
 	}
 //	$scope.$watch('busca',function(){

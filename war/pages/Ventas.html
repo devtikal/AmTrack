@@ -468,7 +468,7 @@
   <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required id="buscaCliente" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-blur="buscaUsuario()" ng-keyup="$event.keyCode == 13 ? buscaUsuario() : null"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required id="buscaCliente" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-blur="buscaUsuario('re')" ng-keyup="$event.keyCode == 13 ? buscaUsuario('re') : null"></p>
      En Atencion a
     <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     
@@ -510,7 +510,7 @@
    <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" required ng-blur="buscaUsuario('des')" ng-keyup="$event.keyCode == 13 ? buscaUsuario('des') : null"></p>
      En Antencion a
     <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
    
@@ -526,7 +526,7 @@
      <div class="col-md-6">
        Colonia
    
-     <p><select ng-model="paquete.destinatario.colonia" class="input-lg" style="width:100%">
+     <p><select id="slDes" ng-model="paquete.destinatario.colonia" class="input-lg" style="width:100%">
     
 			<option ng-repeat="c in coloniaD">{{c}}</option>
 	  </select>
@@ -727,7 +727,7 @@
 					<td>{{e.referencias}}</td>
 					
 					<td>
-					<button class="btn btn-small btn-success" ng-click="ClienteSeleccionado(e)">
+					<button class="btn btn-small btn-success" ng-click="ClienteSeleccionado(e,'re')">
 							<i class="fa fa-chevron-circle-left"></i>
 						</button>
 						
@@ -739,7 +739,65 @@
      
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" ng-click="cancelSeleccion()" >Cerrar</button>
+          <button type="button" class="btn btn-primary" ng-click="cancelSeleccion('re')" >Cerrar</button>
+        </div>
+      </div>
+    </div>
+ </div>
+<!-- FIN -->
+ <!--   MODAL VER DATOS CLIENTE DESTINATARIO -->
+   <div class="modal fade" id="mdlSelClientDes" role="dialog" data-backdrop="static">
+<div class="modal-dialog modal-lg">
+      <div class="modal-content"  style="width:1024PX; margin-left:0; ">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Seleccionar Cliente</h4>
+        </div>
+        <div class="modal-body">
+      
+       <table class="table table-striped table-responsive">
+			<thead>
+				<tr>
+					<th width="15%">En Atencion</th>
+					<th width="5%">C.P.</th>
+					<th width="10%">Calle</th>
+					<th width="5%">No. Ext.</th>
+					<th width="5%">No. Int.</th>
+					<th width="10%">Colonia</th>
+					<th width="8%">Municipio</th>
+					<th width="10%">Estado</th>
+					<th width="10%">Telefono</th>
+					<th width="10%">Referencias</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr ng-repeat="e in listaCliente">
+					<td>{{e.enAtencion}}</td>
+					<td>{{e.codigoPostal}}</td>
+					<td>{{e.calle}} </td>
+					<td>{{e.noExterior}}</td>
+					<td>{{e.noInterior}}</td>
+					<td>{{e.colonia}}</td>
+					<td>{{e.municipio}}</td>
+					<td>{{e.estado}}</td>
+					<td>{{e.telefono}}</td>
+					<td>{{e.referencias}}</td>
+					
+					<td>
+					<button class="btn btn-small btn-success" ng-click="ClienteSeleccionado(e,'des')">
+							<i class="fa fa-chevron-circle-left"></i>
+						</button>
+						
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+
+     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="cancelSeleccion('des')" >Cerrar</button>
         </div>
       </div>
     </div>
