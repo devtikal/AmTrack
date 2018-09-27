@@ -176,8 +176,8 @@ public class EnvioController {
 		//	e=empresaDao.getByNombre(evo.getEmpresa());
 			c=ef.getCliente();
 			System.out.println("cliente:"+c.getNombre());
-			if (c.getCodigoPostal()==null || c.getCodigoPostal()==0){
-				c.setCodigoPostal(0);
+			if ( c.getCodigoPostal()==null){
+				c.setCodigoPostal("-");
 			}
 			personaDao.save(c);
 					

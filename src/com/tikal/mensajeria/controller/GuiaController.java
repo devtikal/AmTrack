@@ -220,15 +220,18 @@ public class GuiaController {
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		
-		String gui = inicio.substring(0,19);		
+		String gui = inicio.substring(0,19);	
+		//String gui = inicio.substring(0,19);	
 		Integer ini= Integer.parseInt(inicio.substring(19));
 		Integer fini= Integer.parseInt(fin.substring(19));
-		
+		System.out.println("*******gui:"+gui);
 		System.out.println("*******inicio:"+inicio);
 		System.out.println("*******fin:"+fin);
+		System.out.println("*******ini:"+ini);
+		System.out.println("*******fini:"+fini);
 		String mensaje="";
 		for (int i=ini; i<=fini; i++) {
-			Guia guia = guiaDao.getByNumero(gui+i);
+			Guia guia = guiaDao.getByNumeroDel(gui+i);
 			if (guia.getEstatus().equals("EN ENVIO")){
 				System.out.println("la guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO");
 				mensaje=mensaje+"\nLa guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO";

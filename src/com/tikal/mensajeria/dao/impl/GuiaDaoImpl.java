@@ -89,11 +89,11 @@ public class GuiaDaoImpl implements GuiaDao {
 	public Guia getByNumero(String numero) {
 		// TODO Auto-generated method stub
 		//if (numero == null){
-			System.out.println(" el numero de guia viene en nulo....");
+			//System.out.println(" el numero de guia viene en nulo....");
 		//	return null;
 		//}else{
 			System.out.println(" guias con el numero:"+numero);
-			String num= numero.substring(0, 22);
+			String num= numero.substring(0, 22); //tenia 22
 			System.out.println("num:"+num);
 			List<Guia> lista = ofy().load().type(Guia.class).filter("numero",num).list();
 			System.out.println(" guias con el numero:"+numero);
@@ -109,6 +109,30 @@ public class GuiaDaoImpl implements GuiaDao {
 		//}
 	}
 
+	
+	@Override
+	public Guia getByNumeroDel(String numero) {
+		// TODO Auto-generated method stub
+		//if (numero == null){
+			//System.out.println(" el numero de guia viene en nulo....");
+		//	return null;
+		//}else{
+			//System.out.println(" guias con el numero:"+numero);
+		//	String num= numero.substring(0, 22); //tenia 22
+			System.out.println("numero guia:"+numero);
+			List<Guia> lista = ofy().load().type(Guia.class).filter("numero",numero).list();
+			System.out.println(" guias con el numero:"+numero);
+			//String num= numero.substring(0, 22);
+			System.out.println("lista:"+lista);
+			if (lista.size() == 0) {
+				System.out.println("no hay:");
+				return null;
+			}
+			System.out.println("lista de guias :"+lista); 
+			Guia nuevo = lista.get(0);
+			return nuevo;
+		//}
+	}
 
 	@Override
 	public Guia getByEstSuc(String tipoGuia, Long idSucursal) {
