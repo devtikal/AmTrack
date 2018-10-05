@@ -679,7 +679,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 	
 	}
 	$scope.libGuia= function(g){
-		if($scope.paquete.empresa == "ESTAFETA")
+		
 		paqueteriaService.liberaGuias(g).then(function(data) {
 			console.log("se ha eliminado la guia ", g);
 		});
