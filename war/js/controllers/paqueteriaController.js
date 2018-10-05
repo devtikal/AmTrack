@@ -614,7 +614,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			paquete:{tipoPaquete:null}
 	}
 	$scope.isSobre= function (data) {
-		$scope.libGuia($scope.guardGuia);
+		//$scope.libGuia($scope.guardGuia);
 		if (data=='1Kg Sobre Sig Dia' || data=='11:30 Sobre Sig Dia'){
 			$scope.paquete.paquete.tipoPaquete="SOBRE";
 			$scope.paquete.tipoEnvio="Dia Siguiente";
@@ -805,6 +805,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 		}
 	}
 	$scope.isEstafeta = function() {
+		$scope.libGuia($scope.guardGuia);
 		$scope.disKilataje=false;
 		$scope.maxchar = 10;
 		if ($scope.paquete.empresa=="DHL"){
@@ -1148,4 +1149,3 @@ $scope.EnviarFormulario = function() {
 
 
 } ]);
-
