@@ -101,15 +101,15 @@ public class GuiaController {
 		//if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		if (guiaDao.getByNumero(inicio)==null && guiaDao.getByNumero(fin)==null){   //si ya existe la guia inicial o final
 				AsignadorDeCharset.asignar(request, response);
-				Integer ini= Integer.parseInt(inicio.substring(19));
-				Integer fini= Integer.parseInt(fin.substring(19));
+				Integer ini= Integer.parseInt(inicio.substring(18));
+				Integer fini= Integer.parseInt(fin.substring(18));
 				
 				System.out.println("-------------- ini:"+ini);
 				System.out.println("-------------- fin:"+fini);
 				
-				String gui = inicio.substring(0,19);
+				String gui = inicio.substring(0,18);
 				System.out.println("-------------- cuerpo guia inicial gui:"+gui);
-				String ni= inicio.substring(19);
+				String ni= inicio.substring(18);
 				System.out.println("-------------- :   ni:"+ni);
 				
 				System.out.println("-------------- cuerpo guia:"+gui);
@@ -121,9 +121,9 @@ public class GuiaController {
 					guia.setEstatus("NO ASIGNADA");
 					String N= String.valueOf(i);
 					System.out.println("NNNN:"+N);
-					if (N.length()<3){
-						for (int x=0;x<=2; x++){
-							if (N.length()<3){
+					if (N.length()<4){
+						for (int x=0;x<=3; x++){
+							if (N.length()<4){
 								N="0"+N;
 								System.out.println("nuevo NNNN:"+N);
 							}
@@ -174,10 +174,10 @@ public class GuiaController {
 	
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
-		String gui = inicio.substring(0,19);		
-		Integer ini= Integer.parseInt(inicio.substring(19));
-		Integer fini= Integer.parseInt(fin.substring(19));
-		String ni= inicio.substring(19);
+		String gui = inicio.substring(0,18);		
+		Integer ini= Integer.parseInt(inicio.substring(18));
+		Integer fini= Integer.parseInt(fin.substring(18));
+		String ni= inicio.substring(18);
 		System.out.println("-------------- :   ni:"+ni);
 		if (ni.startsWith("0")){
 			System.out.println("-------------- es un cero:   ni:"+ni);
@@ -220,10 +220,10 @@ public class GuiaController {
 	//				if(SesionController.verificarPermiso2(request, usuarioDao, perfilDAO, 45, sessionDao,userName)){
 		AsignadorDeCharset.asignar(request, response);
 		
-		String gui = inicio.substring(0,19);	
+		String gui = inicio.substring(0,18);	
 		//String gui = inicio.substring(0,19);	
-		Integer ini= Integer.parseInt(inicio.substring(19));
-		Integer fini= Integer.parseInt(fin.substring(19));
+		Integer ini= Integer.parseInt(inicio.substring(18));
+		Integer fini= Integer.parseInt(fin.substring(18));
 		System.out.println("*******gui:"+gui);
 		System.out.println("*******inicio:"+inicio);
 		System.out.println("*******fin:"+fin);
@@ -232,21 +232,23 @@ public class GuiaController {
 		String mensaje="";
 		for (int i=ini; i<=fini; i++) {
 			Guia guia = guiaDao.getByNumeroDel(gui+i);
-			if (guia.getEstatus().equals("EN ENVIO")){
-				System.out.println("la guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO");
-				mensaje=mensaje+"\nLa guia"+guia.getNumero()+" no se puede cancelar, porque ya esta ASIGNADA ó EN ENVIO";
-				
-			}else{
-	
-				//guia.setEstatus("CANCELADA");
-				//guiaDao.update(guia);
-				guiaDao.delete(guia);
-				mensaje ="Guias eliminadas correctamente...";
-			}
-			response.getWriter().write(JsonConvertidor.toJson(mensaje));
-		}
+			if (guia==null){}
+			else{
+				if (guia.getEstatus().equals("EN ENVIO")){
+					System.out.println("la guia"+guia.getNumero()+" no se puede cancelar, porque ya esta  EN ENVIO");
+					mensaje=mensaje+"\nLa guia"+guia.getNumero()+" no se puede cancelar, porque ya esta EN ENVIO";
+					
+				}else{
 		
-		 
+					//guia.setEstatus("CANCELADA");
+					//guiaDao.update(guia);
+					guiaDao.delete(guia);
+					mensaje ="Guias eliminadas correctamente...";
+				}
+				response.getWriter().write(JsonConvertidor.toJson(mensaje));
+			}
+		
+		}
 		
 	}
 	 @RequestMapping(value = { "/getGuia/{tipoGuia}/{empresa}/{userName}" },  method = RequestMethod.GET, produces = "application/json")
