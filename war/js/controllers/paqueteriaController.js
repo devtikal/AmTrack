@@ -613,6 +613,7 @@ app.controller("EnvioController",['$scope','$rootScope','$window', '$location', 
 			tipoEnvio:null , 
 			paquete:{tipoPaquete:null}
 	}
+
 	$scope.isSobre= function (data) {
 		//$scope.libGuia($scope.guardGuia);
 		if (data=='1Kg Sobre Sig Dia' || data=='11:30 Sobre Sig Dia'){

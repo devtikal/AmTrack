@@ -943,12 +943,15 @@
 <!-- FIN -->
 <!--   MODAL FPf -->
    <div class="modal modal-wide fade" id="modalPDF" role="dialog">
-<div class="modal-dialog modal-lg ">
-   
-      <object data="{{url}}" type="application/pdf" height="870" width="850" >
-    </object>
+<div class="modal-dialog modal-lg">
+<div class="modal-content" style="background-color: black;">
+<div class="modal-body">
 
-    </div>
+	<a class="btn btn-primary btn-block" href="{{url}}" target="_blank">Imprimir</a>
+      <object id="PDFCont" data="{{url}}" type="application/pdf" height="870" width="780" >
+    </object>
+</div>
+    </div></div>
  </div>
 <!-- FIN -->
 <!--   MODAL Cancelar Factura -->
