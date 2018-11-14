@@ -468,7 +468,8 @@
   <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required id="buscaCliente" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-blur="buscaUsuario('re')" ng-keyup="$event.keyCode == 13 ? buscaUsuario('re') : null"></p>
+    <p><input class="input-lg" ng-model="paquete.cliente.nombre" required id="buscaCliente" onkeyup="javascript:this.value=this.value.toUpperCase();" ng-blur="buscaUsuario('re')"></p>
+<!--     ng-keyup="$event.keyCode == 13 ? buscaUsuario('re') : null" -->
      En Atencion a
     <p><input class="input-lg" ng-model="paquete.cliente.enAtencion" required onkeyup="javascript:this.value=this.value.toUpperCase();"></p>
     
@@ -510,7 +511,8 @@
    <div class="row">
   <div class="col-md-6">
  	 Nombre / Empresa
-    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" required ng-blur="buscaUsuario('des')" ng-keyup="$event.keyCode == 13 ? buscaUsuario('des') : null"></p>
+    <p><input class="input-lg" ng-model="paquete.destinatario.nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" required ng-blur="buscaUsuario('des')"></p>
+<!--     ng-keyup="$event.keyCode == 13 ? buscaUsuario('des') : null" -->
      En Antencion a
     <p><input class="input-lg" ng-model="paquete.destinatario.enAtencion" onkeyup="javascript:this.value=this.value.toUpperCase();" required></p>
    
