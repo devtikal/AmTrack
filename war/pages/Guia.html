@@ -30,6 +30,11 @@
 <!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
 						
 		</div>
+				<div class="col-md-1">
+		 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#liberar">Liberar Guia</button>
+<!-- 		<button class="btn btn-small" ng-click="verTodo()">Ver Todo </button> -->
+						
+		</div>
 
 	</div>
 	<br>
@@ -285,7 +290,39 @@
         </div>
       </div>
     </div>
+  </div> 
+  
+<!--   MODAL LIBERAR GUIA -->
+
+       <div class="modal fade" id="liberar" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title">Liberaci&oacute;n de Guia</h4>
+        </div>
+        <div class="modal-body">
+             
+      
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+<!--             <label for="exampleInputEmail1">Guia a Liberar</label> -->
+            <input id="libGuia" class="form-control"type="text" placeholder="Ingresar Guia" onpaste="return false" ng-model="guiaLib" ng-keyup="maskLib('lib')"maxlength="22"> 
+          </div>
+       
+          <a class="btn btn-success btn-block" ng-disabled="btnLib" ng-click="liberaGuia(guiaLib)">Liberar</a>
+        </form>
+
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
   </div>
+<!-- FIN LIBERACION DE GUIA -->
   </div>
 
 	

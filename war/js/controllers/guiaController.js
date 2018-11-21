@@ -20,6 +20,24 @@ app.service("guiaService",['$http', '$q','$window', function($http, $q,$window){
 		return d.promise;
 	}
 	
+	this.libGuia = function(guia) {
+		var d = $q.defer();
+		$http.post("guia/liberarGuia/"+guia).then(
+				function(response) {
+//					console.log(response);
+					d.resolve(response.data);
+				},
+				function(response) {
+					if(response.status==403){
+						alert("No tiene permiso de realizar esta acción");
+//						$location.path("/login");
+					}
+					d.reject(response);
+//					$window.location.reload;
+				});
+		return d.promise;
+	}
+	
 	this.getGuia = function() {
 		var d = $q.defer();
 		$http.get("guia/getResumenGuias/").then(
@@ -183,6 +201,7 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 	$scope.maskGuia = function(tipo){
 		var de = document.getElementById('de').value;
 		var hasta = document.getElementById('hasta').value;
+		
 		if(tipo=="de"){
 			
 			if (de.length == 9){
@@ -199,6 +218,27 @@ app.controller("guiaController",['$scope','$rootScope','$window', '$location', '
 		if (de.length == 22 && hasta.length == 22){
 			$scope.btnGuardar=false;
 		}else{$scope.btnGuardar=true;}
+		
+		
+	}
+	$scope.btnLib = true;
+	$scope.maskLib = function(){
+		var lib = document.getElementById('libGuia').value;
+		if (lib.length == 9){
+			document.getElementById('libGuia').value = document.getElementById('libGuia').value + "-";
+			
+		}
+		if (lib.length == 22){
+			$scope.btnLib=false;
+		}else{$scope.btnLib=true;}
+		
+	}
+	$scope.liberaGuia = function(guia){
+		guiaService.libGuia(guia).then(function(data) {
+			alert(data);
+			$scope.guiaLib="";
+			$scope.btnLib=true;
+		});
 	}
 	guiaService.getGuia().then(function(data) {
 		$scope.guias=data;
