@@ -295,7 +295,7 @@ public class GuiaController {
 		  
 }
 	 
-	 @RequestMapping(value = { "/liberarGuia/{numeroGuia}" },  method = RequestMethod.GET)
+	 @RequestMapping(value = { "/liberarGuia/{numeroGuia}" },  method = RequestMethod.POST)
 		public void guargaGuia(HttpServletResponse response, HttpServletRequest request,@PathVariable String numeroGuia) throws IOException {
 	
 	
@@ -304,9 +304,18 @@ public class GuiaController {
 			if (g==null){
 				response.getWriter().println("error... no hay guia con ese numero");
 			}else{
-			
-				g.setEstatus("ASIGNADA");
-				guiaDao.update(g);
+				switch(g.getEstatus()){
+				case "EN ENVIO":response.getWriter().println("no se puede eliminar esa guia porque ya está en un envío");
+								break;
+				case "NO ASIGNADA":response.getWriter().println("la guia aun no ha sido asignada...");
+									break;
+				case "ASIGNADA":response.getWriter().println("la guia esta disponible...");
+								break;
+				case "EN USO":g.setEstatus("ASIGNADA");
+								guiaDao.update(g);
+								response.getWriter().println("guía "+g.getNumero()+" liberada...");
+								break;
+			}
 			}
 	  // System.out.println("dame guia:"+numeroGuia);
 	  //response.getWriter().println(g.getNumero());
@@ -314,8 +323,51 @@ public class GuiaController {
 	
 	 
 		  
-}
+	 	}
 	
+	 @RequestMapping(value = { "/liberarGuia/{numeroGuia}" },  method = RequestMethod.GET)
+		public void liberaGuia(HttpServletResponse response, HttpServletRequest request,@PathVariable String numeroGuia) throws IOException {
+	
+	
+		 System.out.println("guia numero"+numeroGuia);
+			Guia g=guiaDao.getByNumero(numeroGuia);//.substring(1));
+			if (g==null){
+				response.getWriter().println("error... no hay guia con ese numero");
+			}else{
+				
+				switch(g.getEstatus()){
+					case "EN ENVIO":response.getWriter().println("no se puede eliminar esa guia porque ya está en un envío");
+									break;
+					case "NO ASIGNADA":response.getWriter().println("la guia aun no ha sido asignada...");
+										break;
+					case "ASIGNADA":response.getWriter().println("la guia esta disponible...");
+									break;
+					case "EN USO":g.setEstatus("ASIGNADA");
+									guiaDao.update(g);
+									response.getWriter().println("guía "+g.getNumero()+" liberada...");
+									break;
+				}
+//								
+//				if (g.getEstatus().equals("EN ENVIO")){
+//					response.getWriter().println("no se puede eliminar esa guia porque ya está en un envío");
+//				}
+//				if (g.getEstatus().equals("NO ASIGNADA")){
+//					response.getWriter().println("la guia aun no ha sido asignada...");
+//				}
+//				else{
+//					g.setEstatus("ASIGNADA");
+//					guiaDao.update(g);
+//					response.getWriter().println("guía "+g.getNumero()+" liberada...");
+//				}
+			}
+	  // System.out.println("dame guia:"+numeroGuia);
+	  //response.getWriter().println(g.getNumero());
+	  //response.getWriter().println(ok );
+	
+	 
+		  
+	 	}
+	 
 	 @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
 		public void findAll(HttpServletResponse response, HttpServletRequest request) throws IOException {
 			AsignadorDeCharset.asignar(request, response);
