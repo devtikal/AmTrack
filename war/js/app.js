@@ -117,7 +117,7 @@ app.service('sessionService', [
 //						$rootScope.numNotificaciones=response.data;
 //					})
 					$location.path("/welcome");
-					$window.location.reload();
+				
 				} else {
 					$rootScope.authenticated = false;
 				}
@@ -171,6 +171,7 @@ app.controller('navigation', [ 'sessionService','$window', '$rootScope', '$scope
 					$scope.error = false;
 					$location.path("/welcome");
 				} else {
+					
 					$location.path("/login");
 					$scope.error = true;
 				}
