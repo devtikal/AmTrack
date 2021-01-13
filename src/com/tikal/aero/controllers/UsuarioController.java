@@ -44,7 +44,7 @@ public class UsuarioController {
 			if (usuario.getUsername() == null || usuario.getPassword() == null || usuario.getEmail() == null) {
 				response.sendError(400);
 			} else {
-				// System.out.println(usuario.getUsername()+"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy");
+				System.out.println(usuario.getUsername()+"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy");
 				if (!usuariodao.crearUsuario(usuario)) {
 					response.sendError(400);
 				}
