@@ -302,20 +302,20 @@ public class GuiaController {
 		 System.out.println("guia numero"+numeroGuia);
 			Guia g=guiaDao.getByNumero(numeroGuia);//.substring(1));
 			if (g==null){
-				response.getWriter().println("error... no hay guia con ese numero");
+				response.getWriter().println("Error... No hay guia con ese numero");
 			}else{
 				switch(g.getEstatus()){
-				case "EN ENVIO":response.getWriter().println("no se puede eliminar esa guia porque ya está en un envío");
+				case "EN ENVIO":response.getWriter().println("No se puede eliminar esa guia porque ya esta en un envio");
 								break;
-				case "NO ASIGNADA":response.getWriter().println("la guia aun no ha sido asignada...");
+				case "NO ASIGNADA":response.getWriter().println("La guia aun no ha sido asignada...");
 									break;
-				case "ASIGNADA":response.getWriter().println("la guia esta disponible...");
+				case "ASIGNADA":response.getWriter().println("La guia esta disponible...");
 								break;
 				case "EN USO":g.setEstatus("ASIGNADA");
 								guiaDao.update(g);
-								response.getWriter().println("guía "+g.getNumero()+" liberada...");
+								response.getWriter().println("Guia "+g.getNumero()+" liberada...");
 								break;
-			}
+				}
 			}
 	  // System.out.println("dame guia:"+numeroGuia);
 	  //response.getWriter().println(g.getNumero());
