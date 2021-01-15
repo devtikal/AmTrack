@@ -12,15 +12,16 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
- 	<context:component-scan base-package="com.tikal.aero.controller"/>
-    <context:component-scan base-package="com.tikal.aero.service.impl"/>
-     <context:component-scan base-package="com.tikal.aero.dao"/>   
-    <context:component-scan base-package="com.tikal.aero.dao.impl"/>
-    <context:component-scan base-package="com.tikal.aero.util"/>
+ 	<context:component-scan 
+ 	 base-package="com.tikal.aero.controllers,com.tikal.aero.dao,com.tikal.aero.dao.impl,com.tikal.aero.util"/>
+<!--     <context:component-scan base-package="com.tikal.aero.security"/> -->
 
        
-   
+   <bean class="com.tikal.aero.Register" scope="singleton" />
+       <bean class="com.tikal.aero.dao.impl.SerialDAOImp" />
+	<bean class="com.tikal.aero.security.PerfilDAOImp" />
+	<bean class="com.tikal.aero.security.UsuarioDAOImp" />
 
-
+<mvc:annotation-driven />
 	</beans>
     

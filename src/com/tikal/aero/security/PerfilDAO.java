@@ -2,7 +2,7 @@ package com.tikal.aero.security;
 
 import java.util.List;
 
-import com.tikal.aero.modelo.login.Perfil;
+import com.tikal.aero.modelo.Perfil;
 
 public interface PerfilDAO {
 	

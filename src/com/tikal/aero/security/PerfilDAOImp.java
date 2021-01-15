@@ -5,7 +5,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.List;
 
-import com.tikal.aero.modelo.login.Perfil;
+import com.tikal.aero.modelo.Perfil;
 
 public class PerfilDAOImp implements PerfilDAO{
 

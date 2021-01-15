@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.tikal.aero.modelo.login.Usuario;
+import com.tikal.aero.modelo.Usuario;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {

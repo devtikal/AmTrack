@@ -12,8 +12,8 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.tikal.aero.modelo.login.Perfil;
-import com.tikal.aero.modelo.login.Usuario;
+import com.tikal.aero.modelo.Perfil;
+import com.tikal.aero.modelo.Usuario;
 import com.tikal.aero.security.PerfilDAO;
 import com.tikal.aero.security.UsuarioDAO;
 import com.tikal.aero.util.JsonConvertidor;

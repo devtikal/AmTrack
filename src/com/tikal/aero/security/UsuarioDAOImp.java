@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.tikal.aero.modelo.login.Usuario;
+import com.tikal.aero.modelo.Usuario;
 
 @Repository
 public class UsuarioDAOImp implements UsuarioDAO {

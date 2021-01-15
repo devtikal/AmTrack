@@ -28,15 +28,15 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.stream.StreamSource;
 
-//import com.tikal.hospital.facturacion.FormatoFecha;
-import com.tikal.aero.modelo.login.Perfil;
-import com.tikal.aero.modelo.login.Usuario;
+//import com.tikal.aero.facturacion.FormatoFecha;
+import com.tikal.aero.modelo.Perfil;
+import com.tikal.aero.modelo.Usuario;
 import com.tikal.aero.security.PerfilDAO;
 import com.tikal.aero.security.UsuarioDAO;
-//import com.tikal.hospital.sat.cfd.Comprobante;
-//import com.tikal.hospital.sat.timbrefiscaldigital.TimbreFiscalDigital;
-//import com.tikal.hospital.security.PerfilDAO;
-//import com.tikal.hospital.security.UsuarioDAO;
+//import com.tikal.aero.sat.cfd.Comprobante;
+//import com.tikal.aero.sat.timbrefiscaldigital.TimbreFiscalDigital;
+//import com.tikal.aero.security.PerfilDAO;
+//import com.tikal.aero.security.UsuarioDAO;
 
 //import mx.gob.sat.cancelacfd.Acuse;
 

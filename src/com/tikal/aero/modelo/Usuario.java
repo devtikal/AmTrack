@@ -1,18 +1,16 @@
 /**
  * 
  */
-package com.tikal.aero.modelo.login;
+package com.tikal.aero.modelo;
 
-import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-
+import com.tikal.aero.security.Rol;
 
 /**
  * @author Tikal
@@ -24,12 +22,19 @@ public class Usuario implements UserDetails{
 	@Id Long id;
 	@Index String usuario;
 	private String pass;
-
+	private List<Rol> authorities;
 	@Index private String perfil;
 	@Index private String email;
 
 
-
+	@Override
+	public List<Rol> getAuthorities() {
+		return this.authorities;
+	}
+	
+	public List<Rol> setAuthorities(List<Rol> authorities){
+		return this.authorities = authorities;
+	}
 
 	@Override
 	public String getPassword() {
@@ -69,7 +74,15 @@ public class Usuario implements UserDetails{
 		return true;
 	}
 	
-
+	public boolean hasRole(String rol){
+		for(Rol r:this.getAuthorities()){
+			if(r.getName().compareTo(rol)==0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public String getPerfil() {
 		return perfil;
 	}
@@ -92,10 +105,5 @@ public class Usuario implements UserDetails{
 
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

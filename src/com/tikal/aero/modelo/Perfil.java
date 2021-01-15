@@ -1,4 +1,4 @@
-package com.tikal.aero.modelo.login;
+package com.tikal.aero.modelo;
 
 
 import com.googlecode.objectify.annotation.Entity;

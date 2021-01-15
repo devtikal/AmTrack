@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.tikal.aero.modelo.login.Perfil;
-import com.tikal.aero.modelo.login.Usuario;
+import com.tikal.aero.modelo.Perfil;
+import com.tikal.aero.modelo.Usuario;
 import com.tikal.aero.security.PerfilDAO;
 import com.tikal.aero.security.UsuarioDAO;
 import com.tikal.aero.util.AsignadorDeCharset;
 import com.tikal.aero.util.EmailSender;
-//import com.tikal.aero.util.EmailSender;
 import com.tikal.aero.util.JsonConvertidor;
 import com.tikal.aero.util.Util;
 
@@ -44,7 +43,7 @@ public class UsuarioController {
 			if (usuario.getUsername() == null || usuario.getPassword() == null || usuario.getEmail() == null) {
 				response.sendError(400);
 			} else {
-				System.out.println(usuario.getUsername()+"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy");
+				// System.out.println(usuario.getUsername()+"YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy");
 				if (!usuariodao.crearUsuario(usuario)) {
 					response.sendError(400);
 				}
