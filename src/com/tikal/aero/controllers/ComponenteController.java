@@ -71,7 +71,7 @@ public class ComponenteController {
 		   		entry.setnombre("nombre del componente");
 		   		entry.setclaveInterna("PARTE_1");
 		   		//entry.setD_pendientes(3);
-		   		entry.setD_cantidad(100);
+		   		//entry.setD_cantidad(100);
 		   		entry.setIdCategoria(Long.parseLong("5910974510923776"));
 		   		entry.setIdCondicion(Long.parseLong("6473924464345088"));
 		   		entry.setIdUnidad(Long.parseLong("5348024557502464"));
@@ -91,8 +91,8 @@ public class ComponenteController {
 	 /////////////////////////////////////////////////////********************************************************
 
 	 
-	 @RequestMapping(value = {"/add/{userName}"}, method = RequestMethod.POST, produces = "application/json", consumes = "application/json") 
-	   public void addComponente(HttpServletResponse response, HttpServletRequest request, @RequestBody String json, @PathVariable String userName) throws IOException{
+	 @RequestMapping(value = {"/add"}, method = RequestMethod.POST, produces = "application/json", consumes = "application/json") 
+	   public void add(HttpServletResponse response, HttpServletRequest request, @RequestBody String json) throws IOException{
 	    	  System.out.println("si entra al add por POST"+json);
 	    	 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		        try {
@@ -166,9 +166,9 @@ public class ComponenteController {
 		}
 	   
 	   
-	   @RequestMapping(value = {"/delete/{folio}/{userName}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+	   @RequestMapping(value = {"/delete/{folio}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
 	   public void deleteOrden(HttpServletResponse response, HttpServletRequest request, @RequestBody String json,
-		@PathVariable Long id, @PathVariable String userName) throws IOException {
+		@PathVariable Long id) throws IOException {
 		 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		   		componenteDao.delete(componenteDao.consult(id));
 		   }else{
@@ -219,8 +219,8 @@ public class ComponenteController {
 	
 	   
 	   
-	   @RequestMapping(value = {"/update/{userName}" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json, @PathVariable String userName)
+	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json)
 				throws IOException {
 		 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 				AsignadorDeCharset.asignar(request, response);

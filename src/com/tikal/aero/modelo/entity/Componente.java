@@ -14,8 +14,8 @@ public class Componente{
 	private String claveInterna;
 	private String claveManual;
 	private String noSerie;
-	@Index private Integer d_cantidad;
-	private Integer d_pendientes;
+	@Index private Integer cantidad;
+	private Integer pendientes;
 	@Index private String fechaApertura;
 	@Index private Long idCategoria;
 	private Long idUnidad;
@@ -26,9 +26,9 @@ public class Componente{
 	private String repisa;
 	private String imagen;
 	private Boolean certificado8130;
-	private String d_modelo;
-	private String d_marca;
-	private String d_observaciones;
+	private String modeloAeronave;
+	private String marcaAeronave;
+	private String observaciones;
 	
 	
 	
@@ -45,24 +45,38 @@ public class Componente{
 	public void setNoSerie(String noSerie) {
 		this.noSerie = noSerie;
 	}
-	public String getD_modelo() {
-		return d_modelo;
+	
+	public String getNombre() {
+		return nombre;
 	}
-	public void setD_modelo(String d_modelo) {
-		this.d_modelo = d_modelo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getD_marca() {
-		return d_marca;
+	public String getClaveInterna() {
+		return claveInterna;
 	}
-	public void setD_marca(String d_marca) {
-		this.d_marca = d_marca;
+	public void setClaveInterna(String claveInterna) {
+		this.claveInterna = claveInterna;
 	}
-	public String getD_observaciones() {
-		return d_observaciones;
+	public String getClaveManual() {
+		return claveManual;
 	}
-	public void setD_observaciones(String d_observaciones) {
-		this.d_observaciones = d_observaciones;
+	public void setClaveManual(String claveManual) {
+		this.claveManual = claveManual;
 	}
+	public String getModeloAeronave() {
+		return modeloAeronave;
+	}
+	public void setModeloAeronave(String modeloAeronave) {
+		this.modeloAeronave = modeloAeronave;
+	}
+	public String getMarcaAeronave() {
+		return marcaAeronave;
+	}
+	public void setMarcaAeronave(String marcaAeronave) {
+		this.marcaAeronave = marcaAeronave;
+	}
+
 	public Boolean getCertificado8130() {
 		return certificado8130;
 	}
@@ -130,18 +144,24 @@ public class Componente{
 	public void setclaveManual(String claveManual) {
 		this.claveManual = claveManual;
 	}
-	public Integer getD_cantidad() {
-		// if (this.getD_cantidad() < 0) d_cantidad=0;
-		return d_cantidad;
+	
+	public Integer getCantidad() {
+		return cantidad;
 	}
-	public void setD_cantidad(Integer d_cantidad) {
-		this.d_cantidad = d_cantidad;
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
-	public Integer getD_pendientes() {
-		return d_pendientes;
+	public Integer getPendientes() {
+		return pendientes;
 	}
-	public void setD_pendientes(Integer d_pendientes) {
-		this.d_pendientes = d_pendientes;
+	public void setPendientes(Integer pendientes) {
+		this.pendientes = pendientes;
+	}
+	public String getObservaciones() {
+		return observaciones;
+	}
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 	public String getAnaquel() {
 		return anaquel;

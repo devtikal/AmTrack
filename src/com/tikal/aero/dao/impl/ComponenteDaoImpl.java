@@ -61,14 +61,14 @@ public class ComponenteDaoImpl implements ComponenteDao{
 			if (old != null) {
 				old.setAnaquel(c.getAnaquel());
 				old.setCertificado8130(c.getCertificado8130());
-				old.setD_cantidad(c.getD_cantidad());
+				old.setCantidad(c.getCantidad());
 				old.setclaveInterna(c.getclaveInterna());
 				old.setnombre(c.getnombre());
-				old.setD_marca(c.getD_marca());
-				old.setD_modelo(c.getD_modelo());
-				old.setD_observaciones(c.getD_observaciones());
+				old.setMarcaAeronave(c.getMarcaAeronave());
+				old.setModeloAeronave(c.getModeloAeronave());
+				old.setObservaciones(c.getObservaciones());
 				old.setclaveManual(c.getclaveManual());
-				old.setD_pendientes(c.getD_pendientes());
+				old.setPendientes(c.getPendientes());
 				old.setFechaApertura(c.getFechaApertura());
 				old.setIdCategoria(c.getIdCategoria());
 				old.setIdCondicion(c.getIdCondicion());
@@ -96,10 +96,10 @@ public class ComponenteDaoImpl implements ComponenteDao{
 		Componente old = this.consult(id);
 		if (old != null) {
 //			//old.setDireccion(e.getDireccion());
-			old.setD_cantidad(d_cantidad);
+			old.setCantidad(d_cantidad);
 			//old.setclaveInterna(c.getclaveInterna());
 		//	old.setclaveManual(c.getclaveManual());;
-			old.setD_pendientes(d_pendientes);
+			old.setPendientes(d_pendientes);
 		//	old.setD_vale(c.getD_vale());
 		//	old.setD_requisicion(c.getD_requisicion());
 			
@@ -129,7 +129,7 @@ public class ComponenteDaoImpl implements ComponenteDao{
 		List<Componente> min = new ArrayList<Componente>();
 		List<Componente> todos = ofy().load().type(Componente.class).list();
 		for (Componente c :todos){
-			if (c.getD_cantidad()<=c.getMinimo()){
+			if (c.getCantidad()<=c.getMinimo()){
 				System.out.println("El componente ya esta en alerta de mínimo" );
 				min.add(c);				
 			}
