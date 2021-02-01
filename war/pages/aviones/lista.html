@@ -1,0 +1,120 @@
+<div class="row">
+
+	<div class="col-md-2">
+            <div class="info-box bg-info">
+              <span class="info-box-icon"><a href="#/avion/alta" ><i class="fas fa-plus" style="color: white;"></i></a></span>
+
+              <div class="info-box-content">
+                <span class="info-box-number">Alta de Aeronave</span>
+
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-lg-12">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Projects</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 3%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          Datos Aeronave
+                      </th>
+                      <th style="width: 30%">
+                          Medidas
+                      </th>
+                      <th>
+                          Proximo mantenimiento
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Status
+                      </th>
+                      <th style="width: 20%">
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="a in listaAviones">
+                      <td>
+                          #{{a.numeroAeronave}}
+                      </td>
+                      <td>
+                          <a>
+                              <span ng-if="a.modelo">Mode: <b>{{a.modelo}}</b><br></span>
+                              <span ng-if="a.matricula">Mat: <b>{{a.matricula}}</b><br></span> 
+                              <span ng-if="a.numeroSerie">Serial: <b>{{a.numeroSerie}}</b></span>
+                              
+                          </a>
+                      </td>
+                      <td>
+                          <a>
+                              <span ng-if="a.aterrizaje">Aterrisajes: <b>{{a.aterrizaje}}</b><br></span>
+                              <span ng-if="a.tiempovuelo">Hora Vuelo: <b>{{a.tiempovuelo}} Hrs</b><br></span> 
+                              <span ng-if="a.motor1">Motor 1: <b>{{a.motor1}}</b></span>
+                              <span ng-if="a.motor2">Motor 2: <b>{{a.motor2}}</b></span>
+                              
+                          </a>
+                      </td>
+                      <td class="project_progress">
+                          <div class="progress progress-sm">
+                              <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
+                              </div>
+                          </div>
+                          <small>
+                              57%
+                          </small>
+                      </td>
+                      <td class="project-state">
+                          <span class="badge badge-success">Bueno</span>
+                      </td>
+                      <td class="project-actions text-right">
+                          <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-folder">
+                              </i>
+                              Ver
+                          </a>
+                          <a class="btn btn-info btn-sm" href="#">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Editar
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="#">
+                              <i class="fas fa-trash">
+                              </i>
+                              Eliminar
+                          </a>
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </div>
+
+</div>
