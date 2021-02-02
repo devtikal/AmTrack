@@ -1,4 +1,4 @@
-app.service("avionesServices",['$http', '$q', function($http, $q){
+app.service("avionesServices",['$http', '$q','$location', function($http, $q, $location){
 	this.altaAvion=function(data){
 		var d = $q.defer();
 		$http.post("/aeronave/add",data).then(
@@ -77,7 +77,7 @@ app.controller("avionesAltaController",['$rootScope','$scope','$window', '$locat
 			numeroAeronave:"10",
 			matricula:"AOL-27163",
 			marca:"MKD2",
-			modelo:"V6123",
+			modelo:"Md1",
 			numeroSerie:"45567887654",
 			aterrizaje:"612",
 			tiempovuelo:"45679",
@@ -115,11 +115,17 @@ app.controller("avionesListaController",['$rootScope','$scope','$window', '$loca
 		})
 	}
 	
+	$scope.EliminaAeronave = function(){
+		avionesServices.borraAvion($scope.avionSeleccionado.id).then(function(data){
+			$scope.getAll();
+		})
+	}
 	
-	$( window ).on( "load", function() {
 		$scope.getAll();
 				
-	});
+		$scope.ASelect= function(data){
+			$scope.avionSeleccionado = data;
+		}
 			
 			
 }]);

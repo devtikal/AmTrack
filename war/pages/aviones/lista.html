@@ -1,7 +1,7 @@
 <div class="row">
 
 	<div class="col-md-2">
-            <div class="info-box bg-info">
+            <div class="info-box bg-secondary">
               <span class="info-box-icon"><a href="#/avion/alta" ><i class="fas fa-plus" style="color: white;"></i></a></span>
 
               <div class="info-box-content">
@@ -11,7 +11,19 @@
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-          </div>
+      </div>
+      <div class="col-md-2">
+            <div class="info-box bg-secondary">
+              <span class="info-box-icon"><a href="#/avion/componente/alta" ><i class="fas fa-plus" style="color: white;"></i></a></span>
+
+              <div class="info-box-content">
+                <span class="info-box-number">Alta de Componentes</span>
+
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      </div>
 
 </div>
 
@@ -23,7 +35,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Projects</h3>
+          <h3 class="card-title">Lista de Aeronaves</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -87,20 +99,20 @@
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success">Bueno</span>
+                          <span class="badge badge-success">Excelente</span>
                       </td>
                       <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
-                              </i>
-                              Ver
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Editar
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
+<!--                           <a class="btn btn-primary btn-sm" href="#"> -->
+<!--                               <i class="fas fa-folder"> -->
+<!--                               </i> -->
+<!--                               Ver -->
+<!--                           </a> -->
+<!--                           <a class="btn btn-info btn-sm" href="#"> -->
+<!--                               <i class="fas fa-pencil-alt"> -->
+<!--                               </i> -->
+<!--                               Editar -->
+<!--                           </a> -->
+                          <a class="btn btn-danger btn-sm" ng-click="ASelect(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
                               <i class="fas fa-trash">
                               </i>
                               Eliminar
@@ -118,3 +130,29 @@
     </div>
 
 </div>
+
+
+
+<!-- MODAL DELETE -->
+<div class="modal fade" id="mdlDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Eliminacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esta apunto de eliminar la Aeronave <b>#{{avionSeleccionado.numeroAeronave}}</b> con Matricula <b>{{avionSeleccionado.matricula}}</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="avionSeleccionado={}">Cerrar</button>
+        <button type="button" class="btn btn-danger" ng-click="EliminaAeronave()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
