@@ -90,54 +90,8 @@ public class ComponenteDaoImpl implements ComponenteDao{
        return ofy().load().type(Componente.class).id(id).now();
 		
 	}
-	@Override
-	public void updateExistencias(Long id, Integer d_cantidad, Integer d_pendientes) {
-		// TODO Auto-generated method stub
-		Componente old = this.consult(id);
-		if (old != null) {
-//			//old.setDireccion(e.getDireccion());
-			old.setCantidad(d_cantidad);
-			//old.setclaveInterna(c.getclaveInterna());
-		//	old.setclaveManual(c.getclaveManual());;
-			old.setPendientes(d_pendientes);
-		//	old.setD_vale(c.getD_vale());
-		//	old.setD_requisicion(c.getD_requisicion());
-			
-			ofy().save().entity(old);
-		
-		}
-		//return null;
-	}
+	
 
-	@Override
-	public List<Componente> getByDiscrepancia(Long idDiscrepancia) {
-		// TODO Auto-generated method stub
-		//List<Componente> comps = ofy().load().type(Componente.class).filter("folioOrden", folioOrden).list();
-		return null;
-	}
-	@Override
-	public List<Componente> getByCategoria(Long idCategoria) {
-		// TODO Auto-generated method stub
-		System.out.println("consultando componentes por categoria " );
-		return ofy().load().type(Componente.class).filter("idCategoria", idCategoria).list();
-		
-	}
-	@Override
-	public List<Componente> getMaxMin() {
-		// TODO Auto-generated method stub
-		System.out.println("obtenendo minimos......" );
-		List<Componente> min = new ArrayList<Componente>();
-		List<Componente> todos = ofy().load().type(Componente.class).list();
-		for (Componente c :todos){
-			if (c.getCantidad()<=c.getMinimo()){
-				System.out.println("El componente ya esta en alerta de mínimo" );
-				min.add(c);				
-			}
-			System.out.println("No hay componentes en alerta"+min.size() );
-			
-		}
-		
-		return min;
-	}
+
 }
  

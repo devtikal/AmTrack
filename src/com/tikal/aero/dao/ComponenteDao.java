@@ -21,17 +21,6 @@ public interface ComponenteDao {
 	
 	public List<Componente> getAll();
 	
-	public List<Componente> getAllF();
-	
-	public List<Componente> getAll0();
-	
-	public List<Componente> getByCategoria(Long idCategoria);
-	
-	public void updateExistencias(Long id, Integer existencias, Integer pendientes);
-
-	public List<Componente> getByDiscrepancia(Long idDiscrepancia);
-	
-	public List<Componente> getMaxMin();
 
 	//void findAll();
 	

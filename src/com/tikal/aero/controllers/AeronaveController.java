@@ -93,10 +93,10 @@ public class AeronaveController  {
         
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST, produces = "application/json", consumes = "application/json") 
 	   public void addAeronave(HttpServletResponse response, HttpServletRequest request,
-			   @RequestBody String json,  @PathVariable String userName) throws IOException{
+			   @RequestBody String json) throws IOException{
 	    	System.out.println("si entra al add por POST"+json);
-	    	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
-		        try {
+	    //	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+		
 		        	AsignadorDeCharset.asignar(request, response);
 		        	Aeronave a =(Aeronave) JsonConvertidor.fromJson(json, Aeronave.class);        	
 		        	
@@ -105,12 +105,10 @@ public class AeronaveController  {
 						Contador.incremeta();
 				
 		        	aeronaveDao.save(a);	            
-		        } catch (RuntimeException ignored) {
-		        	ignored.printStackTrace();
-		        }
-	    	}else{
-				response.sendError(403);
-			}
+
+//	    	}else{
+//				response.sendError(403);
+//			}
 	       
 	    }
     
@@ -131,30 +129,30 @@ public class AeronaveController  {
 	   public void deleteAeronave(HttpServletResponse response, HttpServletRequest request,
 			   @PathVariable Long id) throws IOException {
 		   ////////////ojo cuando borra aeronave, checr muy bien lo de Static en el dao y el @override de daoimpl
-			if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){    
+		//	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){    
 				   System.out.println("si esta en delete"+id);
 				   aeronaveDao.delete(aeronaveDao.consult(id));
 				   System.out.println("aeronave eliminada....");
 				   response.getWriter().println("ok");
-		   }else{
-				response.sendError(403);
-			}
+//		   }else{
+//				response.sendError(403);
+//			}
 	   }
 	   
 	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request,
 				@RequestBody String json , @PathVariable String userName)throws IOException {
 			System.out.println("obj de edgar:"+json);
-			if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+			//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 			
 				AsignadorDeCharset.asignar(request, response);
 				Aeronave a = (Aeronave) JsonConvertidor.fromJson(json, Aeronave.class);
 	
 				aeronaveDao.update(a);
 				response.getWriter().println(JsonConvertidor.toJson(a));
-			}else{
-				response.sendError(403);
-			}
+//			}else{
+//				response.sendError(403);
+//			}
 			
 		}
 	   

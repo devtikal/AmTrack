@@ -128,16 +128,7 @@ public class ComponenteController {
 		}
 	   
 	   
-	   @RequestMapping(value = { "/findByDiscrepancia/{idDiscrepancia}" }, method = RequestMethod.GET, produces = "application/json")
-		public void findByDis(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idDiscrepancia) throws IOException {
-			AsignadorDeCharset.asignar(request, response);
-			List<Componente> lista = componenteDao.getByDiscrepancia(idDiscrepancia);
-			if (lista == null) {
-				lista = new ArrayList<Componente>();
-			}
-			response.getWriter().println(JsonConvertidor.toJson(lista));
-
-		}
+	 
 	   /// trae TODOS los componentes
 	   @RequestMapping(value = { "/findAll" }, method = RequestMethod.GET, produces = "application/json")
 		public void findAllComplete(HttpServletResponse response, HttpServletRequest request) throws IOException {
@@ -152,18 +143,7 @@ public class ComponenteController {
 
 	 
 	   
-	   @RequestMapping(value = { "/getByCategoria/{idCategoria}" }, method = RequestMethod.POST, produces = "application/json")
-		public void getByCat(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idCategoria) throws IOException {
-			AsignadorDeCharset.asignar(request, response);
-			System.out.println("si entraxxxxxxx ");
-			//List<ComponenteVo> cvos= new ArrayList<ComponenteVo>();
-			List<Componente> lista = componenteDao.getByCategoria(idCategoria);			
-//					for (Componente c : lista){
-//							c.setD_pendientes(requisicionDao.getPendientes(c.getId()));
-//							componenteDao.update(c);						   
-//					}					
-			response.getWriter().println(JsonConvertidor.toJson(lista));
-		}
+	  
 	   
 	   
 	   @RequestMapping(value = {"/delete/{folio}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
