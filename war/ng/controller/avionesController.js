@@ -118,6 +118,10 @@ app.controller("avionesListaController",['$rootScope','$scope','$window', '$loca
 	$scope.EliminaAeronave = function(){
 		avionesServices.borraAvion($scope.avionSeleccionado.id).then(function(data){
 			$scope.getAll();
+			setTimeout(() => {
+				$('#mdlDelete').modal('toggle')
+			}, 500);
+			
 		})
 	}
 	

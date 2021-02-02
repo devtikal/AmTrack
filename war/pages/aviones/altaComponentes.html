@@ -1,0 +1,236 @@
+ <div class="row" >
+ <div class="col-md-6">
+            <!-- general form elements disabled -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title"></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form role="form">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Numero Aeronave</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.numeroAeronave">
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Matricula</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.matricula">
+                      </div>
+                    </div>
+                   
+                   <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Marca</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.marca">
+                      </div>
+                    </div>
+                   
+                   <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Modelo</label>
+<!--                         <input type="text" class="form-control" placeholder="..." ng-model="avion.modelo"> -->
+                        <select class="form-control" placeholder="..." ng-model="avion.modelo">
+                        	<option>Md1</option>
+                        	<option>md2</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                
+                   
+                   <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Numero de Serie</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.numeroSerie">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Aterrisajes</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.aterrizaje">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Tiempo de Vuelo</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.tiempovuelo">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Planeador</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.planeador">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Motor 1</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.motor1">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Motor 2</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.motor2">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Marcas</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.marcas">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Nacionalidad</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="avion.nacionalidad">
+                      </div>
+                    </div>
+                    
+				</div>
+                 
+                  <div class="form-group">
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+   </div>
+   <div class="col-md-6">
+   		 <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title"></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <div class="row">
+              	<div class="col-sm-6" ng-if="avion.numeroAeronave">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Numero de Aeronave</label>
+                        <span type="text" class="" >{{avion.numeroAeronave}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.matricula">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Matricula</label>
+                        <span type="text" class="" >{{avion.matricula}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.marca">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Marca</label>
+                        <span type="text" class="" >{{avion.marca}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.modelo">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Modelo</label>
+                        <span type="text" class="" >{{avion.modelo}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.numeroSerie">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Numero de Serie</label>
+                        <span type="text" class="" >{{avion.numeroSerie}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.aterrizaje">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Aterrizaje</label>
+                        <span type="text" class="" >{{avion.aterrizaje}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.tiempovuelo">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Hora Vuelo</label>
+                        <span type="text" class="" >{{avion.tiempovuelo}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.planeador">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Planeador</label>
+                        <span type="text" class="" >{{avion.planeador}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.motor1">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Motor 1</label>
+                        <span type="text" class="" >{{avion.motor1}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.motor2">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Motor 2</label>
+                        <span type="text" class="" >{{avion.motor2}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.marcas">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Marcas</label>
+                        <span type="text" class="" >{{avion.marcas}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-6" ng-if="avion.nacionalidad">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Nacionalidad</label>
+                        <span type="text" class="" >{{avion.nacionalidad}}</span>
+                      </div>
+                </div>
+                
+                <div class="col-sm-12" 
+                ng-if="avion.numeroAeronave && avion.matricula && avion.marca && avion.modelo && avion.numeroSerie && avion.aterrizaje && avion.tiempovuelo && avion.planeador && avion.motor1 && avion.motor2 && avion.marcas && avion.nacionalidad">
+                      <button class="btn btn-secondary form-control" ng-click="guardaAvion(avion)">Guardar</button>
+                </div>
+              </div>
+              </div>
+            </div>
+   </div>
+ 
+ </div>

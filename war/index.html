@@ -46,7 +46,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      
+      <li class="nav-item" ng-controller="navigation">
+        <a class="nav-link"  role="button" ng-click="cerrarSesion()"><i 
+        	class="fas fa-sign-out-alt"></i></a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
             class="fas fa-th-large"></i></a>
@@ -73,7 +76,7 @@
           <img src="https://developers.google.com/web/images/contributors/no-photo.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{user}}</a>
+          <a href="#" class="d-block">{{usr.usuario}}</a>
         </div>
       </div>
 
@@ -148,8 +151,9 @@
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
+<!-- JS -->
 <script src="dist/js/adminlte.min.js"></script>
+<script src="login/js.cookie.js"></script>
 <!-- Angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
@@ -159,3 +163,4 @@
 <script src="ng/controller/avionesController.js"></script>
 </body>
 </html>
+>
