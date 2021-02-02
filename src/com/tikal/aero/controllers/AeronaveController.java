@@ -101,7 +101,7 @@ public class AeronaveController  {
 		        	Aeronave a =(Aeronave) JsonConvertidor.fromJson(json, Aeronave.class);        	
 		        	
 		        	
-						a.setNumeroAeronave(String.valueOf(Contador.getFolio())+"N");
+						a.setNumeroAeronave(String.valueOf(Contador.getFolio()));
 						Contador.incremeta();
 				
 		        	aeronaveDao.save(a);	            
