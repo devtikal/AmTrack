@@ -125,7 +125,7 @@ public class AeronaveController  {
 		}
 	   
 	   
-	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.POST)
+	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET)
 	   public void deleteAeronave(HttpServletResponse response, HttpServletRequest request,
 			   @PathVariable Long id) throws IOException {
 		   ////////////ojo cuando borra aeronave, checr muy bien lo de Static en el dao y el @override de daoimpl
@@ -139,7 +139,7 @@ public class AeronaveController  {
 //			}
 	   }
 	   
-	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request,@RequestBody String json )throws IOException {
 			System.out.println("obj de edgar:"+json);
 			//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
