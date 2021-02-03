@@ -28,9 +28,9 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 		return d.promise;
 	}
 	
-	this.actualizaComponente=function(){
+	this.actualizaComponente=function(data){
 		var d = $q.defer();
-		$http.post("/componente/update").then(
+		$http.post("/componente/update",data).then(
 			function(response) {
 				d.resolve(response.data);
 			}, function(response) {
