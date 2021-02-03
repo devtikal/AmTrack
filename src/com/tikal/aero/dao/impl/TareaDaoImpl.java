@@ -2,11 +2,15 @@ package com.tikal.aero.dao.impl;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+
 import java.util.List;
 
-import com.tikal.aero.modelo.entity.Tarea;
+import org.springframework.stereotype.Service;
 
-public class TareaDaoImpl {
+import com.tikal.aero.dao.TareaDao;
+import com.tikal.aero.modelo.entity.Tarea;
+@Service("tareaDao")
+public class TareaDaoImpl implements TareaDao {
 
 	public void save(Tarea c) {   
 		System.out.println("si lega aqui");
@@ -18,7 +22,10 @@ public class TareaDaoImpl {
 	}
 
 	
-	
+	public List<Tarea> byComponente(Long idComponente) {                   
+
+		return ofy().load().type(Tarea.class).filter("idComponente", idComponente).list();
+	}
 
 	
 	public void delete(Tarea c) {

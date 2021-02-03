@@ -21,6 +21,6 @@ import com.tikal.aero.modelo.entity.Tarea;
 		
 		public List<Tarea> getAll();
 			
-		
+		public List<Tarea> byComponente(Long idComponente);
 	
 }

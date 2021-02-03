@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ import com.tikal.aero.util.AsignadorDeCharset;
 import com.tikal.aero.util.JsonConvertidor;
 import com.tikal.aero.util.Util;
 
+@Controller
+@RequestMapping(value="/tarea")
 public class TareaController {
 
 	
@@ -42,22 +45,22 @@ public class TareaController {
 	
 		
 	
-	 @RequestMapping(value = {"/add"}, method = RequestMethod.POST, produces = "application/json", consumes = "application/json") 
+	 @RequestMapping(value = {"/add"}, method = RequestMethod.POST, consumes = "application/json") 
 	   public void addTarea(HttpServletResponse response, HttpServletRequest request,
 			   @RequestBody String json) throws IOException{
 	    	System.out.println("si entra al add por POST"+json);
-	    	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
-		        try {
+//	    	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+//		        try {
 		        	AsignadorDeCharset.asignar(request, response);
 		        	Tarea a =(Tarea) JsonConvertidor.fromJson(json, Tarea.class);        	
 		        	
 		        	tareaDao.save(a);	            
-		        } catch (RuntimeException ignored) {
-		        	ignored.printStackTrace();
-		        }
-	    	}else{
-				response.sendError(403);
-			}
+//		        } catch (RuntimeException ignored) {
+//		        	ignored.printStackTrace();
+//		        }
+//	    	}else{
+//				response.sendError(403);
+//			}
 	       
 	    }
   
@@ -73,6 +76,17 @@ public class TareaController {
 
 		}
 	   
+	   
+	   @RequestMapping(value = { "/findAll/{idComponente}" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAllComp(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idComponente) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Tarea> lista = tareaDao.byComponente(idComponente);
+			if (lista == null) {
+				lista = new ArrayList<Tarea>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
 	   
 	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.POST)
 	   public void deleteTarea(HttpServletResponse response, HttpServletRequest request,
