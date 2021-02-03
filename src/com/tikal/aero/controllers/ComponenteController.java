@@ -149,11 +149,13 @@ public class ComponenteController {
 	   @RequestMapping(value = {"/delete/{folio}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
 	   public void deleteOrden(HttpServletResponse response, HttpServletRequest request, @RequestBody String json,
 		@PathVariable Long id) throws IOException {
-		 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+		 //	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		   		componenteDao.delete(componenteDao.consult(id));
-		   }else{
-				response.sendError(403);
-			}
+		   	  System.out.println("compponente eliminada....");
+			   response.getWriter().println("ok");
+//		   }else{
+//				response.sendError(403);
+//			}
 	   }
 	   
 	   //////////////////////////////////////////////////////////////////////////////////////////*******************
@@ -202,15 +204,15 @@ public class ComponenteController {
 	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json)
 				throws IOException {
-		 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+		 	//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 				AsignadorDeCharset.asignar(request, response);
 				Componente c = (Componente) JsonConvertidor.fromJson(json, Componente.class);
 				//Empleado e= evo.getEmpleado();
 				componenteDao.update(c);
 				response.getWriter().println(JsonConvertidor.toJson(c));
-		   }else{
-				response.sendError(403);
-			}
+//		   }else{
+//				response.sendError(403);
+//			}
 		}
 	    
 	
