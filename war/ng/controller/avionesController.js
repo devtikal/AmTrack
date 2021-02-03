@@ -90,7 +90,7 @@ app.controller("avionesAltaController",['$rootScope','$scope','$window', '$locat
 	
 	$scope.guardaAvion = function(data){
 		avionesServices.altaAvion(data).then(function(response){
-			console.log("Respuesta del servidor " + response );
+			window.location.reload();
 		});
 	}
 			

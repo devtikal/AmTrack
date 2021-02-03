@@ -67,8 +67,8 @@
                       </div>
                     </div>
                     
-                     <div class="col-sm-12 col-md-6 col-lg-4">
-                      <!-- text input -->
+                     <!-- <div class="col-sm-12 col-md-6 col-lg-4">
+                      text input
                       <div class="form-group">
                         <label>idCategoria</label>
                         <input type="text" class="form-control" placeholder="..." ng-model="componente.idCategoria">
@@ -76,7 +76,7 @@
                     </div>
                     
                      <div class="col-sm-12 col-md-6 col-lg-4">
-                      <!-- text input -->
+                      text input
                       <div class="form-group">
                         <label>idUnidad</label>
                         <input type="text" class="form-control" placeholder="..." ng-model="componente.idUnidad">
@@ -84,12 +84,12 @@
                     </div>
                     
                      <div class="col-sm-12 col-md-6 col-lg-4">
-                      <!-- text input -->
+                      text input
                       <div class="form-group">
                         <label>idCondicion</label>
                         <input type="text" class="form-control" placeholder="..." ng-model="componente.idCondicion">
                       </div>
-                    </div>
+                    </div> -->
                     
                      <div class="col-sm-12 col-md-6 col-lg-4">
                       <!-- text input -->
@@ -134,11 +134,17 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <!-- text input -->
                       <div class="form-group">
-                        <label>Tiene certificado8130</label>
-                        <select class="form-control" placeholder="..." ng-model="componente.certificado8130">
-                        	<option value="true">Si</option>
-                        	<option value="false">No</option>
-                        </select>
+                        <label>Certificado8130</label>
+                       <!--  <select class="form-control" placeholder="..." ng-model="componente.certificado8130">
+                        	<option ng-value="true">Si</option>
+                        	<option ng-value="false">No</option>
+                        </select> -->
+                        <div class="form-check">
+						    <input type="checkbox" class="form-check-input" ng-model="componente.certificado8130">
+						    <label ng-if="componente.certificado8130" class="form-check-label" for="exampleCheck1">SI</label>
+						    <label ng-if="!componente.certificado8130"class="form-check-label" for="exampleCheck1">NO</label>
+					  </div>
+                        
                       </div>
                     </div>
                     
@@ -244,8 +250,8 @@
                       </div>
                 </div>
                 
-                <div class="col-sm-6" ng-if="componente.idCategoria">
-                      <!-- text input -->
+                <!-- <div class="col-sm-6" ng-if="componente.idCategoria">
+                      text input
                       <div class="form-group">
                         <label>idCategoria</label>
                         <span type="text" class="" >{{componente.idCategoria}}</span>
@@ -253,7 +259,7 @@
                 </div>
                 
                 <div class="col-sm-6" ng-if="componente.idUnidad">
-                      <!-- text input -->
+                      text input
                       <div class="form-group">
                         <label>idUnidad</label>
                         <span type="text" class="" >{{componente.idUnidad}}</span>
@@ -261,12 +267,12 @@
                 </div>
                 
                 <div class="col-sm-6" ng-if="componente.idCondicion">
-                      <!-- text input -->
+                      text input
                       <div class="form-group">
                         <label>idCondicion</label>
                         <span type="text" class="" >{{componente.idCondicion}}</span>
                       </div>
-                </div>
+                </div> -->
                 
                 <div class="col-sm-6" ng-if="componente.maximo">
                       <!-- text input -->
@@ -312,7 +318,8 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label>Tiene Certificado8130</label>
-                        <span type="text" class="" >{{componente.certificado8130}}</span>
+                        <span ng-if="componente.certificado8130" type="text" class="" >SI</span>
+                        <span ng-if="!componente.certificado8130" type="text" class="" >NO</span>
                       </div>
                 </div>
                 
@@ -343,9 +350,8 @@
                 
                 <div class="col-sm-12" 
                 ng-if="componente.nombre && componente.claveInterna && componente.claveManual && componente.noSerie && componente.cantidad && 
-                componente.pendientes && componente.fechaApertura && componente.idCategoria && componente.idUnidad && componente.idCondicion && 
-                componente.maximo && componente.minimo && componente.anaquel && componente.repisa && componente.imagen && 
-                componente.certificado8130 && componente.modeloAeronave && componente.marcaAeronave && componente.observaciones">
+                componente.pendientes && componente.fechaApertura && componente.maximo && componente.minimo && componente.anaquel && 
+                componente.repisa && componente.imagen && componente.modeloAeronave && componente.marcaAeronave && componente.observaciones">
                       <button class="btn btn-secondary form-control" ng-click="guardaComponente(componente)">Guardar</button>
                 </div>
               </div>

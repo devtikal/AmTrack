@@ -7,7 +7,6 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			}, function(response) {
 				if(response.status==403){
 					alert("No esta autorizado para realizar esta accion");
-					$location.path("/");
 				}
 			});
 		return d.promise;
@@ -21,7 +20,9 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			}, function(response) {
 				if(response.status==403){
 					alert("No esta autorizado para realizar esta accion");
-					$location.path("/");
+				}
+				if(response.status!=403){
+					alert("No se ha podido procesar la solicitud");
 				}
 			});
 		return d.promise;
@@ -35,7 +36,9 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			}, function(response) {
 				if(response.status==403){
 					alert("No esta autorizado para realizar esta accion");
-					$location.path("/");
+				}
+				if(response.status!=403){
+					alert("No se ha podido procesar la solicitud");
 				}
 			});
 		return d.promise;
@@ -49,7 +52,9 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			}, function(response) {
 				if(response.status==403){
 					alert("No esta autorizado para realizar esta accion");
-					$location.path("/");
+				}
+				if(response.status!=403){
+					alert("No se ha podido procesar la solicitud");
 				}
 			});
 		return d.promise;
@@ -73,7 +78,7 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 	$scope.editaComponente = function(data){
 		componentesServices.actualizaComponente(data).then(function(resp){
 			alert("Se ha actualizacon correctamente")
-			$location.reload();
+			window.location.reload();
 		});
 	}
 	$scope.onEliminarComponente = function(data){
@@ -104,7 +109,7 @@ app.controller("componentesAltaController",['$rootScope','$scope','$window', '$l
 			anaquel:null,
 			repisa:null,
 			imagen:null,
-			certificado8130:null,
+			certificado8130:false,
 			modeloAeronave:null,
 			marcaAeronave:null,
 			observaciones:null
@@ -112,7 +117,7 @@ app.controller("componentesAltaController",['$rootScope','$scope','$window', '$l
 	$scope.guardaComponente = function(data){
 		componentesServices.altaComponente(data).then(function(){
 			alert("Se ha registrado correctamente el componente")
-			$location.reload();
+			window.location.reload();
 			
 		});
 	}
