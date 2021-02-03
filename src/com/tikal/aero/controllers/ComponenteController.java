@@ -90,11 +90,11 @@ public class ComponenteController {
 	 /////////////////////////////////////////////////////********************************************************
 
 	 
-	 @RequestMapping(value = {"/add"}, method = RequestMethod.POST, produces = "application/json", consumes = "application/json") 
+	 @RequestMapping(value = {"/add"}, method = RequestMethod.POST, consumes = "application/json") 
 	   public void add(HttpServletResponse response, HttpServletRequest request, @RequestBody String json) throws IOException{
 	    	  System.out.println("si entra al add por POST"+json);
-	    	 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
-		        try {
+//	    	 	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
+//		        try {
 		        	AsignadorDeCharset.asignar(request, response);
 		        	// System.out.println("request......."+request);
 		        	// System.out.println("request......."+response);
@@ -103,15 +103,16 @@ public class ComponenteController {
 		        	//pegar el valor de empresa, aeronave y contacato
 		        	//cmp.setD_pendientes(50);//aqui va funcion para calcular cuantas piezas pendientes hay de cada componente
 		        	//orden.setFolio(1111);
-		        	componenteDao.save(cmp);	            
-		        } catch (RuntimeException ignored) {
-		        	ignored.printStackTrace();
-		            // getUniqueEntity should throw exception
-		        }
-	      }else{
-			response.sendError(403);
-		  }
-	       
+		        	componenteDao.save(cmp);	   
+		        	
+//		        } catch (RuntimeException ignored) {
+//		        	ignored.printStackTrace();
+//		            // getUniqueEntity should throw exception
+//		        }
+//	      }else{
+//			response.sendError(403);
+//		  }
+//	       
 	    }
 	 
 	   /////////////////////////////////////////////////////////////////////////////////////////**********************
@@ -145,9 +146,8 @@ public class ComponenteController {
 	  
 	   
 	   
-	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
-	   public void deletComp(HttpServletResponse response, HttpServletRequest request,
-		@PathVariable Long id) throws IOException {
+	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET, consumes = "application/json")
+	   public void deletComp(HttpServletResponse response, HttpServletRequest request,@PathVariable Long id) throws IOException {
 		 //	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		   		componenteDao.delete(componenteDao.consult(id));
 		   	  System.out.println("compponente eliminada....");
@@ -198,8 +198,18 @@ public class ComponenteController {
 	   
 	   
 	
-	   
-	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+//	   @RequestMapping(value={"/update"},method= RequestMethod.POST, consumes="application/json")
+//		public void update(HttpServletResponse res, HttpServletRequest req, @RequestBody String json) throws IOException{
+//			AsignadorDeCharset.asignar(req, res);
+//			
+//			Cliente cliente= (Cliente) JsonConvertidor.fromJson(json, Cliente.class);
+//			System.out.println("clienteSaldo:"+cliente.getSaldo());
+//			if(cliente.getTipo().compareTo("cliente")==0){
+//				cliente.setNickname(cliente.getNombre()+" "+cliente.getApePaterno()+ " "+ cliente.getApeMaterno());
+//			}
+//			clientedao.save(cliente);
+//		}
+	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json)
 				throws IOException {
 		 	//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
@@ -207,7 +217,7 @@ public class ComponenteController {
 				Componente c = (Componente) JsonConvertidor.fromJson(json, Componente.class);
 				//Empleado e= evo.getEmpleado();
 				componenteDao.update(c);
-				response.getWriter().println(JsonConvertidor.toJson(c));
+			//	response.getWriter().println(JsonConvertidor.toJson(c));
 //		   }else{
 //				response.sendError(403);
 //			}
