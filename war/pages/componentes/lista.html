@@ -1,0 +1,345 @@
+<div class="row">
+
+      <div class="col-md-2">
+            <div class="info-box bg-secondary">
+              <span class="info-box-icon"><a href="#/componente/alta" ><i class="fas fa-plus" style="color: white;"></i></a></span>
+
+              <div class="info-box-content">
+                <span class="info-box-number">Alta de Componentes</span>
+
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      </div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-lg-12">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Lista de Componentes</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th>
+                      
+                      </th>
+                      <th style="width: 20%">
+                          Informacion
+                      </th>
+                      <th style="width: 30%">
+                          Almacenamiento
+                      </th>
+                      <th>
+                          Ubicacion
+                      </th>
+                      <th>
+                          Aeronave
+                      </th>
+                      <th style="width: 20%">
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="a in listaComponentes">
+                      <td>
+                      
+                      </td>
+                      <td>
+                          <a>
+                              <span ng-if="a.nombre">Nombre: <b>{{a.nombre}}</b><br></span>
+                              <span ng-if="a.claveInterna">Clave Int: <b>{{a.claveInterna}}</b><br></span> 
+                              <span ng-if="a.claveManual">Clave Manual: <b>{{a.claveManual}}</b><br></span>
+                              <span ng-if="a.noSerie">No. Serie: <b>{{a.noSerie}}</b><br></span>
+                              <span ng-if="a.certificado8130">Certificado8130: <b>SI</b><br></span>
+                              
+                          </a>
+                      </td>
+                      <td>
+                          <a>
+                              <span ng-if="a.fechaApertura">Fecha Apertura: <b>{{a.fechaApertura  | date :  "EEEE, d MMMM, y"}}</b><br></span>
+                              <span ng-if="a.cantidad">Cantidad: <b>{{a.cantidad}}</b><br></span> 
+                              <span ng-if="a.pendientes">Pendientes: <b>{{a.pendientes}}</b><br></span>
+                              <span ng-if="a.maximo">Maximo: <b>{{a.maximo}}</b><br></span> 
+                              <span ng-if="a.minimo">Minimo: <b>{{a.minimo}}</b><br></span>
+                              
+                          </a>
+                      </td>
+                      <td>
+                          <a>
+                              <span ng-if="a.anaquel">Anaquel: <b>{{a.anaquel}}</b><br></span> 
+                              <span ng-if="a.repisa">Repisa: <b>{{a.repisa}}</b><br></span>
+                              
+                          </a>
+                      </td>
+                      <td >
+                          <a>
+                              <span ng-if="a.marcaAeronave">Marca Aeronave: <b>{{a.marcaAeronave}}</b><br></span> 
+                              <span ng-if="a.modeloAeronave">Modelo Aeronave: <b>{{a.modeloAeronave}}</b><br></span>
+                              
+                          </a>
+                      </td>
+                      <td class="project-actions text-right">
+                         <!--  <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-folder">
+                              </i>
+                              Ver
+                          </a> -->
+                          <a class="btn btn-info btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlEdita" style="color: white;">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Editar
+                          </a>
+                          <a class="btn btn-danger btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
+                              <i class="fas fa-trash">
+                              </i>
+                              Eliminar
+                          </a>
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </div>
+
+</div>
+
+
+
+<!-- MODAL DELETE -->
+<div class="modal fade" id="mdlDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion de Eliminacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esta apunto de eliminar el Componente <b>{{componente.nombre}}</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="avionSeleccionado={}">Cerrar</button>
+        <button type="button" class="btn btn-danger" ng-click="onEliminarComponente(componente)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL EDITA -->
+<div class="modal fade" id="mdlEdita" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edicion de Componente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+			<form role="form">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.nombre">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Clave Interna</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.claveInterna">
+                      </div>
+                    </div>
+                   
+                   <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Clave Manual</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.claveManual">
+                      </div>
+                    </div>
+                   
+                   <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Numero Serie</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.noSerie">
+                        
+                      </div>
+                    </div>
+                    
+                
+                   
+                   <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.cantidad">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Pendientes</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.pendientes">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Fecha Apertura</label>
+                        <input type="date" class="form-control" placeholder="..." ng-model="componente.fechaApertura">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>idCategoria</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.idCategoria">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>idUnidad</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.idUnidad">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>idCondicion</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.idCondicion">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Maximo</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.maximo">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Minimo</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.minimo">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Anaquel</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.anaquel">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Repisa</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.repisa">
+                      </div>
+                    </div>
+                    
+                     <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Imagen</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.imagen">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Certificado8130</label>
+                       <!--  <select class="form-control" placeholder="..." ng-model="componente.certificado8130">
+                        	<option ng-value="true">Si</option>
+                        	<option ng-value="false">No</option>
+                        </select> -->
+                        <div class="form-check">
+						    <input type="checkbox" class="form-check-input" ng-model="componente.certificado8130">
+						    <label ng-if="componente.certificado8130" class="form-check-label" for="exampleCheck1">SI</label>
+						    <label ng-if="!componente.certificado8130"class="form-check-label" for="exampleCheck1">NO</label>
+					  </div>
+                        
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Modelo Aeronave</label>
+                        
+                        <select class="form-control" placeholder="..." ng-model="componente.modeloAeronave">
+                        	<option>Md1</option>
+                        	<option>md2</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Marca Aeronave</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.marcaAeronave">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Observaciones</label>
+                        <input type="text" class="form-control" placeholder="..." ng-model="componente.observaciones">
+                      </div>
+                    </div>
+                    
+				</div>
+                 
+                  <div class="form-group">
+                  </div>
+                </form>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="avionSeleccionado={}">Cerrar</button>
+        <button type="button" class="btn btn-primary" ng-click="editaComponente(componente)">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -8,6 +8,14 @@ app.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : "pages/aviones/lista.html",
 		controller : "avionesListaController"
 	});
+	$routeProvider.when('/componente/alta', {
+		templateUrl : "pages/componentes/alta.html",
+		controller : "componentesAltaController"
+	});
+	$routeProvider.when('/componente/lista', {
+		templateUrl : "pages/componentes/lista.html",
+		controller : "componentesListaController"
+	});
 	$routeProvider.otherwise({
 		redirectTo : '/',
 		templateUrl : "pages/inicio.html",
