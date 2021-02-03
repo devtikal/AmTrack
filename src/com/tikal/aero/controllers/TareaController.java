@@ -77,6 +77,17 @@ public class TareaController {
 		}
 	   
 	   
+	   @RequestMapping(value = { "/findAll/{idComponente}" }, method = RequestMethod.GET, produces = "application/json")
+		public void findAllComp(HttpServletResponse response, HttpServletRequest request, @PathVariable Long idComponente) throws IOException {
+			AsignadorDeCharset.asignar(request, response);
+			List<Tarea> lista = tareaDao.byComponente(idComponente);
+			if (lista == null) {
+				lista = new ArrayList<Tarea>();
+			}
+			response.getWriter().println(JsonConvertidor.toJson(lista));
+
+		}
+	   
 	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.POST)
 	   public void deleteTarea(HttpServletResponse response, HttpServletRequest request,
 			   @PathVariable Long id) throws IOException {

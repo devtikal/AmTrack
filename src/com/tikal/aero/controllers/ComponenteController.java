@@ -48,7 +48,6 @@ public class ComponenteController {
 		
 	 
 	 @Autowired
-
 	 ComponenteDao componenteDao;
 
 
