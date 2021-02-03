@@ -9,13 +9,13 @@
               <div class="card-body">
                 <form role="form">
                   <div class="row">
-                    <div class="col-sm-12">
-                      <!-- text input -->
+                    <!-- <div class="col-sm-12">
+                      text input
                       <div class="form-group">
                         <label>Numero Aeronave</label>
                         <input type="text" class="form-control" placeholder="..." ng-model="avion.numeroAeronave">
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col-sm-12">
                       <!-- text input -->
                       <div class="form-group">
@@ -128,13 +128,7 @@
               <!-- /.card-header -->
               <div class="card-body">
               <div class="row">
-              	<div class="col-sm-6" ng-if="avion.numeroAeronave">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Numero de Aeronave</label>
-                        <span type="text" class="" >{{avion.numeroAeronave}}</span>
-                      </div>
-                </div>
+              	
                 
                 <div class="col-sm-6" ng-if="avion.matricula">
                       <!-- text input -->
@@ -225,7 +219,7 @@
                 </div>
                 
                 <div class="col-sm-12" 
-                ng-if="avion.numeroAeronave && avion.matricula && avion.marca && avion.modelo && avion.numeroSerie && avion.aterrizaje && avion.tiempovuelo && avion.planeador && avion.motor1 && avion.motor2 && avion.marcas && avion.nacionalidad">
+                ng-if="avion.matricula && avion.marca && avion.modelo && avion.numeroSerie && avion.aterrizaje && avion.tiempovuelo && avion.planeador && avion.motor1 && avion.motor2 && avion.marcas && avion.nacionalidad">
                       <button class="btn btn-secondary form-control" ng-click="guardaAvion(avion)">Guardar</button>
                 </div>
               </div>

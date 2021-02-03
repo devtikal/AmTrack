@@ -41,9 +41,9 @@ app.service("avionesServices",['$http', '$q','$location', function($http, $q, $l
 			});
 		return d.promise;
 	}
-	this.actualizaAvion=function(){
+	this.actualizaAvion=function(data){
 		var d = $q.defer();
-		$http.post("/aeronave/update/").then(
+		$http.post("/aeronave/update/",data).then(
 			function(response) {
 				console.log(response);
 				d.resolve(response.data);
@@ -58,35 +58,21 @@ app.service("avionesServices",['$http', '$q','$location', function($http, $q, $l
 	
 }]);
 app.controller("avionesAltaController",['$rootScope','$scope','$window', '$location', '$cookieStore','avionesServices','$rootScope', function($rootScope,$scope, $window, $location, $cookieStore, avionesServices,$rootScope){
-//	$scope.avion = {
-//		numeroAeronave:null,
-//		matricula:null,
-//		marca:null,
-//		modelo:null,
-//		numeroSerie:null,
-//		aterrizaje:null,
-//		tiempovuelo:null,
-//		planeador:null,
-//		motor1:null,
-//		motor2:null,
-//		marcas:null,
-//		nacionalidad:null
-//	}
-	
 	$scope.avion = {
-			numeroAeronave:"10",
-			matricula:"AOL-27163",
-			marca:"MKD2",
-			modelo:"Md1",
-			numeroSerie:"45567887654",
-			aterrizaje:"612",
-			tiempovuelo:"45679",
-			planeador:"23456",
-			motor1:"344443458",
-			motor2:"987654343",
-			marcas:"23453",
-			nacionalidad:"MX"
-		}
+		matricula:null,
+		marca:null,
+		modelo:null,
+		numeroSerie:null,
+		aterrizaje:null,
+		tiempovuelo:null,
+		planeador:null,
+		motor1:null,
+		motor2:null,
+		marcas:null,
+		nacionalidad:null
+	}
+	
+
 	
 	$scope.guardaAvion = function(data){
 		avionesServices.altaAvion(data).then(function(response){
@@ -123,6 +109,13 @@ app.controller("avionesListaController",['$rootScope','$scope','$window', '$loca
 			}, 500);
 			
 		})
+	}
+	$scope.editaAvion = function(data){
+		avionesServices.actualizaAvion(data).then(function(){
+			alert("Se ha actualizacon correctamente")
+			$('#mdlEdita').modal('toggle')
+//			window.location.reload();
+		});
 	}
 	
 		$scope.getAll();
