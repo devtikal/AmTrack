@@ -17,9 +17,10 @@ public class Componente{
 	@Index private Integer cantidad;
 	private Integer pendientes;
 	@Index private String fechaApertura;
-	@Index private Long idCategoria;
-	private Long idUnidad;
-	private Long idCondicion;
+//	@Index private Long idCategoria;
+//	private Long idUnidad;
+//	private Long idCondicion;
+	private String unidad;
 	private Integer maximo;
 	private Integer minimo;
 	private String anaquel;
@@ -95,23 +96,12 @@ public class Componente{
 	public void setMinimo(Integer minimo) {
 		this.minimo = minimo;
 	}
-	public Long getIdUnidad() {
-		return idUnidad;
+	
+	public String getUnidad() {
+		return unidad;
 	}
-	public void setIdUnidad(Long idUnidad) {
-		this.idUnidad = idUnidad;
-	}
-	public Long getIdCondicion() {
-		return idCondicion;
-	}
-	public void setIdCondicion(Long idCondicion) {
-		this.idCondicion = idCondicion;
-	}
-	public Long getIdCategoria() {
-		return idCategoria;
-	}
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
 	}
 	public String getFechaApertura() {
 		return fechaApertura;

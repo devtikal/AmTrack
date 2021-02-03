@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import com.tikal.aero.dao.ComponenteDao;
+import com.tikal.aero.modelo.entity.Aeronave;
 import com.tikal.aero.modelo.entity.Componente;
 import com.tikal.aero.security.PerfilDAO;
 import com.tikal.aero.security.UsuarioDAO;
@@ -72,9 +73,7 @@ public class ComponenteController {
 		   		entry.setclaveInterna("PARTE_1");
 		   		//entry.setD_pendientes(3);
 		   		//entry.setD_cantidad(100);
-		   		entry.setIdCategoria(Long.parseLong("5910974510923776"));
-		   		entry.setIdCondicion(Long.parseLong("6473924464345088"));
-		   		entry.setIdUnidad(Long.parseLong("5348024557502464"));
+		   		
 		   		entry.setMaximo(900);
 		   		entry.setMinimo(2);
 		   		//entry.setD_requisicion("num de requisicion");
@@ -146,8 +145,8 @@ public class ComponenteController {
 	  
 	   
 	   
-	   @RequestMapping(value = {"/delete/{folio}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
-	   public void deleteOrden(HttpServletResponse response, HttpServletRequest request, @RequestBody String json,
+	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+	   public void deletComp(HttpServletResponse response, HttpServletRequest request,
 		@PathVariable Long id) throws IOException {
 		 //	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		   		componenteDao.delete(componenteDao.consult(id));
@@ -199,7 +198,6 @@ public class ComponenteController {
 	   
 	   
 	
-	   
 	   
 	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json)

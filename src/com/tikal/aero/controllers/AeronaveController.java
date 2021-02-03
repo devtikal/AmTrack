@@ -140,8 +140,7 @@ public class AeronaveController  {
 	   }
 	   
 	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-		public void update(HttpServletResponse response, HttpServletRequest request,
-				@RequestBody String json , @PathVariable String userName)throws IOException {
+		public void update(HttpServletResponse response, HttpServletRequest request,@RequestBody String json )throws IOException {
 			System.out.println("obj de edgar:"+json);
 			//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 			

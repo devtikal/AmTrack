@@ -70,9 +70,7 @@ public class ComponenteDaoImpl implements ComponenteDao{
 				old.setclaveManual(c.getclaveManual());
 				old.setPendientes(c.getPendientes());
 				old.setFechaApertura(c.getFechaApertura());
-				old.setIdCategoria(c.getIdCategoria());
-				old.setIdCondicion(c.getIdCondicion());
-				old.setIdUnidad(c.getIdUnidad());
+				old.setUnidad(c.getUnidad());
 				old.setMaximo(c.getMaximo());
 				old.setMinimo(c.getMinimo());
 				old.setNoSerie(c.getNoSerie());
