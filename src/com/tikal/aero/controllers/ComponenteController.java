@@ -146,7 +146,7 @@ public class ComponenteController {
 	  
 	   
 	   
-	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET, consumes = "application/json")
+	   @RequestMapping(value = {"/delete/{id}" }, method = RequestMethod.GET)
 	   public void deletComp(HttpServletResponse response, HttpServletRequest request,@PathVariable Long id) throws IOException {
 		 //	if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 		   		componenteDao.delete(componenteDao.consult(id));
