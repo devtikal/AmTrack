@@ -28,7 +28,7 @@ app.controller('navigation', [ '$window', '$rootScope', '$scope','$http', '$loca
 		
 		$scope.cerrarSesion = function(){
 			$http.get("/usuario/cerrarSesion").success(function(data) {
-				window.location.href="/login"
+				window.location.href="/login/"
 			})
 		};
 } ]);
@@ -37,7 +37,7 @@ app.run(['$rootScope','$http','$cookieStore',function ($rootScope,$http,$cookieS
 		$rootScope.usr = JSON.parse(Cookies.get('usuario'))
 	}).error(function(data) {
 	    Cookies.remove('usuario');
-	    window.location.href="/login"
+	    window.location.href="/login/"
 	});
 	
 }]);

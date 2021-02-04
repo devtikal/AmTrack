@@ -51,21 +51,21 @@
                       </div>
                     </div>
                     
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Pendientes</label>
-                        <input type="text" class="form-control" placeholder="..." ng-model="componente.pendientes">
-                      </div>
-                    </div>
+<!--                     <div class="col-sm-12 col-md-6 col-lg-4"> -->
+<!--                       text input -->
+<!--                       <div class="form-group"> -->
+<!--                         <label>Pendientes</label> -->
+<!--                         <input type="text" class="form-control" placeholder="..." ng-model="componente.pendientes"> -->
+<!--                       </div> -->
+<!--                     </div> -->
                     
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Fecha Apertura</label>
-                        <input type="date" class="form-control" placeholder="..." ng-model="componente.fechaApertura">
-                      </div>
-                    </div>
+<!--                     <div class="col-sm-12 col-md-6 col-lg-4"> -->
+<!--                       text input -->
+<!--                       <div class="form-group"> -->
+<!--                         <label>Fecha Apertura</label> -->
+<!--                         <input type="date" class="form-control" placeholder="..." ng-model="componente.fechaApertura"> -->
+<!--                       </div> -->
+<!--                     </div> -->
                     
                      <!-- <div class="col-sm-12 col-md-6 col-lg-4">
                       text input
@@ -234,21 +234,21 @@
                       </div>
                 </div>
                 
-                <div class="col-sm-6" ng-if="componente.pendientes">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Pendientes</label>
-                        <span type="text" class="" >{{componente.pendientes}}</span>
-                      </div>
-                </div>
+<!--                 <div class="col-sm-6" ng-if="componente.pendientes"> -->
+<!--                       text input -->
+<!--                       <div class="form-group"> -->
+<!--                         <label>Pendientes</label> -->
+<!--                         <span type="text" class="" >{{componente.pendientes}}</span> -->
+<!--                       </div> -->
+<!--                 </div> -->
                 
-                <div class="col-sm-6" ng-if="componente.fechaApertura">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Fecha Apertura</label>
-                        <span type="text" class="" >{{componente.fechaApertura | date :  "EEEE, d MMMM, y"}}</span>
-                      </div>
-                </div>
+<!--                 <div class="col-sm-6" ng-if="componente.fechaApertura"> -->
+<!--                       text input -->
+<!--                       <div class="form-group"> -->
+<!--                         <label>Fecha Apertura</label> -->
+<!--                         <span type="text" class="" >{{componente.fechaApertura | date :  "EEEE, d MMMM, y"}}</span> -->
+<!--                       </div> -->
+<!--                 </div> -->
                 
                 <!-- <div class="col-sm-6" ng-if="componente.idCategoria">
                       text input
@@ -350,7 +350,7 @@
                 
                 <div class="col-sm-12" 
                 ng-if="componente.nombre && componente.claveInterna && componente.claveManual && componente.noSerie && componente.cantidad && 
-                componente.pendientes && componente.fechaApertura && componente.maximo && componente.minimo && componente.anaquel && 
+                componente.maximo && componente.minimo && componente.anaquel && 
                 componente.repisa && componente.imagen && componente.modeloAeronave && componente.marcaAeronave && componente.observaciones">
                       <button class="btn btn-secondary form-control" ng-click="guardaComponente(componente)">Guardar</button>
                 </div>
