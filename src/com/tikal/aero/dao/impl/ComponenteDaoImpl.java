@@ -68,8 +68,7 @@ public class ComponenteDaoImpl implements ComponenteDao{
 				old.setModeloAeronave(c.getModeloAeronave());
 				old.setObservaciones(c.getObservaciones());
 				old.setclaveManual(c.getclaveManual());
-				old.setPendientes(c.getPendientes());
-				old.setFechaApertura(c.getFechaApertura());
+				
 				old.setUnidad(c.getUnidad());
 				old.setMaximo(c.getMaximo());
 				old.setMinimo(c.getMinimo());
