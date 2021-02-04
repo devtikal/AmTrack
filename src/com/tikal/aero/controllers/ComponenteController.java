@@ -77,7 +77,7 @@ public class ComponenteController {
 		   		entry.setMinimo(2);
 		   		//entry.setD_requisicion("num de requisicion");
 		   		//entry.setD_vale("numero de vale");
-		   		entry.setFechaApertura("01/12/2017");
+		   	//	entry.setFechaApertura("01/12/2017");
 		  
 	            System.out.println("si asign/ valor"+entry);
 	      

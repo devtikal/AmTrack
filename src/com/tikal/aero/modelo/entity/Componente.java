@@ -15,8 +15,8 @@ public class Componente{
 	private String claveManual;
 	private String noSerie;
 	@Index private Integer cantidad;
-	private Integer pendientes;
-	@Index private String fechaApertura;
+	
+
 //	@Index private Long idCategoria;
 //	private Long idUnidad;
 //	private Long idCondicion;
@@ -103,12 +103,7 @@ public class Componente{
 	public void setUnidad(String unidad) {
 		this.unidad = unidad;
 	}
-	public String getFechaApertura() {
-		return fechaApertura;
-	}
-	public void setFechaApertura(String fechaApertura) {
-		this.fechaApertura = fechaApertura;
-	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -141,12 +136,7 @@ public class Componente{
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Integer getPendientes() {
-		return pendientes;
-	}
-	public void setPendientes(Integer pendientes) {
-		this.pendientes = pendientes;
-	}
+	
 	public String getObservaciones() {
 		return observaciones;
 	}
