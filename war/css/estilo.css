@@ -1,0 +1,14 @@
+.info-box .info-box-icon2 {
+  border-radius: 0.25rem;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  font-size: 1.875rem;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  width: 70px;
+}
+.info-box .info-box-icon2 > img {
+  max-width: 100%;
+}

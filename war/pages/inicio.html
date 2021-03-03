@@ -1,0 +1,24 @@
+<div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4" ng-repeat="a in listAviones">
+              <div class="info-box">
+				  <span class="info-box-icon2"><img src="{{a.img}}"> </span>
+				  <div class="info-box-content">
+				    <span class="info-box-text">{{a.modelo}}</span>
+				    <span class="info-box-number">{{a.serial}}</span>
+				    <br>
+				    <div ng-repeat="m in a.mantenimiento">
+				    
+				    <span class="progress-description">
+				      {{m.porcentaje}}% para {{m.componente}}
+				    </span>
+				    <div class="progress" >
+				      <div class="progress-bar bg-info" ng-class="{'bg-info': m.porcentaje < 50, 'bg-success': m.porcentaje >= 50 && m.porcentaje <= 69, 'bg-warning': m.porcentaje >= 70 && m.porcentaje <= 85, 'bg-danger': m.porcentaje >= 86}" style="width: {{m.porcentaje}}%"></div>
+				    </div>
+				    </div>
+				  </div>
+				</div>
+              
+            </div>
+
+</div>

@@ -63,7 +63,7 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 }]);
 
 
-app.controller("componentesListaController",['$rootScope','$scope','$window', '$location', '$cookieStore','componentesServices','$rootScope', function($rootScope,$scope, $window, $location, $cookieStore, componentesServices,$rootScope){
+app.controller("componentesListaController",['$rootScope','$scope','$window', '$location', '$cookieStore','componentesServices','$rootScope','tareaServices', function($rootScope,$scope, $window, $location, $cookieStore, componentesServices,$rootScope,tareaServices){
 
 	$scope.getListaComponentes = function(){
 		componentesServices.listaComponente().then(function(data){
@@ -86,6 +86,20 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 			alert("Se ha eliminado correctamente")
 		});
 	}
+	
+	$scope.onNuevaTarea = function(){
+		$scope.tarea.idComponente = $scope.componente.id
+		$scope.tarea.marcaAeronave = $scope.componente.marcaAeronave
+		$scope.tarea.modeloAeronave = $scope.componente.modeloAeronave
+		console.log($scope.tarea)
+		
+		tareaServices.altaTarea($scope.tarea).then(function(){
+			alert("Tarea se ha creada correctamente")
+			$('#mdlNvaTarea').modal('toggle')
+		})
+	}
+	
+	
 			
 	$scope.getListaComponentes();		
 }]);

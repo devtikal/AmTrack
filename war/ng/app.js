@@ -16,13 +16,22 @@ app.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : "pages/componentes/lista.html",
 		controller : "componentesListaController"
 	});
+	$routeProvider.when('/componente/tareas/ver/:idComponente', {
+		templateUrl : "pages/componentes/listaTareas.html",
+		controller : "tareaController"
+	});
 	$routeProvider.otherwise({
 		redirectTo : '/',
 		templateUrl : "pages/inicio.html",
-		controller : "avionesAltaController"
+		controller : "dashboardController"
 	});
 	
 }]);
+app.directive('sidebar',function(){
+	return{
+		templateUrl:'pages/contenido/sidebar.html'
+	};
+});
 app.controller('navigation', [ '$window', '$rootScope', '$scope','$http', '$location',
 	function( $window,$rootScope, $scope, $http, $location) {
 		
@@ -32,6 +41,7 @@ app.controller('navigation', [ '$window', '$rootScope', '$scope','$http', '$loca
 			})
 		};
 } ]);
+
 app.run(['$rootScope','$http','$cookieStore',function ($rootScope,$http,$cookieStore) {
 	$http.get("/currentSession").success(function() {
 		$rootScope.usr = JSON.parse(Cookies.get('usuario'))

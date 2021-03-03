@@ -31,6 +31,7 @@
           </div>
         </div>
         <div class="card-body p-0">
+        <div class="table-responsive">
           <table class="table table-striped projects">
               <thead>
                   <tr>
@@ -93,11 +94,16 @@
                           </a>
                       </td>
                       <td class="project-actions text-right">
-                         <!--  <a class="btn btn-primary btn-sm" href="#">
-                              <i class="fas fa-folder">
+                        <a class="btn btn-primary btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlNvaTarea" style="color: white;">
+                              <i class="fas fa-plus">
                               </i>
-                              Ver
-                          </a> -->
+                              Tarea
+                          </a>
+                          <a class="btn btn-primary btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlNvaTarea" style="color: white;">
+                              <i class="fas fa-eye">
+                              </i>
+                              Tarea
+                          </a>
                           <a class="btn btn-info btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlEdita" style="color: white;">
                               <i class="fas fa-pencil-alt">
                               </i>
@@ -113,6 +119,7 @@
                   
               </tbody>
           </table>
+          <div class="table-responsive">
         </div>
         <!-- /.card-body -->
       </div>
@@ -312,6 +319,61 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="componente={}">Cerrar</button>
         <button type="button" class="btn btn-primary" ng-click="editaComponente(componente)">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TAREA -->
+<div class="modal fade" id="mdlNvaTarea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Tarea para el componente <b>{{componente.nombre}}<b></b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Nombre</label>
+                     <input type="text" class="form-control" ng-model="tarea.nombre">
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Secuencia</label>
+                     <input type="number" class="form-control" ng-model="tarea.secuencia">
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Unidad Secuencia</label>
+                     <select class="form-control" ng-model="tarea.unidadSecuencia">
+                     	<option value="horas">Horas</option>
+                     	<option value="dias">Dias</option>
+                     	<option value="meses">Meses</option>
+                     	<option value="años">Años</option>
+                     </select>
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>descripcion</label>
+                     <input type="text" class="form-control" ng-model="tarea.descripcion">
+                </div>
+        	</div>
+        </div>
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="tarea={}">Cerrar</button>
+        <button type="button" class="btn btn-primary" ng-click="onNuevaTarea()">Crear</button>
       </div>
     </div>
   </div>
