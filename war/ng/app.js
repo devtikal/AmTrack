@@ -8,6 +8,10 @@ app.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : "pages/aviones/lista.html",
 		controller : "avionesListaController"
 	});
+	$routeProvider.when('/avion/detalle/:id', {
+		templateUrl : "pages/aviones/detalles.html",
+		controller : "avionesDetalleController"
+	});
 	$routeProvider.when('/componente/alta', {
 		templateUrl : "pages/componentes/alta.html",
 		controller : "componentesAltaController"

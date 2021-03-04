@@ -126,3 +126,21 @@ app.controller("avionesListaController",['$rootScope','$scope','$window', '$loca
 			
 			
 }]);
+
+
+app.controller("avionesDetalleController",['$rootScope','$scope','$window', '$location', '$cookieStore','avionesServices','$routeParams', function($rootScope,$scope, $window, $location, $cookieStore, avionesServices,$routeParams){
+	var idAvion = $routeParams.id;
+	var listAviones= dashboradData();	
+	$scope.data = function(id){
+		$scope.aeronave = null;
+		for(i in listAviones){
+			if(id == listAviones[i].id){
+				$scope.aeronave = listAviones[i];
+				console.log($scope.aeronave);
+				break;
+			}
+		}
+	}	
+	
+	$scope.data(idAvion);
+}]);
