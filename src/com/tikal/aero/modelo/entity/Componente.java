@@ -15,6 +15,9 @@ public class Componente{
 	private String claveManual;
 	private String noSerie;
 	@Index private Integer cantidad;
+	@Index private  String categoria;
+	@Index private String subCategoria;
+	@Index private String estado;
 	
 
 //	@Index private Long idCategoria;
@@ -160,6 +163,24 @@ public class Componente{
 	}
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	public String getSubCategoria() {
+		return subCategoria;
+	}
+	public void setSubCategoria(String subCategoria) {
+		this.subCategoria = subCategoria;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	
