@@ -94,24 +94,24 @@
                           </a>
                       </td>
                       <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlNvaTarea" style="color: white;">
-                              <i class="fas fa-plus">
-                              </i>
+                        <a class="btn btn-primary btn-sm mt-1" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlNvaTarea" style="color: white;">
+                              <i class="fas fa-plus"></i>
                               Tarea
                           </a>
-                          <a class="btn btn-primary btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlNvaTarea" style="color: white;">
-                              <i class="fas fa-eye">
-                              </i>
+                          <a class="btn btn-primary btn-sm mt-1" ng-click="EComponente(a)"  style="color: white;">
+                              <i class="fas fa-eye"></i>
                               Tarea
                           </a>
-                          <a class="btn btn-info btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlEdita" style="color: white;">
-                              <i class="fas fa-pencil-alt">
-                              </i>
+                           <a class="btn btn-primary btn-sm mt-1" ng-click="onVerHistorial(a)" style="color: white;">
+                              <i class="fas fa-history"></i>
+                              Historial
+                          </a>
+                          <a class="btn btn-info btn-sm mt-1" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlEdita" style="color: white;">
+                              <i class="fas fa-pencil-alt"></i>
                               Editar
                           </a>
-                          <a class="btn btn-danger btn-sm" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
-                              <i class="fas fa-trash">
-                              </i>
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
+                              <i class="fas fa-trash"></i>
                               Eliminar
                           </a>
                       </td>
@@ -379,5 +379,161 @@
   </div>
 </div>
 
+<!-- VER TAREAS -->
+<div class="modal fade" id="mdlVerTareas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Historial del Componente <b>{{componente.nombre}} - {{componente.noSerie}}<b></b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" >
+        	<div class="col-lg-12" align="right">
+        		<button class="btn btn-primary" ng-click="onAgregarHistorial()">Agregar Historial</button>
+        	</div>
+        	
+        </div>
+        <div class="table-responsive">
+          	<table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th>
+                      	 Fecha
+                      </th>
+                      <th style="width: 20%">
+                         Descripcion
+                      </th>
+                      <th style="width: 30%">
+                          
+                      </th>
+                     
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="h in listaTareas">
+                      <td>
+                      	{{h.fecha}}
+                      </td>
+                       <td>
+                      	{{h.Descripcion}}
+                      </td>
+                     
+                      <td class="project-actions text-right">
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
+                              <i class="fas fa-trash"></i>
+                              Eliminar
+                          </a>
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="componente={}">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL HISTORIAL -->
+<div class="modal fade" id="mdlHistorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Historial del Componente <b>{{componente.nombre}} - {{componente.noSerie}}<b></b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" >
+        	<div class="col-lg-12" align="right">
+        		<button class="btn btn-primary" ng-click="onAgregarHistorial()">Agregar Historial</button>
+        	</div>
+        	
+        </div>
+        <div class="table-responsive">
+          	<table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th>
+                      	 Fecha
+                      </th>
+                      <th style="width: 20%">
+                         Descripcion
+                      </th>
+                      <th style="width: 60%">
+                          
+                      </th>
+                     
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="h in listaHistorial">
+                      <td>
+                      	{{h.fecha}}
+                      </td>
+                       <td>
+                      	{{h.Descripcion}}
+                      </td>
+                     
+                      <td class="project-actions text-right">
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="onEliminar(h)" style="color: white;">
+                              <i class="fas fa-trash"></i>
+                          </a>
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="componente={}">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<!-- MODAL AGREGAR HISTORIAL -->
+<div class="modal fade" id="mdlAddHistorial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Historial al Componente <b>{{componente.nombre}} - {{componente.noSerie}}<b></b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        	 <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="form-group">
+              <label for="">Fecha</label>
+              <input type="date" name="" id="hFecha" class="form-control" placeholder="" aria-describedby="Fecha de Historial" ng-model = "newHistorial.fecha">
+            </div>
+           </div>
+           <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="form-group">
+              <label for="">Descripcion</label>
+              <textarea ng-model = "newHistorial.Descripcion" rows="5" cols="" id="hDescripcion" class="form-control" placeholder="Introduzca Descripcion" aria-describedby="Descripcion del Historial"></textarea>
+            </div>
+           </div>
+           <div class="col-lg-12 col-md-12 col-sm-12">
+            <button type="submit" class="btn btn-primary form-control" ng-click="addHistorial(newHistorial)">Guardar</button>
+           </div>
+        </div>
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="componente={}">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 

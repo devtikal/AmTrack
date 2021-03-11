@@ -59,6 +59,42 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			});
 		return d.promise;
 	}
+	this.getListaHistoriaByComponents = function(id){
+		var d = $q.defer();
+		$http.get("/historialComp/findAll/"+id).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				if(response.status==403){
+					alert("No esta autorizado para realizar esta accion");
+				}
+			});
+		return d.promise;
+	}
+	this.addHistorial = function(data){
+		var d = $q.defer();
+		$http.post("/historialComp/add ",data).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				if(response.status==403){
+					alert("No esta autorizado para realizar esta accion");
+				}
+			});
+		return d.promise;
+	}
+	this.deleteHistorial = function(id){
+		var d = $q.defer();
+		$http.post("/historialComp/delete/ "+id).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				if(response.status==403){
+					alert("No esta autorizado para realizar esta accion");
+				}
+			});
+		return d.promise;
+	}
 	
 }]);
 
@@ -97,6 +133,44 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 			alert("Tarea se ha creada correctamente")
 			$('#mdlNvaTarea').modal('toggle')
 		})
+	}
+	$scope.onVerHistorial = function(data){
+		$scope.componente = data;
+		$scope.loadHistorial(data.id);
+		$('#mdlHistorial').modal('toggle')
+		
+	}
+	$scope.loadHistorial = function(id){
+		componentesServices.getListaHistoriaByComponents(id).then(function(data){
+			$scope.listaHistorial = data
+			
+		});
+	}
+	$scope.onAgregarHistorial = function(){
+		$('#mdlHistorial').modal('toggle')
+		$('#mdlAddHistorial').modal('toggle')
+		
+	}
+	$scope.addHistorial = function(data){
+		var send = data;
+		send.idComponente = $scope.componente.id
+		componentesServices.addHistorial(send).then(function(){
+			$scope.newHistorial = {}
+			$('#mdlAddHistorial').modal('toggle')
+			$scope.onVerHistorial($scope.componente)
+		})
+		
+		
+	}
+	$scope.onEliminar = function(data){
+		var r = confirm("Desea eliminar el siguiente registro:\nFecha:\n"+data.fecha+"\nDescripcion:\n"+data.Descripcion);
+		if(r){
+			componentesServices.deleteHistorial(data.id).then(function(){
+				$scope.loadHistorial($scope.componente.id)
+
+			})
+		}
+		
 	}
 	
 	
