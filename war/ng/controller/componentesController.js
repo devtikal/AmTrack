@@ -71,6 +71,18 @@ app.service("componentesServices",['$http', '$q','$location', function($http, $q
 			});
 		return d.promise;
 	}
+	this.getListaTareasByComponents = function(id){
+		var d = $q.defer();
+		$http.get("/tarea/findAll/"+id).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				if(response.status==403){
+					alert("No esta autorizado para realizar esta accion");
+				}
+			});
+		return d.promise;
+	}
 	this.addHistorial = function(data){
 		var d = $q.defer();
 		$http.post("/historialComp/add ",data).then(
@@ -130,8 +142,11 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 		console.log($scope.tarea)
 		
 		tareaServices.altaTarea($scope.tarea).then(function(){
-			alert("Tarea se ha creada correctamente")
 			$('#mdlNvaTarea').modal('toggle')
+			swal("Exito!", "Tarea se ha creada correctamente", "success").then(function(){
+				$scope.onVerTarea($scope.componente);
+			});
+			
 		})
 	}
 	$scope.onVerHistorial = function(data){
@@ -173,6 +188,19 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 		
 	}
 	
+	$scope.onVerTarea = function(data){
+		$scope.componente = data;
+		$('#mdlVerTareas').modal('toggle')
+		$scope.loadTareas(data.id)
+		
+	}
+	$scope.loadTareas = function(id){
+		componentesServices.getListaTareasByComponents(id).then(function(data){
+			$scope.listaTareas = data
+			console.log(data)
+			
+		});
+	}
 	
 			
 	$scope.getListaComponentes();		
