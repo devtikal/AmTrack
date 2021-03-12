@@ -7,12 +7,37 @@ app.service("tareaServices",['$http', '$q','$location', function($http, $q, $loc
 			function(response) {
 				d.resolve(response.data);
 			}, function(response) {
-				if(response.status==403){
-					alert("No esta autorizado para realizar esta accion");
-				}
-				if(response.status!=403){
-					alert("No se ha podido procesar la solicitud");
-				}
+				checkResponse(response);
+			});
+		return d.promise;
+	}
+	this.getListaTareasByComponents = function(id){
+		var d = $q.defer();
+		$http.get("/tarea/findAll/"+id).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				checkResponse(response);
+			});
+		return d.promise;
+	}
+	this.eliminaTarea = function(id){
+		var d = $q.defer();
+		$http.post("/tarea/delete/"+id).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				checkResponse(response);
+			});
+		return d.promise;
+	}
+	this.actualizaTarea = function(tarea){
+		var d = $q.defer();
+		$http.post("/tarea/update",tarea).then(
+			function(response) {
+				d.resolve(response.data);
+			}, function(response) {
+				checkResponse(response);
 			});
 		return d.promise;
 	}

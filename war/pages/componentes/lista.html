@@ -110,7 +110,7 @@
                               <i class="fas fa-pencil-alt"></i>
                               Editar
                           </a>
-                          <a class="btn btn-danger btn-sm mt-1" ng-click="EComponente(a)" data-toggle="modal" data-target="#mdlDelete" style="color: white;">
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="onEliminarComponente(a)" style="color: white;">
                               <i class="fas fa-trash"></i>
                               Eliminar
                           </a>
@@ -301,7 +301,50 @@
                         <input type="text" class="form-control" placeholder="..." ng-model="componente.marcaAeronave">
                       </div>
                     </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Categoria</label>
+                        <select class="form-control" ng-model="componente.categoria">
+                        	<option>Categoria 1</option>
+                        	<option>Categoria 2</option>
+                        	<option>Categoria 3</option>
+                        	<option>Categoria 4</option>
+                        	<option>Categoria 5</option>
+                        	<option>Categoria 6</option>
+                        	<option>Categoria 7</option>
+                        	<option>Categoria 8</option>
+                        	<option>Categoria 9</option>
+                        </select>
+                      </div>
+                    </div>
                     
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Sub Categoria</label>
+                        <select class="form-control" ng-model="componente.subCategoria">
+                        	<option>Sub Cat 1</option>
+                        	<option>Sub Cat 2</option>
+                        	<option>Sub Cat 3</option>
+                        	<option>Sub Cat 4</option>
+                        	<option>Sub Cat 5</option>
+                        	<option>Sub Cat 6</option>
+                        	<option>Sub Cat 7</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Estado</label>
+                        <select class="form-control" ng-model="componente.estado">
+                        	<option>Nuevo</option>
+                        	<option>Usado</option>
+                        </select>
+                      </div>
+                    </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <!-- text input -->
                       <div class="form-group">
@@ -364,7 +407,7 @@
         	
         	<div class="col-sm-12 col-md-6 col-lg-4">
         		<div class="form-group">
-                     <label>descripcion</label>
+                     <label>Descripcion</label>
                      <input type="text" class="form-control" ng-model="tarea.descripcion">
                 </div>
         	</div>
@@ -374,6 +417,64 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="tarea={}">Cerrar</button>
         <button type="button" class="btn btn-primary" ng-click="onNuevaTarea()">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL Edita TAREA -->
+<div class="modal fade" id="mdlEditaTarea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edicion de la Tarea para el componente <b>{{componente.nombre}}<b></b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Nombre</label>
+                     <input type="text" class="form-control" ng-model="tareaEdita.nombre">
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Secuencia</label>
+                     <input type="number" class="form-control" ng-model="tareaEdita.secuencia">
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Unidad Secuencia</label>
+                     <select class="form-control" ng-model="tareaEdita.unidadSecuencia">
+                     	<option value="horas">Horas</option>
+                     	<option value="dias">Dias</option>
+                     	<option value="meses">Meses</option>
+                     	<option value="años">Años</option>
+                     </select>
+                </div>
+        	</div>
+        	
+        	<div class="col-sm-12 col-md-6 col-lg-4">
+        		<div class="form-group">
+                     <label>Descripcion</label>
+                     <input type="text" class="form-control" ng-model="tareaEdita.descripcion">
+                </div>
+        	</div>
+        	<div class="col-sm-12 col-md-12 col-lg-12">
+        		<button class="btn btn-primary form-control" ng-click="actualizaTarea()"><i class="fas fa-edit"></i> Actualizar</button>
+        	</div>
+        </div>
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="tareaEdita={}">Cerrar</button>
       </div>
     </div>
   </div>
@@ -390,12 +491,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row" >
-        	<div class="col-lg-12" align="right">
-        		<button class="btn btn-primary" ng-click="onAgregarHistorial()">Agregar Historial</button>
-        	</div>
-        	
-        </div>
+        
         <div class="table-responsive">
           	<table class="table table-striped projects">
               <thead>
@@ -408,9 +504,6 @@
                       </th>
                       <th>
                          Secuencia 
-                      </th>
-                      <th>
-                          
                       </th>
                       <th>
                           
@@ -431,8 +524,11 @@
                       </td>
                      
                       <td class="project-actions text-right">
-                          <a class="btn btn-danger btn-sm mt-1"  style="color: white;">
-                              <i class="fas fa-trash"></i>
+                      <a class="btn btn-primary btn-sm mt-1" ng-click="onEditaTarea(h)" style="color: white;">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="onEliminarTarea(h)" style="color: white;">
+                              <i class="fas fa-trash-alt"></i>
                           </a>
                       </td>
                   </tr>
@@ -490,7 +586,7 @@
                       </td>
                      
                       <td class="project-actions text-right">
-                          <a class="btn btn-danger btn-sm mt-1" ng-click="onEliminar(h)" style="color: white;">
+                          <a class="btn btn-danger btn-sm mt-1" ng-click="onEliminarHistorial(h)" style="color: white;">
                               <i class="fas fa-trash"></i>
                           </a>
                       </td>
@@ -519,26 +615,28 @@
         </button>
       </div>
       <div class="modal-body">
+      <form action="">
         <div class="row">
         	 <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="form-group">
               <label for="">Fecha</label>
-              <input type="date" name="" id="hFecha" class="form-control" placeholder="" aria-describedby="Fecha de Historial" ng-model = "newHistorial.fecha">
+              <input type="date" name="" id="hFecha" class="form-control" placeholder="" aria-describedby="Fecha de Historial" ng-model = "newHistorial.fecha" required>
             </div>
            </div>
            <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="form-group">
               <label for="">Descripcion</label>
-              <textarea ng-model = "newHistorial.Descripcion" rows="5" cols="" id="hDescripcion" class="form-control" placeholder="Introduzca Descripcion" aria-describedby="Descripcion del Historial"></textarea>
+              <textarea ng-model = "newHistorial.Descripcion" rows="5" cols="" id="hDescripcion" class="form-control" placeholder="Introduzca Descripcion" aria-describedby="Descripcion del Historial" required></textarea>
             </div>
            </div>
            <div class="col-lg-12 col-md-12 col-sm-12">
             <button type="submit" class="btn btn-primary form-control" ng-click="addHistorial(newHistorial)">Guardar</button>
            </div>
         </div>
-			
+		</form>	
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-warning"  ng-click="newHistorial={}"><i class="fas fa-eraser"></i> Limpiar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="componente={}">Cancelar</button>
       </div>
     </div>
