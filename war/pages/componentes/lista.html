@@ -378,25 +378,26 @@
         </button>
       </div>
       <div class="modal-body">
+      <form action="">
         <div class="row">
         	<div class="col-sm-12 col-md-6 col-lg-4">
         		<div class="form-group">
                      <label>Nombre</label>
-                     <input type="text" class="form-control" ng-model="tarea.nombre">
+                     <input id="newTareaNombre" type="text" class="form-control" ng-model="tarea.nombre" required>
                 </div>
         	</div>
         	
         	<div class="col-sm-12 col-md-6 col-lg-4">
         		<div class="form-group">
                      <label>Secuencia</label>
-                     <input type="number" class="form-control" ng-model="tarea.secuencia">
+                     <input id="newTareaSecuencua" type="number" class="form-control" ng-model="tarea.secuencia" required>
                 </div>
         	</div>
         	
         	<div class="col-sm-12 col-md-6 col-lg-4">
         		<div class="form-group">
                      <label>Unidad Secuencia</label>
-                     <select class="form-control" ng-model="tarea.unidadSecuencia">
+                     <select id="newTareaUnidadSecuencia" class="form-control" ng-model="tarea.unidadSecuencia" required>
                      	<option value="horas">Horas</option>
                      	<option value="dias">Dias</option>
                      	<option value="meses">Meses</option>
@@ -408,15 +409,18 @@
         	<div class="col-sm-12 col-md-6 col-lg-4">
         		<div class="form-group">
                      <label>Descripcion</label>
-                     <input type="text" class="form-control" ng-model="tarea.descripcion">
+                     <input id="newTareaDescripcion" type="text" class="form-control" ng-model="tarea.descripcion" required>
                 </div>
         	</div>
+        	<div class="col-sm-12 col-md-12 col-lg-12">
+        		 <button type="submit" class="btn btn-primary form-control" ng-click="onNuevaTarea()"><i class="fas fa-plus-square"></i> Crear</button>
+        	</div>
         </div>
-			
+		</form>	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="tarea={}">Cerrar</button>
-        <button type="button" class="btn btn-primary" ng-click="onNuevaTarea()">Crear</button>
+       
       </div>
     </div>
   </div>

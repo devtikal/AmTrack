@@ -145,19 +145,36 @@ app.controller("componentesListaController",['$rootScope','$scope','$window', '$
 	}
 	
 	$scope.onNuevaTarea = function(){
-		$scope.tarea.idComponente = $scope.componente.id
-		$scope.tarea.marcaAeronave = $scope.componente.marcaAeronave
-		$scope.tarea.modeloAeronave = $scope.componente.modeloAeronave
-		console.log($scope.tarea)
+
+		if($scope.tarea.nombre && $scope.tarea.secuencia && $scope.tarea.descripcion && $scope.tarea.descripcion){
+			$scope.tarea.idComponente = $scope.componente.id
+			$scope.tarea.marcaAeronave = $scope.componente.marcaAeronave
+			$scope.tarea.modeloAeronave = $scope.componente.modeloAeronave
+			tareaServices.altaTarea($scope.tarea).then(function(){
+				$scope.tarea = {}
+				$('#mdlNvaTarea').modal('toggle')
+				swal("Exito!", "Tarea se ha creada correctamente", "success").then(function(){
+					$scope.onVerTarea($scope.componente);
+				});
+				
+			})
+		}else{
+			if(!$scope.tarea.nombre){
+				document.getElementById("newTareaNombre").focus();
+			}
+			if(!$scope.tarea.secuencia){
+				document.getElementById("newTareaSecuencia").focus();
+			}
+			if(!$scope.tarea.unidadSecuencia){
+				document.getElementById("newTareaUnidadSecuencia").focus();
+			}
+			if(!$scope.tarea.descripcion){
+				document.getElementById("newTareaDescripcion").focus();
+			}
+		}
+	
 		
-		tareaServices.altaTarea($scope.tarea).then(function(){
-			$scope.tarea = {}
-			$('#mdlNvaTarea').modal('toggle')
-			swal("Exito!", "Tarea se ha creada correctamente", "success").then(function(){
-				$scope.onVerTarea($scope.componente);
-			});
-			
-		})
+		
 	}
 	$scope.onVerHistorial = function(data){
 		$scope.componente = data;
