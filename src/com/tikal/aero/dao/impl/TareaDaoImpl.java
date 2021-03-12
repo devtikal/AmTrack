@@ -53,6 +53,8 @@ public class TareaDaoImpl implements TareaDao {
 				old.setModeloAeronave(c.getModeloAeronave());
 				old.setNombre(c.getNombre());
 				old.setSecuencia(c.getSecuencia());
+				old.setDescripcion(c.getDescripcion());
+				
 				old.setUnidadSecuencia(c.getUnidadSecuencia());
 				
 			}	

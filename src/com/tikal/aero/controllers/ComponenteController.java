@@ -211,6 +211,7 @@ public class ComponenteController {
 	   @RequestMapping(value = {"/update" }, method = RequestMethod.POST, consumes = "application/json")
 		public void update(HttpServletResponse response, HttpServletRequest request, @RequestBody String json)
 				throws IOException {
+		   System.out.println("JSON:"+json);
 		 	//if(Util.verificarPermiso(request, usuarioDao, perfilDAO,0)){   
 				AsignadorDeCharset.asignar(request, response);
 				Componente c = (Componente) JsonConvertidor.fromJson(json, Componente.class);
